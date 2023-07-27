@@ -65,6 +65,8 @@ python generation.py --input_dataset  "Datasets/drebin215_permissions_apiCalls_i
 - [ ] colocar no plot o classificador.
 - [ ] rodar perceptron.
 - [ ] Medição do tempo em cada etapa do processo da ferramenta.
+- [ ] Aumentar a variabilidade de datasets.
+- [ ] Melhorar a rede com menos dados trabalho futuro. 
       
       
       
