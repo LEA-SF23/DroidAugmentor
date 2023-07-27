@@ -4,10 +4,10 @@ Ferramenta de geração de dataset
 
 Passos (versão simples):
 1. git clone git@github.com:LEA-SF23/DroidAugmentor.git
-2. ./scripts/docker_build.sh
-3. ./scripts/docker_run_shared_dir.sh . 
-4. ./scripts/run_see_if_it_works.sh
-
+2. cd DroidAugmentor
+3. ./scripts/docker_build.sh
+4. ./scripts/docker_run_shared_dir.sh . 
+5. ./scripts/run_see_if_it_works.sh
 
 ## 
 
