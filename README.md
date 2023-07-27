@@ -56,6 +56,7 @@ python generation.py --input_dataset  "Datasets/drebin215_permissions_apiCalls_i
 - [ ] Seleção dos arquivos de saída do gráfico (PDF, PNG)
 - [ ] Suprimir prints da cGAN no treinamento
 - [ ] Verificar output_dataset
+- [ ] alterar help input e output arquivo do dataset de entrada, arquivo dataset de saida.
       
 
 
