@@ -54,10 +54,20 @@ python generation.py --input_dataset  "Datasets/drebin215_permissions_apiCalls_i
 - [x] Verificar output_dataset
 - [x] alterar help input e output arquivo do dataset de entrada, arquivo dataset de saida.
 
+
 <<<<<<< O que falta
 
+- [ ] diretório de saída com tudo.  --output_dataset informar qual é o diretorio colocar o gráfico. Informar que os dados estão lá para o usuário. gravar os parâmetros de entrada no diretório.
+- [ ] Usar classificador para treinar com dados sintéticos e híbrido 3 resultados.
+- [ ]  --output_format_plot remover.
 - [ ] output_model
 - [ ] Suprimir prints da cGAN no treinamento
+- [ ] colocar no plot o classificador.
+- [ ] rodar perceptron.
+      
+      
+      
+
 
       
 
