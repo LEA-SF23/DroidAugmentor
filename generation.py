@@ -207,9 +207,9 @@ def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, cl
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run the experiment with cGAN and classifiers')
-    parser.add_argument('--input_dataset', type=str, required=True, help='Nome do dataset de entrada')
+    parser.add_argument('--input_dataset', type=str, required=True, help='Arquivo do dataset de entrada')
     parser.add_argument('--data_type', type=str, default='float32', choices=['int8', 'float16', 'float32'], help='Tipo de dado para representar as características das amostras.')
-    parser.add_argument('--output_dataset', type=str, required=True, help='Nome do dataset gerado.')
+    parser.add_argument('--output_dataset', type=str, required=True, help='Arquivo do dataset gerado.')
     parser.add_argument('--num_samples_class_malware', type=int, default=None, help='Número de amostras da Classe 1 (maligno).')
     parser.add_argument('--num_samples_class_benign', type=int, default=None, help='Número de amostras da Classe 0 (benigno).')
     parser.add_argument('--number_epochs', type=int, default=10000, help='Número de épocas (iterações de treinamento).')
