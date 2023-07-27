@@ -1,6 +1,15 @@
 # DroidAugmentor
 Ferramenta de geração de dataset
 
+
+Passos (versão simples):
+1. clonar o repositório
+2. ./scripts/docker_build.sh
+3. ./scripts/docker_run_shared_dir.sh . 
+4. dentro do container, executar um dos scripts run_ ou a ferramenta em linha de comando (pipenv run python generation.py ... )
+5. exemplo: ./scripts/run_see_if_it_works.sh
+
+
 ## 
 
 ### Config with pipenv
