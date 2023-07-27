@@ -1,6 +1,14 @@
 # DroidAugmentor
 Ferramenta de geração de dataset
 
+
+Passos (versão simples):
+1. git clone git@github.com:LEA-SF23/DroidAugmentor.git
+2. cd DroidAugmentor
+3. ./scripts/docker_build.sh
+4. ./scripts/docker_run_shared_dir.sh . 
+5. ./scripts/run_see_if_it_works.sh
+
 ## 
 
 ### Config with pipenv
@@ -45,5 +53,10 @@ python generation.py --input_dataset  "Datasets/drebin215_permissions_apiCalls_i
 <<<<<<< O que falta
 - [ ] batch_size: Tamanho do lote, default: 32. Parâmetro que determina o número de amostras de dados processadas em cada passo de treinamento da rede. É a quantidade de exemplos passados pela rede antes de realizar uma atualização dos pesos do modelo. Opções: (16, 32,64).
 - [ ] output_model
+- [ ] Seleção dos arquivos de saída do gráfico (PDF, PNG)
+- [ ] Suprimir prints da cGAN no treinamento
+- [ ] Verificar output_dataset
+- [ ] alterar help input e output arquivo do dataset de entrada, arquivo dataset de saida.
+      
 
 
