@@ -50,7 +50,7 @@ python generation.py --input_dataset  "Datasets/drebin215_permissions_apiCalls_i
 - [x] --dense_layer_sizes_d default=[512, 256, 128]  Valor das camadas densas do discriminador
 - [x] --use_gpu default=False  Opção para usar a GPU do TensorFlow
 - [x] --batch_size: Tamanho do lote, default: 32. Parâmetro que determina o número de amostras de dados processadas em cada passo de treinamento da rede. É a quantidade de exemplos passados pela rede antes de realizar uma atualização dos pesos do modelo. Opções: (16, 32,64).
-- [x] output_format_plot, Default pdf. Seleção dos arquivos de saída do gráfico (PDF, PNG)
+- [x] --output_format_plot, Default pdf. Seleção dos arquivos de saída do gráfico (PDF, PNG)
 - [x] Verificar output_dataset
 
 <<<<<<< O que falta
