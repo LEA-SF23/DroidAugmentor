@@ -57,13 +57,15 @@ python generation.py --input_dataset  "Datasets/drebin215_permissions_apiCalls_i
 
 <<<<<<< O que falta
 
-- [ ] diretório de saída com tudo.  --output_dataset informar qual é o diretorio colocar o gráfico. Informar que os dados estão lá para o usuário. gravar os parâmetros de entrada no diretório.
+- [ ] Diretório de saída com tudo.  --output_dataset informar qual é o diretorio colocar o gráfico. Informar que os dados estão lá para o usuário. gravar os parâmetros de entrada no diretório.
 - [ ] Usar classificador para treinar com dados sintéticos e híbrido 3 resultados.
 - [ ]  --output_format_plot remover.
 - [ ] output_model
 - [ ] Suprimir prints da cGAN no treinamento
 - [ ] colocar no plot o classificador.
 - [ ] rodar perceptron.
+- [ ] Medição do tempo em cada etapa do processo da ferramenta.
+      
       
       
       
