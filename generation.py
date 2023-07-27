@@ -28,18 +28,9 @@ tf_logger = logging.getLogger('tensorflow')
 tf_logger.setLevel(logging.ERROR)
 warnings.filterwarnings("ignore", category=FutureWarning)
 with warnings.catch_warnings():
-        warnings.filterwarnings("ignore", message=".*the default value of `keepdims` will become False.*")
+    warnings.filterwarnings("ignore", message=".*the default value of `keepdims` will become False.*")
 
-
-def main(args):
-    if args.use_gpu:
-        os.environ["CUDA_VISIBLE_DEVICES"] = "0"  # Usar a GPU com ID 0
-    else:
-        os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # Desabilitar o uso de GPU
-
-
-
-def create_and_save_plot(classifier_type, accuracies, precisions, recalls, f1_scores):
+def create_and_save_plot(classifier_type, accuracies, precisions, recalls, f1_scores, output_format_plot='pdf'):
     metrics = ['Acurácia', 'Precisão', 'Recall', 'F1-Score']
     values = [accuracies, precisions, recalls, f1_scores]
     colors = ['#3182BD', '#6BAED6', '#FD8D3C', '#FDD0A2', '#31A354', '#74C476', '#E6550D', '#FD8D3C']
@@ -80,8 +71,8 @@ def create_and_save_plot(classifier_type, accuracies, precisions, recalls, f1_sc
         plot_bgcolor='white'  # Define a cor de fundo para gelo (RGB: 240, 240, 240)
     )
 
-    plot_filename = f'{classifier_type}_classifier.pdf'
-    pio.write_image(fig, plot_filename, format='pdf')
+    plot_filename = f'{classifier_type}_classifier.{output_format_plot}'
+    pio.write_image(fig, plot_filename, format=output_format_plot)
 
 def perceptron(out_shape):
     inputs = keras.layers.Input(shape=(out_shape))
@@ -97,9 +88,6 @@ def perceptron(out_shape):
     model.compile("adam", loss="binary_crossentropy", metrics=["accuracy"])  
     return model
 
-
-
-
 def generate_instances(cgan, num_instances, label_class):
     if label_class == 0:
         sampled_labels = np.zeros(num_instances, dtype=np.int8)
@@ -114,10 +102,9 @@ def generate_instances(cgan, num_instances, label_class):
     gen_df['class'] = sampled_labels  # Use the synthetic labels directly
     return gen_df
 
+def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, classifier_type, output_format_plot, output_dataset, batch_size=32, training_algorithm='Adam', num_epochs=10000, latent_dim=128, activation_function='LeakyReLU', dropout_decay_rate_g=0.2, dropout_decay_rate_d=0.4, dense_layer_sizes_g=[128, 256, 512], dense_layer_sizes_d=[512, 256, 128]):
 
-
-def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, classifier_type, training_algorithm='Adam', num_epochs=10000, latent_dim=128, activation_function='LeakyReLU', dropout_decay_rate_g=0.2, dropout_decay_rate_d=0.4, dense_layer_sizes_g=[128, 256, 512], dense_layer_sizes_d=[512, 256, 128]):
-    cgan = cGAN(latent_dim=latent_dim, out_shape=out_sh, training_algorithm=training_algorithm, activation_function=activation_function, dropout_decay_rate_g=dropout_decay_rate_g, dropout_decay_rate_d=dropout_decay_rate_d, dense_layer_sizes_g=dense_layer_sizes_g, dense_layer_sizes_d=dense_layer_sizes_d)   
+    cgan = cGAN(latent_dim=latent_dim, out_shape=out_sh, training_algorithm=training_algorithm, activation_function=activation_function, dropout_decay_rate_g=dropout_decay_rate_g, dropout_decay_rate_d=dropout_decay_rate_d, dense_layer_sizes_g=dense_layer_sizes_g, dense_layer_sizes_d=dense_layer_sizes_d, batch_size=batch_size)
     skf = StratifiedKFold(n_splits=k, shuffle=True, random_state=42)
 
     accuracies = []
@@ -135,7 +122,6 @@ def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, cl
         df_negative_synthetic = generate_instances(cgan, num_samples_class0, 0)
         df_synthetic = pd.concat([df_positive_synthetic, df_negative_synthetic], ignore_index=True)
 
-        
         synthetic_train_idx = np.random.choice(df_synthetic.index, size=int(0.8 * len(df_synthetic)), replace=False)
         synthetic_test_idx = np.setdiff1d(df_synthetic.index, synthetic_train_idx)
 
@@ -147,7 +133,7 @@ def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, cl
         if classifier_type == 'knn':
             classifier = KNeighborsClassifier(n_neighbors=5)
         elif classifier_type == 'perceptron':
-            classifier = perceptron(out_shape)  
+            classifier = perceptron(out_sh)  
             # treinar perceptron com 20 epochs
             classifier.fit(X_train, y_train, epochs=500)  
         elif classifier_type == 'random_forest':
@@ -163,29 +149,31 @@ def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, cl
         classifier.fit(X_train, y_train)
         y_pred_synthetic = classifier.predict(X_synthetic_test)
 
-       
         y_synthetic_test = y_synthetic_test.astype(int)
         y_pred_synthetic = y_pred_synthetic.astype(int)
 
         cm_synthetic = confusion_matrix(y_synthetic_test, y_pred_synthetic)
-        accuracy_synthetic = accuracy_score(y_synthetic_test, y_pred_synthetic)  # 
-        precision_synthetic = precision_score(y_synthetic_test, y_pred_synthetic)  #
-        recall_synthetic = recall_score(y_synthetic_test, y_pred_synthetic)  # 
+        accuracy_synthetic = accuracy_score(y_synthetic_test, y_pred_synthetic)  
+        precision_synthetic = precision_score(y_synthetic_test, y_pred_synthetic)  
+        recall_synthetic = recall_score(y_synthetic_test, y_pred_synthetic)  
         f1_synthetic = f1_score(y_synthetic_test, y_pred_synthetic)
-	# Obtendo o diretório atual do script
+
+        # Obtendo o diretório atual do script
         script_dir = os.path.dirname(os.path.abspath(__file__))
 
         # Salvar os dados sintéticos em um arquivo CSV
-        synthetic_filename = f'synthetic_data_fold_{i+1}.csv'
+        #synthetic_filename = f'synthetic_data_fold_{i+1}.csv'
+
+	# Salvar os dados sintéticos em um arquivo CSV
+        synthetic_filename = f'{output_dataset}.csv'
+        synthetic_filepath = os.path.join(script_dir, synthetic_filename)
+        df_synthetic.to_csv(synthetic_filepath, index=False, sep=',', header=True)
 
         # Verifique se é a última dobra
         if i + 1 == k:
-            # Obtendo o diretório atual do script
-            script_dir = os.path.dirname(os.path.abspath(__file__))
             synthetic_filepath = os.path.join(script_dir, synthetic_filename)
             df_synthetic.to_csv(synthetic_filepath, index=False, sep=',', header=True)
 
-        
         accuracies.append(accuracy_synthetic)
         precisions.append(precision_synthetic)
         recalls.append(recall_synthetic)
@@ -214,21 +202,18 @@ def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, cl
     print("Standard Deviation of Recall:", np.std(recalls))
     print("Standard Deviation of F1 Score:", np.std(f1_scores))
 
-	
-
     # plotar gráfico com nome do classificador
-    create_and_save_plot(classifier_type, accuracies, precisions, recalls, f1_scores)
-
+    create_and_save_plot(classifier_type, accuracies, precisions, recalls, f1_scores, output_format_plot=output_format_plot)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run the experiment with cGAN and classifiers')
-    parser.add_argument('--input_dataset', type=str, required=True, help='Diretório do dataset.')
+    parser.add_argument('--input_dataset', type=str, required=True, help='Nome do dataset de entrada')
     parser.add_argument('--data_type', type=str, default='float32', choices=['int8', 'float16', 'float32'], help='Tipo de dado para representar as características das amostras.')
-    parser.add_argument('--output_dataset', type=str, required=True, help='Diretório de saída para o dataset sintético gerado.')
+    parser.add_argument('--output_dataset', type=str, required=True, help='Nome do dataset gerado.')
     parser.add_argument('--num_samples_class_malware', type=int, default=None, help='Número de amostras da Classe 1 (maligno).')
     parser.add_argument('--num_samples_class_benign', type=int, default=None, help='Número de amostras da Classe 0 (benigno).')
     parser.add_argument('--number_epochs', type=int, default=10000, help='Número de épocas (iterações de treinamento).')
-    parser.add_argument('--classifier', type=str, required=True, choices=['knn', 'perceptron', 'random_forest', 'svm'], help='Classificador a ser utilizado (knn, perceptron, random_forest, svm).')
+    parser.add_argument('--classifier', type=str, required=True, choices=['knn','perceptron', 'random_forest', 'svm'], help='Classificador a ser utilizado (knn, perceptron, random_forest, svm).')
     parser.add_argument('--k_fold', type=int, default=5, help='Número de folds para validação cruzada.')
     parser.add_argument("--latent_dimension", type=int, default=128, help="Dimensão do espaço latente para treinamento cGAN")
     parser.add_argument("--training_algorithm", type=str, default='Adam', choices=['Adam', 'RMSprop', 'Adadelta'], help="Algoritmo de treinamento para cGAN.")
@@ -238,6 +223,8 @@ if __name__ == "__main__":
     parser.add_argument("--dense_layer_sizes_g", type=int, nargs='+', default=[128, 256, 512], help=" Valor das camadas densas do gerador")
     parser.add_argument("--dense_layer_sizes_d", type=int, nargs='+', default=[512, 256, 128], help="valor das camadas densas do discriminador")
     parser.add_argument('--use_gpu', action='store_true', default=False, help='Opção para usar a GPU do TensorFlow.')
+    parser.add_argument('--batch_size', type=int, default=32, choices=[16, 32, 64], help='Tamanho do lote da cGAN.')
+    parser.add_argument('--output_format_plot', type=str, default='pdf', choices=['pdf', 'png'], help='Formato de saída para o gráfico (pdf ou png). Default: pdf')
 	
 
     args = parser.parse_args()
@@ -248,6 +235,6 @@ if __name__ == "__main__":
 
     out_shape = df_new.shape[1] - 1
     
-
     # Executando o experimento com k-fold
-    run_experiment(df_new, args.num_samples_class_malware, args.num_samples_class_benign, out_shape, args.k_fold, args.classifier, training_algorithm=args.training_algorithm, num_epochs=args.number_epochs, latent_dim=args.latent_dimension, activation_function=args.activation_function, dropout_decay_rate_g=args.dropout_decay_rate_g, dropout_decay_rate_d=args.dropout_decay_rate_d, dense_layer_sizes_g=args.dense_layer_sizes_g, dense_layer_sizes_d=args.dense_layer_sizes_d)
+    run_experiment(df_new, args.num_samples_class_malware, args.num_samples_class_benign, out_shape, args.k_fold, args.classifier, args.output_format_plot,  args.output_dataset, batch_size=args.batch_size, training_algorithm=args.training_algorithm, num_epochs=args.number_epochs, latent_dim=args.latent_dimension, activation_function=args.activation_function, dropout_decay_rate_g=args.dropout_decay_rate_g, dropout_decay_rate_d=args.dropout_decay_rate_d, dense_layer_sizes_g=args.dense_layer_sizes_g, dense_layer_sizes_d=args.dense_layer_sizes_d)
+

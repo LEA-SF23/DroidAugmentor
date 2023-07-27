@@ -22,12 +22,8 @@ import warnings
 import logging
 
 
-
-
-
 class cGAN():
-    def __init__(self, latent_dim, out_shape, training_algorithm='Adam', activation_function='LeakyReLU', dropout_decay_rate_g=0.2, dropout_decay_rate_d=0.4, dense_layer_sizes_g=[128, 256, 512], dense_layer_sizes_d=[512, 256, 128]):
-        # Inicialização da classe cGAN com parâmetros
+    def __init__(self, latent_dim, out_shape, training_algorithm='Adam', activation_function='LeakyReLU', dropout_decay_rate_g=0.2, dropout_decay_rate_d=0.4, dense_layer_sizes_g=[128, 256, 512], dense_layer_sizes_d=[512, 256, 128], batch_size=32):
         self.latent_dim = latent_dim
         self.out_shape = out_shape
         self.num_classes = 2
@@ -37,6 +33,7 @@ class cGAN():
         self.dropout_decay_rate_d = dropout_decay_rate_d
         self.dense_layer_sizes_g = dense_layer_sizes_g
         self.dense_layer_sizes_d = dense_layer_sizes_d
+        self.batch_size = batch_size
 
         # Definindo o otimizador com base no algoritmo de treinamento escolhido
         optimizer = self.get_optimizer()
@@ -134,7 +131,10 @@ class cGAN():
         return Model(inputs=[gen_sample, label], outputs=validity, name="Discriminator")
 
     def train(self, X_train, y_train, pos_index, neg_index, epochs, sampling=False, batch_size=32, sample_interval=100, plot=True):
-        # embora não recomendado, definir perdas como globais ajuda na análise do nosso cgan fora da classe
+        if batch_size is None:
+            batch_size = self.batch_size
+
+        # Embora não recomendado, definir perdas como globais ajuda na análise do nosso cGAN fora da classe
         global G_losses
         global D_losses
 
@@ -161,7 +161,7 @@ class cGAN():
             noise = np.random.normal(0, 1, (batch_size, self.latent_dim))
             gen_samples = self.generator.predict([noise, labels])
 
-            # alisamento de rótulo
+            # Alisamento de rótulo
             if epoch < epochs // 1.5:
                 valid_smooth = (valid + 0.1) - (np.random.random(valid.shape) * 0.1)
                 fake_smooth = (fake - 0.1) + (np.random.random(fake.shape) * 0.1)
