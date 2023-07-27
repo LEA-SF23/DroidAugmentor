@@ -68,6 +68,7 @@ python generation.py --input_dataset  "Datasets/drebin215_permissions_apiCalls_i
 - [ ] Aumentar a variabilidade de datasets.
 - [ ] Melhorar a rede com menos dados trabalho futuro.
 - [ ] MSE, distancia do cosseno
+- [ ] duas saidas, desemepenho do classificador. Matriz de confusão.
       
       
       
