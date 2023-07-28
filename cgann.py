@@ -1,29 +1,26 @@
-import os
+
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn import preprocessing
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import KFold, GridSearchCV
-from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
-from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, balanced_accuracy_score, classification_report, ConfusionMatrixDisplay
-import gc
-from tensorflow import keras
-from keras.layers import Input, Dense, Reshape, Flatten, Dropout, multiply, Concatenate
-from keras.layers import BatchNormalization, Activation, Embedding, ZeroPadding2D, LeakyReLU
+from keras.layers import Input, Dense, Flatten, Dropout, multiply
+from keras.layers import BatchNormalization, Activation, Embedding,  LeakyReLU, PReLU
 from keras.models import Sequential, Model
 from keras.optimizers import Adam, RMSprop, Adadelta
-from keras.initializers import RandomNormal
-import keras.backend as K
 import plotly.graph_objects as go
-import contextlib
-import warnings
-import logging
+import plotly.io as pio
+import os
+
 
 
 class cGAN():
-    def __init__(self, latent_dim, out_shape, training_algorithm='Adam', activation_function='LeakyReLU', dropout_decay_rate_g=0.2, dropout_decay_rate_d=0.4, dense_layer_sizes_g=[128, 256, 512], dense_layer_sizes_d=[512, 256, 128], batch_size=32):
+    def __init__(self, latent_dim, out_shape, training_algorithm='Adam',
+                 activation_function='LeakyReLU',
+                 dropout_decay_rate_g=0.2, dropout_decay_rate_d=0.4,
+                 dense_layer_sizes_g=[128, 256, 512],
+                 dense_layer_sizes_d=[512, 256, 128],
+                 batch_size=32,
+                 dtype=None,
+                 output_dir=None):
+
         self.latent_dim = latent_dim
         self.out_shape = out_shape
         self.num_classes = 2
@@ -34,6 +31,8 @@ class cGAN():
         self.dense_layer_sizes_g = dense_layer_sizes_g
         self.dense_layer_sizes_d = dense_layer_sizes_d
         self.batch_size = batch_size
+        self.dtype = dtype
+        self.output_dir = output_dir
 
         # Definindo o otimizador com base no algoritmo de treinamento escolhido
         optimizer = self.get_optimizer()
@@ -74,7 +73,6 @@ class cGAN():
 
     def generator(self):
         # Criação do modelo gerador
-        init = RandomNormal(mean=0.0, stddev=0.02)
         model = Sequential()
 
         for layer_size in self.dense_layer_sizes_g:
@@ -83,6 +81,7 @@ class cGAN():
 
             if self.activation_function == 'LeakyReLU':
                 model.add(LeakyReLU(alpha=0.2))
+            #    model.add(LeakyReLU(alpha=0.3)) #default alpha
             elif self.activation_function == 'ReLU':
                 model.add(Activation('relu'))
             elif self.activation_function == 'PReLU':
@@ -90,11 +89,13 @@ class cGAN():
             else:
                 raise ValueError("Função de ativação inválida. Use 'LeakyReLU', 'ReLU' ou 'PReLU'.")
             model.add(BatchNormalization(momentum=0.8))
+            #model.add(BatchNormalization(momentum=0.99)) #default momentum
+
 
         model.add(Dense(self.out_shape, activation='sigmoid'))
 
         noise = Input(shape=(self.latent_dim,))
-        label = Input(shape=(1,), dtype='int8')
+        label = Input(shape=(1,), dtype=self.dtype)
         label_embedding = Flatten()(Embedding(self.num_classes, self.latent_dim)(label))
 
         model_input = multiply([noise, label_embedding])
@@ -104,11 +105,10 @@ class cGAN():
 
     def discriminator(self):
         # Criação do modelo discriminador
-        init = RandomNormal(mean=0.0, stddev=0.02)
         model = Sequential()
 
         for layer_size in self.dense_layer_sizes_d:
-            model.add(Dense(layer_size, input_dim=self.out_shape, kernel_initializer=init))
+            model.add(Dense(layer_size, input_dim=self.out_shape))
             if self.activation_function == 'LeakyReLU':
                 model.add(LeakyReLU(alpha=0.2))
             elif self.activation_function == 'ReLU':
@@ -122,7 +122,7 @@ class cGAN():
         model.add(Dense(1, activation='sigmoid'))
 
         gen_sample = Input(shape=(self.out_shape,))
-        label = Input(shape=(1,), dtype='int8')
+        label = Input(shape=(1,), dtype=self.dtype)
         label_embedding = Flatten()(Embedding(self.num_classes, self.out_shape)(label))
 
         model_input = multiply([gen_sample, label_embedding])
@@ -130,7 +130,7 @@ class cGAN():
 
         return Model(inputs=[gen_sample, label], outputs=validity, name="Discriminator")
 
-    def train(self, X_train, y_train, pos_index, neg_index, epochs, sampling=False, batch_size=32, sample_interval=100, plot=True):
+    def train(self, X_train, y_train, epochs, sampling=False, batch_size=32, sample_interval=100, plot=True):
         if batch_size is None:
             batch_size = self.batch_size
 
@@ -144,12 +144,23 @@ class cGAN():
         valid = np.ones((batch_size, 1))
         fake = np.zeros((batch_size, 1))
 
+        neg_index = range(len(X_train[0])-1)
+
+        pos_list = []
+        neg_list = []
+        for i in range(len(X_train)):
+            if y_train[i] == 1:
+                pos_list.append(i)
+            else:
+                neg_list.append(i)
+
+
         for epoch in range(epochs):
 
             # if sample==True --> treina o discriminador com 8 amostras da classe positiva e o resto com classe negativa
             if sampling:
-                idx1 = np.random.choice(pos_index, 8)
-                idx0 = np.random.choice(neg_index, batch_size - 8)
+                idx1 = np.random.choice(pos_list, 8)
+                idx0 = np.random.choice(neg_list, 8)
                 idx = np.concatenate((idx1, idx0))
             # if sample!=True --> treina o discriminador usando instâncias aleatórias em lotes de 32
             else:
@@ -159,7 +170,8 @@ class cGAN():
 
             # Amostra de ruído como entrada do gerador
             noise = np.random.normal(0, 1, (batch_size, self.latent_dim))
-            gen_samples = self.generator.predict([noise, labels])
+            gen_samples = self.generator.predict([noise, labels], verbose=0)
+            #verbose: 'auto', 0, 1, or 2. Verbosity mode. 0 = silent, 1 = progress bar, 2 = one line per epoch.
 
             # Alisamento de rótulo
             if epoch < epochs // 1.5:
@@ -186,14 +198,14 @@ class cGAN():
                       % (epoch, epochs, d_loss[0], g_loss[0]))
             G_losses.append(g_loss[0])
             D_losses.append(d_loss[0])
-            if plot:
-                if epoch + 1 == epochs:
-                    fig = go.Figure()
-                    fig.add_trace(go.Scatter(x=list(range(len(G_losses))), y=G_losses, name='G'))
-                    fig.add_trace(go.Scatter(x=list(range(len(D_losses))), y=D_losses, name='D'))
-                    fig.update_layout(title="Perda do Gerador e Discriminador",
-                                      xaxis_title="iterações",
-                                      yaxis_title="Perda",
-                                      legend_title="Legenda")
 
-                    fig.show()
+        if self.output_dir is not None:
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(x=list(range(len(G_losses))), y=G_losses, name='G'))
+            fig.add_trace(go.Scatter(x=list(range(len(D_losses))), y=D_losses, name='D'))
+            fig.update_layout(title="Perda do Gerador e Discriminador",
+                              xaxis_title="iterações",
+                              yaxis_title="Perda",
+                              legend_title="Legenda")
+
+            pio.write_image(fig,  os.path.join(self.output_dir, "curve_trainning_error.pdf"))
