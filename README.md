@@ -53,21 +53,22 @@ python generation.py --input_dataset  "Datasets/drebin215_permissions_apiCalls_i
 - [x] --output_format_plot, Default pdf. Seleção dos arquivos de saída do gráfico (PDF, PNG)
 - [x] Verificar output_dataset
 - [x] alterar help input e output arquivo do dataset de entrada, arquivo dataset de saida.
-
+- [x] MSE
+- [x] Cosine
+- [x] Salvar gráfico, resultados e parâmetros de entrada em output_dataset
 
 <<<<<<< O que falta
 
-- [ ] Diretório de saída com tudo.  --output_dataset informar qual é o diretorio colocar o gráfico. Informar que os dados estão lá para o usuário. gravar os parâmetros de entrada no diretório.
+
 - [ ] Usar classificador para treinar com dados sintéticos e híbrido 3 resultados.
 - [ ]  --output_format_plot remover.
 - [ ] output_model
 - [ ] Suprimir prints da cGAN no treinamento
-- [ ] colocar no plot o classificador.
+- [ ] colocar no plot o nome do classificador.
 - [ ] rodar perceptron.
 - [ ] Medição do tempo em cada etapa do processo da ferramenta.
 - [ ] Aumentar a variabilidade de datasets.
 - [ ] Melhorar a rede com menos dados trabalho futuro.
-- [ ] MSE, distancia do cosseno
 - [ ] duas saidas, desemepenho do classificador. Matriz de confusão.
 - [ ] colocar no github os parâmetros da ferramenta.
       
