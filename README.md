@@ -71,6 +71,40 @@ python generation.py --input_dataset  "Datasets/drebin215_permissions_apiCalls_i
 - [ ] Melhorar a rede com menos dados trabalho futuro.
 - [ ] duas saidas, desemepenho do classificador. Matriz de confusão.
 - [ ] colocar no github os parâmetros da ferramenta.
+
+Parâmetros cGAN
+latent_dim      128
+epochs          10000
+np.random seed  np.random seed
+Loss            binary_crossentropy
+
+Parâmetros Gerador
+
+Dense                   128
+Droupout                0,2
+LeakyReLu               0,2           
+BatchNormalization      0,8
+Dense                   256
+Droupout                0,2
+LeakyReLu               0,2
+BatchNormalization      0,8
+Dense                   512
+Droupout                0,2
+LeakyReLu               0,2
+BatchNormalization      0,8
+Activation              Sigmoid
+
+
+Parâmetros Discriminador
+ 
+Dense                  512
+LeakyReLu              0,2
+Dense                  256
+Droupout               0,4
+Dense                  128
+Activation            Sigmoid
+
+
       
       
       
