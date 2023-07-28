@@ -38,6 +38,17 @@ try:
     from sklearn.model_selection import train_test_split
     from sklearn.metrics import confusion_matrix
 
+    # gpus = tf.config.list_physical_devices('GPU')
+    # if gpus:
+    #     # Restrict TensorFlow to only use the first GPU
+    #     try:
+    #         tf.config.set_visible_devices(gpus[0], 'GPU')
+    #         logical_gpus = tf.config.list_logical_devices('GPU')
+    #         print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
+    #     except RuntimeError as e:
+    #         # Visible devices must be set before GPUs have been initialized
+    #         print(e)
+
 except ImportError as error:
 
     print(error)
@@ -116,12 +127,20 @@ def create_and_save_plot(classifier_type, accuracies, precisions, recalls, f1_sc
             font=dict(color='black', size=12),
             xanchor='center',
             yanchor='bottom',
+
         )
 
     fig.update_layout(
         barmode='group',
         title=title,
-        yaxis=dict(title=f'Média {len(accuracies)} dobras'),
+        yaxis=dict(
+            title=f'Média {len(accuracies)} dobras',
+                tickmode='linear',
+                tick0=0.0,
+                dtick=0.1,
+                gridcolor='black',
+                gridwidth=.05
+        ),
         xaxis=dict(title=f'Desempenho com {classifier_type}'),
         showlegend=False,
         plot_bgcolor='white'  # Define a cor de fundo para gelo (RGB: 240, 240, 240)
@@ -154,9 +173,9 @@ def generate_instances(cgan, num_instances, label_class):
     gen_samples = cgan.generator.predict([noise, sampled_labels])
     gen_samples = np.round(gen_samples)
 
-    gen_df = pd.DataFrame(data=gen_samples, columns=df_new.drop('class', 1).columns)
-    gen_df['class'] = sampled_labels  # Use the synthetic labels directly
-    return gen_df
+    #gen_df = pd.DataFrame(data=gen_samples, columns=df_new.drop('class', 1).columns)
+    #gen_df['class'] = sampled_labels  # Use the synthetic labels directly
+    return gen_samples, sampled_labels
 
 def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, classifier_type, output_format_plot,
                    output_dir, batch_size=32, training_algorithm='Adam', num_epochs=10000, latent_dim=128,
@@ -164,7 +183,7 @@ def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, cl
                    dense_layer_sizes_g=[128, 256, 512], dense_layer_sizes_d=[512, 256, 128],
                    arg_dtype=np.int8, out_label=""):
 
-    skf = StratifiedKFold(n_splits=k, shuffle=True, random_state=42)
+    skf = StratifiedKFold(n_splits=k, shuffle=True)
     accuracies = []
     precisions = []
     recalls = []
@@ -179,34 +198,37 @@ def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, cl
         cgan = cGAN(latent_dim=latent_dim, out_shape=out_sh, training_algorithm=training_algorithm,
                     activation_function=activation_function, dropout_decay_rate_g=dropout_decay_rate_g,
                     dropout_decay_rate_d=dropout_decay_rate_d, dense_layer_sizes_g=dense_layer_sizes_g,
-                    dense_layer_sizes_d=dense_layer_sizes_d, batch_size=batch_size)
+                    dense_layer_sizes_d=dense_layer_sizes_d, batch_size=batch_size,
+                    dtype=arg_dtype, output_dir=output_dir)
 
         X_train, X_test = np.array(df_new.iloc[train_index, :-1].values, dtype=arg_dtype), np.array(df_new.iloc[test_index, :-1].values, dtype=arg_dtype)
         y_train, y_test = np.array(df_new.iloc[train_index, -1].values, dtype=arg_dtype), np.array(df_new.iloc[test_index, -1].values, dtype=arg_dtype)
 
-        cgan.train(X_train, y_train, num_samples_class1, num_samples_class0, epochs=num_epochs, plot=False)
 
-        df_positive_synthetic = generate_instances(cgan, num_samples_class1, 1)
-        df_negative_synthetic = generate_instances(cgan, num_samples_class0, 0)
-        df_synthetic = pd.concat([df_positive_synthetic, df_negative_synthetic], ignore_index=True)
+        cgan.train(X_train, y_train, epochs=num_epochs, plot=False)
 
-        synthetic_train_idx = np.random.choice(df_synthetic.index, size=int(0.8 * len(df_synthetic)), replace=False)
-        synthetic_test_idx = np.setdiff1d(df_synthetic.index, synthetic_train_idx)
+        x_df_positive_synthetic, y_df_positive_synthetic = generate_instances(cgan, num_samples_class1, 1)
+        x_df_negative_synthetic, y_df_negative_synthetic = generate_instances(cgan, num_samples_class0, 0)
+        X_synthetic_test = np.concatenate([x_df_positive_synthetic, x_df_negative_synthetic])
+        Y_synthetic_test = np.concatenate([y_df_positive_synthetic, y_df_negative_synthetic])
 
-        X_synthetic_train = np.array(df_synthetic.loc[synthetic_train_idx].iloc[:, :-1].values, dtype=arg_dtype)
-        y_synthetic_train = np.array(df_synthetic.loc[synthetic_train_idx].iloc[:, -1].values, dtype=arg_dtype)
-        X_synthetic_test = np.array(df_synthetic.loc[synthetic_test_idx].iloc[:, :-1].values, dtype=arg_dtype)
-        y_synthetic_test = np.array(df_synthetic.loc[synthetic_test_idx].iloc[:, -1].values, dtype=arg_dtype)
+        #synthetic_train_idx = np.random.choice(df_synthetic.index, size=int(0.8 * len(df_synthetic)), replace=False)
+        #synthetic_test_idx = np.setdiff1d(df_synthetic.index, synthetic_train_idx)
+
+        #X_synthetic_train = np.array(df_synthetic.loc[synthetic_train_idx].iloc[:, :-1].values, dtype=arg_dtype)
+        #y_synthetic_train = np.array(df_synthetic.loc[synthetic_train_idx].iloc[:, -1].values, dtype=arg_dtype)
+        X_synthetic_test = np.array(X_synthetic_test, dtype=arg_dtype)
+        y_synthetic_test = np.array(Y_synthetic_test, dtype=arg_dtype)
 
         if classifier_type == 'knn':
-            classifier = KNeighborsClassifier(n_neighbors=5)
+            classifier = KNeighborsClassifier(n_neighbors=2)
             classifier.fit(X_train, y_train)
         elif classifier_type == 'perceptron':
             classifier = perceptron(out_sh)  
             # treinar perceptron com 20 epochs
             classifier.fit(X_train, y_train, epochs=20)
         elif classifier_type == 'random_forest':
-            classifier = RandomForestClassifier(n_estimators=100, random_state=42)
+            classifier = RandomForestClassifier(n_estimators=100)
             classifier.fit(X_train, y_train)
         elif classifier_type == 'svm':
             # Hyperparameter tuning for SVM
@@ -216,6 +238,7 @@ def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, cl
             classifier.fit(X_train, y_train)
         else:
             raise ValueError("Invalid classifier type. Use 'knn', 'perceptron', 'random_forest', or 'svm'.")
+
 
 
         #Sintético
@@ -230,8 +253,13 @@ def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, cl
         recall_synthetic = recall_score(y_synthetic_test, y_pred_synthetic)  
         f1_synthetic = f1_score(y_synthetic_test, y_pred_synthetic)
 
-        synthetic_filepath = os.path.join(output_dir, f'synthetic_dataset_k{i+1}.csv')
-        df_synthetic.to_csv(synthetic_filepath, index=False, sep=',', header=True)
+        #TODO
+        # synthetic_filepath = os.path.join(output_dir, f'synthetic_dataset_k{i+1}.csv')
+        # XY_synthetic_test = np.concatenate([X_synthetic_test, Y_synthetic_test], axis=1)
+        # df_senthetic_header = df_new.iloc[0]
+        # df_synthetic_rows = pd.DataFrame(XY_synthetic_test)
+        # df_synthetic = pd.concat([df_senthetic_header, df_synthetic_rows])
+        # df_synthetic.to_csv(synthetic_filepath, index=False, sep=',', header=True)
 
         accuracies.append(accuracy_synthetic)
         precisions.append(precision_synthetic)
@@ -296,7 +324,7 @@ def run_experiment(df_new, num_samples_class1, num_samples_class0, out_sh, k, cl
         # Plot non-normalized confusion matrix
         plt.figure()
         plot_confusion_matrix(cm_real, title=out_label,
-                              cmap=plt.colormaps.get_cmap(cmap_names[(i + 2+k) % len(cmap_names)]))
+                              cmap=plt.colormaps.get_cmap(cmap_names[(i + 2) % len(cmap_names)]))
         matrix_file = os.path.join(output_dir, f'cm_real_{classifier_type}_k{i + 1}.pdf')
         plt.savefig(matrix_file, bbox_inches='tight')
 
@@ -360,9 +388,9 @@ if __name__ == "__main__":
 
     #TODO DONE parece que esse argumento não está sendo utilizado consistentemente
     parser.add_argument('--data_type', type=str, default='float32', choices=['int8', 'float16', 'float32'], help='Tipo de dado para representar as características das amostras.')
-    parser.add_argument('--num_samples_class_malware', type=int, default=None, help='Número de amostras da Classe 1 (maligno).')
-    parser.add_argument('--num_samples_class_benign', type=int, default=None, help='Número de amostras da Classe 0 (benigno).')
-    parser.add_argument('--number_epochs', type=int, default=10000, help='Número de épocas (iterações de treinamento).')
+    parser.add_argument('--num_samples_class_malware', type=int, default=1000, help='Número de amostras da Classe 1 (maligno).')
+    parser.add_argument('--num_samples_class_benign', type=int, default=1000, help='Número de amostras da Classe 0 (benigno).')
+    parser.add_argument('--number_epochs', type=int, default=700, help='Número de épocas (iterações de treinamento).')
     parser.add_argument('--k_fold', type=int, default=5, help='Número de folds para validação cruzada.')
     parser.add_argument("--latent_dimension", type=int, default=128, help="Dimensão do espaço latente para treinamento cGAN")
     parser.add_argument("--training_algorithm", type=str, default='Adam', choices=['Adam', 'RMSprop', 'Adadelta'], help="Algoritmo de treinamento para cGAN.")
@@ -374,6 +402,7 @@ if __name__ == "__main__":
     parser.add_argument('--use_gpu', action='store_true', default=False, help='Opção para usar a GPU do TensorFlow.')
     parser.add_argument('--batch_size', type=int, default=32, choices=[16, 32, 64], help='Tamanho do lote da cGAN.')
     parser.add_argument('--output_format_plot', type=str, default='pdf', choices=['pdf', 'png'], help='Formato de saída para o gráfico (pdf ou png). Default: pdf')
+    time_start_campaign = datetime.datetime.now()
 
     args = parser.parse_args()
 
@@ -385,6 +414,8 @@ if __name__ == "__main__":
         arg_dtype = np.float32
     else:
         sys.exit()
+
+
 
     # creating a new directory
     Path(args.output_dir).mkdir(parents=True, exist_ok=True)
@@ -409,4 +440,7 @@ if __name__ == "__main__":
                    dropout_decay_rate_g=args.dropout_decay_rate_g, dropout_decay_rate_d=args.dropout_decay_rate_d,
                    dense_layer_sizes_g=args.dense_layer_sizes_g, dense_layer_sizes_d=args.dense_layer_sizes_d,
                    arg_dtype=arg_dtype, out_label=out_label)
+
+    time_end_campaign = datetime.datetime.now()
+    logging.info("\t Campaign duration: {}".format(time_end_campaign - time_start_campaign))
 
