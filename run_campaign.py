@@ -247,7 +247,7 @@ def main():
                         logging.info(
                             "\t\t\t\t\tBegin: {}".format(time_start_experiment.strftime(TIME_FORMAT)))
 
-                        cmd = "pipenv run generation2.py "
+                        cmd = "pipenv run python generation2.py "
                         cmd += " --use_gpu {}".format(args.use_gpu)
                         cmd += " --dataset {}".format(os.path.join(PATH_DATASETS, dataset))
                         cmd += " --training_algorithm {}".format(training_algorithm)
