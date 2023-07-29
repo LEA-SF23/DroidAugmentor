@@ -190,18 +190,18 @@ def main():
     'drebin215_small_512Malwares_512Benign.csv',
     'drebin215_small_64Malwares_64Benign.csv']
 
-
+    # training_algorithm_choices = ['Adam', 'RMSprop', 'Adadelta']
     campaign_demo = Campaign(datasets=['drebin215_small_64Malwares_64Benign.csv'],
                              training_algorithm=['Adam'],
                              dense_layer_sizes_g=['[128, 256, 512]'],
                              dense_layer_sizes_d=['[512, 256, 128]']
                              )
 
-    #training_algorithm_choices = ['Adam', 'RMSprop', 'Adadelta']
 
-    campaigns = [cdemo_pif]
+
+    campaigns = []
     if args.campaign == "demo":
-        campaigns = [demo]
+        campaigns = [campaign_demo]
 
     # elif args.campaign == "teste":
     #     campaigns = campaign_teste
