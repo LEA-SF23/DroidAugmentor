@@ -145,6 +145,9 @@ def main():
 
     parser.add_argument('--use_gpu', action='store_true', default=False, help='Opção para usar a GPU do TensorFlow.')
 
+    help_msg = "demo mode (default={})".format(False)
+    parser.add_argument("--demo", "-d", help=help_msg, action='store_true')
+    
     help_msg = "verbosity logging level (INFO=%d DEBUG=%d)" % (logging.INFO, logging.DEBUG)
     parser.add_argument("--verbosity", "-v", help=help_msg, default=DEFAULT_VERBOSITY_LEVEL, type=int)
 
