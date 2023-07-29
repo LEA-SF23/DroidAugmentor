@@ -250,7 +250,7 @@ def main():
                         cmd += " --training_algorithm {}".format(training_algorithm)
                         cmd += " --dense_layer_sizes_g {}".format(dense_layer_sizes_g)
                         cmd += " --dense_layer_sizes_d {}".format(dense_layer_sizes_d)
-                        #run_cmd(cmd)
+                        run_cmd(cmd)
 
                         time_end_experiment = datetime.datetime.now()
                         duration = time_end_experiment - time_start_experiment
