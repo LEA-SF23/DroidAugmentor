@@ -196,8 +196,8 @@ def main():
     # training_algorithm_choices = ['Adam', 'RMSprop', 'Adadelta']
     campaign_demo = Campaign(datasets=['drebin215_small_64Malwares_64Benign.csv'],
                              training_algorithm=['Adam'],
-                             dense_layer_sizes_g=['[128, 256, 512]'],
-                             dense_layer_sizes_d=['[512, 256, 128]']
+                             dense_layer_sizes_g=["'[128, 256, 512]'"],
+                             dense_layer_sizes_d=["'[512, 256, 128]'"]
                              )
 
 
