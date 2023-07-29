@@ -4,7 +4,7 @@
 try:
     import sys
     import os
-    from tqdm import tqdm
+    #from tqdm import tqdm
     import argparse
     import logging
     import subprocess
@@ -207,11 +207,12 @@ def main():
     #     campaigns = campaign_teste
     #
 
-
+    time_start_campaign = datetime.datetime.now()
     logging.info("\n\n\n")
     logging.info("##########################################")
     logging.info(" EVALUTION ")
     logging.info("##########################################")
+
 
     count_campaign = 1
     for c in campaigns:
@@ -224,7 +225,7 @@ def main():
 
             count_training_algorithm = 1
             for training_algorithm in c.training_algorithm:
-                logging.info("\t\t\ttraining_algorithm {}/{} ".format(count_training_algorithm, len(c.count_training_algorithm)))
+                logging.info("\t\t\ttraining_algorithm {}/{} ".format(count_training_algorithm, len(c.training_algorithm)))
                 count_training_algorithm += 1
 
                 count_dense_layer_sizes_g = 1
@@ -249,7 +250,7 @@ def main():
                         cmd += " --training_algorithm {}".format(training_algorithm)
                         cmd += " --dense_layer_sizes_g {}".format(dense_layer_sizes_g)
                         cmd += " --dense_layer_sizes_d {}".format(dense_layer_sizes_d)
-                        run_cmd(cmd)
+                        #run_cmd(cmd)
 
                         time_end_experiment = datetime.datetime.now()
                         duration = time_end_experiment - time_start_experiment
