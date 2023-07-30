@@ -12,6 +12,7 @@ try:
     import datetime
     from logging.handlers import RotatingFileHandler
     from pathlib import Path
+    import itertools
 
 except ImportError as error:
     print(error)
@@ -32,9 +33,30 @@ DEFAULT_CAMPAIGN = "demo"
 PATH_LOG = 'logs'
 PATH_DATASETS = 'datasets'
 PATHS = [PATH_LOG]
-  
-
 args = None
+COMMAND = "pipenv run python generation2.py "
+
+datasets = [
+        'datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
+        'datasets/defenseDroid2939_small_256Malwares_256Benign.csv',
+        'datasets/defenseDroid2939_small_512Malwares_512Benign.csv',
+        'datasets/defenseDroid2939_small_64Malwares_64Benign.csv',
+        'datasets/drebin215_original_5560Malwares_6566Benign.csv',
+        'datasets/drebin215_small_256Malwares_256Benign.csv',
+        'datasets/drebin215_small_512Malwares_512Benign.csv',
+        'datasets/drebin215_small_64Malwares_64Benign.csv']
+
+# training_algorithm_choices = ['Adam', 'RMSprop', 'Adadelta']
+campaigns_available = {}
+
+campaigns_available['demo'] = {
+    'input_dataset': ['datasets/defenseDroid2939_small_64Malwares_64Benign.csv'],
+    'classifier' : ['knn', 'random_forest', 'svm'],
+    'training_algorithm': ['Adam'],
+}
+#'perceptron',
+# 'training_algorithm': ['Adam', 'RMSprop', 'Adadelta'],
+
 
 
 def print_config(args):
@@ -137,10 +159,9 @@ def check_files(files, error=False):
 
 def main():
 
-
     parser = argparse.ArgumentParser(description='Torrent Trace Correct - Machine Learning')
 
-    help_msg = "Campaign [demo, teste, sf23] (default={})".format(DEFAULT_CAMPAIGN)
+    help_msg = "Campaign {} (default={})".format([x for x in campaigns_available.keys()], DEFAULT_CAMPAIGN)
     parser.add_argument("--campaign", "-c", help=help_msg, default=DEFAULT_CAMPAIGN, type=str)
 
     parser.add_argument('--use_gpu', action='store_true', default=False, help='Opção para usar a GPU do TensorFlow.')
@@ -183,86 +204,75 @@ def main():
     # imprime configurações para fins de log
     print_config(args)
 
-    datasets =[
-    'defenseDroid2939_original_6000Malwares_5975Benign.csv',
-    'defenseDroid2939_small_256Malwares_256Benign.csv',
-    'defenseDroid2939_small_512Malwares_512Benign.csv',
-    'defenseDroid2939_small_64Malwares_64Benign.csv',
-    'drebin215_original_5560Malwares_6566Benign.csv',
-    'drebin215_small_256Malwares_256Benign.csv',
-    'drebin215_small_512Malwares_512Benign.csv',
-    'drebin215_small_64Malwares_64Benign.csv']
-
-    # training_algorithm_choices = ['Adam', 'RMSprop', 'Adadelta']
-    campaign_demo = Campaign(datasets=['drebin215_small_64Malwares_64Benign.csv'],
-                             training_algorithm=['Adam'],
-                             dense_layer_sizes_g=["'[128, 256, 512]'"],
-                             dense_layer_sizes_d=["'[512, 256, 128]'"]
-                             )
 
 
+    campaigns_chosen = []
 
-    campaigns = []
-    if args.campaign == "demo":
-        campaigns = [campaign_demo]
 
-    # elif args.campaign == "teste":
-    #     campaigns = campaign_teste
-    #
+    if args.campaign is None:
+        campaigns_chosen = campaigns_available.keys()
+    else:
+        if args.campaign in campaigns_available.keys():
+            campaigns_chosen.append(args.campaign)
+        else:
+            logging.error(" Campaign '{}' not found".format(args.campaign))
+            sys.exit(-1)
+
 
     time_start_campaign = datetime.datetime.now()
     logging.info("\n\n\n")
     logging.info("##########################################")
     logging.info(" EVALUTION ")
     logging.info("##########################################")
-
+    time_start_evaluation = datetime.datetime.now()
 
     count_campaign = 1
-    for c in campaigns:
-        logging.info("\tCampaign {}/{} ".format(count_campaign, len(campaigns)))
+    for c in campaigns_chosen:
+        logging.info("\tCampaign {} {}/{} ".format(c, count_campaign, len(campaigns_chosen)))
         count_campaign += 1
-        count_dataset = 1
-        for dataset in c.datasets:
-            logging.info("\t\tDatasets {}/{} ".format(count_dataset, len(c.datasets)))
-            count_dataset += 1
 
-            count_training_algorithm = 1
-            for training_algorithm in c.training_algorithm:
-                logging.info("\t\t\ttraining_algorithm {}/{} ".format(count_training_algorithm, len(c.training_algorithm)))
-                count_training_algorithm += 1
-
-                count_dense_layer_sizes_g = 1
-                for dense_layer_sizes_g in c.dense_layer_sizes_g:
-                    logging.info("\t\t\tdense_layer_sizes_g {}/{} ".format(count_dense_layer_sizes_g,
-                                                                          len(c.dense_layer_sizes_g)))
-                    count_dense_layer_sizes_g += 1
-
-                    count_dense_layer_sizes_d = 1
-                    for dense_layer_sizes_d in c.dense_layer_sizes_d:
-                        logging.info("\t\t\t\tdense_layer_sizes_g {}/{} ".format(count_dense_layer_sizes_d,
-                                                                               len(c.dense_layer_sizes_d)))
-                        count_dense_layer_sizes_d = +1
-
-                        time_start_experiment = datetime.datetime.now()
-                        logging.info(
-                            "\t\t\t\t\tBegin: {}".format(time_start_experiment.strftime(TIME_FORMAT)))
-
-                        cmd = "pipenv run python generation2.py "
-                        cmd += " --use_gpu {}".format(args.use_gpu)
-                        cmd += " --dataset {}".format(os.path.join(PATH_DATASETS, dataset))
-                        cmd += " --training_algorithm {}".format(training_algorithm)
-                        cmd += " --dense_layer_sizes_g {}".format(dense_layer_sizes_g)
-                        cmd += " --dense_layer_sizes_d {}".format(dense_layer_sizes_d)
-                        run_cmd(cmd)
-
-                        time_end_experiment = datetime.datetime.now()
-                        duration = time_end_experiment - time_start_experiment
-                        logging.info("\t\t\t\t\tEnd                : {}".format(time_end_experiment.strftime(TIME_FORMAT)))
-                        logging.info("\t\t\t\t\tExperiment duration: {}".format(duration))
+        campaign = campaigns_available[c]
+        params, values = zip(*campaign.items())
+        permutations_dicts = [dict(zip(params, v)) for v in itertools.product(*values)]
 
 
-    time_end_campaign = datetime.datetime.now()
-    logging.info("\t Campaign duration: {}".format(time_end_campaign - time_start_campaign))
+        count_permutation = 1
+        for permutation in permutations_dicts:
+            logging.info("\t\tpermutation {}/{} ".format(count_permutation, len(permutations_dicts)))
+            logging.info("\t\t{}".format(permutation))
+            count_permutation += 1
+
+            cmd = COMMAND
+            cmd += " --use_gpu {}".format(args.use_gpu)
+
+            output_dir = 'out_{}_{}/permutation_{}'.format(
+                datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"),
+                c,
+                count_permutation)
+
+            cmd += " --output_dir {}".format(output_dir)
+
+
+            for param in permutation.keys():
+                cmd += " --{} {}".format(param, permutation[param])
+
+
+            time_start_experiment = datetime.datetime.now()
+            logging.info(
+                "\t\t\t\t\tBegin: {}".format(time_start_experiment.strftime(TIME_FORMAT)))
+            run_cmd(cmd)
+
+            time_end_experiment = datetime.datetime.now()
+            duration = time_end_experiment - time_start_experiment
+            logging.info("\t\t\t\t\tEnd                : {}".format(time_end_experiment.strftime(TIME_FORMAT)))
+            logging.info("\t\t\t\t\tExperiment duration: {}".format(duration))
+
+
+        time_end_campaign = datetime.datetime.now()
+        logging.info("\t Campaign duration: {}".format(time_end_campaign - time_start_campaign))
+
+    time_end_evaluation = datetime.datetime.now()
+    logging.info("Evalutation duration: {}".format(time_end_evaluation - time_start_evaluation))
 
 
 if __name__ == '__main__':
