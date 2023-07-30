@@ -242,7 +242,7 @@ def main():
     logging.info(" EVALUTION ")
     logging.info("##########################################")
     time_start_evaluation = datetime.datetime.now()
-
+    
     count_campaign = 1
     for c in campaigns_chosen:
         logging.info("\tCampaign {} {}/{} ".format(c, count_campaign, len(campaigns_chosen)))
@@ -251,7 +251,9 @@ def main():
         campaign = campaigns_available[c]
         params, values = zip(*campaign.items())
         permutations_dicts = [dict(zip(params, v)) for v in itertools.product(*values)]
-
+        output_dir = 'out_{}_{}'.format(
+                datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"),
+                c)
 
         count_permutation = 1
         for permutation in permutations_dicts:
@@ -263,12 +265,8 @@ def main():
             if args.use_gpu:
                 cmd += " --use_gpu "
 
-            output_dir = 'out_{}_{}/permutation_{}'.format(
-                datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"),
-                c,
-                count_permutation)
 
-            cmd += " --output_dir {}".format(output_dir)
+            cmd += " --output_dir {}/permutation_{}".format(output_dir, count_permutation)
 
 
             for param in permutation.keys():
