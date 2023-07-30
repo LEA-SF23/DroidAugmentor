@@ -54,9 +54,18 @@ campaigns_available['demo'] = {
     'classifier' : ['knn', 'random_forest', 'svm'],
     'training_algorithm': ['Adam'],
 }
+
+campaigns_available['teste'] = {
+    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
+                      'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
+    'data_type' : ['int8', 'float16', 'float32'],
+    'classifier' : ['knn'],
+    'training_algorithm': ['Adam'],
+}
+
 #'perceptron',
 # 'training_algorithm': ['Adam', 'RMSprop', 'Adadelta'],
-
+# 'classifier' : ['knn', 'random_forest', 'svm'],
 
 
 def print_config(args):
