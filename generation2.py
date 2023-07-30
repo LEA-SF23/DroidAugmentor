@@ -415,10 +415,10 @@ if __name__ == "__main__":
     else:
         sys.exit()
 
-    if not args.use_gpu:
-        config = tf.ConfigProto(device_count={'GPU': 0})
-        sess = tf.Session(config=config)
-
+    if args.use_gpu:
+       #TODO 
+        pass
+        
     # creating a new directory
     Path(args.output_dir).mkdir(parents=True, exist_ok=True)
 
