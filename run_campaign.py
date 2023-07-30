@@ -243,7 +243,8 @@ def main():
             count_permutation += 1
 
             cmd = COMMAND
-            cmd += " --use_gpu {}".format(args.use_gpu)
+            if args.use_gpu:
+                cmd += " --use_gpu "
 
             output_dir = 'out_{}_{}/permutation_{}'.format(
                 datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"),
