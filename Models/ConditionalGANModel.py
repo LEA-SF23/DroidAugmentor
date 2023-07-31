@@ -202,7 +202,7 @@ class ConditionalGAN:
                                                                                    self.gen_loss_tracker.result()))
                 
                 time_now = datetime.datetime.now()
-                logging.info("\t Campaign duration: {}".format(time_now - time_before))
+                print("\t Campaign duration: {}".format(time_now - time_before))
                 time_before = time_now
     
             generator_loss.append(self.gen_loss_tracker.result())
