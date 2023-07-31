@@ -56,6 +56,15 @@ campaigns_available['demo'] = {
     'training_algorithm': ['Adam'],
 }
 
+campaigns_available['foca1'] = {
+    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv'],
+    'classifier' : ['knn'],
+    'training_algorithm': ['Adam'],
+    'number_epochs' : ['20000'],
+    "dropout_decay_rate_g": [0.1, 0.2, 0.3],
+    "dropout_decay_rate_d": [0.2, 0.4, 0.6]
+}
+
 campaigns_available['teste'] = {
     'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
                       'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
