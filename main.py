@@ -99,7 +99,11 @@ DEFAULT_MATRIX_CONFUSION_PREDICT_LABELS = ["Rótulo Verdadeiro", "Rótulo Predit
 DEFAULT_COLOR_NAME_MAP = ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds', 'YlOrBr', 'YlOrRd', 'OrRd',
                           'PuRd', 'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
 
-
+# Define a custom argument type for a list of integers
+def list_of_ints(arg):
+    return list(map(int, arg.split(',')))[0]
+    
+    
 def plot_confusion_matrix(cm, normalize=False, title='Matriz de Confusão', cmap=None):
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
@@ -406,10 +410,10 @@ if __name__ == "__main__":
                         help="Taxa de decaimento do dropout do gerador da cGAN")
     parser.add_argument("--dropout_decay_rate_d", type=float, default=DEFAULT_CONDITIONAL_GAN_DROPOUT_DECAY_RATE_D,
                         help="Taxa de decaimento do dropout do discriminador da cGAN")
-    parser.add_argument("--dense_layer_sizes_g", type=list, nargs='+',
+    parser.add_argument("--dense_layer_sizes_g", type=list_of_ints, nargs='+',
                         default=DEFAULT_CONDITIONAL_GAN_DENSE_LAYERS_SETTINGS_G,
                         help=" Valor das camadas densas do gerador")
-    parser.add_argument("--dense_layer_sizes_d", type=list, nargs='+',
+    parser.add_argument("--dense_layer_sizes_d", type=list_of_ints, nargs='+',
                         default=DEFAULT_CONDITIONAL_GAN_DENSE_LAYERS_SETTINGS_D,
                         help="valor das camadas densas do discriminador")
     parser.add_argument('--use_gpu', action='store_true', default=False,
@@ -431,6 +435,7 @@ if __name__ == "__main__":
 
     else:
         data_type = np.float32
+    
 
     Path(args.output_dir).mkdir(parents=True, exist_ok=True)
 

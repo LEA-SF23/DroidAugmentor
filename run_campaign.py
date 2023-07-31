@@ -62,7 +62,9 @@ campaigns_available['foca1'] = {
     'training_algorithm': ['Adam'],
     'number_epochs' : ['20000'],
     "dropout_decay_rate_g": [0.2, 0.1, 0.3],
-    "dropout_decay_rate_d": [0.4, 0.2, 0.5]
+    "dropout_decay_rate_d": [0.4, 0.2, 0.5],
+    "dense_layer_sizes_g" : ['256,256,512,512'],
+    "dense_layer_sizes_d" : ['512,512,256,256'],
 }
 
 campaigns_available['teste'] = {
