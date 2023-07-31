@@ -251,15 +251,15 @@ def main():
 
         campaign = campaigns_available[c]
         params, values = zip(*campaign.items())
-        permutations_dicts = [dict(zip(params, v)) for v in itertools.product(*values)]
+        combinations_dicts = [dict(zip(params, v)) for v in itertools.product(*values)]
         output_dir = 'out_{}_{}'.format(
                 datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"),
                 c)
 
-        count_permutation = 1
-        for permutation in permutations_dicts:
-            logging.info("\t\tpermutation {}/{} ".format(count_permutation, len(permutations_dicts)))
-            logging.info("\t\t{}".format(permutation))
+        count_combination = 1
+        for combination in combinations_dicts:
+            logging.info("\t\tcombination {}/{} ".format(count_combination, len(combinations_dicts)))
+            logging.info("\t\t{}".format(combination))
             
 
             cmd = COMMAND
@@ -267,11 +267,11 @@ def main():
                 cmd += " --use_gpu "
 
 
-            cmd += " --output_dir {}/permutation_{}".format(output_dir, count_permutation)
-            count_permutation += 1
+            cmd += " --output_dir {}/combination_{}".format(output_dir, count_combination)
+            count_combination += 1
 
-            for param in permutation.keys():
-                cmd += " --{} {}".format(param, permutation[param])
+            for param in combination.keys():
+                cmd += " --{} {}".format(param, combination[param])
 
 
             time_start_experiment = datetime.datetime.now()
