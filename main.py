@@ -303,7 +303,10 @@ def run_experiment(dataset, number_samples_generate_true_class, number_samples_g
                                                   dropout_decay_rate_d=dropout_decay_rate_d,
                                                   dense_layer_sizes_g=dense_layer_sizes_g,
                                                   dense_layer_sizes_d=dense_layer_sizes_d, batch_size=batch_size,
-                                                  dataset_type=dataset_type, output_dir=output_dir)
+                                                  dataset_type=dataset_type, 
+                                                  output_dir=output_dir,
+                                                  output_file='curve_trainning_error_{i}.pdf'
+                                                  )
 
         x_train = np.array(dataset.iloc[train_index, :-1].values, dtype=dataset_type)
         x_test = np.array(dataset.iloc[test_index, :-1].values, dtype=dataset_type)

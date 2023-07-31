@@ -54,7 +54,8 @@ class ConditionalGAN:
                  dropout_decay_rate_d=DEFAULT_CONDITIONAL_GAN_DROPOUT_DECAY_RATE_D,
                  dense_layer_sizes_g=DEFAULT_CONDITIONAL_GAN_DENSE_LAYERS_SETTINGS_G,
                  dense_layer_sizes_d=DEFAULT_CONDITIONAL_GAN_DENSE_LAYERS_SETTINGS_D,
-                 batch_size=DEFAULT_CONDITIONAL_GAN_BATCH_SIZE, dataset_type=np.float32, output_dir=None):
+                 batch_size=DEFAULT_CONDITIONAL_GAN_BATCH_SIZE, dataset_type=np.float32, 
+                 output_dir=None, output_file='curve_trainning_error.pdf'):
 
         self.latent_dim = latent_dim
         self.out_shape = output_shape
@@ -68,6 +69,7 @@ class ConditionalGAN:
         self.batch_size = batch_size
         self.dataset_type = dataset_type
         self.output_dir = output_dir
+        self.output_file = output_file
 
         self.instance_discriminator = self.discriminator()
         self.instance_discriminator.compile(loss=[DEFAULT_CONDITIONAL_GAN_LOSS], optimizer=self.get_optimizer())
@@ -210,4 +212,4 @@ class ConditionalGAN:
                               yaxis_title="Perda",
                               legend_title="Legenda")
 
-            pio.write_image(fig, os.path.join(self.output_dir, "curve_training_error.pdf"))
+            pio.write_image(fig, os.path.join(self.output_dir, self.output_file))
