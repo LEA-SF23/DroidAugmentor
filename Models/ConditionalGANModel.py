@@ -197,12 +197,12 @@ class ConditionalGAN:
             self.disc_loss_tracker.update_state(d_loss)
 
             if (epoch + 1) % sample_interval == 1:
-                print("[%d/%d]\tLoss Discriminator: %.4f\tLoss Generator: %.4f" % (epoch, epochs,
-                                                                                   self.disc_loss_tracker.result(),
-                                                                                   self.gen_loss_tracker.result()))
-                
                 time_now = datetime.datetime.now()
-                print("\t Campaign duration: {}".format(time_now - time_before))
+                print("[{}/{}]\tLoss Discriminator: {:.4f}\tLoss Generator: {:.4f}\tduration: {}".format(
+                                                                                epoch, epochs,
+                                                                                self.disc_loss_tracker.result(),
+                                                                                self.gen_loss_tracker.result(),
+                                                                                time_now - time_before                    ))
                 time_before = time_now
     
             generator_loss.append(self.gen_loss_tracker.result())
