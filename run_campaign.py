@@ -67,6 +67,17 @@ campaigns_available['foca1'] = {
     "dense_layer_sizes_d" : ['512,512,256,256'],
 }
 
+campaigns_available['foca2'] = {
+    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv'],
+    'classifier' : ['knn'],
+    'training_algorithm': ['Adam'],
+    'number_epochs' : ['10000'],
+    "dropout_decay_rate_g": [0.2, 0.1, 0.3],
+    "dropout_decay_rate_d": [0.4, 0.2, 0.5],
+    "dense_layer_sizes_g" : ['16'],
+    "dense_layer_sizes_d" : ['32'],
+}
+
 campaigns_available['teste'] = {
     'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
                       'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
