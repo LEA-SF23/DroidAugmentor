@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 import plotly.io as pio
 import os
 import keras
+import datetime
 
 from keras.layers import Input
 from keras.layers import Dense
@@ -176,7 +177,7 @@ class ConditionalGAN:
         generator_loss, discriminator_loss = [], []
 
         labels_real_data, labels_synthetic_data = np.ones((batch_size, 1)), np.zeros((batch_size, 1))
-        
+        time_before = datetime.datetime.now()
         for epoch in range(epochs):
 
             idx = np.random.randint(0, x_training.shape[0], batch_size)
@@ -195,10 +196,15 @@ class ConditionalGAN:
             self.gen_loss_tracker.update_state(g_loss)
             self.disc_loss_tracker.update_state(d_loss)
 
-            if (epoch + 1) % sample_interval == 0:
+            if (epoch + 1) % sample_interval == 1:
                 print("[%d/%d]\tLoss Discriminator: %.4f\tLoss Generator: %.4f" % (epoch, epochs,
                                                                                    self.disc_loss_tracker.result(),
                                                                                    self.gen_loss_tracker.result()))
+                
+                time_now = datetime.datetime.now()
+                logging.info("\t Campaign duration: {}".format(time_now - time_before))
+                time_before = time_now
+    
             generator_loss.append(self.gen_loss_tracker.result())
             discriminator_loss.append(self.disc_loss_tracker.result())
 
