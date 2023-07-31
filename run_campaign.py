@@ -51,7 +51,8 @@ campaigns_available = {}
 
 campaigns_available['demo'] = {
     'input_dataset': ['datasets/defenseDroid2939_small_64Malwares_64Benign.csv'],
-    'classifier' : ['knn', 'random_forest', 'svm'],
+    'classifier' : ['knn', 'random_forest'],
+    'number_epochs' : ['500'],
     'training_algorithm': ['Adam'],
 }
 
