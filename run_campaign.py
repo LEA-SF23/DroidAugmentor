@@ -259,7 +259,7 @@ def main():
         for permutation in permutations_dicts:
             logging.info("\t\tpermutation {}/{} ".format(count_permutation, len(permutations_dicts)))
             logging.info("\t\t{}".format(permutation))
-            count_permutation += 1
+            
 
             cmd = COMMAND
             if args.use_gpu:
@@ -267,7 +267,7 @@ def main():
 
 
             cmd += " --output_dir {}/permutation_{}".format(output_dir, count_permutation)
-
+            count_permutation += 1
 
             for param in permutation.keys():
                 cmd += " --{} {}".format(param, permutation[param])
