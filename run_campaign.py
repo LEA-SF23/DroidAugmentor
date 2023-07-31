@@ -61,8 +61,8 @@ campaigns_available['foca1'] = {
     'classifier' : ['knn'],
     'training_algorithm': ['Adam'],
     'number_epochs' : ['20000'],
-    "dropout_decay_rate_g": [0.1, 0.2, 0.3],
-    "dropout_decay_rate_d": [0.2, 0.4, 0.6]
+    "dropout_decay_rate_g": [0.2, 0.1, 0.3],
+    "dropout_decay_rate_d": [0.4, 0.2, 0.5]
 }
 
 campaigns_available['teste'] = {
