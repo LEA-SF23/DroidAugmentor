@@ -101,7 +101,8 @@ DEFAULT_COLOR_NAME_MAP = ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Red
 
 # Define a custom argument type for a list of integers
 def list_of_ints(arg):
-    return list(map(int, arg.split(',')))[0]
+    #return map(int, arg.split(','))[0]
+    return [int(x) for x in arg.split(',')]
     
     
 def plot_confusion_matrix(cm, normalize=False, title='Matriz de Confusão', cmap=None):
@@ -429,6 +430,15 @@ if __name__ == "__main__":
     time_start_campaign = datetime.datetime.now()
 
     args = parser.parse_args()
+    
+    
+    if args.dense_layer_sizes_g != DEFAULT_CONDITIONAL_GAN_DENSE_LAYERS_SETTINGS_G:
+    	args.dense_layer_sizes_g = args.dense_layer_sizes_g[0]
+    
+    if args.dense_layer_sizes_d != DEFAULT_CONDITIONAL_GAN_DENSE_LAYERS_SETTINGS_D:
+    	args.dense_layer_sizes_d = args.dense_layer_sizes_d[0]
+    	
+   
 
     if args.data_type == 'int8':
         data_type = np.int8
