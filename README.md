@@ -75,6 +75,8 @@ datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv -c knn -o pasta_d
 - [ ] colocar no github os parâmetros da ferramenta.
 - [ ] classificadores em classe separada
 - [ ] modularização da ferramenta
+- [ ] analisar knn classifier se ele tem mais alguma função além.
+- [ ] Olhar o random forest.
       
 
 Parâmetros cGAN
