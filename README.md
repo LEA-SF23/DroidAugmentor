@@ -59,6 +59,7 @@ datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv -c knn -o pasta_d
 - [x] Cosine
 - [x] Salvar gráfico, resultados e parâmetros de entrada em output_dataset
 
+
 <<<<<<< O que falta
 
 
@@ -77,6 +78,7 @@ datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv -c knn -o pasta_d
 - [ ] modularização da ferramenta
 - [ ] analisar knn classifier se ele tem mais alguma função além.
 - [ ] Olhar o random forest.
+- [ ] Olhar os parâmetros do svm.
       
 
 Parâmetros cGAN
