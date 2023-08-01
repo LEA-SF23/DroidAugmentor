@@ -73,6 +73,9 @@ datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv -c knn -o pasta_d
 - [ ] Melhorar a rede com menos dados trabalho futuro.
 - [ ] duas saidas, desemepenho do classificador. Matriz de confusão.
 - [ ] colocar no github os parâmetros da ferramenta.
+- [ ] classificadores em classe separada
+- [ ] modularização da ferramenta
+      
 
 Parâmetros cGAN
 latent_dim      128
