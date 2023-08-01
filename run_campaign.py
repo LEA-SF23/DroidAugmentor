@@ -67,7 +67,7 @@ campaigns_available['foca1'] = {
     "dense_layer_sizes_d" : ['512,512,256,256'],
 }
 
-campaigns_available['foca1'] = {
+campaigns_available['foca2'] = {
     'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv'],
     'classifier' : ['knn'],
     'training_algorithm': ['Adam', 'RMSprop', 'Adadelta'],
