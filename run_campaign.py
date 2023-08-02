@@ -50,11 +50,23 @@ datasets = [
 campaigns_available = {}
 
 campaigns_available['demo'] = {
-    'input_dataset': ['datasets/defenseDroid2939_small_64Malwares_64Benign.csv'],
-    'classifier' : ['knn', 'random_forest'],
+    'input_dataset': ['datasets/defenseDroid2939_small_64Malwares_64Benign.csv',
+                     'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
+    'classifier' : ['perceptron'],
     'number_epochs' : ['500'],
     'training_algorithm': ['Adam'],
 }
+
+campaigns_available['sf23'] = {
+    'input_dataset': ['datasets/defenseDroid2939_small_64Malwares_64Benign.csv',
+                     'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
+    'classifier' : ['perceptron'],
+    'number_epochs' : ['5000'],
+    "dense_layer_sizes_g" : ['128', '128,256', '128,256,512'],
+    "dense_layer_sizes_d" : ['128', '256,128', '512,256,128'],
+    'training_algorithm': ['Adam'],
+}
+
 
 campaigns_available['foca1'] = {
     'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv'],
