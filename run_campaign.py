@@ -50,20 +50,39 @@ datasets = [
 campaigns_available = {}
 
 campaigns_available['demo'] = {
-    'input_dataset': ['datasets/defenseDroid2939_small_64Malwares_64Benign.csv',
-                     'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
+    'input_dataset': ['datasets/defenseDroid2939_small_64Malwares_64Benign.csv'],
     'classifier' : ['perceptron'],
     'number_epochs' : ['1'],
     'training_algorithm': ['Adam'],
 }
 
-campaigns_available['sf23'] = {
-    'input_dataset': ['datasets/defenseDroid2939_small_64Malwares_64Benign.csv',
+campaigns_available['sf23_1l'] = {
+    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
                      'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
     'classifier' : ['perceptron'],
-    "dense_layer_sizes_g" : ['128', '128,256', '128,256,512'],
-    "dense_layer_sizes_d" : ['128', '256,128', '512,256,128'],
+    "dense_layer_sizes_g" : ['128', '256', '512'],
+    "dense_layer_sizes_d" : ['128', '256', '512'],
     'number_epochs' : ['100'],
+    'training_algorithm': ['Adam'],
+}
+
+campaigns_available['sf23_2l'] = {
+    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
+                     'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
+    'classifier' : ['perceptron'],
+    "dense_layer_sizes_g" : ['128,256', '128,512'],
+    "dense_layer_sizes_d" : ['256,128', '512,128'],
+    'number_epochs' : ['500'],
+    'training_algorithm': ['Adam'],
+}
+
+campaigns_available['sf23_3l'] = {
+    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
+                     'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
+    'classifier' : ['perceptron'],
+    "dense_layer_sizes_g" : ['128,256,512'],
+    "dense_layer_sizes_d" : ['512,256,128'],
+    'number_epochs' : ['1000'],
     'training_algorithm': ['Adam'],
 }
 
@@ -289,6 +308,9 @@ def main():
     else:
         if args.campaign in campaigns_available.keys():
             campaigns_chosen.append(args.campaign)
+        if ',' in args.campaign: 
+            campaigns_chosen = args.split(',')
+    
         else:
             logging.error(" Campaign '{}' not found".format(args.campaign))
             sys.exit(-1)
