@@ -34,7 +34,7 @@ PATH_LOG = 'logs'
 PATH_DATASETS = 'datasets'
 PATHS = [PATH_LOG]
 args = None
-COMMAND = "pipenv run python main.py "
+COMMAND = "pipenv run python main2.py "
 
 datasets = [
         'datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
@@ -61,7 +61,6 @@ campaigns_available['sf23'] = {
     'input_dataset': ['datasets/defenseDroid2939_small_64Malwares_64Benign.csv',
                      'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
     'classifier' : ['perceptron'],
-    'number_epochs' : ['5000'],
     "dense_layer_sizes_g" : ['128', '128,256', '128,256,512'],
     "dense_layer_sizes_d" : ['128', '256,128', '512,256,128'],
     'training_algorithm': ['Adam'],
