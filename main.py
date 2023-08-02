@@ -99,7 +99,12 @@ DEFAULT_OUTPUT_PATH_CONFUSION_MATRIX = "confusion_matrix"
 DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "Training_curve"
 
 
-
+# Define a custom argument type for a list of integers
+def list_of_ints(arg):
+    return list(map(int, arg.split(',')))[0]
+    #return map(int, arg.split(','))[0]
+    return [int(x) for x in arg.split(',')]
+    
 def create_plot_classifier_metrics(classifier_type, accuracies, precisions, recalls, f1_scores, plot_filename, title):
 
     values = [accuracies, precisions, recalls, f1_scores]
@@ -480,10 +485,10 @@ def create_argparse():
     parser.add_argument("--dropout_decay_rate_d",
                         type=float, default=DEFAULT_ADVERSARIAL_DROPOUT_DECAY_RATE_D,
                         help="Taxa de decaimento do dropout do discriminador da cGAN")
-    parser.add_argument("--dense_layer_sizes_g", type=list, nargs='+',
+    parser.add_argument("--dense_layer_sizes_g", type=list_of_ints, nargs='+',
                         default=DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_G,
                         help=" Valor das camadas densas do gerador")
-    parser.add_argument("--dense_layer_sizes_d", type=list, nargs='+',
+    parser.add_argument("--dense_layer_sizes_d", type=list_of_ints, nargs='+',
                         default=DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_D,
                         help="valor das camadas densas do discriminador")
     parser.add_argument('--use_gpu', action='store_true', default=False,
@@ -537,6 +542,12 @@ if __name__ == "__main__":
 
     else:
         data_type = np.float32
+
+    if args.dense_layer_sizes_g != DEFAULT_CONDITIONAL_GAN_DENSE_LAYERS_SETTINGS_G:
+    	args.dense_layer_sizes_g = args.dense_layer_sizes_g[0]
+
+    if args.dense_layer_sizes_d != DEFAULT_CONDITIONAL_GAN_DENSE_LAYERS_SETTINGS_D:
+    	args.dense_layer_sizes_d = args.dense_layer_sizes_d[0]
 
     dataset_file, output_shape, output_label = initial_step(arguments, data_type)
 
