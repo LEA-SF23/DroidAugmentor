@@ -53,7 +53,7 @@ campaigns_available['demo'] = {
     'input_dataset': ['datasets/defenseDroid2939_small_64Malwares_64Benign.csv',
                      'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
     'classifier' : ['perceptron'],
-    'number_epochs' : ['500'],
+    'number_epochs' : ['1'],
     'training_algorithm': ['Adam'],
 }
 
@@ -63,6 +63,7 @@ campaigns_available['sf23'] = {
     'classifier' : ['perceptron'],
     "dense_layer_sizes_g" : ['128', '128,256', '128,256,512'],
     "dense_layer_sizes_d" : ['128', '256,128', '512,256,128'],
+    'number_epochs' : ['100'],
     'training_algorithm': ['Adam'],
 }
 
