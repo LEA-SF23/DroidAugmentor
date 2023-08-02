@@ -70,7 +70,7 @@ campaigns_available['sf23_2l'] = {
     'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
                      'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
     'classifier' : ['perceptron'],
-    "dense_layer_sizes_g" : ['128,256']
+    "dense_layer_sizes_g" : ['128,256'],
     "dense_layer_sizes_d" : ['256,128'],
     'number_epochs' : ['500'],
     'training_algorithm': ['Adam'],
