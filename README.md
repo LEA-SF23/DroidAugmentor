@@ -79,6 +79,7 @@ datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv -c knn -o pasta_d
 - [ ] analisar knn classifier se ele tem mais alguma função além.
 - [ ] Olhar o random forest.
 - [ ] Olhar os parâmetros do svm.
+- [ ] 
       
 
 Parâmetros cGAN
