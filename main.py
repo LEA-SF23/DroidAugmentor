@@ -35,6 +35,7 @@ try:
     from Tools.tools import PlotConfusionMatrix
     from Tools.tools import DEFAULT_COLOR_NAME_MAP
     from Tools.tools import DEFAULT_PLOT_BAR_COLOR_MAP
+    from Tools.tools import DEFAULT_PLOT_BAR_METRICS_LABELS
 
     from sklearn.model_selection import GridSearchCV
     from sklearn.metrics import confusion_matrix
