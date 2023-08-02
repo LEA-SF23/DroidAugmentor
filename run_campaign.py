@@ -309,7 +309,7 @@ def main():
         if args.campaign in campaigns_available.keys():
             campaigns_chosen.append(args.campaign)
         if ',' in args.campaign: 
-            campaigns_chosen = args.split(',')
+            campaigns_chosen = args.campaign.split(',')
     
         else:
             logging.error(" Campaign '{}' not found".format(args.campaign))
