@@ -34,7 +34,7 @@ PATH_LOG = 'logs'
 PATH_DATASETS = 'datasets'
 PATHS = [PATH_LOG]
 args = None
-COMMAND = "pipenv run python main2.py "
+COMMAND = "pipenv run python main.py "
 
 datasets = [
         'datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
