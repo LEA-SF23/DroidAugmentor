@@ -103,7 +103,7 @@ DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "Training_curve"
 def list_of_ints(arg):
     return list(map(int, arg.split(',')))[0]
     #return map(int, arg.split(','))[0]
-    return [int(x) for x in arg.split(',')]
+    #return [int(x) for x in arg.split(',')]
     
 def create_plot_classifier_metrics(classifier_type, accuracies, precisions, recalls, f1_scores, plot_filename, title):
 
