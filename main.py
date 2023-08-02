@@ -543,11 +543,11 @@ if __name__ == "__main__":
     else:
         data_type = np.float32
 
-    if args.dense_layer_sizes_g != DEFAULT_CONDITIONAL_GAN_DENSE_LAYERS_SETTINGS_G:
-    	args.dense_layer_sizes_g = args.dense_layer_sizes_g[0]
+    if arguments.dense_layer_sizes_g != DEFAULT_CONDITIONAL_GAN_DENSE_LAYERS_SETTINGS_G:
+    	arguments.dense_layer_sizes_g = args.dense_layer_sizes_g[0]
 
-    if args.dense_layer_sizes_d != DEFAULT_CONDITIONAL_GAN_DENSE_LAYERS_SETTINGS_D:
-    	args.dense_layer_sizes_d = args.dense_layer_sizes_d[0]
+    if arguments.dense_layer_sizes_d != DEFAULT_CONDITIONAL_GAN_DENSE_LAYERS_SETTINGS_D:
+    	arguments.dense_layer_sizes_d = args.dense_layer_sizes_d[0]
 
     dataset_file, output_shape, output_label = initial_step(arguments, data_type)
 
