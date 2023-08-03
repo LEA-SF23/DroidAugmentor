@@ -1,5 +1,13 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
+
+__author__ = 'unknown'
+__email__ = 'unknown@unknown.com.br'
+__version__ = '{1}.{0}.{0}'
+__initial_data__ = '2022/06/01'
+__last_update__ = '2023/08/03'
+__credits__ = ['unknown']
+
 import logging
 import os
 from pathlib import Path
@@ -121,7 +129,7 @@ class AdversarialModel(Model):
             discriminator_file_name = self.file_name_discriminator + "_" + str(k_fold)
             generator_file_name = self.file_name_generator + "_" + str(k_fold)
 
-            path_model = os.path.join(path_directory, str(k_fold))
+            path_model = os.path.join(path_directory, "fold_"+str(k_fold+1))
             Path(path_model).mkdir(parents=True, exist_ok=True)
 
             discriminator_file_name = os.path.join(path_model, discriminator_file_name)
