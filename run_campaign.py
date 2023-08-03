@@ -92,7 +92,7 @@ campaigns_available['sf23_2l'] = {
     'classifier' : ['perceptron'],
     "dense_layer_sizes_g" : ['128,256'],
     "dense_layer_sizes_d" : ['256,128'],
-    'number_epochs' : ['500'],
+    'number_epochs' : ['5000'],
     'training_algorithm': ['Adam'],
 }
 
@@ -102,7 +102,7 @@ campaigns_available['sf23_3l'] = {
     'classifier' : ['perceptron'],
     "dense_layer_sizes_g" : ['128,256,512'],
     "dense_layer_sizes_d" : ['512,256,128'],
-    'number_epochs' : ['1000'],
+    'number_epochs' : ['10000'],
     'training_algorithm': ['Adam'],
 }
 
