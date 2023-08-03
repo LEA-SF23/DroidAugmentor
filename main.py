@@ -1,6 +1,12 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+__author__ = 'unknown'
+__email__ = 'unknown@unknown.com.br'
+__version__ = '{1}.{0}.{0}'
+__initial_data__ = '2022/06/01'
+__last_update__ = '2023/08/03'
+__credits__ = ['unknown']
 
 try:
 
@@ -23,19 +29,16 @@ try:
     from sklearn.neighbors import KNeighborsClassifier
     from sklearn.ensemble import RandomForestClassifier
 
-    from sklearn.metrics import accuracy_score
-    from sklearn.metrics import precision_score
-    from sklearn.metrics import recall_score
-    from sklearn.metrics import f1_score
-
     from Models.ConditionalGANModel import ConditionalGAN
     from Models.AdversarialModel import AdversarialModel
     from Models.PerceptronModel import PerceptronMultilayer
 
-    from Tools.tools import PlotConfusionMatrix
+    from Tools.tools import PlotConfusionMatrix, PlotRegressiveMetrics
+    from Tools.tools import PlotCurveLoss
+    from Tools.tools import ProbabilisticMetrics
+    from Tools.tools import PlotClassificationMetrics
     from Tools.tools import DEFAULT_COLOR_NAME_MAP
-    from Tools.tools import DEFAULT_PLOT_BAR_COLOR_MAP
-    from Tools.tools import DEFAULT_PLOT_BAR_METRICS_LABELS
+    from Tools.tools import DEFAULT_COLOR_MAP
 
     from sklearn.model_selection import GridSearchCV
     from sklearn.metrics import confusion_matrix
@@ -102,33 +105,8 @@ DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "Training_curve"
 # Define a custom argument type for a list of integers
 def list_of_ints(arg):
     return list(map(int, arg.split(',')))
-    #return map(int, arg.split(','))[0]
-    #return [int(x) for x in arg.split(',')]
-    
-def create_plot_classifier_metrics(classifier_type, accuracies, precisions, recalls, f1_scores, plot_filename, title):
-
-    values = [accuracies, precisions, recalls, f1_scores]
-
-    fig = go.Figure()
-
-    for metric, metric_values, color in zip(DEFAULT_PLOT_BAR_METRICS_LABELS, values, DEFAULT_PLOT_BAR_COLOR_MAP):
-        metric_mean = statistics.mean(metric_values)
-        metric_std = statistics.stdev(metric_values)
-        fig.add_trace(go.Bar(x=[metric], y=[metric_mean], name=metric, marker=dict(color=color),
-                             error_y=dict(type='constant', value=metric_std, visible=True), width=0.2))
-        fig.add_annotation(x=metric, y=metric_mean + metric_std, xref="x", yref="y", text=f' {metric_std:.4f}',
-                           showarrow=False, font=dict(color='black', size=12), xanchor='center', yanchor='bottom')
-
-    y_label_dictionary = dict(title=f'Média {len(accuracies)} dobras', tickmode='linear', tick0=0.0, dtick=0.1,
-                              gridcolor='black', gridwidth=.05)
-    fig.update_layout(barmode='group', title=title, yaxis=y_label_dictionary,
-                      xaxis=dict(title=f'Desempenho com {classifier_type}'), showlegend=False, plot_bgcolor='white')
-
-    pio.write_image(fig, plot_filename)
-
 
 def generate_samples(instance_model, number_instances, latent_dimension, label_class):
-
     if np.ceil(label_class) == 1:
 
         label_samples_generated = np.ones(number_instances, dtype=np.float32)
@@ -140,14 +118,13 @@ def generate_samples(instance_model, number_instances, latent_dimension, label_c
         label_samples_generated = label_samples_generated.reshape((number_instances, 1))
 
     random_latent_noise = np.random.normal(0, 1, (number_instances, latent_dimension))
-    generated_samples = instance_model.generator.predict([random_latent_noise, label_samples_generated])
+    generated_samples = instance_model.generator.predict([random_latent_noise, label_samples_generated], verbose=0)
     generated_samples = np.rint(generated_samples)
 
     return generated_samples, label_samples_generated
 
 
 def get_classifier(classifier_type, x_samples_training, y_samples_training, output_shape, dataset_type):
-
     if classifier_type == 'knn':
         # TODO: Verificar sobre o KNN
         x_samples_training = np.array(x_samples_training, dtype=dataset_type)
@@ -182,62 +159,83 @@ def get_classifier(classifier_type, x_samples_training, y_samples_training, outp
     return classifier
 
 
-def evaluate_synthetic_data(classifier, x_synthetic_samples, y_synthetic_samples, fold, k, generate_confusion_matrix,
-                            output_dir, classifier_type, out_label, path_confusion_matrix):
+def comparative_data(fold, x_synthetic, real_data):
+    instance_metrics = ProbabilisticMetrics()
+    synthetic_mean_squared_error = instance_metrics.get_mean_squared_error(real_data, x_synthetic)
+    synthetic_cosine_similarity = instance_metrics.get_cosine_similarity(real_data, x_synthetic)
+    synthetic_kl_divergence = instance_metrics.get_mean_squared_error(real_data, x_synthetic)
+    synthetic_maximum_mean_discrepancy = instance_metrics.get_mean_squared_error(real_data, x_synthetic)
+    logging.info(f"Similarity Metrics")
+    logging.info(f"  Synthetic Fold {fold + 1} - Mean Squared Error: " + str(synthetic_mean_squared_error))
+    logging.info(f"  Synthetic Fold {fold + 1} - Cosine Similarity: " + str(synthetic_cosine_similarity))
+    logging.info(f"  Synthetic Fold {fold + 1} - KL Divergence: " + str(synthetic_kl_divergence))
+    logging.info(f"  Synthetic Fold {fold + 1} - Maximum Mean Discrepancy: " + str(synthetic_maximum_mean_discrepancy))
+    logging.info("---")
+    logging.info("")
 
-    y_predicted_synthetic = np.rint(classifier.predict(x_synthetic_samples))
-    confusion_matrix_synthetic = confusion_matrix(y_synthetic_samples, y_predicted_synthetic)
-    accuracy_synthetic = accuracy_score(y_synthetic_samples, y_predicted_synthetic)
-    precision_synthetic = precision_score(y_synthetic_samples, y_predicted_synthetic)
-    recall_synthetic = recall_score(y_synthetic_samples, y_predicted_synthetic)
-    f1_synthetic = f1_score(y_synthetic_samples, y_predicted_synthetic)
+    return [synthetic_mean_squared_error, synthetic_cosine_similarity, synthetic_kl_divergence,
+            synthetic_maximum_mean_discrepancy]
+
+
+def evaluate_synthetic_data(classifier, x_synthetic, y_synthetic, fold, k, generate_confusion_matrix,
+                            output_dir, classifier_type, out_label, path_confusion_matrix):
+    y_predicted_synthetic = np.rint(classifier.predict(x_synthetic, verbose=0))
+
+    instance_metrics = ProbabilisticMetrics()
+    confusion_matrix_synthetic = confusion_matrix(y_synthetic, y_predicted_synthetic)
+
+    accuracy_synthetic = instance_metrics.get_accuracy(y_synthetic, y_predicted_synthetic)
+    precision_synthetic = instance_metrics.get_precision(y_synthetic, y_predicted_synthetic)
+    recall_synthetic = instance_metrics.get_recall(y_synthetic, y_predicted_synthetic)
+    f1_synthetic = instance_metrics.get_f1_score(y_synthetic, y_predicted_synthetic)
 
     logging.info(f"Synthetic Fold {fold + 1}/{k} results")
     logging.info(f"Synthetic Fold {fold + 1} - Confusion Matrix:")
     logging.info(confusion_matrix_synthetic)
-    logging.info(f"Synthetic Fold {fold + 1} - Accuracy: " + str(accuracy_synthetic))
-    logging.info(f"Synthetic Fold {fold + 1} - Precision: " + str(precision_synthetic))
-    logging.info(f"Synthetic Fold {fold + 1} - Recall: " + str(recall_synthetic))
-    logging.info(f"Synthetic Fold {fold + 1} - F1 Score: " + str(f1_synthetic))
-    logging.info("---")
-    logging.info("")
+    logging.info("\nClassifier Metrics:")
+    logging.info(f"  Synthetic Fold {fold + 1} - Accuracy: " + str(accuracy_synthetic))
+    logging.info(f"  Synthetic Fold {fold + 1} - Precision: " + str(precision_synthetic))
+    logging.info(f"  Synthetic Fold {fold + 1} - Recall: " + str(recall_synthetic))
+    logging.info(f"  Synthetic Fold {fold + 1} - F1 Score: " + str(f1_synthetic) + "\n")
 
     if generate_confusion_matrix:
-
         plt.figure()
         selected_color_map = plt.colormaps.get_cmap(DEFAULT_COLOR_NAME_MAP[(fold + 2) % len(DEFAULT_COLOR_NAME_MAP)])
         confusion_matrix_instance = PlotConfusionMatrix()
         confusion_matrix_instance.plot_confusion_matrix(confusion_matrix_synthetic, out_label, selected_color_map)
         Path(os.path.join(output_dir, path_confusion_matrix)).mkdir(parents=True, exist_ok=True)
-        matrix_file = os.path.join(output_dir, path_confusion_matrix, f'cm_synthetic_{classifier_type}_k{fold + 1}.pdf')
+        matrix_file = os.path.join(output_dir, path_confusion_matrix, f'CM_Synthetic_{classifier_type}_k{fold + 1}.pdf')
         plt.savefig(matrix_file, bbox_inches='tight')
 
     return [accuracy_synthetic, precision_synthetic, recall_synthetic, f1_synthetic]
 
 
-def evaluate_real_data(classifier, x_real_samples, y_real_samples, fold, k, generate_confusion_matrix, output_dir,
+def evaluate_real_data(classifier, x_real, y_real, fold, k, generate_confusion_matrix, output_dir,
                        classifier_type, out_label, path_confusion_matrix):
-    y_predicted_real = classifier.predict(x_real_samples)
+    y_predicted_real = classifier.predict(x_real, verbose=0)
 
     y_predicted_real = y_predicted_real.astype(int)
-    y_sample_real = y_real_samples.astype(int)
+    y_sample_real = y_real.astype(int)
 
     confusion_matrix_real = confusion_matrix(y_sample_real, y_predicted_real)
 
-    accuracy_real = accuracy_score(y_sample_real, y_predicted_real)
-    precision_real = precision_score(y_sample_real, y_predicted_real)
-    recall_real = recall_score(y_sample_real, y_predicted_real)
-    f1_real = f1_score(y_sample_real, y_predicted_real)
+    instance_metrics = ProbabilisticMetrics()
+
+    accuracy_real = instance_metrics.get_accuracy(y_sample_real, y_predicted_real)
+    precision_real = instance_metrics.get_precision(y_sample_real, y_predicted_real)
+    recall_real = instance_metrics.get_recall(y_sample_real, y_predicted_real)
+    f1_real = instance_metrics.get_f1_score(y_sample_real, y_predicted_real)
 
     logging.info(f"Real Fold {fold + 1}/{k} results")
     logging.info(f"Real Fold {fold + 1} results")
     logging.info(f"Real Fold {fold + 1} - Confusion Matrix:")
     logging.info(confusion_matrix_real)
+    logging.info("\nClassifier Metrics:")
     logging.info(f"Real Fold {fold + 1} - Accuracy: " + str(accuracy_real))
     logging.info(f"Real Fold {fold + 1} - Precision: " + str(precision_real))
     logging.info(f"Real Fold {fold + 1} - Recall: " + str(recall_real))
-    logging.info(f"Real Fold {fold + 1} - F1 Score: " + str(f1_real))
-    logging.info("---")
+    logging.info(f"Real Fold {fold + 1} - F1 Score: " + str(f1_real) + "\n")
+    logging.info("")
 
     if generate_confusion_matrix:
         plt.figure()
@@ -245,28 +243,21 @@ def evaluate_real_data(classifier, x_real_samples, y_real_samples, fold, k, gene
         confusion_matrix_instance = PlotConfusionMatrix()
         confusion_matrix_instance.plot_confusion_matrix(confusion_matrix_real, out_label, selected_color_map)
         Path(os.path.join(output_dir, path_confusion_matrix)).mkdir(parents=True, exist_ok=True)
-        matrix_file = os.path.join(output_dir, path_confusion_matrix, f'cm_real_{classifier_type}_k{fold + 1}.pdf')
+        matrix_file = os.path.join(output_dir, path_confusion_matrix, f'CM_Real_{classifier_type}_k{fold + 1}.pdf')
         plt.savefig(matrix_file, bbox_inches='tight')
 
     return [accuracy_real, precision_real, recall_real, f1_real]
 
 
-def plot_training_loss_curve(generator_loss, discriminator_loss, output_dir, k_fold, path_curve_loss):
-    if output_dir is not None:
-        fig = go.Figure()
-        fig.add_trace(go.Scatter(x=list(range(len(generator_loss))), y=generator_loss, name='Generator'))
-        fig.add_trace(go.Scatter(x=list(range(len(discriminator_loss))), y=discriminator_loss, name='Discriminator'))
-        fig.update_layout(title="Perda do Gerador e Discriminador", xaxis_title="iterações", yaxis_title="Perda",
-                          legend_title="Legenda")
-        Path(os.path.join(output_dir, path_curve_loss)).mkdir(parents=True, exist_ok=True)
-        pio.write_image(fig, os.path.join(output_dir, path_curve_loss,  "curve_training_error_k_{}.pdf".format(k_fold)))
-
-
 def show_and_export_results(synthetic_accuracies, synthetic_precisions, synthetic_recalls, synthetic_f1_scores,
-                            real_accuracies, real_precisions, real_recalls, real_f1_scores, classifier_type,
+                            real_accuracies, real_precisions, real_recalls, real_f1_scores, list_mean_squared_error,
+                            list_cosine_similarity, list_kl_divergence, list_max_mean_discrepancy, classifier_type,
                             output_dir, title_output_label):
-    logging.info(f"Overall Synthetic Results:")
 
+    plot_classifier_metrics = PlotClassificationMetrics()
+    plot_regressive_metrics = PlotRegressiveMetrics()
+
+    logging.info(f"Overall Synthetic Results:\n")
     logging.info("  Synthetic List of Accuracies: {}".format(synthetic_accuracies))
     logging.info("  Synthetic List of Precisions: {}".format(synthetic_precisions))
     logging.info("  Synthetic List of Recalls: {}".format(synthetic_recalls))
@@ -278,15 +269,15 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
     logging.info("  Synthetic Standard Deviation of Accuracy: {}".format(np.std(synthetic_accuracies)))
     logging.info("  Synthetic Standard Deviation of Precision: {}".format(np.std(synthetic_precisions)))
     logging.info("  Synthetic Standard Deviation of Recall: {}".format(np.std(synthetic_recalls)))
-    logging.info("  Synthetic Standard Deviation of F1 Score: {}".format(np.std(synthetic_f1_scores)))
+    logging.info("  Synthetic Standard Deviation of F1 Score: {}\n".format(np.std(synthetic_f1_scores)))
 
-    plot_filename = os.path.join(output_dir, f'bars_synthetic_{classifier_type}.pdf')
-    create_plot_classifier_metrics(classifier_type, synthetic_accuracies, synthetic_precisions, synthetic_recalls,
-                                   synthetic_f1_scores, plot_filename,
-                                   title=f'{title_output_label}_SYNTHETIC')
+    plot_filename = os.path.join(output_dir, f'Synthetic_Data_Classification_Metrics_{classifier_type}.pdf')
 
-    logging.info(f" Overall Real Results:")
+    plot_classifier_metrics.plot_classifier_metrics(classifier_type, synthetic_accuracies, synthetic_precisions,
+                                                    synthetic_recalls, synthetic_f1_scores, plot_filename,
+                                                    f'{title_output_label}_SYNTHETIC')
 
+    logging.info(f" Overall Real Results:\n")
     logging.info("  Real List of Accuracies: {}".format(real_accuracies))
     logging.info("  Real List of Precisions: {}".format(real_precisions))
     logging.info("  Real List of Recalls: {}".format(real_recalls))
@@ -298,11 +289,33 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
     logging.info("  Real Standard Deviation of Accuracy: {}".format(np.std(real_accuracies)))
     logging.info("  Real Standard Deviation of Precision: {}".format(np.std(real_precisions)))
     logging.info("  Real Standard Deviation of Recall: {}".format(np.std(real_recalls)))
-    logging.info("  Real Standard Deviation of F1 Score: {}".format(np.std(real_f1_scores)))
+    logging.info("  Real Standard Deviation of F1 Score: {}\n".format(np.std(real_f1_scores)))
 
-    plot_filename = os.path.join(output_dir, f'bars_real_{classifier_type}.pdf')
-    create_plot_classifier_metrics(classifier_type, real_accuracies, real_precisions, real_recalls, real_f1_scores, plot_filename,
-                                   title=f'{title_output_label}_REAL')
+    logging.info(f" Comparative Metrics:\n")
+    logging.info("  Comparative List of Mean Squared Error: {}".format(list_mean_squared_error))
+    logging.info("  Comparative List of Cosine Similarity: {}".format(list_cosine_similarity))
+    logging.info("  Comparative List of KL divergence: {}".format(list_kl_divergence))
+    logging.info("  Comparative List of Max Mean Discrepancy: {}".format(list_max_mean_discrepancy))
+    logging.info("  Comparative Mean Squared Error: {}".format(np.mean(list_mean_squared_error)))
+    logging.info("  Comparative Mean Cosine Similarity: {}".format(np.mean(list_cosine_similarity)))
+    logging.info("  Comparative Mean KL divergence: {}".format(np.mean(list_kl_divergence)))
+    logging.info("  Comparative Mean Max Mean Discrepancy: {}".format(np.mean(list_max_mean_discrepancy)))
+    logging.info("  Comparative Standard Deviation of Mean Squared Error: {}".format(np.std(list_mean_squared_error)))
+    logging.info("  Comparative Standard Deviation of Cosine Similarity: {}".format(np.std(list_cosine_similarity)))
+    logging.info("  Comparative Standard Deviation of KL divergence: {}".format(np.std(list_kl_divergence)))
+    logging.info(
+        "  Comparative Standard Deviation of Max Mean Discrepancy: {}".format(np.std(list_max_mean_discrepancy)))
+
+    plot_filename = os.path.join(output_dir, f'Real_Data_Classification_Metrics_{classifier_type}.pdf')
+
+    plot_classifier_metrics.plot_classifier_metrics(classifier_type, real_accuracies, real_precisions, real_recalls,
+                                                    real_f1_scores, plot_filename, f'{title_output_label}_REAL')
+
+    plot_filename = os.path.join(output_dir, f'Real_Data_Distance_Metrics_{classifier_type}.pdf')
+
+    plot_regressive_metrics.plot_regressive_metrics(list_mean_squared_error, list_cosine_similarity,
+                                                    list_kl_divergence, list_max_mean_discrepancy, plot_filename,
+                                                    f'{title_output_label}_REAL')
 
 
 def get_adversarial_model(latent_dim, output_data_shape, activation_function, initializer_mean,
@@ -334,11 +347,11 @@ def run_experiment(dataset, input_data_shape, k, classifier_type, output_dir, ba
                    initializer_mean=None, initializer_deviation=None,
                    last_layer_activation=DEFAULT_CONDITIONAL_LAST_ACTIVATION_LAYER,
                    save_models=False, path_confusion_matrix=None, path_curve_loss=None):
-
     stratified = StratifiedKFold(n_splits=k, shuffle=True)
 
-    accuracies, precisions, recalls, f1_scores = [], [], [], []
-    real_accuracies, real_precisions, real_recalls, real_f1_scores = [], [], [], []
+    list_accuracy, list_precision, list_recall, list_f1_score = [], [], [], []
+    list_mean_squared_error, list_cosine_similarity, list_kl_divergence, list_maximum_mean_discrepancy = [], [], [], []
+    list_real_accuracy, list_real_precision, list_real_recall, list_real_f1_score = [], [], [], []
 
     for i, (train_index, test_index) in enumerate(stratified.split(dataset.iloc[:, :-1], dataset.iloc[:, -1])):
 
@@ -363,8 +376,11 @@ def run_experiment(dataset, input_data_shape, k, classifier_type, output_dir, ba
         if save_models:
             adversarial_model.save_models(output_dir, i)
 
-        plot_training_loss_curve(training_history.history['loss_g'], training_history.history['loss_d'], output_dir,
-                                 i, path_curve_loss)
+        generator_loss_list = training_history.history['loss_g']
+        discriminator_loss_list = training_history.history['loss_d']
+        plot_loss_curve_instance = PlotCurveLoss()
+        plot_loss_curve_instance.plot_training_loss_curve(generator_loss_list, discriminator_loss_list, output_dir, i,
+                                                          path_curve_loss)
 
         number_samples_true = len([positional_label for positional_label in y_test.tolist() if positional_label == 1])
         number_samples_false = len([positional_label for positional_label in y_test.tolist() if positional_label == 0])
@@ -388,24 +404,32 @@ def run_experiment(dataset, input_data_shape, k, classifier_type, output_dir, ba
                                                           output_dir, classifier_type, output_label,
                                                           path_confusion_matrix)
 
-        accuracies.append(evaluation_results_synthetic_data[0])
-        precisions.append(evaluation_results_synthetic_data[1])
-        recalls.append(evaluation_results_synthetic_data[2])
-        f1_scores.append(evaluation_results_synthetic_data[3])
+        comparative_metrics = comparative_data(i, x_synthetic_samples, x_test)
 
-        real_accuracies.append(evaluation_results_real_data[0])
-        real_precisions.append(evaluation_results_real_data[1])
-        real_recalls.append(evaluation_results_real_data[2])
-        real_f1_scores.append(evaluation_results_real_data[3])
+        list_accuracy.append(evaluation_results_synthetic_data[0])
+        list_precision.append(evaluation_results_synthetic_data[1])
+        list_recall.append(evaluation_results_synthetic_data[2])
+        list_f1_score.append(evaluation_results_synthetic_data[3])
 
-    show_and_export_results(accuracies, precisions, recalls, f1_scores, real_accuracies, real_precisions, real_recalls,
-                            real_f1_scores, classifier_type, output_dir, output_label)
+        list_real_accuracy.append(evaluation_results_real_data[0])
+        list_real_precision.append(evaluation_results_real_data[1])
+        list_real_recall.append(evaluation_results_real_data[2])
+        list_real_f1_score.append(evaluation_results_real_data[3])
+
+        list_mean_squared_error.append(comparative_metrics[0])
+        list_cosine_similarity.append(comparative_metrics[1])
+        list_kl_divergence.append(comparative_metrics[2])
+        list_maximum_mean_discrepancy.append(comparative_metrics[3])
+
+    show_and_export_results(list_accuracy, list_precision, list_recall, list_f1_score, list_real_accuracy,
+                            list_real_precision, list_real_recall, list_real_f1_score, list_mean_squared_error,
+                            list_cosine_similarity, list_kl_divergence, list_maximum_mean_discrepancy,
+                            classifier_type, output_dir, output_label)
 
 
 def initial_step(initial_arguments, dataset_type):
-
     Path(initial_arguments.output_dir).mkdir(parents=True, exist_ok=True)
-    file_args = os.path.join(initial_arguments.output_dir, 'commandline_args')
+    file_args = os.path.join(initial_arguments.output_dir, 'commandline_args.txt')
 
     with open(file_args, 'w') as f:
         json.dump(initial_arguments.__dict__, f, indent=2)
@@ -415,13 +439,12 @@ def initial_step(initial_arguments, dataset_type):
     dataset_input_shape = dataset_file_loaded.shape[1] - 1
 
     input_dataset = os.path.basename(initial_arguments.input_dataset)
-    dataset_labels = f'{input_dataset}_{initial_arguments.data_type}_{initial_arguments.classifier}'
+    dataset_labels = f'Dataset: {input_dataset}'
 
     return dataset_file_loaded, dataset_input_shape, dataset_labels
 
 
 def show_all_settings(arg_parsers):
-
     logging.info("Command:\n\t{0}\n".format(" ".join([x for x in sys.argv])))
     logging.info("Settings:")
     lengths = [len(x) for x in vars(arg_parsers).keys()]
@@ -544,10 +567,10 @@ if __name__ == "__main__":
         data_type = np.float32
 
     if arguments.dense_layer_sizes_g != DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_G:
-    	arguments.dense_layer_sizes_g = arguments.dense_layer_sizes_g[0]
+        arguments.dense_layer_sizes_g = arguments.dense_layer_sizes_g[0]
 
     if arguments.dense_layer_sizes_d != DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_D:
-    	arguments.dense_layer_sizes_d = arguments.dense_layer_sizes_d[0]
+        arguments.dense_layer_sizes_d = arguments.dense_layer_sizes_d[0]
 
     dataset_file, output_shape, output_label = initial_step(arguments, data_type)
 
