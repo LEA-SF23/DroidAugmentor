@@ -328,7 +328,8 @@ def main():
     else:
         if args.campaign in campaigns_available.keys():
             campaigns_chosen.append(args.campaign)
-        if ',' in args.campaign: 
+            
+        elif ',' in args.campaign: 
             campaigns_chosen = args.campaign.split(',')
     
         else:
