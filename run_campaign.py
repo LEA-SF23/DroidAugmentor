@@ -56,33 +56,48 @@ campaigns_available['demo'] = {
     'training_algorithm': ['Adam'],
 }
 
+campaigns_available['sf23_1l_64'] = {
+    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
+                     'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
+    "dense_layer_sizes_g" : ['128'],
+    "dense_layer_sizes_d" : ['128'],
+    'number_epochs' : ['1000'],
+    'training_algorithm': ['Adam'],
+}
+
 campaigns_available['sf23_1l_128'] = {
     'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
                      'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
-    'classifier' : ['perceptron'],
     "dense_layer_sizes_g" : ['128'],
     "dense_layer_sizes_d" : ['128'],
-    'number_epochs' : ['100'],
+    'number_epochs' : ['1000'],
     'training_algorithm': ['Adam'],
 }
 
 campaigns_available['sf23_1l_256'] = {
     'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
                      'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
-    'classifier' : ['perceptron'],
     "dense_layer_sizes_g" : ['256'],
     "dense_layer_sizes_d" : ['256'],
-    'number_epochs' : ['100'],
+    'number_epochs' : ['1000'],
     'training_algorithm': ['Adam'],
 }
 
 campaigns_available['sf23_1l_512'] = {
     'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
                      'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
-    'classifier' : ['perceptron'],
     "dense_layer_sizes_g" : ['512'],
     "dense_layer_sizes_d" : ['512'],
-    'number_epochs' : ['100'],
+    'number_epochs' : ['1000'],
+    'training_algorithm': ['Adam'],
+}
+
+campaigns_available['sf23_1l_1024'] = {
+    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
+                     'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
+    "dense_layer_sizes_g" : ['1024'],
+    "dense_layer_sizes_d" : ['1024'],
+    'number_epochs' : ['1000'],
     'training_algorithm': ['Adam'],
 }
 
