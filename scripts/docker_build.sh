@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t droidaugmentor/tensorflow:latest .
+docker build -t sf23/droidaugmentor:latest . 
