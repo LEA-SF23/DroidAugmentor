@@ -103,8 +103,7 @@ DEFAULT_SAVE_MODELS = True
 DEFAULT_OUTPUT_PATH_CONFUSION_MATRIX = "confusion_matrix"
 DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "training_curve"
 DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine", "KNN",
-                           "DecisionTree", "AdaBoost", 
-                           "QuadraticDiscriminant"] #"NaiveBayes","Perceptron"
+                           "DecisionTree", "AdaBoost"] #"QuadraticDiscriminant", "NaiveBayes","Perceptron"
 
 #DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine"]
 
