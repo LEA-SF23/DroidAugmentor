@@ -16,6 +16,8 @@ import itertools
 import plotly.graph_objects as go
 import plotly.io as pio
 import matplotlib.pyplot as plt
+import matplotlib.colors as colors
+import matplotlib.cm as cmx
 
 from scipy.special import rel_entr
 from pathlib import Path
@@ -47,7 +49,11 @@ DEFAULT_PLOT_REGRESSION_METRICS_LABELS = [ 'Similaridade de Cossenos',
                                           'Máxima Discrepância Média']
 
 # https://matplotlib.org/stable/tutorials/colors/colormaps.html
-DEFAULT_COLOR_MAP =  plt.get_cmap('tab10') # ['#3182BD', '#6BAED6', '#FD8D3C', '#FDD0A2', '#31A354', '#74C476', '#E6550D', '#FD8D3C']
+mapa_cor = plt.get_cmap('tab10')  # carrega tabela de cores conforme dicionário
+mapeamento_normalizado = colors.Normalize(vmin=0, vmax=9)  # mapeamento em 10 cores
+mapa_escalar = cmx.ScalarMappable(norm=mapeamento_normalizado, cmap=mapa_cor)  # lista de cores final
+
+DEFAULT_COLOR_MAP =  [mapa_escalar.to_rgba(x) for x in range(9] # ['#3182BD', '#6BAED6', '#FD8D3C', '#FDD0A2', '#31A354', '#74C476', '#E6550D', '#FD8D3C']
 DEFAULT_COLOR_NAME = ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds', 'YlOrBr', 'YlOrRd', 'OrRd',
                           'PuRd', 'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
 
