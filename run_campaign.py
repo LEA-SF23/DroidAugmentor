@@ -310,7 +310,10 @@ def main():
     print("")
 
 
-    logging_filename = '{}/evaluation_campaign_{}.log'.format(PATH_LOG, datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))
+    output_dir = 'out_{}'.format(
+                datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
+    Path(output_dir).mkdir(parents=True, exist_ok=True)    
+    logging_filename = '{}/evaluation_campaigns.log'.format(output_dir)
 
     logging_format = '%(asctime)s\t***\t%(message)s'
     # configura o mecanismo de logging
@@ -364,9 +367,7 @@ def main():
         campaign = campaigns_available[c]
         params, values = zip(*campaign.items())
         combinations_dicts = [dict(zip(params, v)) for v in itertools.product(*values)]
-        output_dir = 'out_{}_{}'.format(
-                datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"),
-                c)
+        campaign_dir = '{}/{}'.format(output_dir, c)
 
         count_combination = 1
         for combination in combinations_dicts:
@@ -379,7 +380,7 @@ def main():
                 cmd += " --use_gpu "
 
 
-            cmd += " --output_dir {}/combination_{}".format(output_dir, count_combination)
+            cmd += " --output_dir {}/combination_{}".format(campaign_dir, count_combination)
             count_combination += 1
 
             for param in combination.keys():
