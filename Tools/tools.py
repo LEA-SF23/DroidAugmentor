@@ -49,12 +49,23 @@ DEFAULT_PLOT_REGRESSION_METRICS_LABELS = [ 'Similaridade de Cossenos',
                                           'Máxima Discrepância Média']
 
 # https://matplotlib.org/stable/tutorials/colors/colormaps.html
-mapa_cor = plt.get_cmap('tab10')  # carrega tabela de cores conforme dicionário
-mapeamento_normalizado = colors.Normalize(vmin=0, vmax=19)  # mapeamento em 10 cores
-mapa_escalar = cmx.ScalarMappable(norm=mapeamento_normalizado, cmap=mapa_cor)  # lista de cores final
+#mapa_cor = plt.get_cmap('tab10')  # carrega tabela de cores conforme dicionário
+#mapeamento_normalizado = colors.Normalize(vmin=0, vmax=19)  # mapeamento em 10 cores
+#mapa_escalar = cmx.ScalarMappable(norm=mapeamento_normalizado, cmap=mapa_cor)  # lista de cores final
+
+# tab:blue : #1f77b4
+# tab:orange : #ff7f0e
+# tab:green : #2ca02c
+# tab:red : #d62728
+# tab:purple : #9467bd
+# tab:brown : #8c564b
+# tab:pink : #e377c2
+# tab:gray : #7f7f7f
+# tab:olive : #bcbd22
+# tab:cyan : #17becf
 
 #DEFAULT_COLOR_MAP =  [mapa_escalar.to_rgba(x) for x in range(9)] # ['#3182BD', '#6BAED6', '#FD8D3C', '#FDD0A2', '#31A354', '#74C476', '#E6550D', '#FD8D3C']
-DEFAULT_COLOR_MAP =  ['#3182BD', '#FD8D3C',  '#31A354',   '#E6550D']
+DEFAULT_COLOR_MAP =  ['#1f77b4', '#ff7f0e',  '#2ca02c',   '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', '', '', '', '', '', '', '']
 DEFAULT_COLOR_NAME = ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds', 'YlOrBr', 'YlOrRd', 'OrRd',
                           'PuRd', 'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
 
