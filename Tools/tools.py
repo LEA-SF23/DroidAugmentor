@@ -180,17 +180,19 @@ class PlotClassificationMetrics:
         new_plot_bars = go.Figure()
 
         for metric, metric_values, color in zip(self.labels_bar_metrics, list_all_metrics, self.color_map_bar):
-            metric_mean = statistics.mean(metric_values)
-            metric_std = statistics.stdev(metric_values)
-
-            new_plot_bars.add_trace(go.Bar(x=[metric], y=[metric_mean], name=metric, marker=dict(color=color),
-                                           error_y=dict(type='constant', value=metric_std, visible=True),
-                                           width=self.width_bar))
-
-            new_plot_bars.add_annotation(x=metric, y=metric_mean + metric_std, xref="x", yref="y",
-                                         text=f' {metric_std:.4f}', showarrow=False,
-                                         font=dict(color='black', size=self.font_size),
-                                         xanchor='center', yanchor='bottom')
+            try:
+                metric_mean = statistics.mean(metric_values)
+                metric_std = statistics.stdev(metric_values)
+    
+                new_plot_bars.add_trace(go.Bar(x=[metric], y=[metric_mean], name=metric, marker=dict(color=color),
+                                               error_y=dict(type='constant', value=metric_std, visible=True),
+                                               width=self.width_bar))
+                new_plot_bars.add_annotation(x=metric, y=metric_mean + metric_std, xref="x", yref="y",
+                                             text=f' {metric_std:.4f}', showarrow=False,
+                                             font=dict(color='black', size=self.font_size),
+                                             xanchor='center', yanchor='bottom')
+            except Exception as e:
+              print("Metric {} error: {}".format(metric, e))
 
         y_label_dictionary = dict(title=f'Média {len(accuracy_list)} dobras', tickmode='linear', tick0=0.0, dtick=0.1,
                                   gridcolor='black', gridwidth=.05)
