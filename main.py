@@ -277,7 +277,7 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
         logging.info("  Synthetic Standard Deviation of Recall: {}".format(np.std(synthetic_recalls[index])))
         logging.info("  Synthetic Standard Deviation of F1 Score: {}\n".format(np.std(synthetic_f1_scores[index])))
 
-        plot_filename = os.path.join(output_dir, f'Synthetic_Data_Classification_Metrics_{classifier_type[index]}.pdf')
+        plot_filename = os.path.join(output_dir, f'{classifier_type[index]}_Synthetic.pdf')
 
         plot_classifier_metrics.plot_classifier_metrics(classifier_type[index], synthetic_accuracies[index],
                                                         synthetic_precisions[index], synthetic_recalls[index],
@@ -298,7 +298,7 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
         logging.info("  Real Standard Deviation of Recall: {}".format(np.std(real_recalls[index])))
         logging.info("  Real Standard Deviation of F1 Score: {}\n".format(np.std(real_f1_scores[index])))
 
-        plot_filename = os.path.join(output_dir, f'Real_Data_Classification_Metrics_{classifier_type[index]}.pdf')
+        plot_filename = os.path.join(output_dir, f'{classifier_type[index]}_Real.pdf')
 
         plot_classifier_metrics.plot_classifier_metrics(classifier_type[index], real_accuracies[index],
                                                         real_precisions[index], real_recalls[index],
@@ -345,7 +345,7 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
     # logging.info("  Comparative Standard Deviation of Max Mean Discrepancy: {}".format(
     #             np.std(list_max_mean_discrepancy)))
 
-    plot_filename = os.path.join(output_dir, f'Real_Data_Distance_Metrics_Fold_{index}.pdf')
+    plot_filename = os.path.join(output_dir, f'Comparison_Real_Synthetic.pdf')
 
     plot_regressive_metrics.plot_regressive_metrics(list_mean_squared_error, list_cosine_similarity,
                                                     list_kl_divergence, list_max_mean_discrepancy, plot_filename,
