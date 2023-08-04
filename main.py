@@ -306,11 +306,12 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
                                                         f'{title_output_label}_REAL')
 
 
+                                
     comparative_metrics=['Mean Squared Error','Cosine Similarity','KL divergence ','Max Mean Discrepancy']
     comparative_lists = [list_mean_squared_error,list_cosine_similarity, list_kl_divergence, list_max_mean_discrepancy]
+    logging.info(f"Comparative Metrics:")
     for metric, comparative_list in zip(comparative_metrics, comparative_lists):
-        logging.info(f"Comparative Metrics:\n")
-        logging.info("\t{}:".format(metric))
+        logging.info("\n\t{}:".format(metric))
         logging.info("\t\t{} - List     : {}".format(metric, comparative_list)) 
         logging.info("\t\t{} - Mean     : {}".format(metric, np.mean(comparative_list)))
         logging.info("\t\t{} - Std. Dev.: {}".format(metric, np.std(comparative_list)))
