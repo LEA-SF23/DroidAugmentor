@@ -243,6 +243,8 @@ class PlotRegressiveMetrics:
         for metric, metric_values, color in zip(self.labels_plot_regressive_metrics, list_metrics, self.color_map_bar):
             try:
 
+              print("Metric: {} values: {} color: {}".format(metric, metric_values, color))
+               
               metric_mean = statistics.mean(metric_values)
               metric_std = statistics.stdev(metric_values)
   
