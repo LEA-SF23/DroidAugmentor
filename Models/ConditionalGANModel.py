@@ -91,13 +91,13 @@ class ConditionalGAN:
         label_input = Input(shape=(1,), dtype=self.dataset_type)
 
         generator_model = Dense(self.dense_layer_sizes_g[0], kernel_initializer=initialization)(neural_model_inputs)
-        generator_model = BatchNormalization(momentum=0.8)(generator_model)
+        #generator_model = BatchNormalization(momentum=0.8)(generator_model)
         generator_model = Dropout(self.dropout_decay_rate_g)(generator_model)
         generator_model = self.add_activation_layer(generator_model)
 
         for layer_size in self.dense_layer_sizes_g[1:]:
             generator_model = Dense(layer_size, kernel_initializer=initialization)(generator_model)
-            generator_model = BatchNormalization(momentum=0.8)(generator_model)
+            #generator_model = BatchNormalization(momentum=0.8)(generator_model)
             generator_model = Dropout(self.dropout_decay_rate_g)(generator_model)
             generator_model = self.add_activation_layer(generator_model)
 
@@ -120,13 +120,13 @@ class ConditionalGAN:
 
         discriminator_model = Dense(self.dense_layer_sizes_d[0])(neural_model_input)
         discriminator_model = Dropout(self.dropout_decay_rate_d)(discriminator_model)
-        discriminator_model = BatchNormalization(momentum=0.8)(discriminator_model)
+        #discriminator_model = BatchNormalization(momentum=0.8)(discriminator_model)
         discriminator_model = self.add_activation_layer(discriminator_model)
 
         for layer_size in self.dense_layer_sizes_d[1:]:
 
             discriminator_model = Dense(layer_size)(discriminator_model)
-            discriminator_model = BatchNormalization(momentum=0.8)(discriminator_model)
+            #discriminator_model = BatchNormalization(momentum=0.8)(discriminator_model)
             discriminator_model = Dropout(self.dropout_decay_rate_d)(discriminator_model)
             discriminator_model = self.add_activation_layer(discriminator_model)
 
