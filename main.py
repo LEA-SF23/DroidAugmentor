@@ -311,10 +311,10 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
     comparative_lists = [list_mean_squared_error,list_cosine_similarity, list_kl_divergence, list_max_mean_discrepancy]
     logging.info(f"Comparative Metrics:")
     for metric, comparative_list in zip(comparative_metrics, comparative_lists):
-        logging.info("\n\t{}:".format(metric))
+        logging.info("\t{}".format(metric))
         logging.info("\t\t{} - List     : {}".format(metric, comparative_list)) 
         logging.info("\t\t{} - Mean     : {}".format(metric, np.mean(comparative_list)))
-        logging.info("\t\t{} - Std. Dev.: {}".format(metric, np.std(comparative_list)))
+        logging.info("\t\t{} - Std. Dev.: {}\n".format(metric, np.std(comparative_list)))
 
                                 
                                 
@@ -349,7 +349,7 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
 
     plot_regressive_metrics.plot_regressive_metrics(list_mean_squared_error, list_cosine_similarity,
                                                     list_kl_divergence, list_max_mean_discrepancy, plot_filename,
-                                                    f'{title_output_label}_REAL')
+                                                    f'{title_output_label}')
 
 
 def get_adversarial_model(latent_dim, input_data_shape, activation_function, initializer_mean, initializer_deviation,
