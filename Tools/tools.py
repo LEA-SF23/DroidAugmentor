@@ -181,8 +181,8 @@ class PlotClassificationMetrics:
 
         for metric, metric_values, color in zip(self.labels_bar_metrics, list_all_metrics, self.color_map_bar):
             try:
-                metric_mean = statistics.mean(metric_values)
-                metric_std = statistics.stdev(metric_values)
+                metric_mean = np.mean(metric_values)
+                metric_std = np.std(metric_values)
     
                 new_plot_bars.add_trace(go.Bar(x=[metric], y=[metric_mean], name=metric, marker=dict(color=color),
                                                error_y=dict(type='constant', value=metric_std, visible=True),
@@ -245,8 +245,8 @@ class PlotRegressiveMetrics:
 
               print("Metric: {} values: {} color: {}".format(metric, metric_values, color))
                
-              metric_mean = statistics.mean(metric_values)
-              metric_std = statistics.stdev(metric_values)
+              metric_mean = np.mean(metric_values)
+              metric_std = np.std(metric_values)
   
               new_plot_bars.add_trace(go.Bar(x=[metric], y=[metric_mean], name=metric, marker=dict(color=color),
                                              error_y=dict(type='constant', value=metric_std, visible=True),
