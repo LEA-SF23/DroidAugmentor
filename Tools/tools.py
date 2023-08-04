@@ -9,7 +9,7 @@ __last_update__ = '2023/08/03'
 __credits__ = ['unknown']
 
 import os
-import statistics
+#import statistics
 import numpy as np
 import itertools
 
@@ -243,7 +243,7 @@ class PlotRegressiveMetrics:
         for metric, metric_values, color in zip(self.labels_plot_regressive_metrics, list_metrics, self.color_map_bar):
             try:
 
-              print("Metric: {} values: {} color: {}".format(metric, metric_values, color))
+              #print("Metric: {} values: {} color: {}".format(metric, metric_values, color))
                
               metric_mean = np.mean(metric_values)
               metric_std = np.std(metric_values)
