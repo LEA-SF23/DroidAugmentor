@@ -63,7 +63,6 @@ campaigns_available['sf23_1l_64'] = {
     "dense_layer_sizes_d" : ['128'],
     'number_epochs' : ['1000'],
     'training_algorithm': ['Adam'],
-    'classifier' : ['perceptron'],
 }
 
 campaigns_available['sf23_1l_128'] = {
@@ -73,7 +72,6 @@ campaigns_available['sf23_1l_128'] = {
     "dense_layer_sizes_d" : ['128'],
     'number_epochs' : ['1000'],
     'training_algorithm': ['Adam'],
-    'classifier' : ['perceptron'],
 }
 
 campaigns_available['sf23_1l_256'] = {
@@ -83,7 +81,6 @@ campaigns_available['sf23_1l_256'] = {
     "dense_layer_sizes_d" : ['256'],
     'number_epochs' : ['1000'],
     'training_algorithm': ['Adam'],
-    'classifier' : ['perceptron'],
 }
 
 campaigns_available['sf23_1l_512'] = {
@@ -93,7 +90,6 @@ campaigns_available['sf23_1l_512'] = {
     "dense_layer_sizes_d" : ['512'],
     'number_epochs' : ['1000'],
     'training_algorithm': ['Adam'],
-    'classifier' : ['perceptron'],
 }
 
 campaigns_available['sf23_1l_1024'] = {
@@ -103,7 +99,6 @@ campaigns_available['sf23_1l_1024'] = {
     "dense_layer_sizes_d" : ['1024'],
     'number_epochs' : ['1000'],
     'training_algorithm': ['Adam'],
-    'classifier' : ['perceptron'],
 }
 
 campaigns_available['sf23_2l'] = {
