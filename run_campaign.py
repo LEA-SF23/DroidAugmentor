@@ -310,7 +310,7 @@ def main():
     print("")
 
 
-    output_dir = 'out_{}'.format(
+    output_dir = 'outputs/out_{}'.format(
                 datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
     Path(output_dir).mkdir(parents=True, exist_ok=True)    
     logging_filename = '{}/evaluation_campaigns.log'.format(output_dir)
