@@ -41,9 +41,13 @@ DEFAULT_LOSS_CURVE_LEGEND_NAME = "Legenda"
 DEFAULT_LOSS_CURVE_PREFIX_FILE = "curve_training_error"
 DEFAULT_TITLE_COMPARATIVE_PLOTS = "Comparativo entre dados sintéticos e reais (Média)"
 DEFAULT_PLOT_CLASSIFIER_METRICS_LABELS = ['Acurácia', 'Precisão', 'Recall', 'F1-Score']
-DEFAULT_PLOT_REGRESSION_METRICS_LABELS = ['Erro Médio Quadrático', 'Similaridade de Cossenos', 'Divergência KL',
+DEFAULT_PLOT_REGRESSION_METRICS_LABELS = [ 'Similaridade de Cossenos', 
+                                          'Erro Médio Quadrático', 
+                                          'Divergência KL',
                                           'Máxima Discrepância Média']
-DEFAULT_COLOR_MAP = ['#3182BD', '#6BAED6', '#FD8D3C', '#FDD0A2', '#31A354', '#74C476', '#E6550D', '#FD8D3C']
+
+# https://matplotlib.org/stable/tutorials/colors/colormaps.html
+DEFAULT_COLOR_MAP =  plt.get_cmap('tab10') # ['#3182BD', '#6BAED6', '#FD8D3C', '#FDD0A2', '#31A354', '#74C476', '#E6550D', '#FD8D3C']
 DEFAULT_COLOR_NAME = ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds', 'YlOrBr', 'YlOrRd', 'OrRd',
                           'PuRd', 'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
 
@@ -236,7 +240,7 @@ class PlotRegressiveMetrics:
     def plot_regressive_metrics(self, mean_squared_error_list, list_cosine_similarity,
                                 list_kl_divergence, list_max_mean_discrepancy, plot_filename, plot_title):
 
-        list_metrics = [mean_squared_error_list, list_cosine_similarity, list_kl_divergence, list_max_mean_discrepancy]
+        list_metrics = [list_cosine_similarity, mean_squared_error_list, list_kl_divergence, list_max_mean_discrepancy]
 
         new_plot_bars = go.Figure()
 
