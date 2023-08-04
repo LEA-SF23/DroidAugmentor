@@ -80,8 +80,8 @@ DEFAULT_DATA_TYPE = "float32"
 
 DEFAULT_NUMBER_GENERATE_MALWARE_SAMPLES = 2000
 DEFAULT_NUMBER_GENERATE_BENIGN_SAMPLES = 2000
-DEFAULT_NUMBER_EPOCHS_CONDITIONAL_GAN = 1
-DEFAULT_NUMBER_STRATIFICATION_FOLD = 2
+DEFAULT_NUMBER_EPOCHS_CONDITIONAL_GAN = 100
+DEFAULT_NUMBER_STRATIFICATION_FOLD = 5
 DEFAULT_ADVERSARIAL_LATENT_DIMENSION = 128
 DEFAULT_ADVERSARIAL_TRAINING_ALGORITHM = "Adam"
 DEFAULT_ADVERSARIAL_ACTIVATION = "LeakyReLU"
@@ -104,9 +104,9 @@ DEFAULT_OUTPUT_PATH_CONFUSION_MATRIX = "confusion_matrix"
 DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "training_curve"
 DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine", "KNN",
                            "DecisionTree", "AdaBoost", "NaiveBayes",
-                           "QuadraticDiscriminant", "Perceptron"]
+                           "QuadraticDiscriminant"] #"Perceptron"
 
-DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine"]
+#DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine"]
 
 DEFAULT_VERBOSE_LIST = {logging.INFO: 2, logging.DEBUG: 1, logging.WARNING: 2,
                         logging.FATAL: 0, logging.ERROR: 0}
