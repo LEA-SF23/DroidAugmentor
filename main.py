@@ -106,6 +106,7 @@ DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "Training_curve"
 def list_of_ints(arg):
     return list(map(int, arg.split(',')))
 
+
 def generate_samples(instance_model, number_instances, latent_dimension, label_class):
     if np.ceil(label_class) == 1:
 
@@ -555,7 +556,7 @@ if __name__ == "__main__":
         logging.basicConfig(format="%(message)s", datefmt=TIME_FORMAT, level=arguments.verbosity)
         show_all_settings(arguments)
 
-    time_start_campaign = datetime.datetime.now()
+    time_start_experiment = datetime.datetime.now()
 
     if arguments.data_type == 'int8':
         data_type = np.int8
@@ -586,5 +587,5 @@ if __name__ == "__main__":
                    initializer_deviation=arguments.initializer_deviation, save_models=arguments.save_models,
                    path_confusion_matrix=arguments.path_confusion_matrix, path_curve_loss=arguments.path_curve_loss)
 
-    time_end_campaign = datetime.datetime.now()
-    logging.info("\t Campaign duration: {}".format(time_end_campaign - time_start_campaign))
+    time_end_experiment = datetime.datetime.now()
+    logging.info("\t Experiment duration: {}".format(time_end_experiment - time_start_experiment))
