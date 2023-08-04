@@ -82,6 +82,7 @@ DEFAULT_NUMBER_GENERATE_MALWARE_SAMPLES = 2000
 DEFAULT_NUMBER_GENERATE_BENIGN_SAMPLES = 2000
 DEFAULT_NUMBER_EPOCHS_CONDITIONAL_GAN = 100
 DEFAULT_NUMBER_STRATIFICATION_FOLD = 5
+
 DEFAULT_ADVERSARIAL_LATENT_DIMENSION = 128
 DEFAULT_ADVERSARIAL_TRAINING_ALGORITHM = "Adam"
 DEFAULT_ADVERSARIAL_ACTIVATION = "PReLU"  # ['LeakyReLU', 'ReLU', 'PReLU']
@@ -92,6 +93,8 @@ DEFAULT_ADVERSARIAL_INITIALIZER_DEVIATION = 0.02
 DEFAULT_ADVERSARIAL_BATCH_SIZE = 32
 DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_G = [128]
 DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_D = [128]
+DEFAULT_ADVERSARIAL_RANDOM_LATENT_MEAN_DISTRIBUTION = 0.0
+DEFAULT_ADVERSARIAL_RANDOM_LATENT_STANDER_DEVIATION = 1.0
 
 DEFAULT_CONDITIONAL_LAST_ACTIVATION_LAYER = "sigmoid"
 DEFAULT_PERCEPTRON_TRAINING_ALGORITHM = "Adam"
@@ -104,7 +107,6 @@ DEFAULT_OUTPUT_PATH_CONFUSION_MATRIX = "confusion_matrix"
 DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "training_curve"
 DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine", "KNN",
                            "DecisionTree", "AdaBoost"]  # "QuadraticDiscriminant", "NaiveBayes","Perceptron"
-
 
 DEFAULT_VERBOSE_LIST = {logging.INFO: 2, logging.DEBUG: 1, logging.WARNING: 2,
                         logging.FATAL: 0, logging.ERROR: 0}
@@ -257,7 +259,7 @@ def evaluate_real_data(list_classifiers, x_real, y_real, fold, k, generate_confu
 def show_and_export_results(synthetic_accuracies, synthetic_precisions, synthetic_recalls, synthetic_f1_scores,
                             real_accuracies, real_precisions, real_recalls, real_f1_scores, list_mean_squared_error,
                             list_cosine_similarity, list_kl_divergence, list_max_mean_discrepancy, classifier_type,
-                            output_dir, title_output_label, k_folds):
+                            output_dir, title_output_label):
     plot_classifier_metrics = PlotClassificationMetrics()
     plot_regressive_metrics = PlotRegressiveMetrics()
 
@@ -313,31 +315,6 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
         logging.info("\t\t{} - Mean     : {}".format(metric, np.mean(comparative_list)))
         logging.info("\t\t{} - Std. Dev.: {}\n".format(metric, np.std(comparative_list)))
 
-    # logging.info(f"Comparative Metrics:\n")
-    # logging.info("  Comparative List of Mean Squared Error  : {}".format(list_mean_squared_error))
-    # logging.info("  Comparative List of Cosine Similarity   : {}".format(list_cosine_similarity))
-    # logging.info("  Comparative List of KL divergence       : {}".format(list_kl_divergence))
-    # logging.info("  Comparative List of Max Mean Discrepancy: {}".format(list_max_mean_discrepancy))
-
-    # logging.info("  Squared Error - Comparative Mean           : {}".format(np.mean(list_mean_squared_error)))
-    # logging.info("  Comparative Std. Dev. Mean Squared Error: {}".format(
-    #     np.std(list_mean_squared_error)))
-
-    # logging.info("   Cosine Similarity - Mean      : {}".format(np.mean(list_cosine_similarity)))
-    # logging.info("   Cosine Similarity - Std. Dev. : {}".format(
-    #     np.std(list_cosine_similarity)))
-
-    # logging.info("  Comparative Mean KL divergence: {}".format(np.mean(list_kl_divergence)))
-
-    # logging.info("  Comparative Mean Max Mean Discrepancy: {}".format(
-    #     np.mean(list_max_mean_discrepancy)))
-
-    # logging.info("  Comparative Standard Deviation of KL divergence: {}".format(
-    #     np.std(list_kl_divergence)))
-
-    # logging.info("  Comparative Standard Deviation of Max Mean Discrepancy: {}".format(
-    #             np.std(list_max_mean_discrepancy)))
-
     plot_filename = os.path.join(output_dir, f'Comparison_Real_Synthetic.pdf')
 
     plot_regressive_metrics.plot_regressive_metrics(list_mean_squared_error, list_cosine_similarity,
@@ -347,7 +324,8 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
 
 def get_adversarial_model(latent_dim, input_data_shape, activation_function, initializer_mean, initializer_deviation,
                           dropout_decay_rate_g, dropout_decay_rate_d, last_layer_activation, dense_layer_sizes_g,
-                          dense_layer_sizes_d, dataset_type, training_algorithm):
+                          dense_layer_sizes_d, dataset_type, training_algorithm, latent_mean_distribution,
+                          latent_stander_deviation):
     instance_models = ConditionalGAN(latent_dim, input_data_shape, activation_function, initializer_mean,
                                      initializer_deviation, dropout_decay_rate_g, dropout_decay_rate_d,
                                      last_layer_activation, dense_layer_sizes_g, dense_layer_sizes_d, dataset_type)
@@ -355,7 +333,9 @@ def get_adversarial_model(latent_dim, input_data_shape, activation_function, ini
     generator_model = instance_models.get_generator()
     discriminator_model = instance_models.get_discriminator()
 
-    adversarial_model = AdversarialModel(generator_model, discriminator_model, latent_dimension=latent_dim)
+    adversarial_model = AdversarialModel(generator_model, discriminator_model, latent_dimension=latent_dim,
+                                         latent_mean_distribution=latent_mean_distribution,
+                                         latent_stander_deviation=latent_stander_deviation)
 
     optimizer_generator = adversarial_model.get_optimizer(training_algorithm)
     optimizer_discriminator = adversarial_model.get_optimizer(training_algorithm)
@@ -401,7 +381,9 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
                    dense_layer_sizes_g=None, dense_layer_sizes_d=None, dataset_type=None, title_output=None,
                    initializer_mean=None, initializer_deviation=None,
                    last_layer_activation=DEFAULT_CONDITIONAL_LAST_ACTIVATION_LAYER, save_models=False,
-                   path_confusion_matrix=None, path_curve_loss=None, verbose_level=None):
+                   path_confusion_matrix=None, path_curve_loss=None, verbose_level=None,
+                   latent_mean_distribution=None, latent_stander_deviation=None):
+
     show_model(latent_dim, input_data_shape, activation_function, initializer_mean,
                initializer_deviation, dropout_decay_rate_g, dropout_decay_rate_d,
                last_layer_activation, dense_layer_sizes_g, dense_layer_sizes_d,
@@ -418,7 +400,8 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
         adversarial_model = get_adversarial_model(latent_dim, input_data_shape, activation_function, initializer_mean,
                                                   initializer_deviation, dropout_decay_rate_g, dropout_decay_rate_d,
                                                   last_layer_activation, dense_layer_sizes_g, dense_layer_sizes_d,
-                                                  dataset_type, training_algorithm)
+                                                  dataset_type, training_algorithm, latent_mean_distribution,
+                                                  latent_stander_deviation)
         instance_classifier = Classifiers()
 
         x_training = np.array(dataset.iloc[train_index, :-1].values, dtype=dataset_type)
@@ -485,7 +468,7 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
     show_and_export_results(list_accuracy, list_precision, list_recall, list_f1_score, list_real_accuracy,
                             list_real_precision, list_real_recall, list_real_f1_score, list_mean_squared_error,
                             list_cosine_similarity, list_kl_divergence, list_maximum_mean_discrepancy,
-                            classifier_list, output_dir, title_output, k)
+                            classifier_list, output_dir, title_output)
 
 
 def initial_step(initial_arguments, dataset_type):
@@ -614,6 +597,14 @@ def create_argparse():
                         help='Diretório de saída dos gráficos de curva de treinamento',
                         default=DEFAULT_OUTPUT_PATH_TRAINING_CURVE)
 
+    parser.add_argument("--latent_mean_distribution", type=float,
+                        help='Média da distribuição do ruído aleatório de entrada',
+                        default=DEFAULT_ADVERSARIAL_RANDOM_LATENT_MEAN_DISTRIBUTION)
+
+    parser.add_argument("--latent_stander_deviation", type=str,
+                        help='Desvio padrão do ruído aleatório de entrada',
+                        default=DEFAULT_ADVERSARIAL_RANDOM_LATENT_STANDER_DEVIATION)
+
     return parser.parse_args()
 
 
@@ -664,7 +655,8 @@ if __name__ == "__main__":
                    dataset_type=data_type, title_output=output_label, initializer_mean=arguments.initializer_mean,
                    initializer_deviation=arguments.initializer_deviation, save_models=arguments.save_models,
                    path_confusion_matrix=arguments.path_confusion_matrix, path_curve_loss=arguments.path_curve_loss,
-                   verbose_level=arguments.verbosity)
+                   verbose_level=arguments.verbosity, latent_mean_distribution=arguments.latent_mean_distribution,
+                   latent_stander_deviation=arguments.latent_stander_deviation)
 
     time_end_campaign = datetime.datetime.now()
     logging.info("\t Campaign duration: {}".format(time_end_campaign - time_start_campaign))

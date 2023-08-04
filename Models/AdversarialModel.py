@@ -37,6 +37,10 @@ DEFAULT_CONDITIONAL_GAN_RMS_PROP_LEARNING_RATE = 0.001
 DEFAULT_CONDITIONAL_GAN_RMS_PROP_DECAY_RATE = 0.5
 DEFAULT_CONDITIONAL_GAN_ADA_DELTA_LEARNING_RATE = 0.001
 DEFAULT_CONDITIONAL_GAN_ADA_DELTA_DECAY_RATE = 0.5
+DEFAULT_CONDITIONAL_GAN_SMOOTHING_RATE = 0.15
+DEFAULT_CONDITIONAL_GAN_LATENT_MEAN_DISTRIBUTION = 0.0
+DEFAULT_CONDITIONAL_GAN_LATENT_STANDER_DEVIATION = 1.0
+
 DEFAULT_FILE_NAME_DISCRIMINATOR = "discriminator_model"
 DEFAULT_FILE_NAME_GENERATOR = "generator_model"
 DEFAULT_PATH_OUTPUT_MODELS = "models_saved/"
@@ -54,7 +58,10 @@ class AdversarialModel(Model):
                  conditional_gan_ada_delta_decay_rate=DEFAULT_CONDITIONAL_GAN_ADA_DELTA_DECAY_RATE,
                  file_name_discriminator=DEFAULT_FILE_NAME_DISCRIMINATOR,
                  file_name_generator=DEFAULT_FILE_NAME_GENERATOR, models_saved_path=DEFAULT_PATH_OUTPUT_MODELS,
-                 *args, **kwargs):
+                 latent_mean_distribution=DEFAULT_CONDITIONAL_GAN_LATENT_MEAN_DISTRIBUTION,
+                 latent_stander_deviation=DEFAULT_CONDITIONAL_GAN_LATENT_MEAN_DISTRIBUTION,
+                 smoothing_rate=DEFAULT_CONDITIONAL_GAN_SMOOTHING_RATE, *args, **kwargs):
+
         super().__init__(*args, **kwargs)
 
         self.generator = generator_model
@@ -71,6 +78,11 @@ class AdversarialModel(Model):
         self.conditional_gan_rms_prop_decay_rate = conditional_gan_rms_prop_decay_rate
         self.conditional_gan_ada_delta_learning_rate = conditional_gan_ada_delta_learning_rate
         self.conditional_gan_ada_delta_decay_rate = conditional_gan_ada_delta_decay_rate
+
+        self.smoothing_rate = smoothing_rate
+        self.latent_mean_distribution = latent_mean_distribution
+        self.latent_stander_deviation = latent_stander_deviation
+
         self.file_name_discriminator = file_name_discriminator
         self.file_name_generator = file_name_generator
         self.models_saved_path = models_saved_path

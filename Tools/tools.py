@@ -244,11 +244,14 @@ class PlotClassificationMetrics:
 
 class PlotRegressiveMetrics:
 
-    def __init__(self, labels_plot_regressive_metrics=DEFAULT_PLOT_REGRESSION_METRICS_LABELS,
-                 color_map_bar=DEFAULT_COLOR_MAP_REGRESSIVE,
-                 width_bar=DEFAULT_WIDTH_BAR,
-                 font_size=DEFAULT_FONT_SIZE,
-                 plot_title=DEFAULT_TITLE_COMPARATIVE_PLOTS):
+    def __init__(self, labels_plot_regressive_metrics=None, color_map_bar=None, width_bar=DEFAULT_WIDTH_BAR,
+                 font_size=DEFAULT_FONT_SIZE, plot_title=DEFAULT_TITLE_COMPARATIVE_PLOTS):
+
+        if color_map_bar is None:
+            color_map_bar = DEFAULT_COLOR_MAP_REGRESSIVE
+
+        if labels_plot_regressive_metrics is None:
+            labels_plot_regressive_metrics = DEFAULT_PLOT_REGRESSION_METRICS_LABELS
 
         self.labels_plot_regressive_metrics = labels_plot_regressive_metrics
         self.color_map_bar = color_map_bar
@@ -256,17 +259,16 @@ class PlotRegressiveMetrics:
         self.plot_title_axis_x = plot_title
         self.font_size = font_size
 
-    def plot_regressive_metrics(self, mean_squared_error_list, list_cosine_similarity,
-                                list_kl_divergence, list_max_mean_discrepancy, plot_filename, plot_title):
+    def plot_regressive_metrics(self, mean_squared_error_list, list_cosine_similarity, list_kl_divergence,
+                                list_max_mean_discrepancy, plot_filename, plot_title):
 
         list_metrics = [list_cosine_similarity, mean_squared_error_list, list_kl_divergence, list_max_mean_discrepancy]
 
         new_plot_bars = go.Figure()
 
         for metric, metric_values, color in zip(self.labels_plot_regressive_metrics, list_metrics, self.color_map_bar):
-            try:
 
-                # print("Metric: {} values: {} color: {}".format(metric, metric_values, color))
+            try:
 
                 metric_mean = np.mean(metric_values)
                 metric_std = np.std(metric_values)
