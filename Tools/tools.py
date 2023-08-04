@@ -34,17 +34,17 @@ DEFAULT_FONT_SIZE = 12
 DEFAULT_MATRIX_CONFUSION_ROTATION_LEGENDS = 45
 DEFAULT_LOSS_CURVE_LEGEND_GENERATOR = "Gerador"
 DEFAULT_LOSS_CURVE_LEGEND_DISCRIMINATOR = "Discriminador"
-DEFAULT_LOSS_CURVE_LEGEND_ITERATIONS = "iterações"
+DEFAULT_LOSS_CURVE_LEGEND_ITERATIONS = "Interações (Épocas)"
 DEFAULT_LOSS_CURVE_TITLE_PLOT = "Perda do Gerador e Discriminador"
 DEFAULT_LOSS_CURVE_LEGEND_LOSS = "Perda"
 DEFAULT_LOSS_CURVE_LEGEND_NAME = "Legenda"
 DEFAULT_LOSS_CURVE_PREFIX_FILE = "curve_training_error"
-DEFAULT_TITLE_COMPARATIVE_PLOTS = "Comparativo entre dados sintético e reais (Média)"
+DEFAULT_TITLE_COMPARATIVE_PLOTS = "Comparativo entre dados sintéticos e reais (Média)"
 DEFAULT_PLOT_CLASSIFIER_METRICS_LABELS = ['Acurácia', 'Precisão', 'Recall', 'F1-Score']
 DEFAULT_PLOT_REGRESSION_METRICS_LABELS = ['Erro Médio Quadrático', 'Similaridade de Cossenos', 'Divergência KL',
                                           'Máxima Discrepância Média']
 DEFAULT_COLOR_MAP = ['#3182BD', '#6BAED6', '#FD8D3C', '#FDD0A2', '#31A354', '#74C476', '#E6550D', '#FD8D3C']
-DEFAULT_COLOR_NAME_MAP = ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds', 'YlOrBr', 'YlOrRd', 'OrRd',
+DEFAULT_COLOR_NAME = ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds', 'YlOrBr', 'YlOrRd', 'OrRd',
                           'PuRd', 'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
 
 
