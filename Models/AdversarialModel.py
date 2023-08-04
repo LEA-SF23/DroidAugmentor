@@ -122,7 +122,7 @@ class AdversarialModel(Model):
 
         try:
 
-            logging.info("Salvando modelo")
+            logging.info("Saving Adversarial Model:")
             path_directory = os.path.join(path_output, self.models_saved_path)
             Path(path_directory).mkdir(parents=True, exist_ok=True)
 
@@ -149,12 +149,12 @@ class AdversarialModel(Model):
 
             self.generator.save_weights(generator_file_name + ".h5")
 
-            logging.info("Modelo discriminator salvo: {}".format(discriminator_file_name))
-            logging.info("Modelo generator salvo: {}".format(generator_file_name))
+            logging.info("  Discriminator output: {}".format(discriminator_file_name))
+            logging.info("  Generator output: {}".format(generator_file_name))
 
         except FileExistsError:
 
-            logging.error("Arquivo contendo modelo já está salvo")
+            logging.error("File model exists")
             exit(-1)
 
     def load_models(self, path_output, k_fold):
