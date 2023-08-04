@@ -444,3 +444,7 @@ class Classifiers:
 
     def set_perceptron_layer_activation(self, perceptron_layer_activation):
         self.perceptron_layer_activation = perceptron_layer_activation
+
+
+a = Classifiers()
+print(a.random_forest_number_estimators)

@@ -8,30 +8,28 @@ __initial_data__ = '2022/06/01'
 __last_update__ = '2023/08/03'
 __credits__ = ['unknown']
 
+
 try:
 
     import json
     import os
-    import warnings
+    import sys
     import logging
-    import numpy as np
-    import pandas as pd
     import datetime
     import argparse
-    import itertools
-    import statistics
-    import sys
+    import warnings
 
-    from tensorflow import keras
-    from tensorflow.keras.optimizers.legacy import Adam
+    import numpy as np
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    from pathlib import Path
     from tensorflow.keras.losses import BinaryCrossentropy
     from sklearn.model_selection import StratifiedKFold
-    from sklearn.neighbors import KNeighborsClassifier
-    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.metrics import confusion_matrix
 
     from Models.ConditionalGANModel import ConditionalGAN
     from Models.AdversarialModel import AdversarialModel
-    from Models.PerceptronModel import PerceptronMultilayer
     from Models.Classifiers import Classifiers
 
     from Tools.tools import PlotConfusionMatrix
@@ -40,16 +38,7 @@ try:
     from Tools.tools import ProbabilisticMetrics
     from Tools.tools import PlotClassificationMetrics
     from Tools.tools import DEFAULT_COLOR_NAME
-    from Tools.tools import DEFAULT_COLOR_MAP
 
-    from sklearn.model_selection import GridSearchCV
-    from sklearn.metrics import confusion_matrix
-    from sklearn.svm import SVC
-    from pathlib import Path
-
-    import plotly.graph_objects as go
-    import plotly.io as pio
-    import matplotlib.pyplot as plt
 
 except ImportError as error:
 
@@ -122,7 +111,9 @@ def list_of_strs(arg):
     return list(map(str, arg.split(',')))
 
 
-def generate_samples(instance_model, number_instances, latent_dimension, label_class, verbose_level):
+def generate_samples(instance_model, number_instances, latent_dimension, label_class, verbose_level,
+                     latent_mean_distribution, latent_stander_deviation):
+
     if np.ceil(label_class) == 1:
 
         label_samples_generated = np.ones(number_instances, dtype=np.float32)
@@ -133,7 +124,8 @@ def generate_samples(instance_model, number_instances, latent_dimension, label_c
         label_samples_generated = np.zeros(number_instances, dtype=np.float32)
         label_samples_generated = label_samples_generated.reshape((number_instances, 1))
 
-    latent_noise = np.random.normal(0, 1, (number_instances, latent_dimension))
+    latent_noise = np.random.normal(latent_mean_distribution, latent_stander_deviation,
+                                    (number_instances, latent_dimension))
     generated_samples = instance_model.generator.predict([latent_noise, label_samples_generated], verbose=verbose_level)
     generated_samples = np.rint(generated_samples)
 
@@ -429,9 +421,13 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
         number_samples_false = len([positional_label for positional_label in y_test.tolist() if positional_label == 0])
 
         x_true_synthetic, y_true_synthetic = generate_samples(adversarial_model, number_samples_true, latent_dim,
-                                                              1, verbose_level)
+                                                              1, verbose_level, latent_mean_distribution,
+                                                              latent_stander_deviation)
+
         x_false_synthetic, y_false_synthetic = generate_samples(adversarial_model, number_samples_false, latent_dim,
-                                                                0, verbose_level)
+                                                                0, verbose_level, latent_mean_distribution,
+                                                                latent_stander_deviation)
+
         x_synthetic_samples = np.concatenate((x_true_synthetic, x_false_synthetic), dtype=dataset_type)
         y_synthetic_samples = np.rint(np.concatenate((y_true_synthetic, y_false_synthetic)))
         y_synthetic_samples = np.squeeze(y_synthetic_samples, axis=1)
@@ -601,7 +597,7 @@ def create_argparse():
                         help='Média da distribuição do ruído aleatório de entrada',
                         default=DEFAULT_ADVERSARIAL_RANDOM_LATENT_MEAN_DISTRIBUTION)
 
-    parser.add_argument("--latent_stander_deviation", type=str,
+    parser.add_argument("--latent_stander_deviation", type=float,
                         help='Desvio padrão do ruído aleatório de entrada',
                         default=DEFAULT_ADVERSARIAL_RANDOM_LATENT_STANDER_DEVIATION)
 
