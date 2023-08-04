@@ -65,7 +65,8 @@ DEFAULT_PLOT_REGRESSION_METRICS_LABELS = [ 'Similaridade de Cossenos',
 # tab:cyan : #17becf
 
 #DEFAULT_COLOR_MAP =  [mapa_escalar.to_rgba(x) for x in range(9)] # ['#3182BD', '#6BAED6', '#FD8D3C', '#FDD0A2', '#31A354', '#74C476', '#E6550D', '#FD8D3C']
-DEFAULT_COLOR_MAP =  ['#1f77b4', '#ff7f0e',  '#2ca02c',   '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', '', '', '', '', '', '', '']
+DEFAULT_COLOR_MAP =  ['#1f77b4', '#ff7f0e',  '#2ca02c',   '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
+DEFAULT_COLOR_MAP_REGRESSIVE = ['#9467bd', '#8c564b', '#e377c2', '#7f7f7f', ]
 DEFAULT_COLOR_NAME = ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds', 'YlOrBr', 'YlOrRd', 'OrRd',
                           'PuRd', 'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
 
@@ -241,7 +242,7 @@ class PlotClassificationMetrics:
 class PlotRegressiveMetrics:
 
     def __init__(self, labels_plot_regressive_metrics=DEFAULT_PLOT_REGRESSION_METRICS_LABELS, 
-                 color_map_bar=DEFAULT_COLOR_MAP, 
+                 color_map_bar=DEFAULT_COLOR_MAP_REGRESSIVE, 
                  width_bar=DEFAULT_WIDTH_BAR,
                  font_size=DEFAULT_FONT_SIZE, 
                  plot_title=DEFAULT_TITLE_COMPARATIVE_PLOTS):
