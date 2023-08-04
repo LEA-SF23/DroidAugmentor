@@ -18,6 +18,7 @@ from keras.layers import Activation
 from keras.layers import LeakyReLU
 from keras.layers import PReLU
 from keras.layers import Concatenate
+from keras.layers import BatchNormalization
 from keras.initializers import RandomNormal
 from keras.models import Model
 
