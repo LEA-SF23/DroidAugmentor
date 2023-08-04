@@ -32,12 +32,14 @@ try:
     from Models.ConditionalGANModel import ConditionalGAN
     from Models.AdversarialModel import AdversarialModel
     from Models.PerceptronModel import PerceptronMultilayer
+    from Models.Classifiers import Classifiers
 
-    from Tools.tools import PlotConfusionMatrix, PlotRegressiveMetrics
+    from Tools.tools import PlotConfusionMatrix
+    from Tools.tools import PlotRegressiveMetrics
     from Tools.tools import PlotCurveLoss
     from Tools.tools import ProbabilisticMetrics
     from Tools.tools import PlotClassificationMetrics
-    from Tools.tools import DEFAULT_COLOR_NAME_MAP
+    from Tools.tools import DEFAULT_COLOR_NAME
     from Tools.tools import DEFAULT_COLOR_MAP
 
     from sklearn.model_selection import GridSearchCV
@@ -70,6 +72,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore", message=".*the default value of `keepdims` will become False.*")
+    warnings.filterwarnings("ignore", message="Variables are collinear")
 
 DEFAULT_VERBOSITY = logging.INFO
 TIME_FORMAT = '%Y-%m-%d,%H:%M:%S'
@@ -78,8 +81,7 @@ DEFAULT_DATA_TYPE = "float32"
 DEFAULT_NUMBER_GENERATE_MALWARE_SAMPLES = 2000
 DEFAULT_NUMBER_GENERATE_BENIGN_SAMPLES = 2000
 DEFAULT_NUMBER_EPOCHS_CONDITIONAL_GAN = 1
-DEFAULT_NUMBER_STRATIFICATION_FOLD = 5
-
+DEFAULT_NUMBER_STRATIFICATION_FOLD = 2
 DEFAULT_ADVERSARIAL_LATENT_DIMENSION = 128
 DEFAULT_ADVERSARIAL_TRAINING_ALGORITHM = "Adam"
 DEFAULT_ADVERSARIAL_ACTIVATION = "LeakyReLU"
@@ -99,15 +101,26 @@ DEFAULT_PERCEPTRON_DROPOUT_DECAY_RATE = 0.2
 DEFAULT_PERCEPTRON_METRIC = ["accuracy"]
 DEFAULT_SAVE_MODELS = True
 DEFAULT_OUTPUT_PATH_CONFUSION_MATRIX = "confusion_matrix"
-DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "Training_curve"
+DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "training_curve"
+DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine", "KNN",
+                           "DecisionTree", "AdaBoost", "NaiveBayes",
+                           "QuadraticDiscriminant", "Perceptron"]
+
+DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine"]
+
+DEFAULT_VERBOSE_LIST = {logging.INFO: 2, logging.DEBUG: 1, logging.WARNING: 2,
+                        logging.FATAL: 0, logging.ERROR: 0}
 
 
 # Define a custom argument type for a list of integers
 def list_of_ints(arg):
     return list(map(int, arg.split(',')))
 
+# Define a custom argument type for a list of integers
+def list_of_strs(arg):
+    return list(map(str, arg.split(',')))
 
-def generate_samples(instance_model, number_instances, latent_dimension, label_class):
+def generate_samples(instance_model, number_instances, latent_dimension, label_class, verbose_level):
     if np.ceil(label_class) == 1:
 
         label_samples_generated = np.ones(number_instances, dtype=np.float32)
@@ -118,46 +131,11 @@ def generate_samples(instance_model, number_instances, latent_dimension, label_c
         label_samples_generated = np.zeros(number_instances, dtype=np.float32)
         label_samples_generated = label_samples_generated.reshape((number_instances, 1))
 
-    random_latent_noise = np.random.normal(0, 1, (number_instances, latent_dimension))
-    generated_samples = instance_model.generator.predict([random_latent_noise, label_samples_generated], verbose=0)
+    latent_noise = np.random.normal(0, 1, (number_instances, latent_dimension))
+    generated_samples = instance_model.generator.predict([latent_noise, label_samples_generated], verbose=verbose_level)
     generated_samples = np.rint(generated_samples)
 
     return generated_samples, label_samples_generated
-
-
-def get_classifier(classifier_type, x_samples_training, y_samples_training, output_shape, dataset_type):
-    if classifier_type == 'knn':
-        # TODO: Verificar sobre o KNN
-        x_samples_training = np.array(x_samples_training, dtype=dataset_type)
-        y_samples_training = np.array(y_samples_training, dtype=dataset_type)
-        classifier = KNeighborsClassifier(n_neighbors=2)
-        classifier.fit(x_samples_training, y_samples_training)
-
-    elif classifier_type == 'perceptron':
-
-        classifier = PerceptronMultilayer().get_model(output_shape)
-        classifier.fit(x_samples_training, y_samples_training, epochs=30)
-
-    elif classifier_type == 'random_forest':
-        # TODO: Verificar sobre o Random Forest
-        x_samples_training = np.array(x_samples_training, dtype=dataset_type)
-        y_samples_training = np.array(y_samples_training, dtype=dataset_type)
-        classifier = RandomForestClassifier(n_estimators=100)
-        classifier.fit(x_samples_training, y_samples_training)
-
-    elif classifier_type == 'svm':
-        # TODO: Verificar sobre o SVM
-        parameters = {'C': [0.1, 1, 10], 'kernel': ['linear', 'rbf']}
-        svm_classifier = SVC()
-        classifier = GridSearchCV(svm_classifier, parameters, cv=3)  # TODO: Verificar cv igual a 3 ou 2?
-        x_samples_training = np.array(x_samples_training, dtype=dataset_type)
-        y_samples_training = np.array(y_samples_training, dtype=dataset_type)
-        classifier.fit(x_samples_training, y_samples_training)
-
-    else:
-        raise ValueError("Invalid classifier type. Use 'knn', 'perceptron', 'random_forest' or 'svm'.")
-
-    return classifier
 
 
 def comparative_data(fold, x_synthetic, real_data):
@@ -171,159 +149,196 @@ def comparative_data(fold, x_synthetic, real_data):
     logging.info(f"  Synthetic Fold {fold + 1} - Cosine Similarity: " + str(synthetic_cosine_similarity))
     logging.info(f"  Synthetic Fold {fold + 1} - KL Divergence: " + str(synthetic_kl_divergence))
     logging.info(f"  Synthetic Fold {fold + 1} - Maximum Mean Discrepancy: " + str(synthetic_maximum_mean_discrepancy))
-    logging.info("---")
     logging.info("")
 
     return [synthetic_mean_squared_error, synthetic_cosine_similarity, synthetic_kl_divergence,
             synthetic_maximum_mean_discrepancy]
 
 
-def evaluate_synthetic_data(classifier, x_synthetic, y_synthetic, fold, k, generate_confusion_matrix,
-                            output_dir, classifier_type, out_label, path_confusion_matrix):
-    y_predicted_synthetic = np.rint(classifier.predict(x_synthetic, verbose=0))
-
+def evaluate_synthetic_data(list_classifiers, x_synthetic, y_synthetic, fold, k, generate_confusion_matrix,
+                            output_dir, classifier_type, out_label, path_confusion_matrix, verbose_level):
     instance_metrics = ProbabilisticMetrics()
-    confusion_matrix_synthetic = confusion_matrix(y_synthetic, y_predicted_synthetic)
+    accuracy_synthetic_list, precision_synthetic_list, recall_synthetic_list, f1_score_synthetic_list = [], [], [], []
 
-    accuracy_synthetic = instance_metrics.get_accuracy(y_synthetic, y_predicted_synthetic)
-    precision_synthetic = instance_metrics.get_precision(y_synthetic, y_predicted_synthetic)
-    recall_synthetic = instance_metrics.get_recall(y_synthetic, y_predicted_synthetic)
-    f1_synthetic = instance_metrics.get_f1_score(y_synthetic, y_predicted_synthetic)
+    logging.info(f"Synthetic Fold {fold + 1}/{k} results\n")
 
-    logging.info(f"Synthetic Fold {fold + 1}/{k} results")
-    logging.info(f"Synthetic Fold {fold + 1} - Confusion Matrix:")
-    logging.info(confusion_matrix_synthetic)
-    logging.info("\nClassifier Metrics:")
-    logging.info(f"  Synthetic Fold {fold + 1} - Accuracy: " + str(accuracy_synthetic))
-    logging.info(f"  Synthetic Fold {fold + 1} - Precision: " + str(precision_synthetic))
-    logging.info(f"  Synthetic Fold {fold + 1} - Recall: " + str(recall_synthetic))
-    logging.info(f"  Synthetic Fold {fold + 1} - F1 Score: " + str(f1_synthetic) + "\n")
+    for index, classifier_model in enumerate(list_classifiers):
 
-    if generate_confusion_matrix:
-        plt.figure()
-        selected_color_map = plt.colormaps.get_cmap(DEFAULT_COLOR_NAME_MAP[(fold + 2) % len(DEFAULT_COLOR_NAME_MAP)])
-        confusion_matrix_instance = PlotConfusionMatrix()
-        confusion_matrix_instance.plot_confusion_matrix(confusion_matrix_synthetic, out_label, selected_color_map)
-        Path(os.path.join(output_dir, path_confusion_matrix)).mkdir(parents=True, exist_ok=True)
-        matrix_file = os.path.join(output_dir, path_confusion_matrix, f'CM_Synthetic_{classifier_type}_k{fold + 1}.pdf')
-        plt.savefig(matrix_file, bbox_inches='tight')
+        if classifier_type[index] == "Perceptron":
+            y_predicted_synthetic = classifier_model.predict(x_synthetic, verbose=DEFAULT_VERBOSE_LIST[verbose_level])
+            y_predicted_synthetic = np.rint(np.squeeze(y_predicted_synthetic, axis=1))
+        else:
 
-    return [accuracy_synthetic, precision_synthetic, recall_synthetic, f1_synthetic]
+            y_predicted_synthetic = classifier_model.predict(x_synthetic)
+
+        confusion_matrix_synthetic = confusion_matrix(y_synthetic, y_predicted_synthetic)
+        accuracy_synthetic = instance_metrics.get_accuracy(y_synthetic, y_predicted_synthetic)
+        precision_synthetic = instance_metrics.get_precision(y_synthetic, y_predicted_synthetic)
+        recall_synthetic = instance_metrics.get_recall(y_synthetic, y_predicted_synthetic)
+        f1_score_synthetic = instance_metrics.get_f1_score(y_synthetic, y_predicted_synthetic)
+        logging.info(f" Classifier Model: {classifier_type[index]}")
+        logging.info(f"   Synthetic Fold {fold + 1} - Confusion Matrix:")
+        logging.info(confusion_matrix_synthetic)
+        logging.info(f"\n   Classifier Metrics:")
+        logging.info(f"     Synthetic Fold {fold + 1} - Accuracy: " + str(accuracy_synthetic))
+        logging.info(f"     Synthetic Fold {fold + 1} - Precision: " + str(precision_synthetic))
+        logging.info(f"     Synthetic Fold {fold + 1} - Recall: " + str(recall_synthetic))
+        logging.info(f"     Synthetic Fold {fold + 1} - F1 Score: " + str(f1_score_synthetic) + "\n")
+
+        if generate_confusion_matrix:
+            plt.figure()
+            selected_color_map = plt.colormaps.get_cmap(DEFAULT_COLOR_NAME[(fold + 2) % len(DEFAULT_COLOR_NAME)])
+            confusion_matrix_instance = PlotConfusionMatrix()
+            confusion_matrix_instance.plot_confusion_matrix(confusion_matrix_synthetic, out_label, selected_color_map)
+            Path(os.path.join(output_dir, path_confusion_matrix)).mkdir(parents=True, exist_ok=True)
+            matrix_file = os.path.join(output_dir, path_confusion_matrix,
+                                       f'CM_Synthetic_{classifier_type[index]}_k{fold + 1}.pdf')
+            plt.savefig(matrix_file, bbox_inches='tight')
+
+        accuracy_synthetic_list.append(accuracy_synthetic)
+        precision_synthetic_list.append(precision_synthetic)
+        recall_synthetic_list.append(recall_synthetic)
+        f1_score_synthetic_list.append(f1_score_synthetic)
+
+    return [accuracy_synthetic_list, precision_synthetic_list, recall_synthetic_list, f1_score_synthetic_list]
 
 
-def evaluate_real_data(classifier, x_real, y_real, fold, k, generate_confusion_matrix, output_dir,
-                       classifier_type, out_label, path_confusion_matrix):
-    y_predicted_real = classifier.predict(x_real, verbose=0)
-
-    y_predicted_real = y_predicted_real.astype(int)
-    y_sample_real = y_real.astype(int)
-
-    confusion_matrix_real = confusion_matrix(y_sample_real, y_predicted_real)
-
-    instance_metrics = ProbabilisticMetrics()
-
-    accuracy_real = instance_metrics.get_accuracy(y_sample_real, y_predicted_real)
-    precision_real = instance_metrics.get_precision(y_sample_real, y_predicted_real)
-    recall_real = instance_metrics.get_recall(y_sample_real, y_predicted_real)
-    f1_real = instance_metrics.get_f1_score(y_sample_real, y_predicted_real)
-
+def evaluate_real_data(list_classifiers, x_real, y_real, fold, k, generate_confusion_matrix, output_dir,
+                       classifier_type, out_label, path_confusion_matrix, verbose_level):
     logging.info(f"Real Fold {fold + 1}/{k} results")
-    logging.info(f"Real Fold {fold + 1} results")
-    logging.info(f"Real Fold {fold + 1} - Confusion Matrix:")
-    logging.info(confusion_matrix_real)
-    logging.info("\nClassifier Metrics:")
-    logging.info(f"Real Fold {fold + 1} - Accuracy: " + str(accuracy_real))
-    logging.info(f"Real Fold {fold + 1} - Precision: " + str(precision_real))
-    logging.info(f"Real Fold {fold + 1} - Recall: " + str(recall_real))
-    logging.info(f"Real Fold {fold + 1} - F1 Score: " + str(f1_real) + "\n")
-    logging.info("")
+    instance_metrics = ProbabilisticMetrics()
+    accuracy_real_list, precision_real_list, recall_real_list, f1_real_list = [], [], [], []
 
-    if generate_confusion_matrix:
-        plt.figure()
-        selected_color_map = plt.colormaps.get_cmap(DEFAULT_COLOR_NAME_MAP[(fold + 2) % len(DEFAULT_COLOR_NAME_MAP)])
-        confusion_matrix_instance = PlotConfusionMatrix()
-        confusion_matrix_instance.plot_confusion_matrix(confusion_matrix_real, out_label, selected_color_map)
-        Path(os.path.join(output_dir, path_confusion_matrix)).mkdir(parents=True, exist_ok=True)
-        matrix_file = os.path.join(output_dir, path_confusion_matrix, f'CM_Real_{classifier_type}_k{fold + 1}.pdf')
-        plt.savefig(matrix_file, bbox_inches='tight')
+    for index, classifier_model in enumerate(list_classifiers):
 
-    return [accuracy_real, precision_real, recall_real, f1_real]
+        if classifier_type[index] == "Perceptron":
+            y_predicted_real = classifier_model.predict(x_real, verbose=DEFAULT_VERBOSE_LIST[verbose_level])
+            y_predicted_real = np.rint(np.squeeze(y_predicted_real, axis=1))
+        else:
+            y_predicted_real = classifier_model.predict(x_real)
+
+        y_predicted_real = y_predicted_real.astype(int)
+        y_sample_real = y_real.astype(int)
+        confusion_matrix_real = confusion_matrix(y_sample_real, y_predicted_real)
+
+        accuracy_real = instance_metrics.get_accuracy(y_sample_real, y_predicted_real)
+        precision_real = instance_metrics.get_precision(y_sample_real, y_predicted_real)
+        recall_real = instance_metrics.get_recall(y_sample_real, y_predicted_real)
+        f1_real = instance_metrics.get_f1_score(y_sample_real, y_predicted_real)
+
+        logging.info(f" Classifier Model: {classifier_type[index]}")
+        logging.info(f"   Real Fold {fold + 1} - Confusion Matrix:")
+        logging.info(confusion_matrix_real)
+        logging.info(f"\n   Classifier Metrics:")
+        logging.info(f"     Real Fold {fold + 1} - Accuracy: " + str(accuracy_real))
+        logging.info(f"     Real Fold {fold + 1} - Precision: " + str(precision_real))
+        logging.info(f"     Real Fold {fold + 1} - Recall: " + str(recall_real))
+        logging.info(f"     Real Fold {fold + 1} - F1 Score: " + str(f1_real) + "\n")
+        logging.info("")
+
+        if generate_confusion_matrix:
+            plt.figure()
+            selected_color_map = plt.colormaps.get_cmap(DEFAULT_COLOR_NAME[(fold + 2) % len(DEFAULT_COLOR_NAME)])
+            confusion_matrix_instance = PlotConfusionMatrix()
+            confusion_matrix_instance.plot_confusion_matrix(confusion_matrix_real, out_label, selected_color_map)
+            Path(os.path.join(output_dir, path_confusion_matrix)).mkdir(parents=True, exist_ok=True)
+            matrix_file = os.path.join(output_dir, path_confusion_matrix,
+                                       f'CM_Real_{classifier_type[index]}_k{fold + 1}.pdf')
+            plt.savefig(matrix_file, bbox_inches='tight')
+
+        accuracy_real_list.append(accuracy_real)
+        precision_real_list.append(precision_real)
+        recall_real_list.append(recall_real)
+        f1_real_list.append(f1_real)
+
+    return [accuracy_real_list, precision_real_list, recall_real_list, f1_real_list]
 
 
 def show_and_export_results(synthetic_accuracies, synthetic_precisions, synthetic_recalls, synthetic_f1_scores,
                             real_accuracies, real_precisions, real_recalls, real_f1_scores, list_mean_squared_error,
                             list_cosine_similarity, list_kl_divergence, list_max_mean_discrepancy, classifier_type,
-                            output_dir, title_output_label):
+                            output_dir, title_output_label, k_folds):
 
     plot_classifier_metrics = PlotClassificationMetrics()
     plot_regressive_metrics = PlotRegressiveMetrics()
 
-    logging.info(f"Overall Synthetic Results:\n")
-    logging.info("  Synthetic List of Accuracies: {}".format(synthetic_accuracies))
-    logging.info("  Synthetic List of Precisions: {}".format(synthetic_precisions))
-    logging.info("  Synthetic List of Recalls: {}".format(synthetic_recalls))
-    logging.info("  Synthetic List of F1-scores: {}".format(synthetic_f1_scores))
-    logging.info("  Synthetic Mean Accuracy: {}".format(np.mean(synthetic_accuracies)))
-    logging.info("  Synthetic Mean Precision: {}".format(np.mean(synthetic_precisions)))
-    logging.info("  Synthetic Mean Recall: {}".format(np.mean(synthetic_recalls)))
-    logging.info("  Synthetic Mean F1 Score: {}".format(np.mean(synthetic_f1_scores)))
-    logging.info("  Synthetic Standard Deviation of Accuracy: {}".format(np.std(synthetic_accuracies)))
-    logging.info("  Synthetic Standard Deviation of Precision: {}".format(np.std(synthetic_precisions)))
-    logging.info("  Synthetic Standard Deviation of Recall: {}".format(np.std(synthetic_recalls)))
-    logging.info("  Synthetic Standard Deviation of F1 Score: {}\n".format(np.std(synthetic_f1_scores)))
+    for index in range(len(classifier_type)):
+        logging.info("Overall Synthetic Results: Classifier {}\n".format(classifier_type[index]))
+        logging.info("  Synthetic List of Accuracies: {}".format(synthetic_accuracies[index]))
+        logging.info("  Synthetic List of Precisions: {}".format(synthetic_precisions[index]))
+        logging.info("  Synthetic List of Recalls: {}".format(synthetic_recalls[index]))
+        logging.info("  Synthetic List of F1-scores: {}".format(synthetic_f1_scores[index]))
+        logging.info("  Synthetic Mean Accuracy: {}".format(np.mean(synthetic_accuracies[index])))
+        logging.info("  Synthetic Mean Precision: {}".format(np.mean(synthetic_precisions[index])))
+        logging.info("  Synthetic Mean Recall: {}".format(np.mean(synthetic_recalls[index])))
+        logging.info("  Synthetic Mean F1 Score: {}".format(np.mean(synthetic_f1_scores[index])))
+        logging.info("  Synthetic Standard Deviation of Accuracy: {}".format(np.std(synthetic_accuracies[index])))
+        logging.info("  Synthetic Standard Deviation of Precision: {}".format(np.std(synthetic_precisions[index])))
+        logging.info("  Synthetic Standard Deviation of Recall: {}".format(np.std(synthetic_recalls[index])))
+        logging.info("  Synthetic Standard Deviation of F1 Score: {}\n".format(np.std(synthetic_f1_scores[index])))
 
-    plot_filename = os.path.join(output_dir, f'Synthetic_Data_Classification_Metrics_{classifier_type}.pdf')
+        plot_filename = os.path.join(output_dir, f'Synthetic_Data_Classification_Metrics_{classifier_type[index]}.pdf')
 
-    plot_classifier_metrics.plot_classifier_metrics(classifier_type, synthetic_accuracies, synthetic_precisions,
-                                                    synthetic_recalls, synthetic_f1_scores, plot_filename,
-                                                    f'{title_output_label}_SYNTHETIC')
+        plot_classifier_metrics.plot_classifier_metrics(classifier_type[index], synthetic_accuracies[index],
+                                                        synthetic_precisions[index], synthetic_recalls[index],
+                                                        synthetic_f1_scores[index], plot_filename,
+                                                        f'{title_output_label}_SYNTHETIC')
 
-    logging.info(f" Overall Real Results:\n")
-    logging.info("  Real List of Accuracies: {}".format(real_accuracies))
-    logging.info("  Real List of Precisions: {}".format(real_precisions))
-    logging.info("  Real List of Recalls: {}".format(real_recalls))
-    logging.info("  Real List of F1-scores: {}".format(real_f1_scores))
-    logging.info("  Real Mean Accuracy: {}".format(np.mean(real_accuracies)))
-    logging.info("  Real Mean Precision: {}".format(np.mean(real_precisions)))
-    logging.info("  Real Mean Recall: {}".format(np.mean(real_recalls)))
-    logging.info("  Real Mean F1 Score: {}".format(np.mean(real_f1_scores)))
-    logging.info("  Real Standard Deviation of Accuracy: {}".format(np.std(real_accuracies)))
-    logging.info("  Real Standard Deviation of Precision: {}".format(np.std(real_precisions)))
-    logging.info("  Real Standard Deviation of Recall: {}".format(np.std(real_recalls)))
-    logging.info("  Real Standard Deviation of F1 Score: {}\n".format(np.std(real_f1_scores)))
+        logging.info("Overall Real Results: {}\n".format(classifier_type[index]))
+        logging.info("  Real List of Accuracies: {}".format(real_accuracies[index]))
+        logging.info("  Real List of Precisions: {}".format(real_precisions[index]))
+        logging.info("  Real List of Recalls: {}".format(real_recalls[index]))
+        logging.info("  Real List of F1-scores: {}".format(real_f1_scores[index]))
+        logging.info("  Real Mean Accuracy: {}".format(np.mean(real_accuracies[index])))
+        logging.info("  Real Mean Precision: {}".format(np.mean(real_precisions[index])))
+        logging.info("  Real Mean Recall: {}".format(np.mean(real_recalls[index])))
+        logging.info("  Real Mean F1 Score: {}".format(np.mean(real_f1_scores[index])))
+        logging.info("  Real Standard Deviation of Accuracy: {}".format(np.std(real_accuracies[index])))
+        logging.info("  Real Standard Deviation of Precision: {}".format(np.std(real_precisions[index])))
+        logging.info("  Real Standard Deviation of Recall: {}".format(np.std(real_recalls[index])))
+        logging.info("  Real Standard Deviation of F1 Score: {}\n".format(np.std(real_f1_scores[index])))
 
-    logging.info(f" Comparative Metrics:\n")
-    logging.info("  Comparative List of Mean Squared Error: {}".format(list_mean_squared_error))
-    logging.info("  Comparative List of Cosine Similarity: {}".format(list_cosine_similarity))
-    logging.info("  Comparative List of KL divergence: {}".format(list_kl_divergence))
-    logging.info("  Comparative List of Max Mean Discrepancy: {}".format(list_max_mean_discrepancy))
-    logging.info("  Comparative Mean Squared Error: {}".format(np.mean(list_mean_squared_error)))
-    logging.info("  Comparative Mean Cosine Similarity: {}".format(np.mean(list_cosine_similarity)))
-    logging.info("  Comparative Mean KL divergence: {}".format(np.mean(list_kl_divergence)))
-    logging.info("  Comparative Mean Max Mean Discrepancy: {}".format(np.mean(list_max_mean_discrepancy)))
-    logging.info("  Comparative Standard Deviation of Mean Squared Error: {}".format(np.std(list_mean_squared_error)))
-    logging.info("  Comparative Standard Deviation of Cosine Similarity: {}".format(np.std(list_cosine_similarity)))
-    logging.info("  Comparative Standard Deviation of KL divergence: {}".format(np.std(list_kl_divergence)))
-    logging.info(
-        "  Comparative Standard Deviation of Max Mean Discrepancy: {}".format(np.std(list_max_mean_discrepancy)))
+        plot_filename = os.path.join(output_dir, f'Real_Data_Classification_Metrics_{classifier_type[index]}.pdf')
 
-    plot_filename = os.path.join(output_dir, f'Real_Data_Classification_Metrics_{classifier_type}.pdf')
+        plot_classifier_metrics.plot_classifier_metrics(classifier_type[index], real_accuracies[index],
+                                                        real_precisions[index], real_recalls[index],
+                                                        real_f1_scores[index], plot_filename,
+                                                        f'{title_output_label}_REAL')
 
-    plot_classifier_metrics.plot_classifier_metrics(classifier_type, real_accuracies, real_precisions, real_recalls,
-                                                    real_f1_scores, plot_filename, f'{title_output_label}_REAL')
+    for index in range(k_folds):
 
-    plot_filename = os.path.join(output_dir, f'Real_Data_Distance_Metrics_{classifier_type}.pdf')
+        logging.info(f"Comparative Metrics:\n")
+        logging.info("  Comparative List of Mean Squared Error: {}".format(list_mean_squared_error[index]))
+        logging.info("  Comparative List of Cosine Similarity: {}".format(list_cosine_similarity[index]))
+        logging.info("  Comparative List of KL divergence: {}".format(list_kl_divergence[index]))
+        logging.info("  Comparative List of Max Mean Discrepancy: {}".format(list_max_mean_discrepancy[index]))
+        logging.info("  Comparative Mean Squared Error: {}".format(np.mean(list_mean_squared_error[index])))
+        logging.info("  Comparative Mean Cosine Similarity: {}".format(np.mean(list_cosine_similarity[index])))
+        logging.info("  Comparative Mean KL divergence: {}".format(np.mean(list_kl_divergence[index])))
 
-    plot_regressive_metrics.plot_regressive_metrics(list_mean_squared_error, list_cosine_similarity,
-                                                    list_kl_divergence, list_max_mean_discrepancy, plot_filename,
-                                                    f'{title_output_label}_REAL')
+        logging.info("  Comparative Mean Max Mean Discrepancy: {}".format(
+            np.mean(list_max_mean_discrepancy[index])))
+        logging.info("  Comparative Standard Deviation of Mean Squared Error: {}".format(
+            np.std(list_mean_squared_error[index])))
+        logging.info("  Comparative Standard Deviation of Cosine Similarity: {}".format(
+            np.std(list_cosine_similarity[index])))
+        logging.info("  Comparative Standard Deviation of KL divergence: {}".format(
+            np.std(list_kl_divergence[index])))
+
+        logging.info("  Comparative Standard Deviation of Max Mean Discrepancy: {}".format(
+                    np.std(list_max_mean_discrepancy)))
+
+        plot_filename = os.path.join(output_dir, f'Real_Data_Distance_Metrics_Fold_{index}.pdf')
+
+        plot_regressive_metrics.plot_regressive_metrics(list_mean_squared_error, list_cosine_similarity,
+                                                        list_kl_divergence, list_max_mean_discrepancy, plot_filename,
+                                                        f'{title_output_label}_REAL')
 
 
-def get_adversarial_model(latent_dim, output_data_shape, activation_function, initializer_mean,
-                          initializer_deviation, dropout_decay_rate_g, dropout_decay_rate_d,
-                          last_layer_activation, dense_layer_sizes_g, dense_layer_sizes_d, dataset_type,
-                          training_algorithm):
-    instance_models = ConditionalGAN(latent_dim, output_data_shape, activation_function, initializer_mean,
+def get_adversarial_model(latent_dim, input_data_shape, activation_function, initializer_mean, initializer_deviation,
+                          dropout_decay_rate_g, dropout_decay_rate_d, last_layer_activation, dense_layer_sizes_g,
+                          dense_layer_sizes_d, dataset_type, training_algorithm):
+    instance_models = ConditionalGAN(latent_dim, input_data_shape, activation_function, initializer_mean,
                                      initializer_deviation, dropout_decay_rate_g, dropout_decay_rate_d,
                                      last_layer_activation, dense_layer_sizes_g, dense_layer_sizes_d, dataset_type)
 
@@ -342,12 +357,47 @@ def get_adversarial_model(latent_dim, output_data_shape, activation_function, in
     return adversarial_model
 
 
-def run_experiment(dataset, input_data_shape, k, classifier_type, output_dir, batch_size, training_algorithm,
+def show_model(latent_dim, input_data_shape, activation_function, initializer_mean,
+               initializer_deviation, dropout_decay_rate_g, dropout_decay_rate_d,
+               last_layer_activation, dense_layer_sizes_g, dense_layer_sizes_d,
+               dataset_type, verbose_level):
+    show_model_instance = ConditionalGAN(latent_dim, input_data_shape, activation_function, initializer_mean,
+                                         initializer_deviation, dropout_decay_rate_g, dropout_decay_rate_d,
+                                         last_layer_activation, dense_layer_sizes_g, dense_layer_sizes_d,
+                                         dataset_type)
+
+    if verbose_level == logging.INFO:
+        logging.info("Model Architecture")
+        logging.info("  Model Generator")
+        show_model_instance.get_generator().summary()
+        logging.info("  Model Discriminator")
+        show_model_instance.get_discriminator().summary()
+
+    if verbose_level == logging.DEBUG:
+        logging.info("Model Architecture")
+        logging.info("  Model Generator")
+        show_model_instance.get_generator().summary()
+        logging.info("  Dense Structure")
+        show_model_instance.get_dense_generator_model().summary()
+        logging.info("  Model Discriminator")
+        show_model_instance.get_discriminator().summary()
+        logging.info("  Dense Structure")
+        show_model_instance.get_dense_discriminator_model().summary()
+        logging.info("")
+
+
+def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, batch_size, training_algorithm,
                    number_epochs, latent_dim, activation_function, dropout_decay_rate_g, dropout_decay_rate_d,
-                   dense_layer_sizes_g=None, dense_layer_sizes_d=None, dataset_type=None, output_label=None,
+                   dense_layer_sizes_g=None, dense_layer_sizes_d=None, dataset_type=None, title_output=None,
                    initializer_mean=None, initializer_deviation=None,
-                   last_layer_activation=DEFAULT_CONDITIONAL_LAST_ACTIVATION_LAYER,
-                   save_models=False, path_confusion_matrix=None, path_curve_loss=None):
+                   last_layer_activation=DEFAULT_CONDITIONAL_LAST_ACTIVATION_LAYER, save_models=False,
+                   path_confusion_matrix=None, path_curve_loss=None, verbose_level=None):
+
+    show_model(latent_dim, input_data_shape, activation_function, initializer_mean,
+               initializer_deviation, dropout_decay_rate_g, dropout_decay_rate_d,
+               last_layer_activation, dense_layer_sizes_g, dense_layer_sizes_d,
+               dataset_type, verbose_level)
+
     stratified = StratifiedKFold(n_splits=k, shuffle=True)
 
     list_accuracy, list_precision, list_recall, list_f1_score = [], [], [], []
@@ -359,20 +409,20 @@ def run_experiment(dataset, input_data_shape, k, classifier_type, output_dir, ba
         adversarial_model = get_adversarial_model(latent_dim, input_data_shape, activation_function, initializer_mean,
                                                   initializer_deviation, dropout_decay_rate_g, dropout_decay_rate_d,
                                                   last_layer_activation, dense_layer_sizes_g, dense_layer_sizes_d,
-                                                  dataset_type,
-                                                  training_algorithm)
+                                                  dataset_type, training_algorithm)
+        instance_classifier = Classifiers()
 
         x_training = np.array(dataset.iloc[train_index, :-1].values, dtype=dataset_type)
         x_test = np.array(dataset.iloc[test_index, :-1].values, dtype=dataset_type)
-
         y_training = np.array(dataset.iloc[train_index, -1].values, dtype=dataset_type)
-
         y_test = np.array(dataset.iloc[test_index, -1].values, dtype=dataset_type)
-
         x_training = x_training[0:int(len(x_training) - (len(x_training) % batch_size)), :]
         y_training = y_training[0:int(len(y_training) - (len(y_training) % batch_size))]
 
-        training_history = adversarial_model.fit(x_training, y_training, epochs=number_epochs, batch_size=batch_size)
+        logging.info(f" Starting training ADVERSARIAL MODEL:\n")
+        training_history = adversarial_model.fit(x_training, y_training, epochs=number_epochs, batch_size=batch_size,
+                                                 verbose=DEFAULT_VERBOSE_LIST[verbose_level])
+        logging.info(f"     Finished training\n")
 
         if save_models:
             adversarial_model.save_models(output_dir, i)
@@ -386,24 +436,25 @@ def run_experiment(dataset, input_data_shape, k, classifier_type, output_dir, ba
         number_samples_true = len([positional_label for positional_label in y_test.tolist() if positional_label == 1])
         number_samples_false = len([positional_label for positional_label in y_test.tolist() if positional_label == 0])
 
-        x_true_synthetic, y_true_synthetic = generate_samples(adversarial_model, number_samples_true, latent_dim, 1)
-        x_false_synthetic, y_false_synthetic = generate_samples(adversarial_model, number_samples_false, latent_dim, 0)
-
+        x_true_synthetic, y_true_synthetic = generate_samples(adversarial_model, number_samples_true, latent_dim,
+                                                              1, verbose_level)
+        x_false_synthetic, y_false_synthetic = generate_samples(adversarial_model, number_samples_false, latent_dim,
+                                                                0, verbose_level)
         x_synthetic_samples = np.concatenate((x_true_synthetic, x_false_synthetic), dtype=dataset_type)
-        # TODO: Importante para corrigir o problema do formato de entrada
         y_synthetic_samples = np.rint(np.concatenate((y_true_synthetic, y_false_synthetic)))
         y_synthetic_samples = np.squeeze(y_synthetic_samples, axis=1)
 
-        instance_classifier = get_classifier(classifier_type, x_training, y_training, input_data_shape, dataset_type)
+        list_classifiers = instance_classifier.get_trained_classifiers(classifier_list, x_training, y_training,
+                                                                       dataset_type, verbose_level, input_data_shape)
 
-        evaluation_results_synthetic_data = evaluate_synthetic_data(instance_classifier, x_synthetic_samples,
+        evaluation_results_synthetic_data = evaluate_synthetic_data(list_classifiers, x_synthetic_samples,
                                                                     y_synthetic_samples, i, k, True,
-                                                                    output_dir, classifier_type, output_label,
-                                                                    path_confusion_matrix)
+                                                                    output_dir, classifier_list, title_output,
+                                                                    path_confusion_matrix, verbose_level)
 
-        evaluation_results_real_data = evaluate_real_data(instance_classifier, x_test, y_test, i, k, True,
-                                                          output_dir, classifier_type, output_label,
-                                                          path_confusion_matrix)
+        evaluation_results_real_data = evaluate_real_data(list_classifiers, x_test, y_test, i, k,
+                                                          True, output_dir, classifier_list,
+                                                          title_output, path_confusion_matrix, verbose_level)
 
         comparative_metrics = comparative_data(i, x_synthetic_samples, x_test)
 
@@ -425,7 +476,7 @@ def run_experiment(dataset, input_data_shape, k, classifier_type, output_dir, ba
     show_and_export_results(list_accuracy, list_precision, list_recall, list_f1_score, list_real_accuracy,
                             list_real_precision, list_real_recall, list_real_f1_score, list_mean_squared_error,
                             list_cosine_similarity, list_kl_divergence, list_maximum_mean_discrepancy,
-                            classifier_type, output_dir, output_label)
+                            classifier_list, output_dir, title_output, k)
 
 
 def initial_step(initial_arguments, dataset_type):
@@ -465,9 +516,8 @@ def create_argparse():
 
     parser.add_argument('-i', '--input_dataset', type=str, required=True,
                         help='Arquivo do dataset de entrada (Formato CSV)')
-    parser.add_argument('-c', '--classifier', type=str, required=True,
-                        choices=['knn', 'perceptron', 'random_forest', 'svm'],
-                        help='Classificador a ser utilizado (knn, perceptron, random_forest, svm).')
+    parser.add_argument('-c', '--classifier', type=list_of_strs, default=DEFAULT_CLASSIFIER_LIST,
+                        help='Classificador disponíveis {}.'.format(DEFAULT_CLASSIFIER_LIST))
     parser.add_argument('-o', '--output_dir', type=str,
                         default=f'out_{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}',
                         help='Diretório para gravação dos arquivos de saída.')
@@ -556,7 +606,7 @@ if __name__ == "__main__":
         logging.basicConfig(format="%(message)s", datefmt=TIME_FORMAT, level=arguments.verbosity)
         show_all_settings(arguments)
 
-    time_start_experiment = datetime.datetime.now()
+    time_start_campaign = datetime.datetime.now()
 
     if arguments.data_type == 'int8':
         data_type = np.int8
@@ -573,6 +623,10 @@ if __name__ == "__main__":
     if arguments.dense_layer_sizes_d != DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_D:
         arguments.dense_layer_sizes_d = arguments.dense_layer_sizes_d[0]
 
+    if arguments.classifier != DEFAULT_CLASSIFIER_LIST:
+        arguments.classifier = arguments.classifier[0]
+
+
     dataset_file, output_shape, output_label = initial_step(arguments, data_type)
 
     run_experiment(dataset_file, output_shape,
@@ -583,9 +637,10 @@ if __name__ == "__main__":
                    dropout_decay_rate_g=arguments.dropout_decay_rate_g,
                    dropout_decay_rate_d=arguments.dropout_decay_rate_d,
                    dense_layer_sizes_g=arguments.dense_layer_sizes_g, dense_layer_sizes_d=arguments.dense_layer_sizes_d,
-                   dataset_type=data_type, output_label=output_label, initializer_mean=arguments.initializer_mean,
+                   dataset_type=data_type, title_output=output_label, initializer_mean=arguments.initializer_mean,
                    initializer_deviation=arguments.initializer_deviation, save_models=arguments.save_models,
-                   path_confusion_matrix=arguments.path_confusion_matrix, path_curve_loss=arguments.path_curve_loss)
+                   path_confusion_matrix=arguments.path_confusion_matrix, path_curve_loss=arguments.path_curve_loss,
+                   verbose_level=arguments.verbosity)
 
-    time_end_experiment = datetime.datetime.now()
-    logging.info("\t Experiment duration: {}".format(time_end_experiment - time_start_experiment))
+    time_end_campaign = datetime.datetime.now()
+    logging.info("\t Campaign duration: {}".format(time_end_campaign - time_start_campaign))
