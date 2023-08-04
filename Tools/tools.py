@@ -50,10 +50,11 @@ DEFAULT_PLOT_REGRESSION_METRICS_LABELS = [ 'Similaridade de Cossenos',
 
 # https://matplotlib.org/stable/tutorials/colors/colormaps.html
 mapa_cor = plt.get_cmap('tab10')  # carrega tabela de cores conforme dicionário
-mapeamento_normalizado = colors.Normalize(vmin=0, vmax=9)  # mapeamento em 10 cores
+mapeamento_normalizado = colors.Normalize(vmin=0, vmax=19)  # mapeamento em 10 cores
 mapa_escalar = cmx.ScalarMappable(norm=mapeamento_normalizado, cmap=mapa_cor)  # lista de cores final
 
-DEFAULT_COLOR_MAP =  [mapa_escalar.to_rgba(x) for x in range(9)] # ['#3182BD', '#6BAED6', '#FD8D3C', '#FDD0A2', '#31A354', '#74C476', '#E6550D', '#FD8D3C']
+#DEFAULT_COLOR_MAP =  [mapa_escalar.to_rgba(x) for x in range(9)] # ['#3182BD', '#6BAED6', '#FD8D3C', '#FDD0A2', '#31A354', '#74C476', '#E6550D', '#FD8D3C']
+DEFAULT_COLOR_MAP =  ['#3182BD', '#FD8D3C',  '#31A354',   '#E6550D']
 DEFAULT_COLOR_NAME = ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds', 'YlOrBr', 'YlOrRd', 'OrRd',
                           'PuRd', 'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
 
@@ -228,14 +229,11 @@ class PlotClassificationMetrics:
 
 class PlotRegressiveMetrics:
 
-    def __init__(self, labels_plot_regressive_metrics=None, color_map_bar=None, width_bar=DEFAULT_WIDTH_BAR,
-                 font_size=DEFAULT_FONT_SIZE, plot_title=DEFAULT_TITLE_COMPARATIVE_PLOTS):
-
-        if color_map_bar is None:
-            color_map_bar = DEFAULT_COLOR_MAP
-
-        if labels_plot_regressive_metrics is None:
-            labels_plot_regressive_metrics = DEFAULT_PLOT_REGRESSION_METRICS_LABELS
+    def __init__(self, labels_plot_regressive_metrics=DEFAULT_PLOT_REGRESSION_METRICS_LABELS, 
+                 color_map_bar=DEFAULT_COLOR_MAP, 
+                 width_bar=DEFAULT_WIDTH_BAR,
+                 font_size=DEFAULT_FONT_SIZE, 
+                 plot_title=DEFAULT_TITLE_COMPARATIVE_PLOTS):
 
         self.labels_plot_regressive_metrics = labels_plot_regressive_metrics
         self.color_map_bar = color_map_bar
