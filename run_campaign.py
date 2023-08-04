@@ -404,7 +404,7 @@ def main():
         logging.info("\t Campaign duration: {}".format(time_end_campaign - time_start_campaign))
 
     time_end_evaluation = datetime.datetime.now()
-    logging.info("Evalutation duration: {}".format(time_end_evaluation - time_start_evaluation))
+    logging.info("Evaluation duration: {}".format(time_end_evaluation - time_start_evaluation))
 
 
 if __name__ == '__main__':
