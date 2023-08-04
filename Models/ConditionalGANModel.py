@@ -65,6 +65,8 @@ class ConditionalGAN:
         self.dataset_type = dataset_type
         self.initializer_mean = initializer_mean
         self.initializer_deviation = initializer_deviation
+        self.generator_model_dense = None
+        self.discriminator_model_dense = None
 
     def add_activation_layer(self, neural_nodel):
 
@@ -98,13 +100,12 @@ class ConditionalGAN:
 
         generator_model = Dense(self.output_shape, self.last_layer_activation, kernel_initializer=initialization)(
             generator_model)
-        generator_model = Model(neural_model_inputs, generator_model)
-
+        generator_model = Model(neural_model_inputs, generator_model, name="Dense_Generator")
+        self.generator_model_dense = generator_model
         concatenate_output = Concatenate()([latent_input, label_input])
         label_embedding = Flatten()(concatenate_output)
         model_input = Dense(self.latent_dim)(label_embedding)
         generator_output_flow = generator_model(model_input)
-        Model([latent_input, label_input], generator_output_flow, name="Generator").summary()
 
         return Model([latent_input, label_input], generator_output_flow, name="Generator")
 
@@ -125,14 +126,19 @@ class ConditionalGAN:
             discriminator_model = self.add_activation_layer(discriminator_model)
 
         discriminator_model = Dense(1, self.last_layer_activation)(discriminator_model)
-        discriminator_model = Model(inputs=neural_model_input, outputs=discriminator_model)
+        discriminator_model = Model(inputs=neural_model_input, outputs=discriminator_model, name="Dense_Discriminator")
+        self.discriminator_model_dense = discriminator_model
         concatenate_output = Concatenate()([generator_shape_input, label_input])
         label_embedding = Flatten()(concatenate_output)
         model_input = Dense(self.output_shape)(label_embedding)
         validity = discriminator_model(model_input)
-        Model(inputs=[generator_shape_input, label_input], outputs=validity, name="Discriminator").summary()
-
         return Model(inputs=[generator_shape_input, label_input], outputs=validity, name="Discriminator")
+
+    def get_dense_generator_model(self):
+        return self.generator_model_dense
+
+    def get_dense_discriminator_model(self):
+        return self.discriminator_model_dense
 
     def set_latent_dimension(self, latent_dimension):
         self.latent_dim = latent_dimension
