@@ -311,7 +311,7 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
     for metric, comparative_list in zip(comparative_metrics, comparative_lists):
         logging.info(f"Comparative Metrics:\n")
         logging.info("\t{}:".format(metric))
-        logging.info("\t\t{} - List     : {}".format(metric, comparative_list))) 
+        logging.info("\t\t{} - List     : {}".format(metric, comparative_list)) 
         logging.info("\t\t{} - Mean     : {}".format(metric, np.mean(comparative_list)))
         logging.info("\t\t{} - Std. Dev.: {}".format(metric, np.std(comparative_list)))
 
