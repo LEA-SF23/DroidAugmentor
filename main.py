@@ -305,34 +305,50 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
                                                         real_f1_scores[index], plot_filename,
                                                         f'{title_output_label}_REAL')
 
-    for index in range(k_folds):
 
+    comparative_metrics=['Mean Squared Error','Cosine Similarity','KL divergence ','Max Mean Discrepancy']
+    comparative_lists = [list_mean_squared_error,list_cosine_similarity, list_kl_divergence, list_max_mean_discrepancy]
+    for metric, comparative_list in zip(comparative_metrics, comparative_lists):
         logging.info(f"Comparative Metrics:\n")
-        logging.info("  Comparative List of Mean Squared Error: {}".format(list_mean_squared_error[index]))
-        logging.info("  Comparative List of Cosine Similarity: {}".format(list_cosine_similarity[index]))
-        logging.info("  Comparative List of KL divergence: {}".format(list_kl_divergence[index]))
-        logging.info("  Comparative List of Max Mean Discrepancy: {}".format(list_max_mean_discrepancy[index]))
-        logging.info("  Comparative Mean Squared Error: {}".format(np.mean(list_mean_squared_error[index])))
-        logging.info("  Comparative Mean Cosine Similarity: {}".format(np.mean(list_cosine_similarity[index])))
-        logging.info("  Comparative Mean KL divergence: {}".format(np.mean(list_kl_divergence[index])))
+        logging.info("\t{}:".format(metric))
+        logging.info("\t\t{} - List     : {}".format(metric, comparative_list))) 
+        logging.info("\t\t{} - Mean     : {}".format(metric, np.mean(comparative_list)))
+        logging.info("\t\t{} - Std. Dev.: {}".format(metric, np.std(comparative_list)))
 
-        logging.info("  Comparative Mean Max Mean Discrepancy: {}".format(
-            np.mean(list_max_mean_discrepancy[index])))
-        logging.info("  Comparative Standard Deviation of Mean Squared Error: {}".format(
-            np.std(list_mean_squared_error[index])))
-        logging.info("  Comparative Standard Deviation of Cosine Similarity: {}".format(
-            np.std(list_cosine_similarity[index])))
-        logging.info("  Comparative Standard Deviation of KL divergence: {}".format(
-            np.std(list_kl_divergence[index])))
+                                
+                                
+    # logging.info(f"Comparative Metrics:\n")
+    # logging.info("  Comparative List of Mean Squared Error  : {}".format(list_mean_squared_error))
+    # logging.info("  Comparative List of Cosine Similarity   : {}".format(list_cosine_similarity))
+    # logging.info("  Comparative List of KL divergence       : {}".format(list_kl_divergence))
+    # logging.info("  Comparative List of Max Mean Discrepancy: {}".format(list_max_mean_discrepancy))
 
-        logging.info("  Comparative Standard Deviation of Max Mean Discrepancy: {}".format(
-                    np.std(list_max_mean_discrepancy)))
+                                
+    # logging.info("  Squared Error - Comparative Mean           : {}".format(np.mean(list_mean_squared_error)))
+    # logging.info("  Comparative Std. Dev. Mean Squared Error: {}".format(
+    #     np.std(list_mean_squared_error)))
+                                
+    # logging.info("   Cosine Similarity - Mean      : {}".format(np.mean(list_cosine_similarity)))
+    # logging.info("   Cosine Similarity - Std. Dev. : {}".format(
+    #     np.std(list_cosine_similarity)))
 
-        plot_filename = os.path.join(output_dir, f'Real_Data_Distance_Metrics_Fold_{index}.pdf')
+    # logging.info("  Comparative Mean KL divergence: {}".format(np.mean(list_kl_divergence)))
 
-        plot_regressive_metrics.plot_regressive_metrics(list_mean_squared_error, list_cosine_similarity,
-                                                        list_kl_divergence, list_max_mean_discrepancy, plot_filename,
-                                                        f'{title_output_label}_REAL')
+    # logging.info("  Comparative Mean Max Mean Discrepancy: {}".format(
+    #     np.mean(list_max_mean_discrepancy)))
+    
+    
+    # logging.info("  Comparative Standard Deviation of KL divergence: {}".format(
+    #     np.std(list_kl_divergence)))
+
+    # logging.info("  Comparative Standard Deviation of Max Mean Discrepancy: {}".format(
+    #             np.std(list_max_mean_discrepancy)))
+
+    plot_filename = os.path.join(output_dir, f'Real_Data_Distance_Metrics_Fold_{index}.pdf')
+
+    plot_regressive_metrics.plot_regressive_metrics(list_mean_squared_error, list_cosine_similarity,
+                                                    list_kl_divergence, list_max_mean_discrepancy, plot_filename,
+                                                    f'{title_output_label}_REAL')
 
 
 def get_adversarial_model(latent_dim, input_data_shape, activation_function, initializer_mean, initializer_deviation,
