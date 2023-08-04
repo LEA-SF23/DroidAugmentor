@@ -129,7 +129,7 @@ class AdversarialModel(Model):
             discriminator_file_name = self.file_name_discriminator + "_" + str(k_fold)
             generator_file_name = self.file_name_generator + "_" + str(k_fold)
 
-            path_model = os.path.join(path_directory, "fold_"+str(k_fold+1))
+            path_model = os.path.join(path_directory, "fold_" + str(k_fold + 1))
             Path(path_model).mkdir(parents=True, exist_ok=True)
 
             discriminator_file_name = os.path.join(path_model, discriminator_file_name)
@@ -161,27 +161,31 @@ class AdversarialModel(Model):
 
         try:
 
-            logging.info("Carregando modelo")
+            logging.info("Loading Adversarial Model:")
             path_directory = os.path.join(path_output, self.models_saved_path)
-            discriminator_file_name = self.file_name_discriminator + "_" + str(k_fold+1)
-            generator_file_name = self.file_name_generator + "_" + str(k_fold+1)
 
-            discriminator_model_json_pointer = open(path_directory + discriminator_file_name + ".json", 'r')
+            discriminator_file_name = self.file_name_discriminator + "_" + str(k_fold + 1)
+            generator_file_name = self.file_name_generator + "_" + str(k_fold + 1)
+
+            discriminator_file_name = os.path.join(path_directory, discriminator_file_name)
+            generator_file_name = os.path.join(path_directory, generator_file_name)
+
+            discriminator_model_json_pointer = open(discriminator_file_name + ".json", 'r')
             discriminator_model_json = discriminator_model_json_pointer.read()
             discriminator_model_json_pointer.close()
 
             self.discriminator = model_from_json(discriminator_model_json)
-            self.discriminator.load_weights(path_directory + discriminator_file_name + ".h5")
+            self.discriminator.load_weights(discriminator_file_name + ".h5")
 
-            generator_model_json_pointer = open(path_directory + generator_file_name + ".json", 'r')
+            generator_model_json_pointer = open(generator_file_name + ".json", 'r')
             generator_model_json = generator_model_json_pointer.read()
             generator_model_json_pointer.close()
 
             self.generator = model_from_json(generator_model_json)
-            self.generator.load_weights(path_directory + generator_file_name + ".h5")
+            self.generator.load_weights(generator_file_name + ".h5")
 
-            logging.info("Modelo discriminator carregado: {}".format(path_directory + discriminator_file_name))
-            logging.info("Modelo generator carregado: {}".format(path_directory + generator_file_name))
+            logging.info("Model loaded: {}".format(discriminator_file_name))
+            logging.info("Model loaded: {}".format(generator_file_name))
 
         except FileNotFoundError:
 

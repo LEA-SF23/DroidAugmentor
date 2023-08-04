@@ -9,7 +9,7 @@ __last_update__ = '2023/08/03'
 __credits__ = ['unknown']
 
 import os
-#import statistics
+# import statistics
 import numpy as np
 import itertools
 
@@ -43,15 +43,15 @@ DEFAULT_LOSS_CURVE_LEGEND_NAME = "Legenda"
 DEFAULT_LOSS_CURVE_PREFIX_FILE = "curve_training_error"
 DEFAULT_TITLE_COMPARATIVE_PLOTS = "Comparativo entre dados sintéticos e reais (Média)"
 DEFAULT_PLOT_CLASSIFIER_METRICS_LABELS = ['Acurácia', 'Precisão', 'Recall', 'F1-Score']
-DEFAULT_PLOT_REGRESSION_METRICS_LABELS = [ 'Similaridade de Cossenos', 
-                                          'Erro Médio Quadrático', 
+DEFAULT_PLOT_REGRESSION_METRICS_LABELS = ['Similaridade de Cossenos',
+                                          'Erro Médio Quadrático',
                                           'Divergência KL',
                                           'Máxima Discrepância Média']
 
 # https://matplotlib.org/stable/tutorials/colors/colormaps.html
-#mapa_cor = plt.get_cmap('tab10')  # carrega tabela de cores conforme dicionário
-#mapeamento_normalizado = colors.Normalize(vmin=0, vmax=19)  # mapeamento em 10 cores
-#mapa_escalar = cmx.ScalarMappable(norm=mapeamento_normalizado, cmap=mapa_cor)  # lista de cores final
+# mapa_cor = plt.get_cmap('tab10')  # carrega tabela de cores conforme dicionário
+# mapeamento_normalizado = colors.Normalize(vmin=0, vmax=19)  # mapeamento em 10 cores
+# mapa_escalar = cmx.ScalarMappable(norm=mapeamento_normalizado, cmap=mapa_cor)  # lista de cores final
 
 # tab:blue : #1f77b4
 # tab:orange : #ff7f0e
@@ -64,11 +64,14 @@ DEFAULT_PLOT_REGRESSION_METRICS_LABELS = [ 'Similaridade de Cossenos',
 # tab:olive : #bcbd22
 # tab:cyan : #17becf
 
-#DEFAULT_COLOR_MAP =  [mapa_escalar.to_rgba(x) for x in range(9)] # ['#3182BD', '#6BAED6', '#FD8D3C', '#FDD0A2', '#31A354', '#74C476', '#E6550D', '#FD8D3C']
-DEFAULT_COLOR_MAP =  ['#1f77b4', '#ff7f0e',  '#2ca02c',   '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
-DEFAULT_COLOR_MAP_REGRESSIVE = ['#9467bd', '#8c564b', '#e377c2', '#7f7f7f', ]
+# DEFAULT_COLOR_MAP =  [mapa_escalar.to_rgba(x) for x in range(9)]
+# ['#3182BD', '#6BAED6', '#FD8D3C', '#FDD0A2', '#31A354', '#74C476', '#E6550D', '#FD8D3C']
+
+DEFAULT_COLOR_MAP = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22',
+                     '#17becf']
+DEFAULT_COLOR_MAP_REGRESSIVE = ['#9467bd', '#8c564b', '#e377c2', '#7f7f7f' ]
 DEFAULT_COLOR_NAME = ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds', 'YlOrBr', 'YlOrRd', 'OrRd',
-                          'PuRd', 'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
+                      'PuRd', 'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn']
 
 
 class PlotConfusionMatrix:
@@ -206,7 +209,7 @@ class PlotClassificationMetrics:
             try:
                 metric_mean = np.mean(metric_values)
                 metric_std = np.std(metric_values)
-    
+
                 new_plot_bars.add_trace(go.Bar(x=[metric], y=[metric_mean], name=metric, marker=dict(color=color),
                                                error_y=dict(type='constant', value=metric_std, visible=True),
                                                width=self.width_bar))
@@ -215,7 +218,7 @@ class PlotClassificationMetrics:
                                              font=dict(color='black', size=self.font_size),
                                              xanchor='center', yanchor='bottom')
             except Exception as e:
-              print("Metric {} error: {}".format(metric, e))
+                print("Metric {} error: {}".format(metric, e))
 
         y_label_dictionary = dict(title=f'Média {len(accuracy_list)} dobras', tickmode='linear', tick0=0.0, dtick=0.1,
                                   gridcolor='black', gridwidth=.05)
@@ -241,10 +244,10 @@ class PlotClassificationMetrics:
 
 class PlotRegressiveMetrics:
 
-    def __init__(self, labels_plot_regressive_metrics=DEFAULT_PLOT_REGRESSION_METRICS_LABELS, 
-                 color_map_bar=DEFAULT_COLOR_MAP_REGRESSIVE, 
+    def __init__(self, labels_plot_regressive_metrics=DEFAULT_PLOT_REGRESSION_METRICS_LABELS,
+                 color_map_bar=DEFAULT_COLOR_MAP_REGRESSIVE,
                  width_bar=DEFAULT_WIDTH_BAR,
-                 font_size=DEFAULT_FONT_SIZE, 
+                 font_size=DEFAULT_FONT_SIZE,
                  plot_title=DEFAULT_TITLE_COMPARATIVE_PLOTS):
 
         self.labels_plot_regressive_metrics = labels_plot_regressive_metrics
@@ -263,21 +266,21 @@ class PlotRegressiveMetrics:
         for metric, metric_values, color in zip(self.labels_plot_regressive_metrics, list_metrics, self.color_map_bar):
             try:
 
-              #print("Metric: {} values: {} color: {}".format(metric, metric_values, color))
-               
-              metric_mean = np.mean(metric_values)
-              metric_std = np.std(metric_values)
-  
-              new_plot_bars.add_trace(go.Bar(x=[metric], y=[metric_mean], name=metric, marker=dict(color=color),
-                                             error_y=dict(type='constant', value=metric_std, visible=True),
-                                             width=self.width_bar))
-  
-              new_plot_bars.add_annotation(x=metric, y=metric_mean + metric_std, xref="x", yref="y",
-                                           text=f' {metric_std:.4f}', showarrow=False,
-                                           font=dict(color='black', size=self.font_size),
-                                           xanchor='center', yanchor='bottom')
+                # print("Metric: {} values: {} color: {}".format(metric, metric_values, color))
+
+                metric_mean = np.mean(metric_values)
+                metric_std = np.std(metric_values)
+
+                new_plot_bars.add_trace(go.Bar(x=[metric], y=[metric_mean], name=metric, marker=dict(color=color),
+                                               error_y=dict(type='constant', value=metric_std, visible=True),
+                                               width=self.width_bar))
+
+                new_plot_bars.add_annotation(x=metric, y=metric_mean + metric_std, xref="x", yref="y",
+                                             text=f' {metric_std:.4f}', showarrow=False,
+                                             font=dict(color='black', size=self.font_size),
+                                             xanchor='center', yanchor='bottom')
             except Exception as e:
-              print("Metric: {} Exception: {}".format(metric, e))
+                print("Metric: {} Exception: {}".format(metric, e))
 
         y_label_dictionary = dict(title=f'Média {len(mean_squared_error_list)} dobras', tickmode='linear', tick0=0.0,
                                   dtick=0.1, gridcolor='black', gridwidth=.05)

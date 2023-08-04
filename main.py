@@ -84,7 +84,7 @@ DEFAULT_NUMBER_EPOCHS_CONDITIONAL_GAN = 100
 DEFAULT_NUMBER_STRATIFICATION_FOLD = 5
 DEFAULT_ADVERSARIAL_LATENT_DIMENSION = 128
 DEFAULT_ADVERSARIAL_TRAINING_ALGORITHM = "Adam"
-DEFAULT_ADVERSARIAL_ACTIVATION = "PReLU" #['LeakyReLU', 'ReLU', 'PReLU']
+DEFAULT_ADVERSARIAL_ACTIVATION = "PReLU"  # ['LeakyReLU', 'ReLU', 'PReLU']
 DEFAULT_ADVERSARIAL_DROPOUT_DECAY_RATE_G = 0.2
 DEFAULT_ADVERSARIAL_DROPOUT_DECAY_RATE_D = 0.4
 DEFAULT_ADVERSARIAL_INITIALIZER_MEAN = 0.0
@@ -103,9 +103,8 @@ DEFAULT_SAVE_MODELS = True
 DEFAULT_OUTPUT_PATH_CONFUSION_MATRIX = "confusion_matrix"
 DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "training_curve"
 DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine", "KNN",
-                           "DecisionTree", "AdaBoost"] #"QuadraticDiscriminant", "NaiveBayes","Perceptron"
+                           "DecisionTree", "AdaBoost"]  # "QuadraticDiscriminant", "NaiveBayes","Perceptron"
 
-#DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine"]
 
 DEFAULT_VERBOSE_LIST = {logging.INFO: 2, logging.DEBUG: 1, logging.WARNING: 2,
                         logging.FATAL: 0, logging.ERROR: 0}
@@ -115,9 +114,11 @@ DEFAULT_VERBOSE_LIST = {logging.INFO: 2, logging.DEBUG: 1, logging.WARNING: 2,
 def list_of_ints(arg):
     return list(map(int, arg.split(',')))
 
+
 # Define a custom argument type for a list of integers
 def list_of_strs(arg):
     return list(map(str, arg.split(',')))
+
 
 def generate_samples(instance_model, number_instances, latent_dimension, label_class, verbose_level):
     if np.ceil(label_class) == 1:
@@ -257,7 +258,6 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
                             real_accuracies, real_precisions, real_recalls, real_f1_scores, list_mean_squared_error,
                             list_cosine_similarity, list_kl_divergence, list_max_mean_discrepancy, classifier_type,
                             output_dir, title_output_label, k_folds):
-
     plot_classifier_metrics = PlotClassificationMetrics()
     plot_regressive_metrics = PlotRegressiveMetrics()
 
@@ -304,30 +304,25 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
                                                         real_f1_scores[index], plot_filename,
                                                         f'{title_output_label}_REAL')
 
-
-                                
-    comparative_metrics=['Mean Squared Error','Cosine Similarity','KL divergence ','Max Mean Discrepancy']
-    comparative_lists = [list_mean_squared_error,list_cosine_similarity, list_kl_divergence, list_max_mean_discrepancy]
+    comparative_metrics = ['Mean Squared Error', 'Cosine Similarity', 'KL divergence ', 'Max Mean Discrepancy']
+    comparative_lists = [list_mean_squared_error, list_cosine_similarity, list_kl_divergence, list_max_mean_discrepancy]
     logging.info(f"Comparative Metrics:")
     for metric, comparative_list in zip(comparative_metrics, comparative_lists):
         logging.info("\t{}".format(metric))
-        logging.info("\t\t{} - List     : {}".format(metric, comparative_list)) 
+        logging.info("\t\t{} - List     : {}".format(metric, comparative_list))
         logging.info("\t\t{} - Mean     : {}".format(metric, np.mean(comparative_list)))
         logging.info("\t\t{} - Std. Dev.: {}\n".format(metric, np.std(comparative_list)))
 
-                                
-                                
     # logging.info(f"Comparative Metrics:\n")
     # logging.info("  Comparative List of Mean Squared Error  : {}".format(list_mean_squared_error))
     # logging.info("  Comparative List of Cosine Similarity   : {}".format(list_cosine_similarity))
     # logging.info("  Comparative List of KL divergence       : {}".format(list_kl_divergence))
     # logging.info("  Comparative List of Max Mean Discrepancy: {}".format(list_max_mean_discrepancy))
 
-                                
     # logging.info("  Squared Error - Comparative Mean           : {}".format(np.mean(list_mean_squared_error)))
     # logging.info("  Comparative Std. Dev. Mean Squared Error: {}".format(
     #     np.std(list_mean_squared_error)))
-                                
+
     # logging.info("   Cosine Similarity - Mean      : {}".format(np.mean(list_cosine_similarity)))
     # logging.info("   Cosine Similarity - Std. Dev. : {}".format(
     #     np.std(list_cosine_similarity)))
@@ -336,8 +331,7 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
 
     # logging.info("  Comparative Mean Max Mean Discrepancy: {}".format(
     #     np.mean(list_max_mean_discrepancy)))
-    
-    
+
     # logging.info("  Comparative Standard Deviation of KL divergence: {}".format(
     #     np.std(list_kl_divergence)))
 
@@ -408,7 +402,6 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
                    initializer_mean=None, initializer_deviation=None,
                    last_layer_activation=DEFAULT_CONDITIONAL_LAST_ACTIVATION_LAYER, save_models=False,
                    path_confusion_matrix=None, path_curve_loss=None, verbose_level=None):
-
     show_model(latent_dim, input_data_shape, activation_function, initializer_mean,
                initializer_deviation, dropout_decay_rate_g, dropout_decay_rate_d,
                last_layer_activation, dense_layer_sizes_g, dense_layer_sizes_d,
@@ -532,82 +525,83 @@ def create_argparse():
 
     parser.add_argument('-i', '--input_dataset', type=str, required=True,
                         help='Arquivo do dataset de entrada (Formato CSV)')
-    
+
     parser.add_argument('-c', '--classifier', type=list_of_strs, default=DEFAULT_CLASSIFIER_LIST,
-                        help='Classificador (ou lista de classificadores separada por ,) padrão:{}.'.format(DEFAULT_CLASSIFIER_LIST))
-    
+                        help='Classificador (ou lista de classificadores separada por ,) padrão:{}.'.format(
+                            DEFAULT_CLASSIFIER_LIST))
+
     parser.add_argument('-o', '--output_dir', type=str,
                         default=f'out_{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}',
                         help='Diretório para gravação dos arquivos de saída.')
-    
+
     parser.add_argument('--data_type', type=str, default=DEFAULT_DATA_TYPE,
                         choices=['int8', 'float16', 'float32'],
                         help='Tipo de dado para representar as características das amostras.')
-    
+
     parser.add_argument('--num_samples_class_malware', type=int,
                         default=DEFAULT_NUMBER_GENERATE_MALWARE_SAMPLES,
                         help='Número de amostras da Classe 1 (maligno).')
-    
+
     parser.add_argument('--num_samples_class_benign', type=int,
                         default=DEFAULT_NUMBER_GENERATE_BENIGN_SAMPLES,
                         help='Número de amostras da Classe 0 (benigno).')
-    
+
     parser.add_argument('--number_epochs', type=int,
                         default=DEFAULT_NUMBER_EPOCHS_CONDITIONAL_GAN,
                         help='Número de épocas (iterações de treinamento).')
-    
+
     parser.add_argument('--k_fold', type=int,
                         default=DEFAULT_NUMBER_STRATIFICATION_FOLD,
                         help='Número de folds para validação cruzada.')
-    
+
     parser.add_argument('--initializer_mean', type=float,
                         default=DEFAULT_ADVERSARIAL_INITIALIZER_MEAN,
                         help='Valor central da distribuição gaussiana do inicializador.')
-    
+
     parser.add_argument('--initializer_deviation', type=float,
                         default=DEFAULT_ADVERSARIAL_INITIALIZER_DEVIATION,
                         help='Desvio padrão da distribuição gaussiana do inicializador.')
-    
+
     parser.add_argument("--latent_dimension", type=int,
                         default=DEFAULT_ADVERSARIAL_LATENT_DIMENSION,
                         help="Dimensão do espaço latente para treinamento cGAN")
 
-    #TODO testar adequadamente antes de disponibilizar 'RMSprop', 'Adadelta'
+    # TODO testar adequadamente antes de disponibilizar 'RMSprop', 'Adadelta'
     parser.add_argument("--training_algorithm", type=str,
                         default=DEFAULT_ADVERSARIAL_TRAINING_ALGORITHM,
                         help="Algoritmo de treinamento para cGAN.",
                         choices=['Adam'])
-    
+
     parser.add_argument("--activation_function",
                         type=str, default=DEFAULT_ADVERSARIAL_ACTIVATION,
                         help="Função de ativação da cGAN.",
                         choices=['LeakyReLU', 'ReLU', 'PReLU'])
-    
+
     parser.add_argument("--dropout_decay_rate_g",
                         type=float, default=DEFAULT_ADVERSARIAL_DROPOUT_DECAY_RATE_G,
                         help="Taxa de decaimento do dropout do gerador da cGAN")
-    
+
     parser.add_argument("--dropout_decay_rate_d",
                         type=float, default=DEFAULT_ADVERSARIAL_DROPOUT_DECAY_RATE_D,
                         help="Taxa de decaimento do dropout do discriminador da cGAN")
-    
+
     parser.add_argument("--dense_layer_sizes_g", type=list_of_ints, nargs='+',
                         default=DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_G,
                         help=" Valor das camadas densas do gerador")
-    
+
     parser.add_argument("--dense_layer_sizes_d", type=list_of_ints, nargs='+',
                         default=DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_D,
                         help="valor das camadas densas do discriminador")
-    
+
     parser.add_argument('--batch_size', type=int,
                         default=DEFAULT_ADVERSARIAL_BATCH_SIZE,
                         choices=[16, 32, 64],
                         help='Tamanho do lote da cGAN.')
-    
+
     parser.add_argument("--verbosity", type=int,
                         help='Verbosity (Default {})'.format(DEFAULT_VERBOSITY),
                         default=DEFAULT_VERBOSITY)
-    
+
     parser.add_argument("--save_models", type=bool,
                         help='Salvar modelos treinados (Default {})'.format(DEFAULT_SAVE_MODELS),
                         default=DEFAULT_SAVE_MODELS)
@@ -656,7 +650,6 @@ if __name__ == "__main__":
 
     if arguments.classifier != DEFAULT_CLASSIFIER_LIST:
         arguments.classifier = arguments.classifier[0]
-
 
     dataset_file, output_shape, output_label = initial_step(arguments, data_type)
 
