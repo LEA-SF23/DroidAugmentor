@@ -355,7 +355,7 @@ def main():
     time_start_campaign = datetime.datetime.now()
     logging.info("\n\n\n")
     logging.info("##########################################")
-    logging.info(" EVALUTION ")
+    logging.info(" EVALUATION ")
     logging.info("##########################################")
     time_start_evaluation = datetime.datetime.now()
     
