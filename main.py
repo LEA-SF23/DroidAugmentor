@@ -613,7 +613,7 @@ if __name__ == "__main__":
     logging_format = '%(asctime)s\t***\t%(message)s'
 
     # configura o mecanismo de logging
-    if args.verbosity == logging.DEBUG:
+    if arguments.verbosity == logging.DEBUG:
         # mostra mais detalhes
         logging_format = '%(asctime)s\t***\t%(levelname)s {%(module)s} [%(funcName)s] %(message)s'
 
