@@ -620,12 +620,12 @@ if __name__ == "__main__":
     Path(arguments.output_dir).mkdir(parents=True, exist_ok=True)
     logging_filename = os.path.join(arguments.output_dir, LOGGING_FILE_NAME)
 
-    # formatter = logging.Formatter(logging_format, datefmt=TIME_FORMAT, level=args.verbosity)
-    logging.basicConfig(format=logging_format, level=args.verbosity)
+    # formatter = logging.Formatter(logging_format, datefmt=TIME_FORMAT, level=arguments.verbosity)
+    logging.basicConfig(format=logging_format, level=arguments.verbosity)
 
     # Add file rotating handler, with level DEBUG
     rotatingFileHandler = RotatingFileHandler(filename=logging_filename, maxBytes=100000, backupCount=5)
-    rotatingFileHandler.setLevel(args.verbosity)
+    rotatingFileHandler.setLevel(arguments.verbosity)
     rotatingFileHandler.setFormatter(logging.Formatter(logging_format))
     logging.getLogger().addHandler(rotatingFileHandler)
     
