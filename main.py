@@ -100,6 +100,7 @@ DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine", "KNN",
 DEFAULT_VERBOSE_LIST = {logging.INFO: 2, logging.DEBUG: 1, logging.WARNING: 2,
                         logging.FATAL: 0, logging.ERROR: 0}
 
+DEFAULT_LOGGING_FILE_NAME = "logging.log"
 
 # Define a custom argument type for a list of integers
 def list_of_ints(arg):
@@ -600,7 +601,12 @@ def create_argparse():
     parser.add_argument("--latent_stander_deviation", type=float,
                         help='Desvio padrão do ruído aleatório de entrada',
                         default=DEFAULT_ADVERSARIAL_RANDOM_LATENT_STANDER_DEVIATION)
+    
 
+    parser.add_argument("--logging_file_name", type=str,
+                        help='Nome do arquivo de log',
+                        default=DEFAULT_LOGGING_FILE_NAME)
+    
     return parser.parse_args()
 
 
@@ -614,7 +620,6 @@ if __name__ == "__main__":
         show_all_settings(arguments)
 
     else:
-
         logging.basicConfig(format="%(message)s", datefmt=TIME_FORMAT, level=arguments.verbosity)
         show_all_settings(arguments)
 
@@ -637,6 +642,19 @@ if __name__ == "__main__":
 
     if arguments.classifier != DEFAULT_CLASSIFIER_LIST:
         arguments.classifier = arguments.classifier[0]
+
+
+    logging_filename = args.logging_file_name
+
+    # formatter = logging.Formatter(logging_format, datefmt=TIME_FORMAT, level=args.verbosity)
+    logging.basicConfig(format=logging_format, level=args.verbosity)
+
+    # Add file rotating handler, with level DEBUG
+    rotatingFileHandler = RotatingFileHandler(filename=logging_filename, maxBytes=100000, backupCount=5)
+    rotatingFileHandler.setLevel(args.verbosity)
+    rotatingFileHandler.setFormatter(logging.Formatter(logging_format))
+    logging.getLogger().addHandler(rotatingFileHandler)
+
 
     dataset_file, output_shape, output_label = initial_step(arguments, data_type)
 
