@@ -376,8 +376,9 @@ def main():
             
 
             cmd = COMMAND
-
-            cmd += " --output_dir {}/combination_{}".format(campaign_dir, count_combination)
+            cmd += " --verbosity {}".format(args.verbosity)
+            
+            cmd += " --output_dir {}".format(os.path.join(campaign_dir, combination_{}".format(count_combination)))
             count_combination += 1
 
             for param in combination.keys():
