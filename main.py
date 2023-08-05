@@ -639,8 +639,8 @@ if __name__ == "__main__":
     if arguments.classifier != DEFAULT_CLASSIFIER_LIST:
         arguments.classifier = arguments.classifier[0]
 
-    Path(initial_arguments.output_dir).mkdir(parents=True, exist_ok=True)
-    logging_filename = os.path.join(initial_arguments.output_dir, LOGGING_FILE_NAME)
+    Path(arguments.output_dir).mkdir(parents=True, exist_ok=True)
+    logging_filename = os.path.join(arguments.output_dir, LOGGING_FILE_NAME)
 
     # formatter = logging.Formatter(logging_format, datefmt=TIME_FORMAT, level=args.verbosity)
     logging.basicConfig(format=logging_format, level=args.verbosity)
