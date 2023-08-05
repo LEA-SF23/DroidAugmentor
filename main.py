@@ -610,14 +610,27 @@ if __name__ == "__main__":
 
     arguments = create_argparse()
 
-    if arguments.verbosity == logging.DEBUG:
-        logging.basicConfig(format="%(asctime)s %(levelname)s {%(module)s} [%(funcName)s] %(message)s",
-                            datefmt=TIME_FORMAT, level=arguments.verbosity)
-        show_all_settings(arguments)
+    logging_format = '%(asctime)s\t***\t%(message)s'
 
-    else:
-        logging.basicConfig(format="%(message)s", datefmt=TIME_FORMAT, level=arguments.verbosity)
-        show_all_settings(arguments)
+    # configura o mecanismo de logging
+    if args.verbosity == logging.DEBUG:
+        # mostra mais detalhes
+        logging_format = '%(asctime)s\t***\t%(levelname)s {%(module)s} [%(funcName)s] %(message)s'
+
+    Path(arguments.output_dir).mkdir(parents=True, exist_ok=True)
+    logging_filename = os.path.join(arguments.output_dir, LOGGING_FILE_NAME)
+
+    # formatter = logging.Formatter(logging_format, datefmt=TIME_FORMAT, level=args.verbosity)
+    logging.basicConfig(format=logging_format, level=args.verbosity)
+
+    # Add file rotating handler, with level DEBUG
+    rotatingFileHandler = RotatingFileHandler(filename=logging_filename, maxBytes=100000, backupCount=5)
+    rotatingFileHandler.setLevel(args.verbosity)
+    rotatingFileHandler.setFormatter(logging.Formatter(logging_format))
+    logging.getLogger().addHandler(rotatingFileHandler)
+    
+    show_all_settings(arguments)
+    
 
     time_start_campaign = datetime.datetime.now()
 
@@ -639,17 +652,7 @@ if __name__ == "__main__":
     if arguments.classifier != DEFAULT_CLASSIFIER_LIST:
         arguments.classifier = arguments.classifier[0]
 
-    Path(arguments.output_dir).mkdir(parents=True, exist_ok=True)
-    logging_filename = os.path.join(arguments.output_dir, LOGGING_FILE_NAME)
-
-    # formatter = logging.Formatter(logging_format, datefmt=TIME_FORMAT, level=args.verbosity)
-    logging.basicConfig(format=logging_format, level=args.verbosity)
-
-    # Add file rotating handler, with level DEBUG
-    rotatingFileHandler = RotatingFileHandler(filename=logging_filename, maxBytes=100000, backupCount=5)
-    rotatingFileHandler.setLevel(args.verbosity)
-    rotatingFileHandler.setFormatter(logging.Formatter(logging_format))
-    logging.getLogger().addHandler(rotatingFileHandler)
+    
 
 
     dataset_file, output_shape, output_label = initial_step(arguments, data_type)
