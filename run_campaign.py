@@ -290,7 +290,6 @@ def main():
     help_msg = "Campaign {} (default={})".format([x for x in campaigns_available.keys()], DEFAULT_CAMPAIGN)
     parser.add_argument("--campaign", "-c", help=help_msg, default=DEFAULT_CAMPAIGN, type=str)
 
-    parser.add_argument('--use_gpu', action='store_true', default=False, help='Opção para usar a GPU do TensorFlow.')
 
     help_msg = "demo mode (default={})".format(False)
     parser.add_argument("--demo", "-d", help=help_msg, action='store_true')
@@ -378,7 +377,7 @@ def main():
             cmd = COMMAND
             cmd += " --verbosity {}".format(args.verbosity)
             
-            cmd += " --output_dir {}".format(os.path.join(campaign_dir, combination_{}".format(count_combination)))
+            cmd += " --output_dir {}".format(os.path.join(campaign_dir, "combination_{}".format(count_combination)))
             count_combination += 1
 
             for param in combination.keys():
