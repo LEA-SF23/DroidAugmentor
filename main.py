@@ -673,4 +673,4 @@ if __name__ == "__main__":
                    latent_stander_deviation=arguments.latent_stander_deviation)
 
     time_end_campaign = datetime.datetime.now()
-    logging.info("\t Campaign duration: {}".format(time_end_campaign - time_start_campaign))
+    logging.info("\t Evaluation duration: {}".format(time_end_campaign - time_start_campaign))
