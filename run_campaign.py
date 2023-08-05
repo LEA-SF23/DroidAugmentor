@@ -376,9 +376,6 @@ def main():
             
 
             cmd = COMMAND
-            if args.use_gpu:
-                cmd += " --use_gpu "
-
 
             cmd += " --output_dir {}/combination_{}".format(campaign_dir, count_combination)
             count_combination += 1
