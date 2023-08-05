@@ -100,6 +100,15 @@ campaigns_available['sf23_1l_1024'] = {
     'training_algorithm': ['Adam'],
 }
 
+campaigns_available['sf23_1l_4096'] = {
+    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
+                     'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
+    "dense_layer_sizes_g" : ['4096'],
+    "dense_layer_sizes_d" : ['4096'],
+    'number_epochs' : ['1000'],
+    'training_algorithm': ['Adam'],
+}
+
 campaigns_available['sf23_2l'] = {
     'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
                      'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
