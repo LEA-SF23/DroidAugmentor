@@ -100,7 +100,7 @@ DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine", "KNN",
 DEFAULT_VERBOSE_LIST = {logging.INFO: 2, logging.DEBUG: 1, logging.WARNING: 2,
                         logging.FATAL: 0, logging.ERROR: 0}
 
-DEFAULT_LOGGING_FILE_NAME = "logging.log"
+LOGGING_FILE_NAME = "logging.log"
 
 # Define a custom argument type for a list of integers
 def list_of_ints(arg):
@@ -469,7 +469,7 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
 
 
 def initial_step(initial_arguments, dataset_type):
-    Path(initial_arguments.output_dir).mkdir(parents=True, exist_ok=True)
+    
     file_args = os.path.join(initial_arguments.output_dir, 'commandline_args.txt')
 
     with open(file_args, 'w') as f:
@@ -602,10 +602,6 @@ def create_argparse():
                         help='Desvio padrão do ruído aleatório de entrada',
                         default=DEFAULT_ADVERSARIAL_RANDOM_LATENT_STANDER_DEVIATION)
     
-
-    parser.add_argument("--logging_file_name", type=str,
-                        help='Nome do arquivo de log',
-                        default=DEFAULT_LOGGING_FILE_NAME)
     
     return parser.parse_args()
 
@@ -643,8 +639,8 @@ if __name__ == "__main__":
     if arguments.classifier != DEFAULT_CLASSIFIER_LIST:
         arguments.classifier = arguments.classifier[0]
 
-
-    logging_filename = args.logging_file_name
+    Path(initial_arguments.output_dir).mkdir(parents=True, exist_ok=True)
+    logging_filename = os.path.join(initial_arguments.output_dir, LOGGING_FILE_NAME)
 
     # formatter = logging.Formatter(logging_format, datefmt=TIME_FORMAT, level=args.verbosity)
     logging.basicConfig(format=logging_format, level=args.verbosity)
