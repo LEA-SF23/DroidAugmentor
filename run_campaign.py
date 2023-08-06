@@ -132,7 +132,7 @@ campaigns_available['sf23_2l'] = {
                      'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
     "dense_layer_sizes_g" : ['512,1024'],
     "dense_layer_sizes_d" : ['1024,512'],
-    'number_epochs' : ['2000'],
+    'number_epochs' : ['1000'],
     'training_algorithm': ['Adam'],
 }
 
