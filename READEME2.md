@@ -3,7 +3,7 @@
 EXPLICAR ALGO AQUI
 
 ![Examples of traces: ground truth (obtained with 27 monitors), failed
-(obtained with 7 monitors/20 failed), and recovered (using NN).]([layout/example3.png](https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/neural_model.png)?raw=true "Examples of traces: ground truth (obtained with 27 monitors), failed
+(obtained with 7 monitors/20 failed), and recovered (using NN).]([layout/neural_model.png](https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/neural_model.png)?raw=true "Examples of traces: ground truth (obtained with 27 monitors), failed
 (obtained with 7 monitors/20 failed), and recovered (using NN).")
 
 ## Neural Network Topologies
