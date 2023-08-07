@@ -1,4 +1,4 @@
-# DroidAugmentor: Ferramenta de treinamento e avaliação de cGANs para geração de dados sintéticos
+# DroidAugmentor
 
 EXPLICAR ALGO AQUI
 
