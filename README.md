@@ -53,9 +53,7 @@ pipenv run python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-
 ```
 ###  Parâmetros:
 
-  --------------------------------------------------------------
-   
-  
+      --------------------------------------------------------------
 
     --campaign ou -c:    Especifica a campanha de avaliação que você deseja executar. 
                          Você pode fornecer o nome de uma campanha específica ou uma  
@@ -71,15 +69,19 @@ pipenv run python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-
                          Pode ser INFO (1) ou DEBUG (2). 
                          Por padrão, o nível de verbosidade é definido como INFO.
 
+
      Outros parâmetros de entrada são definidos dentro das campanhas de avaliação em 
      campaigns_available. Cada campanha tem suas próprias configurações específicas, 
      como input_dataset, number_epochs, training_algorithm, dense_layer_sizes_g, 
      dense_layer_sizes_d, classifier, activation_function, dropout_decay_rate_g, 
      dropout_decay_rate_d, e data_type. As configurações podem variar dependendo do 
-     objetivo e das   configurações específicas de cada campanha.  
-     
+     objetivo e das configurações específicas de cada campanha.  
 
-        --------------------------------------------------------------
+
+     Em campaigns_available o script irá iterar sobre as combinações de configurações 
+     especificadas e executar os experimentos correspondentes.
+
+    --------------------------------------------------------------
 
 
 ### Executar no Google Colab
