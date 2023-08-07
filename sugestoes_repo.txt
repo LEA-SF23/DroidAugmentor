@@ -1,4 +1,5 @@
 sugestões e coisas para fazer:
+- apresentação e decrição extremamente objetiva e suscinta da ferramenta
 - deixar apenas o dataset do Drebin215 e seus sub-sets
 - deixar um demo do run_campaign.py para todos os sub-sets do Drebin215
 - deixar um run_campaign.py para gerar exatamente os resultados do paper
@@ -9,3 +10,4 @@ sugestões e coisas para fazer:
 -- (opção 2) Dockerfile para fazer o build da imagem do docker;
 -- (opção 3) instalação das depedências e utilização num Linux qualquer;
 -- run_campaign.py ou scripts para automação dos testes;
+
