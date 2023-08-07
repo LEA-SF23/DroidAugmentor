@@ -180,7 +180,6 @@ Impact, in terms of number (left) and duration (right) of a trace (S1) failed (F
            --dense_layer_sizes_d        Valores das camadas densas do discriminador.
            --use_gpu                    Opção para usar a GPU para treinamento.
            --batch_size                 Tamanho do lote da cGAN.
-           --output_format_plot
            --verbosity                  Nível de verbosidade.
            --save_models                Opção para salvar modelos treinados.
            --path_confusion_matrix      Diretório de saída das matrizes de confusão.
