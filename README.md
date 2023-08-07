@@ -161,41 +161,22 @@ Impact, in terms of number (left) and duration (right) of a trace (S1) failed (F
    
     Arguments(main.py):
 
-          -h, --help            Show this help message and exit
-          --snapshot_column     Snapshot column position (Default 1)
-          --peer_column         Peer column position (Default 2)
-          --window_length       Define length window (Default 256)
-          --window_width        Define width window (Default 256)
-          --number_blocks       Define number blocks (Default 32)
-          --topology            Neural topology (Default model_v1)
-          --verbosity           Verbosity (Default 20)
-          --epochs              Define number epochs (Default 120)
-          --metrics             Define metrics (Default mse)
-          --loss LOSS           Define loss (Default mse)
-          --optimizer           Define optimizer (Default adam)
-          --steps_per_epoch     Define batch size (Default 32)
-          --threshold           Threshold (Default 0.75)
-          --seed                Seed (Default 0)
-          --learning_rate       Learning rate (Default 0.001)
-          --pif PIF             PIF(0<x<1) MIF(>1) (Default 0)
-          --duration            Duration
-          --input_file_swarm    Input file swarm (Default )
-          --save_file_samples   Save file samples (Default )
-          --load_samples_in     Load file samples in (Default )
-          --load_samples_out    Load file samples out (Default )
-          --save_model          File save model (Default models_saved/model)
-          --load_model          File load model (Default None)
-          --input_predict       File input to predict (Default )
-          --output_predict      File output to predict (Default )
-          --file_corrected      File corrected for evaluation (Default )
-          --file_failed         File failed for evaluation (Default )
-          --file_original       File failed for evaluation (Default )
-          --file_analyse_mode   File evaluation file mode (Default +a)
-          --file_analyse        File evaluation file (Default results.txt)
+           -i ,  --input_dataset         
+           -c ,  --classifier      
+           -o ,  --output_dir        
+           --data_type
+           --num_samples_class_malware
+           --num_samples_class_benign
+           --number_epochs
+           --k_fold  
+           
+           
 
+            
+         
 
         --------------------------------------------------------------
-        Full traces available at: https://github.com/ComputerNetworks-UFRGS/TraceCollection/tree/master/01_traces
+        
 
 
 
