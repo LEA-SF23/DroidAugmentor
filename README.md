@@ -45,11 +45,25 @@ python run_campaign.py
 
   --------------------------------------------------------------
    
-        Parâmetros:
+     Parâmetros:
 
-           --campaign ou -c:    Especifica a campanha de avaliação que você deseja executar. Você pode fornecer o nome de uma campanha 
-                                específica ou uma lista de campanhas separadas por vírgula. Por exemplo: --campaign sf23_1l_64 ou --campaign 
-                                sf23_1l_64,sf23_1l_128.    
+    --campaign ou -c:    Especifica a campanha de avaliação que você deseja executar. 
+                         Você pode fornecer o nome de uma campanha específica ou uma  
+                         lista de campanhas separadas por vírgula. 
+                         Por exemplo: --campaign sf23_1l_64 ou --campaign 
+                         sf23_1l_64,sf23_1l_128.
+
+    --demo ou -d:
+                         Ativa o modo demo. Quando presente, o script será executado 
+                         no modo demo, o que pode ter comportamento reduzido 
+                         ou exibir informações de teste.
+                         --verbosity ou -v: Especifica o nível de verbosidade do log.
+                         Pode ser INFO (1) ou DEBUG (2). 
+                         Por padrão, o nível de verbosidade é definido como INFO.
+
+
+
+    
 
                                 
         
