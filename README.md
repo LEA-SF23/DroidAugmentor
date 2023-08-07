@@ -7,7 +7,7 @@ EXPLICAR ALGO AQUI
 
 [Link]()
 
-
+[Requirements](requirements.txt)
 ## Instalação e utilização 
 
 1. Usar imagem disponivel no hub.docker.com
@@ -101,7 +101,7 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
 
 
 
-[Requirements](requirements.txt)
+
 
 
 
