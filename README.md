@@ -141,9 +141,17 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
 
 A ferramenta foi testada e utilizada na prática nos seguintes ambientes:
 
-1.Windows 10.
-  Kernel Version = 10.0.19043
-  Versão Python e bibliotecas conforme [requirements](requirements.txt).
+1. Windows 10.
+   Kernel Version = 10.0.19043
+   Versão Python e bibliotecas conforme [requirements](requirements.txt).
+   
+2. Linux Ubuntu 22.04.2 LTS
+   Kernel Version = 5.15.109+
+   Versão Python e bibliotecas conforme [requirements](requirements.txt).
+
+   
+   
+  
 
 
 
