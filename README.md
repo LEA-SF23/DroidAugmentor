@@ -1,6 +1,6 @@
 # DroidAugmentor
 
-EXPLICAR ALGO AQUI
+
 
 
 ## Topologia da rede neural
