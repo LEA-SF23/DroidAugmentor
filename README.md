@@ -106,9 +106,9 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
 
 
 
-## Requirements:
 
-[Requirements](requirements.txt)
+
+##[Requirements](requirements.txt)
 
 
 
