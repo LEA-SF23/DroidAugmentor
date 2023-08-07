@@ -1,11 +1,12 @@
 # DroidAugmentor
 
-EXPLICAR ALGO AQUI
+Ferramenta de treinamento e avaliação de cGANs para geração de dados sintéticos
+
 
 
 ## Topologia da rede neural
 
-[Link]()
+[Link](https://github.com/LEA-SF23/DroidAugmentor/blob/main/TOPOLOGIA.md)
 
 
 ## Instalação e utilização 
@@ -51,7 +52,7 @@ Mesma campanha sendo executada por main.py:
 ```
 pipenv run python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_1l_256/combination_2 --input_dataset datasets/drebin215_original_5560Malwares_6566Benign.csv --dense_layer_sizes_g 256 --dense_layer_sizes_d 256 --number_epochs 1000 --training_algorithm Adam
 ```
-###  Parâmetros:
+###  Parâmetros dos testes automatizados:
 
       --------------------------------------------------------------
 
@@ -103,6 +104,7 @@ input_file_path = "/content/seu.csv"
 ```
 
 Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive.
+ <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/arquivos.JPG" style="max-width:100%;"></td>
 
 
  ## Parâmetros da ferramenta:
