@@ -11,7 +11,6 @@ Three Neural Network topologies are proposed, named Dense, LSTM and Convolutiona
     <tbody>
             <th width="20%">Topologia do Modelo</th>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/neural_model.png"></td>
-    </tbody>
 </table>
 ## Experimental Evaluation
 
