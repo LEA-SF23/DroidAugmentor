@@ -12,7 +12,7 @@ EXPLICAR ALGO AQUI
 
 1. Usar imagem disponivel no hub.docker.com
    ```
-   
+   docker_run.sh
    ```
      
 2. Construir uma imagem do docker. O dockerfile já está disponível no repositório e pode ser modificado com a necessidade do usuário.
