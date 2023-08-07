@@ -58,10 +58,10 @@ input_file_path = "/content/seu.csv"
 Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive.
 
 
-
+##Parâmentros
     --------------------------------------------------------------
    
-    Arguments(main.py):
+          (main.py):
 
            -i ,  --input_dataset        Caminho para o arquivo do dataset real de entrada         
            -c ,  --classifier           Classificador a ser utilizado     
