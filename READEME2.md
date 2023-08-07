@@ -27,20 +27,19 @@ EXPLICAR ALGO AQUI
 
 <table>
     <tbody> 
-        
         <tr>
-            <th width="10%">Fold 1</th>
-            <th width="10%">Fold 2</th>
-            <th width="10%">Fold 3</th>
-            <th width="10%">Fold 4</th>
-            <th width="10%">Fold 5</th>
+            <th width="2%">Fold 1</th>
+            <th width="2%">Fold 2</th>
+            <th width="2%">Fold 3</th>
+            <th width="2%">Fold 4</th>
+            <th width="2%">Fold 5</th>
         </tr>
         <tr>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/curve_training_error_k_1.png" alt="2023-08-07 4 33 16" style="max-width:100%;"></td>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/curve_training_error_k_2.png" alt="2023-08-07 4 40 06" style="max-width:100%;"></td>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/curve_training_error_k_3.png" alt="2023-08-07 4 43 02" style="max-width:100%;"></td>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/curve_training_error_k_4.png" alt="2023-08-07 4 40 06" style="max-width:100%;"></td>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/curve_training_error_k_5.png" alt="2023-08-07 4 43 02" style="max-width:100%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/master/layout/curve_training_error_k_1.png" alt="2023-08-07 4 33 16" style="max-width:100%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/master/layout/curve_training_error_k_2.png" alt="2023-08-07 4 40 06" style="max-width:100%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/master/layout/curve_training_error_k_3.png" alt="2023-08-07 4 43 02" style="max-width:100%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/master/layout/curve_training_error_k_4.png" alt="2023-08-07 4 40 06" style="max-width:100%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/master/layout/curve_training_error_k_5.png" alt="2023-08-07 4 43 02" style="max-width:100%;"></td>
         </tr>
 
 
