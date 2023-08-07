@@ -161,8 +161,8 @@ Impact, in terms of number (left) and duration (right) of a trace (S1) failed (F
    
     Arguments(main.py):
 
-           -i ,  --input_dataset         
-           -c ,  --classifier      
+           -i ,  --input_dataset Caminho para o arquivo do dataset real de entrada         
+           -c ,  --classifier  Classificador a ser utilizado     
            -o ,  --output_dir        
            --data_type
            --num_samples_class_malware
