@@ -131,58 +131,6 @@ input_file_path = "/content/seu.csv"
 
 
 
-
-## Complementary Results
-
-### Comparison with the State-of-the-Art (Dense vs Probabilistic)
-Comparison between the neural network Dense and state-of-the-art probabilistic technique. Values obtained for probabilistic error injection and monitoring error injection.
-
-<table>
-    <tbody> 
-        <tr>
-            <th width="10%">Probabilistic Inject Failure</th>
-        </tr>
-        <tr>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/comparison_pif_dense_prob.png" alt="2023-03-16 4 33 16" style="max-width:100%;"></td>
-        </tr>
-</table>
-
-<table>
-    <tbody> 
-        <tr>
-            <th width="10%">Monitoring Inject Failure</th>
-        </tr>
-        <tr>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/comparison_mif_dense_prob.png" alt="2023-03-16 4 33 16" style="max-width:100%;"></td>
-        </tr>
-</table>
-
-
-### Comparison with the State-of-the-Art (LSTM vs Probabilistic) 
-
-Comparison between the neural network LSTM and state-of-the-art probabilistic technique. Values obtained for probabilistic error injection and monitoring error injection.
-
-<table>
-    <tbody> 
-        <tr>
-            <th width="10%">Probabilistic Inject Failure</th>
-        </tr>
-        <tr>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/comparison_pif_lstm_prob.png" alt="2023-03-16 4 33 16" style="max-width:100%;"></td>
-        </tr>
-</table>
-
-<table>
-    <tbody> 
-        <tr>
-            <th width="10%">Monitoring Inject Failure</th>
-        </tr>
-        <tr>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/comparison_mif_lstm_prob.png" alt="2023-03-16 4 33 16" style="max-width:100%;"></td>
-        </tr>
-</table>
-
-
 ## ACKNOWLEDGMENTS
 
 
