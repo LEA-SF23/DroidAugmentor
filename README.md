@@ -22,7 +22,7 @@ EXPLICAR ALGO AQUI
     - python3 main.py -h
 
 
-### Config with pipenv
+### Configurar com pipenv
 
 ```
 pip install pipenv
