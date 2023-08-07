@@ -161,8 +161,8 @@ Impact, in terms of number (left) and duration (right) of a trace (S1) failed (F
    
     Arguments(main.py):
 
-           -i ,  --input_dataset Caminho para o arquivo do dataset real de entrada         
-           -c ,  --classifier  Classificador a ser utilizado     
+           -i ,  --input_dataset         Caminho para o arquivo do dataset real de entrada         
+           -c ,  --classifier            Classificador a ser utilizado     
            -o ,  --output_dir        
            --data_type
            --num_samples_class_malware
@@ -174,17 +174,17 @@ Impact, in terms of number (left) and duration (right) of a trace (S1) failed (F
            --latent_dimension 
            --training_algorithm
            --activation_function 
-           --dropout_decay_rate_g
-           --dropout_decay_rate_d 
-           --dense_layer_sizes_g
-           --dense_layer_sizes_d
+           --dropout_decay_rate_g     Taxa de decaimento do dropout do gerador da cGAN.
+           --dropout_decay_rate_d     Taxa de decaimento do dropout do discriminador da cGAN.
+           --dense_layer_sizes_g      Valores das camadas densas do gerador.
+           --dense_layer_sizes_d      Valores das camadas densas do discriminador.
            --use_gpu
-           --batch_size
+           --batch_size               Tamanho do lote da cGAN.
            --output_format_plot
-           --verbosity
-           --save_models
-           --path_confusion_matrix 
-           --path_curve_loss 
+           --verbosity                Nível de verbosidade.
+           --save_models              Opção para salvar modelos treinados.
+           --path_confusion_matrix    Diretório de saída das matrizes de confusão.
+           --path_curve_loss          Diretório de saída dos gráficos de curva de treinamento.
            
            
            
