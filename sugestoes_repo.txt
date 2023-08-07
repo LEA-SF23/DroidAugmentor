@@ -11,3 +11,13 @@ sugestões e coisas para fazer:
 -- (opção 3) instalação das depedências e utilização num Linux qualquer;
 -- run_campaign.py ou scripts para automação dos testes;
 
+
+ferramentas de exemplo: 
+https://github.com/fw-tools/fwnl
+https://github.com/Malware-Hunter/sf22-autoCAR
+https://github.com/Malware-Hunter/sf22-DroidAutoML
+https://github.com/Malware-Hunter/sf22-fs3e
+https://github.com/Malware-Hunter/sf22-adbuilder
+https://github.com/decarv/hashify-pass
+https://github.com/alexandrekaihara/lst2.0
+https://github.com/c2dc/iplite-sbseg2022
