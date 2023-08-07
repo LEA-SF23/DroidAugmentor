@@ -43,6 +43,19 @@ Com todas as dependências instaladas execute:
 python run_campaign.py
 ```
 
+  --------------------------------------------------------------
+   
+        Parâmetros:
+
+           --campaign ou -c:    Especifica a campanha de avaliação que você deseja executar. Você pode fornecer o nome de uma campanha 
+                                específica ou uma lista de campanhas separadas por vírgula. Por exemplo: --campaign sf23_1l_64 ou --campaign 
+                                sf23_1l_64,sf23_1l_128.    
+
+                                
+        
+
+        --------------------------------------------------------------
+
 
 ### Executar no Google Colab
 
