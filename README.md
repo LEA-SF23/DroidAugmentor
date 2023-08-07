@@ -70,18 +70,7 @@ input_file_path = "/content/seu.csv"
 ```
 
 
-### Input parameters:
 
-    Arguments(run_TNSM.py):
-        
-       -h, --help            Show this help message and exit
-       --append, -a          Append output logging file with analysis results
-       --demo, -d            Demo mode (default=False)
-       --trials, -r          Mumber of trials (default=1)
-       --start_trials,-s     Start trials (default=0)
-       --skip_train, -t      Skip training of the machine learning model training?
-       --campaign -c         Campaign [demo, mif, pif] (default=demo)
-       --verbosity, -v       Verbosity logging level (INFO=20 DEBUG=10)
 
 
     --------------------------------------------------------------
