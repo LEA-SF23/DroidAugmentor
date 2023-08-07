@@ -5,36 +5,43 @@ EXPLICAR ALGO AQUI
 
 ## Topologia da rede neural
 
-EXPLICAR ALGO AQUI
+[Link]()
 
 
-## Usar no docker
+## Instalação e utilização 
 
-1. Upgrade and update
-    - sudo apt-get update
-    - sudo apt-get upgrade 
+1. Usar imagem disponivel no hub.docker.com
+   ```
+   
+   ```
+     
+2. Construir uma imagem do docker. O dockerfile já está disponível no repositório e pode ser modificado com a necessidade do usuário.
+   
+    ```
+   docker build .
+    ```
     
-2. Installation of application and internal dependencies
-    - git clone [https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network]
-    - pip install -r requirements.txt
-    
-3. Test installation:
-    - python3 main.py -h
-
-
-### Configurar com pipenv
-
+3. Instalar dependências e executar em um linux qualquer
+    - Instalação dos requirements
 ```
 pip install pipenv
 ```
 ```
 pipenv install -r requirements.txt
 ```
-
-### Executar com pipenv
+- Execução da ferramenta
 ```
 pipenv run python main.py -i "dataset/seu.csv" -c knn -o --output_dir
 ```
+
+## Automatizar os experimentos
+
+Frase sobre run_campaing.
+Exemplos de execução
+parâmetros de entrada.
+
+
+
 
 
 ### Executar no Google Colab
@@ -90,7 +97,7 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
         --------------------------------------------------------------
         
 
-
+## Ambientes de teste
 
 
 
