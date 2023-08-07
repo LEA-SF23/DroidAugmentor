@@ -168,7 +168,29 @@ Impact, in terms of number (left) and duration (right) of a trace (S1) failed (F
            --num_samples_class_malware
            --num_samples_class_benign
            --number_epochs
-           --k_fold  
+           --k_fold 
+           --initializer_mean 
+           --initializer_deviation
+           --latent_dimension 
+           --training_algorithm
+           --activation_function 
+           --dropout_decay_rate_g
+           --dropout_decay_rate_d 
+           --dense_layer_sizes_g
+           --dense_layer_sizes_d
+           --use_gpu
+           --batch_size
+           --output_format_plot
+           --verbosity
+           --save_models
+           --path_confusion_matrix 
+           --path_curve_loss 
+           
+           
+           
+           
+           
+           
            
            
 
