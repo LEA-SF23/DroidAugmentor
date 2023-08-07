@@ -1,6 +1,6 @@
 # DroidAugmentor
 
-
+Ferramenta de treinamento e avaliação de cGANs para geração de dados sintéticos
 
 
 ## Topologia da rede neural
