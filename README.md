@@ -141,9 +141,9 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
 
 A ferramenta foi testada e utilizada na prática nos seguintes ambientes:
 
-Windows 10.
-Kernel Version = 10.0.19043
-Versão Python e bibliotecas conforme [requirements](requirements.txt).
+1.Windows 10.
+  Kernel Version = 10.0.19043
+  Versão Python e bibliotecas conforme [requirements](requirements.txt).
 
 
 
@@ -154,7 +154,5 @@ Versão Python e bibliotecas conforme [requirements](requirements.txt).
 
 
 
-This study was financed in part by the Coordenação
-de Aperfeiçoamento de Pessoal de Nível Superior - Brasil
-(CAPES) - Finance Code 001. 
+Este estudo foi parcialmente financiado pela Coordenação de Aperfeiçoamento de Pessoal de Nível Superior - Brasil (CAPES) - Código Financeiro 001.
 
