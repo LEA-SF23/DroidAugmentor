@@ -103,6 +103,7 @@ input_file_path = "/content/seu.csv"
 ```
 
 Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive.
+ <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/arquivos.JPG" style="max-width:100%;"></td>
 
 
  ## Parâmetros da ferramenta:
