@@ -2,9 +2,6 @@
 
 EXPLICAR ALGO AQUI
 
-![Examples of traces: ground truth (obtained with 27 monitors), failed
-(obtained with 7 monitors/20 failed), and recovered (using NN).](layout/neural_model.png?raw=true "Examples of traces: ground truth (obtained with 27 monitors), failed
-(obtained with 7 monitors/20 failed), and recovered (using NN).")
 
 ## Neural Network Topologies
 
@@ -13,14 +10,10 @@ Three Neural Network topologies are proposed, named Dense, LSTM and Convolutiona
 <table>
     <tbody>
         <tr>
-            <th width="20%">Dense Topology</th>
-            <th width="20%">LSTM Topology</th>
-            <th width="20%">Conv Topology</th>
+            <th width="20%">Topologia do Modelo</th>
         </tr>
         <tr>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/dense_model.png"></td>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/lstm.png"></td>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/conv.png"></td>
+            <td><img src="[/blob/master/layout/neural_model.png](https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/neural_model.png)"></td>
         </tr>
 
 
