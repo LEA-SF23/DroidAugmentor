@@ -100,17 +100,6 @@ input_file_path = "/content/seu.csv"
            --save_models                Opção para salvar modelos treinados.
            --path_confusion_matrix      Diretório de saída das matrizes de confusão.
            --path_curve_loss            Diretório de saída dos gráficos de curva de treinamento.
-           
-           
-           
-           
-           
-           
-           
-           
-
-            
-         
 
         --------------------------------------------------------------
         
