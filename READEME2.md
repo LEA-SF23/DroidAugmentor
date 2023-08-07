@@ -27,9 +27,6 @@ EXPLICAR ALGO AQUI
 
 <table>
     <tbody> 
-        <tr>
-            <th width="10%">Curva de treinamento</th>
-        </tr>
         
         <tr>
             <th width="10%">Fold 1</th>
