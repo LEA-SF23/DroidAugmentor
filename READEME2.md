@@ -10,7 +10,7 @@ Three Neural Network topologies are proposed, named Dense, LSTM and Convolutiona
 <table>
     <tbody> 
         <tr>
-            <th width="10%">Gerador</th>
+            <th width="7%">Gerador</th>
             <th width="10%">Discriminador</th>
         </tr>
         <tr>
