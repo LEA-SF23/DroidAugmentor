@@ -36,12 +36,12 @@ pipenv run python main.py -i "dataset/seu.csv" -c knn -o --output_dir
 
 ## Automatizar os experimentos
 
-Frase sobre run_campaing.
-Exemplos de execução
-parâmetros de entrada.
+A ferramenta conta com o run_campaign.py para automatizar a avaliação de algoritmos de aprendizado de máquina em diferentes configurações e conjuntos de dados. Ele executa várias campanhas de avaliação com diferentes parâmetros e registra os resultados em arquivos de log para análise posterior. O resultado final é uma análise comparativa das diferentes configurações de algoritmos em relação aos conjuntos de dados utilizados.
 
-
-
+Com todas as dependências instaladas execute: 
+```
+python run_campaign.py
+```
 
 
 ### Executar no Google Colab
