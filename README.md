@@ -51,11 +51,11 @@ Mesma campanha sendo executada por main.py:
 ```
 pipenv run python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_1l_256/combination_2 --input_dataset datasets/drebin215_original_5560Malwares_6566Benign.csv --dense_layer_sizes_g 256 --dense_layer_sizes_d 256 --number_epochs 1000 --training_algorithm Adam
 ```
-
+###  Parâmetros:
 
   --------------------------------------------------------------
    
-     Parâmetros:
+  
 
     --campaign ou -c:    Especifica a campanha de avaliação que você deseja executar. 
                          Você pode fornecer o nome de uma campanha específica ou uma  
