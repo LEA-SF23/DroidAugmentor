@@ -3,9 +3,9 @@
 EXPLICAR ALGO AQUI
 
 
-## Neural Network Topologies
+## Topologia da rede neural
 
-Three Neural Network topologies are proposed, named Dense, LSTM and Convolutional (Conv), according to their fundamental structures. Each neural network is composed of input, intermediate (also known as hidden layers), and output structures. Below, we provide more details of each proposed neural network topology.
+EXPLICAR ALGO AQUI
 
 <table>
     <tbody> 
@@ -15,26 +15,35 @@ Three Neural Network topologies are proposed, named Dense, LSTM and Convolutiona
         </tr>
         <tr>
              <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/model_generator.png" alt="2018-06-04 4 40 06" style="max-width:100%;"></td>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/model_discriminator.png" alt="2018-06-04 4 40 06" style="max-width:100%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/model_discriminator.png" alt="2023-08-07 4 40 06" style="max-width:100%;"></td>
         </tr>
 
 </table>
 ## Experimental Evaluation
 
-### Fitting Analysis
-Impact of the number of epochs on average error for Dense topology (arrangements A=3, window width W=11), LSTM topology (arrangements A=3, window width W=11), and Conv. topology (arrangements A=8, squared window width W=H=256).
+### Análise de treinamento
+
+EXPLICAR ALGO AQUI
 
 <table>
     <tbody> 
         <tr>
-            <th width="10%">Dense</th>
-            <th width="10%">LSTM</th>
-            <th width="10%">Conv</th>
+            <th width="10%">Curva de treinamento</th>
+        </tr>
+        
+        <tr>
+            <th width="10%">Fold 1</th>
+            <th width="10%">Fold 2</th>
+            <th width="10%">Fold 3</th>
+            <th width="10%">Fold 4</th>
+            <th width="10%">Fold 5</th>
         </tr>
         <tr>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/dense_error.png" alt="2018-06-04 4 33 16" style="max-width:100%;"></td>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/lstm_error.png" alt="2018-06-04 4 40 06" style="max-width:100%;"></td>
-            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/conv_error.png" alt="2018-06-04 4 43 02" style="max-width:100%;"></td>
+            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/curve_training_error_k_1.png" alt="2023-08-07 4 33 16" style="max-width:100%;"></td>
+            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/curve_training_error_k_2.png" alt="2023-08-07 4 40 06" style="max-width:100%;"></td>
+            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/curve_training_error_k_3.png" alt="2023-08-07 4 43 02" style="max-width:100%;"></td>
+            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/curve_training_error_k_4.png" alt="2023-08-07 4 40 06" style="max-width:100%;"></td>
+            <td><img src="https://github.com/kayua/Regenerating-Datasets-With-Convolutional-Network/blob/master/layout/curve_training_error_k_5.png" alt="2023-08-07 4 43 02" style="max-width:100%;"></td>
         </tr>
 
 
