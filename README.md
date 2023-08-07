@@ -139,7 +139,11 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
 
 ## Ambientes de teste
 
+A ferramenta foi testada e utilizada na prática nos seguintes ambientes:
 
+Windows 10.
+Kernel Version = 10.0.19043
+Versão Python e bibliotecas conforme [requirements](requirements.txt).
 
 
 
