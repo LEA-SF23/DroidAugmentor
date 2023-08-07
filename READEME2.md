@@ -28,11 +28,11 @@ EXPLICAR ALGO AQUI
 <table>
     <tbody> 
         <tr>
-            <th width="20%">Fold 1</th>
-            <th width="20%">Fold 2</th>
-            <th width="20%">Fold 3</th>
-            <th width="20%">Fold 4</th>
-            <th width="20%">Fold 5</th>
+            <th width="40%">Fold 1</th>
+            <th width="40%">Fold 2</th>
+            <th width="40%">Fold 3</th>
+            <th width="40%">Fold 4</th>
+            <th width="40%">Fold 5</th>
         </tr>
         <tr>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/curve_training_error_k_1.png" alt="2023-08-07 4 33 16" style="max-width:100%;"></td>
