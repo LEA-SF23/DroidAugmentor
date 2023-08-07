@@ -172,7 +172,7 @@ input_file_path = "/content/seu.csv"
 ```
 
 ```
-!python main.py -i "$input_file_path" -c knn -o --output_dir
+!python main.py -i "dataset/seu.csv" -c knn -o --output_dir
 ```
 
 ### Input parameters:
