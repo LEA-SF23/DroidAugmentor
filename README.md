@@ -146,6 +146,9 @@ Impact, in terms of number (left) and duration (right) of a trace (S1) failed (F
 ### Running/ Executar no Google Colab
 
 ```
+!pip install -r requirements.txt
+```
+```
 !python main.py -i "$input_file_path" -c knn -o --output_dir
 ```
 
