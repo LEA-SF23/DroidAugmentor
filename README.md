@@ -151,7 +151,7 @@ pip install pipenv
 pipenv install -r requirements.txt
 ```
 
-### run with pipenv
+### Run with pipenv
 ```
 pipenv run python main.py -i "$input_file_path" -c knn -o --output_dir
 ```
