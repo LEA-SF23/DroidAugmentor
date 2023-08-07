@@ -8,12 +8,16 @@ EXPLICAR ALGO AQUI
 Three Neural Network topologies are proposed, named Dense, LSTM and Convolutional (Conv), according to their fundamental structures. Each neural network is composed of input, intermediate (also known as hidden layers), and output structures. Below, we provide more details of each proposed neural network topology.
 
 <table>
-    <tbody>
+    <tbody> 
+        <tr>
+            <th width="10%">Gerador</th>
+            <th width="10%">Discriminador</th>
+        </tr>
+        <tr>
+             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/model_generator.png" alt="2018-06-04 4 40 06" style="max-width:100%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/model_discriminator.png" alt="2018-06-04 4 40 06" style="max-width:100%;"></td>
+        </tr>
 
-            <th width="20%">Topologia do Modelo</th>
-                    <tr>
-            <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/neural_model.png">
-                </tr>
 </table>
 ## Experimental Evaluation
 
