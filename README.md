@@ -146,8 +146,17 @@ Impact, in terms of number (left) and duration (right) of a trace (S1) failed (F
 ### Running/ Executar no Google Colab
 
 ```
+from google.colab import drive
+drive.mount('/content/drive')
+```
+
+```
 !pip install -r requirements.txt
 ```
+```
+input_file_path = "/content/seu.csv"
+```
+
 ```
 !python main.py -i "$input_file_path" -c knn -o --output_dir
 ```
