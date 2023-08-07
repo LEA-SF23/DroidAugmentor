@@ -7,7 +7,7 @@ EXPLICAR ALGO AQUI
 
 [Link]()
 
-[Requirements](requirements.txt)
+
 ## Instalação e utilização 
 
 1. Usar imagem disponivel no hub.docker.com
@@ -22,7 +22,7 @@ EXPLICAR ALGO AQUI
     ```
     
 3. Instalar dependências e executar em um linux qualquer
-    - Instalação dos requirements
+    - Instalação dos [requirements](requirements.txt)
 ```
 pip install pipenv
 ```
