@@ -143,6 +143,12 @@ Impact, in terms of number (left) and duration (right) of a trace (S1) failed (F
 `python3 main_mif.py`
 
 
+### Running/ Executar no Google Colab
+
+```
+!python main.py -i "$input_file_path" -c knn -o --output_dir
+```
+
 ### Input parameters:
 
     Arguments(run_TNSM.py):
