@@ -103,7 +103,7 @@ input_file_path = "/content/seu.csv"
 Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive.
 
 
- ## Parâmetros
+ ## Parâmetros da ferramenta:
     --------------------------------------------------------------
    
           (main.py):
