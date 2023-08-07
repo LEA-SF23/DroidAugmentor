@@ -142,6 +142,15 @@ Impact, in terms of number (left) and duration (right) of a trace (S1) failed (F
 ### Run (only one F_mon scenario)
 `python3 main_mif.py`
 
+### Config with pipenv
+
+```
+pip install pipenv
+```
+```
+pipenv install -r requirements.txt
+```
+
 
 ### Running/ Executar no Google Colab
 
