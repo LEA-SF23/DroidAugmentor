@@ -37,7 +37,17 @@ EXPLICAR ALGO AQUI
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/curve_training_error_k_2.png" alt="2023-08-07 4 40 06" style="max-width:160%;"></td>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/curve_training_error_k_3.png" alt="2023-08-07 4 43 02" style="max-width:160%;"></td>
         </tr>
-
+    <tbody> 
+        <tr>
+            <th width="20%">Fold 1</th>
+            <th width="20%">Fold 2</th>
+            <th width="20%">Fold 3</th>
+        </tr>
+        <tr>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/curve_training_error_k_1.png" alt="2023-08-07 4 33 16" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/curve_training_error_k_2.png" alt="2023-08-07 4 40 06" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/curve_training_error_k_3.png" alt="2023-08-07 4 43 02" style="max-width:160%;"></td>
+        </tr>
 
 </table>
 
