@@ -8,7 +8,7 @@ EXPLICAR ALGO AQUI
 EXPLICAR ALGO AQUI
 
 
-## Steps to Install:
+## Usar no docker
 
 1. Upgrade and update
     - sudo apt-get update
@@ -31,13 +31,13 @@ pip install pipenv
 pipenv install -r requirements.txt
 ```
 
-### Run with pipenv
+### Executar com pipenv
 ```
 pipenv run python main.py -i "dataset/seu.csv" -c knn -o --output_dir
 ```
 
 
-### Running/ Executar no Google Colab
+### Executar no Google Colab
 
 ```
 from google.colab import drive
@@ -98,7 +98,9 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
 
 
 
-## ACKNOWLEDGMENTS
+## Agradecimentos
+
+
 
 
 This study was financed in part by the Coordenação
