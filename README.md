@@ -61,12 +61,13 @@ python run_campaign.py
                          Pode ser INFO (1) ou DEBUG (2). 
                          Por padrão, o nível de verbosidade é definido como INFO.
 
-
-
-    
-
-                                
-        
+     Outros parâmetros de entrada são definidos dentro das campanhas de avaliação em 
+     campaigns_available. Cada campanha tem suas próprias configurações específicas, 
+     como input_dataset, number_epochs, training_algorithm, dense_layer_sizes_g, 
+     dense_layer_sizes_d, classifier, activation_function, dropout_decay_rate_g, 
+     dropout_decay_rate_d, e data_type. As configurações podem variar dependendo do 
+     objetivo e das   configurações específicas de cada campanha.  
+     
 
         --------------------------------------------------------------
 
