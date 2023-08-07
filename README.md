@@ -22,20 +22,6 @@ EXPLICAR ALGO AQUI
     - python3 main.py -h
 
 
-## Run experiments:
-
-###  Run (all F_prob experiments)
-`python3 run_jnsm_mif.py -c lstm`
-
-### Run (only one F_prob scenario)
-`python3 main.py`
-
-###  Run (all F_mon experiments)
-`python3 run_mif.py -c lstm`
-
-### Run (only one F_mon scenario)
-`python3 main_mif.py`
-
 ### Config with pipenv
 
 ```
