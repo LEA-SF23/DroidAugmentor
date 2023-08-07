@@ -18,7 +18,7 @@ EXPLICAR ALGO AQUI
 2. Construir uma imagem do docker. O dockerfile já está disponível no repositório e pode ser modificado com a necessidade do usuário.
    
     ```
-   docker build .
+   docker build -t IMAGE_NAME .
     ```
     
 3. Instalar dependências e executar em um linux qualquer
