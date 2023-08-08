@@ -4,22 +4,7 @@ Os gráficos estão disponíveis aqui:
 [Link](https://github.com/LEA-SF23/DroidAugmentor/tree/main/Campains_Results)
 
 
-<table>
-    <tbody> 
-        <tr>
-            <th width="20%">DecisionTree_Synthetic</th>
-            <th width="20%">DecisionTree_Real</th>
-        </tr>
-        <tr>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/DecisionTree_Synthetic.pdf" alt="2023-08-07 4 33 16" style="max-width:160%;"></td>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/DecisionTree_Real.pdf" alt="2023-08-07 4 40 06" style="max-width:160%;"></td>
-         </tr>
-    <tbody> 
-        <tr>
-            <th width="20%">DecisionTree_Synthetic</th>
-            <th width="20%">DecisionTree_Real</th>
-       </tr>
-        <tr>
+
 
 
 
