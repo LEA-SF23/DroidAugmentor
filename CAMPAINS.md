@@ -16,6 +16,25 @@ Os gráficos estão disponíveis aqui:
 
    ```
 
+   <table>
+    <tbody> 
+        <tr>
+            <th width="20%">RandomForest_Synthetic</th>
+            <th width="20%">RandomForest_Real</th>
+        </tr>
+        <tr>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Synthetic_page_1.png" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Real_page_1.png" alt="" style="max-width:160%;"></td>
+        </tr>
+    <tbody> 
+        <tr>
+            <th width="20%">RandomForest_Synthetic</th>
+            <th width="20%">RandomForest_Real</th>
+        </tr>
+        <tr>
+
+
+
 ### Configurações utilizadas:
 
 
