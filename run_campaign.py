@@ -21,10 +21,6 @@ except ImportError as error:
     print()
     sys.exit(-1)
 
-#https://liyin2015.medium.com/tensorflow-cpus-and-gpus-configuration-9c223436d4ef
-#os.environ["CUDA_VISIBLE_DEVICES"]="1"
-#os.environ['TF_CPP_MIN_LOG_LEVEL'] = '0'
-
 DEFAULT_VERBOSITY_LEVEL = logging.INFO
 NUM_EPOCHS = 1000
 TIME_FORMAT = '%Y-%m-%d_%H:%M:%S'
@@ -58,8 +54,8 @@ campaigns_available['demo'] = {
 campaigns_available['sf23_1l_64'] = {
     'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
                      'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
-    "dense_layer_sizes_g" : ['128'],
-    "dense_layer_sizes_d" : ['128'],
+    "dense_layer_sizes_g" : ['64'],
+    "dense_layer_sizes_d" : ['64'],
     'number_epochs' : ['1000'],
     'training_algorithm': ['Adam'],
 }
@@ -118,14 +114,6 @@ campaigns_available['sf23_1l_8192'] = {
     'training_algorithm': ['Adam'],
 }
 
-campaigns_available['sf23_1l_16384'] = {
-    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
-                     'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
-    "dense_layer_sizes_g" : ['16384'],
-    "dense_layer_sizes_d" : ['16384'],
-    'number_epochs' : ['1000'],
-    'training_algorithm': ['Adam'],
-}
 
 campaigns_available['sf23_2l'] = {
     'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
@@ -146,51 +134,6 @@ campaigns_available['sf23_3l'] = {
 }
 
 
-campaigns_available['foca1'] = {
-    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv'],
-    'classifier' : ['knn'],
-    'training_algorithm': ['Adam'],
-    'number_epochs' : ['20000'],
-    "dropout_decay_rate_g": [0.2, 0.1, 0.3],
-    "dropout_decay_rate_d": [0.4, 0.2, 0.5],
-    "dense_layer_sizes_g" : ['256,256,512,512'],
-    "dense_layer_sizes_d" : ['512,512,256,256'],
-}
-
-campaigns_available['foca2'] = {
-    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv'],
-    'classifier' : ['knn'],
-    'training_algorithm': ['Adam', 'RMSprop', 'Adadelta'],
-    'number_epochs' : ['20000'],
-    "dropout_decay_rate_g": [0.3],
-    "dropout_decay_rate_d": [0.5],
-    "dense_layer_sizes_g" : ['256,256,512,512'],
-    "dense_layer_sizes_d" : ['512,512,256,256'],
-}
-
-campaigns_available['foca3'] = {
-    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv'],
-    'classifier' : ['knn'],
-    'training_algorithm': ['Adam'],
-    'activation_function': ['LeakyReLU', 'ReLU', 'PReLU'],
-    'number_epochs' : ['5000'],
-    "dropout_decay_rate_g": [0.3],
-    "dropout_decay_rate_d": [0.5],
-    "dense_layer_sizes_g" : ['256,256,512,512'],
-    "dense_layer_sizes_d" : ['512,512,256,256'],
-}
-
-campaigns_available['focax'] = {
-    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv'],
-    'classifier' : ['knn'],
-    'training_algorithm': ['Adam'],
-    'number_epochs' : ['10000'],
-    "dropout_decay_rate_g": [0.2, 0.1, 0.3],
-    "dropout_decay_rate_d": [0.4, 0.2, 0.5],
-    "dense_layer_sizes_g" : ['16'],
-    "dense_layer_sizes_d" : ['32'],
-}
-
 campaigns_available['teste'] = {
     'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
                       'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
@@ -198,13 +141,6 @@ campaigns_available['teste'] = {
     'training_algorithm': ['Adam', 'RMSprop', 'Adadelta'],
 }
 
-campaigns_available['testeold'] = {
-    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
-                      'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
-    'data_type' : ['int8', 'float16', 'float32'],
-    'classifier' : ['knn'],
-    'training_algorithm': ['Adam'],
-}
 
 #'perceptron',
 # 'training_algorithm': ['Adam', 'RMSprop', 'Adadelta'],
