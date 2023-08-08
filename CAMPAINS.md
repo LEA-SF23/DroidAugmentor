@@ -1,4 +1,4 @@
-Aqui é apresentado sumariamente os resultados de um experimento realizado em 2023-08-05. 
+Apresentamos sumariamente as configurações dos experimentos realizados para a sua replicação
 
 ## Configuração do Experimento para camadas densas de 256. 
 
