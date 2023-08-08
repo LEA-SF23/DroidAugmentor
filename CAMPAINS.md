@@ -4,6 +4,10 @@ Os gráficos estão disponíveis aqui:
 [Link](https://github.com/LEA-SF23/DroidAugmentor/tree/main/Campains_Results)
 
 
+
+
+
+
 ## Configuração do Experimento para camadas densas de 256. 
 
 1. Comando utilizado para a execução do experimento:
@@ -59,6 +63,10 @@ Os gráficos estão disponíveis aqui:
                       
 
     --------------------------------------------------------------
+
+
+
+
 
 
 ## Configuração do Experimento para camadas densas de 1024. 
