@@ -167,9 +167,24 @@ Os gráficos estão disponíveis aqui:
  ```
  
 python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_1l_4096/combination_2 --input_dataset datasets/drebin215_original_5560Malwares_6566Benign.csv --dense_layer_sizes_g 4096 --dense_layer_sizes_d 4096 --number_epochs 1000 --training_algorithm Adam
-
    ```
-     
+ <table>
+    <tbody> 
+        <tr>
+            <th width="20%">AdaBoost_Synthetic 4096</th>
+            <th width="20%">AdaBoost_Real 4096</th>
+        </tr>
+        <tr>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/AdaBoost_Synthetic_page_1.png" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/AdaBoost_Real_page_1.png" alt="" style="max-width:160%;"></td>
+        </tr>
+    <tbody> 
+        <tr>
+            <th width="20%">AdaBoost_Synthetic 4096</th>
+            <th width="20%">AdaBoost_Real 4096</th>
+        </tr>
+        <tr>
+
  ### Configurações utilizadas:
 
 
