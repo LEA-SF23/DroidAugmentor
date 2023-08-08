@@ -1,0 +1,36 @@
+{
+  "input_dataset": "datasets/drebin215_original_5560Malwares_6566Benign.csv",
+  "classifier": [
+    "RandomForest",
+    "SupportVectorMachine",
+    "KNN",
+    "DecisionTree",
+    "AdaBoost"
+  ],
+  "output_dir": "outputs/out_2023-08-05_12-04-18/sf23_1l_256/combination_2",
+  "data_type": "float32",
+  "num_samples_class_malware": 2000,
+  "num_samples_class_benign": 2000,
+  "number_epochs": 1000,
+  "k_fold": 5,
+  "initializer_mean": 0.0,
+  "initializer_deviation": 0.02,
+  "latent_dimension": 128,
+  "training_algorithm": "Adam",
+  "activation_function": "LeakyReLU",
+  "dropout_decay_rate_g": 0.2,
+  "dropout_decay_rate_d": 0.4,
+  "dense_layer_sizes_g": [
+    256
+  ],
+  "dense_layer_sizes_d": [
+    256
+  ],
+  "batch_size": 32,
+  "verbosity": 20,
+  "save_models": true,
+  "path_confusion_matrix": "confusion_matrix",
+  "path_curve_loss": "training_curve",
+  "latent_mean_distribution": 0.0,
+  "latent_stander_deviation": 1.0
+}
