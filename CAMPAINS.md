@@ -19,8 +19,8 @@ Os gráficos estão disponíveis aqui:
    <table>
     <tbody> 
         <tr>
-            <th width="20%">RandomForest_Synthetic</th>
-            <th width="20%">RandomForest_Real</th>
+            <th width="20%">RandomForest_Synthetic 256</th>
+            <th width="20%">RandomForest_Real 256 </th>
         </tr>
         <tr>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Synthetic_page_1.png" alt="" style="max-width:160%;"></td>
@@ -28,8 +28,8 @@ Os gráficos estão disponíveis aqui:
         </tr>
     <tbody> 
         <tr>
-            <th width="20%">RandomForest_Synthetic</th>
-            <th width="20%">RandomForest_Real</th>
+            <th width="20%">RandomForest_Syntheti 256c</th>
+            <th width="20%">RandomForest_Real 256</th>
         </tr>
         <tr>
 
