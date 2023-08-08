@@ -160,17 +160,3 @@ A ferramenta foi testada e utilizada na prática nos seguintes ambientes:
    Versão Python e bibliotecas conforme [requirements](requirements.txt).
 
    
-   
-  
-
-
-
-
-
-## Agradecimentos
-
-
-
-
-Este estudo foi parcialmente financiado pela Coordenação de Aperfeiçoamento de Pessoal de Nível Superior - Brasil (CAPES) - Código Financeiro 001.
-
