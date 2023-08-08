@@ -28,7 +28,7 @@ Os gráficos estão disponíveis aqui:
         </tr>
     <tbody> 
         <tr>
-            <th width="20%">RandomForest_Syntheti 256c</th>
+            <th width="20%">RandomForest_Synthetic 256</th>
             <th width="20%">RandomForest_Real 256</th>
         </tr>
         <tr>
