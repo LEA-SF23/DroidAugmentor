@@ -43,7 +43,16 @@ Com todas as dependências instaladas execute:
 ```
 python run_campaign.py
 ```
+
+
+Mesma campanha realizada no artigo:
+
+```
+pipenv run python run_campaign.py -c sf23_1l_256,sf23_1l_1024,sf23_1l_4096
+```
+
 Exemplo de execução de campanha:
+
 ```
 run_campaign.py -c sf23_1l_256
 
