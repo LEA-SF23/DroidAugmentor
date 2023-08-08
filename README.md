@@ -129,7 +129,6 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
            --dropout_decay_rate_d       Taxa de decaimento do dropout do discriminador da cGAN.
            --dense_layer_sizes_g        Valores das camadas densas do gerador.
            --dense_layer_sizes_d        Valores das camadas densas do discriminador.
-           --use_gpu                    Opção para usar a GPU para treinamento.
            --batch_size                 Tamanho do lote da cGAN.
            --verbosity                  Nível de verbosidade.
            --save_models                Opção para salvar modelos treinados.
