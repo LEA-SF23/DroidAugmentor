@@ -129,8 +129,7 @@
             <th width="20%">Curvas</th>
         </tr>
         <tr>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/training_curve/curve_training_error_k_5_page_1.png
-" alt="" style="max-width:50%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/training_curve/curve_training_error_k_5_page_1.png" alt="" style="max-width:50%;"></td>
         </tr>
 </div>
 
