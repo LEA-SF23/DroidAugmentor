@@ -95,7 +95,7 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
     <tbody> 
         <tr>
             <td colspan="2" style="text-align: center;">
-                <h2>Métricas de aplicabilidade RF </h2>
+                <h2>Métricas de aplicabilidade </h2>
                 <p>Ao verificar se os classificadores são capazes de classificar os dados sintéticos de maneira similar aos dados reais, pode-se inferir que os dados sintéticos são realistas e adequados.</p>
             </td>
         </tr>
@@ -134,7 +134,7 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
         <tr>
             <tr>
             <td colspan="2" style="text-align: center;">
-                <h2>Matrizes de confusão RF </h2>
+                <h2>Matrizes de confusão </h2>
             </td>
         </tr>
         </tr>
