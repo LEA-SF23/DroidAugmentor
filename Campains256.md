@@ -103,6 +103,11 @@
                 </div>
             </td>
         </tr>
+       <tbody> 
+        <tr>
+            <th width="20%">Synthetic_RandomForest_k5_256</th>
+            <th width="20%">Real_RandomForest_k5_256</th>
+        </tr>
     </tbody> 
 </table>
 
