@@ -67,23 +67,19 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
     --------------------------------------------------------------
 
 
-## Métricas de similaridade
+## Métricas de Similaridade
 
-Essas métricas permitem verificar se os dados gerados são diferentes dos dados originais e, ao mesmo tempo, seguem o mesmo padrão estatístico.
+As métricas de similaridade permitem verificar se os dados gerados são diferentes dos dados originais e, ao mesmo tempo, seguem o mesmo padrão estatístico.
 
 ![enter image description here](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/Comparison_Real_Synthetic_page_1.png)
 
 
-    
+## Métricas de Aplicabilidade
+
+As métricas de aplicabilidade são as convencionais, como Acurácia, Precisão, Recall e F1-Score. O objetivo é verificar se os classificadores são capazes de classificar os dados sintéticos de maneira similar aos dados reais. Em caso positivo, pode-se inferir que os dados sintéticos são realistas e adequados.
+
 <table> 
     <tbody> 
-        <tr>
-            <td colspan="2" style="text-align: center;">
-                <h2>Métricas de aplicabilidade </h2>
-                <p>Ao verificar se os classificadores são capazes de classificar os dados sintéticos de maneira similar aos dados reais, pode-se inferir que os dados sintéticos são realistas e adequados.</p>
-            </td>
-        </tr>
-        <tr>
             <td>
                 <div style="position: absolute; top: 50px; left: 50px;">
                     <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Synthetic_page_1.png"
