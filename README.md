@@ -6,7 +6,7 @@ Ferramenta de treinamento e avaliação de cGANs para geração de dados sintét
 
 [Overview da Topologia da cGAN](https://github.com/LEA-SF23/DroidAugmentor/blob/main/TOPOLOGIA.md)
 
-## Resultados dos experimentos (campanha) do paper
+## Resultados dos experimentos (campanhas) do paper
 
 [Gráfico resumo das métricas de aplicabilidade (KNN) das três topologias testadas](https://github.com/LEA-SF23/DroidAugmentor/blob/main/CAMPAINS.md)
 
@@ -43,7 +43,7 @@ Os gráficos e links para os resultados completos de cada um dos três experimen
    ./scripts/docker_run_solo.sh
     ```
     
-3. Executar os mesmos experimentos (campanha) do paper
+3. Executar os mesmos experimentos (campanhas) do paper
 
    ```bash
     ./run_sf23_experiments.sh
