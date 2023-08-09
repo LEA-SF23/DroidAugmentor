@@ -92,18 +92,18 @@
                     <figure style="display: inline-block; text-align: center;">
                         <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Synthetic_page_1.png"
                              alt="RandomForest Synthetic 256"
-                             title="Métricas de aplicabilidad sintético 256"
+                             title="Métricas de aplicabilidade: sintético 256"
                              style="max-width:160%;">
-                        <figcaption>Métricas de aplicabilidad sintético 256</figcaption>
+                        <figcaption>Métricas de aplicabilidade: sintético 256</figcaption>
                     </figure>
                 </td>
                 <td>
                     <figure style="display: inline-block; text-align: center;">
                         <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Real_page_1.png"
                              alt="RandomForest Real 256"
-                             title="Métricas de aplicabilidad real 256"
+                             title="Métricas de aplicabilidade: real 256"
                              style="max-width:160%;">
-                        <figcaption>Métricas de aplicabilidad real 256</figcaption>
+                        <figcaption>Métricas de aplicabilidade: real 256</figcaption>
                     </figure>
                 </td>
             </tr>
