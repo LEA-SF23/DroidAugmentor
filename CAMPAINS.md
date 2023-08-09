@@ -120,6 +120,25 @@ Os gráficos estão disponíveis aqui:
 
 
 
+  <table>
+    <tbody> 
+        <tr>
+            <th width="20%">Synthetic_AdaBoost_k5_4096</th>
+            <th width="20%">Real_AdaBoost_k5_4096</th>
+        </tr>
+        <tr>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/confusion_matrix/CM_Synthetic_AdaBoost_k5_page_1.png alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/confusion_matrix/CM_Real_AdaBoost_k5_page_1.png" alt="" style="max-width:160%;"></td>
+        </tr>
+    <tbody> 
+        <tr>
+            <th width="20%">Synthetic_AdaBoost_k5_4096</th>
+            <th width="20%">Real_AdaBoost_k5_4096</th>
+        </tr>
+        <tr>
+
+
+
 
 ## Configuração do Experimento para camadas densas de 1024. 
 
