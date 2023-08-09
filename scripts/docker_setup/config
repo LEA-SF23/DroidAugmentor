@@ -1,5 +1,0 @@
-# github account
-host github.com
-hostname github.com
-preferredauthentications publickey
-identityfile /root/.ssh/id_rsa_github_droidaugmentordeploy
