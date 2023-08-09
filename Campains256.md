@@ -107,14 +107,14 @@
         </tr>
         <tr>
 
- ## Curvas
+
 
 
  <div style="text-align: center;">
 <table>
     <tbody>
         <tr>
-            <th width="20%">Curva</th>
+            <th width="20%">Curvas</th>
         </tr>
         <tr>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/training_curve/curve_training_error_k_5_page_1.png
