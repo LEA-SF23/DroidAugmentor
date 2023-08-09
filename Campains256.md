@@ -110,12 +110,15 @@
 
 
    
-## Matrizes de confusão
+
   <table>
     <tbody> 
         <tr>
-            <th width="20%">Synthetic_RandomForest_k5_256</th>
-            <th width="20%">Real_RandomForest_k5_256</th>
+            <tr>
+            <td colspan="2" style="text-align: center;">
+                <h2>Matrizes de confusão RF </h2>
+            </td>
+        </tr>
         </tr>
         <tr>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/confusion_matrix/CM_Synthetic_RandomForest_k5_page_1.png" alt="" style="max-width:160%;"></td>
