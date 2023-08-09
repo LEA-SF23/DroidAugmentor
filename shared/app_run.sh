@@ -1,11 +1,9 @@
 #!/bin/bash
 
-cd /droidaugmentor/DroidAugmentor
-git pull
-
 echo "=============================================================="
 echo "Running app with parameters: $*"
 echo "=============================================================="
 
+cd /droidaugmentor/
 pipenv run python main.py  $*
 

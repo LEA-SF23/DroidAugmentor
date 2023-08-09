@@ -1,2 +1,0 @@
-FROM sf23/droidaugmentor:latest
-CMD ["docker_run.sh"]
