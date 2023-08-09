@@ -61,7 +61,7 @@
 
  [Log completo da campanha](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/logging.log)
     
-## Métricas de similaridade
+
 
 <div style="text-align: center;">
 <table>
