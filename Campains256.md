@@ -75,11 +75,11 @@
 </div>
 
 
-## Métricas de aplicabilidade
 
 
 
-<table>
+
+<table> ## Métricas de aplicabilidade
     <tbody> 
         <tr>
             <th width="20%">RandomForest_Synthetic 256</th>
