@@ -11,7 +11,7 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
 
 [Log completo da campanha](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/logging.log)
 
-[Todos os gráficos de resultado](https://github.com/LEA-SF23/DroidAugmentor/tree/main/Campains_Results/256)
+[Relação completa de gráficos e dados do experimento](https://github.com/LEA-SF23/DroidAugmentor/tree/main/Campains_Results/256)
 
  
 ## Execução e Configuração 
