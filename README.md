@@ -4,7 +4,7 @@ Ferramenta de treinamento e avaliação de cGANs para geração de dados sintét
 
 ## Topologia da rede neural
 
-[Overview da Topologia](https://github.com/LEA-SF23/DroidAugmentor/blob/main/TOPOLOGIA.md)
+[Overview da Topologia da cGAN](https://github.com/LEA-SF23/DroidAugmentor/blob/main/TOPOLOGIA.md)
 
 ## Resultados dos experimentos (campanha) do paper
 
