@@ -369,7 +369,6 @@ def show_model(latent_dim, input_data_shape, activation_function, initializer_me
         show_model_instance.get_dense_discriminator_model().summary()
         logging.info("")
 
-
 def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, batch_size, training_algorithm,
                    number_epochs, latent_dim, activation_function, dropout_decay_rate_g, dropout_decay_rate_d,
                    dense_layer_sizes_g=None, dense_layer_sizes_d=None, dataset_type=None, title_output=None,
@@ -422,17 +421,35 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
         number_samples_true = len([positional_label for positional_label in y_test.tolist() if positional_label == 1])
         number_samples_false = len([positional_label for positional_label in y_test.tolist() if positional_label == 0])
 
-        x_true_synthetic, y_true_synthetic = generate_samples(adversarial_model, number_samples_true, latent_dim,
+        # Calculate the desired number of synthetic samples for each class
+        num_samples_true_desired = int(number_samples_true * (1 + 1.0 / k))
+        num_samples_false_desired = int(number_samples_false * (1 + 1.0 / k))
+
+        # Generate synthetic samples with the desired number for each class
+        x_true_synthetic, y_true_synthetic = generate_samples(adversarial_model, num_samples_true_desired, latent_dim,
                                                               1, verbose_level, latent_mean_distribution,
                                                               latent_stander_deviation)
 
-        x_false_synthetic, y_false_synthetic = generate_samples(adversarial_model, number_samples_false, latent_dim,
+        x_false_synthetic, y_false_synthetic = generate_samples(adversarial_model, num_samples_false_desired, latent_dim,
                                                                 0, verbose_level, latent_mean_distribution,
                                                                 latent_stander_deviation)
+
+        # Ensure the desired number of samples for each class
+        x_true_synthetic = x_true_synthetic[:number_samples_true]
+        y_true_synthetic = y_true_synthetic[:number_samples_true]
+
+        x_false_synthetic = x_false_synthetic[:number_samples_false]
+        y_false_synthetic = y_false_synthetic[:number_samples_false]
 
         x_synthetic_samples = np.concatenate((x_true_synthetic, x_false_synthetic), dtype=dataset_type)
         y_synthetic_samples = np.rint(np.concatenate((y_true_synthetic, y_false_synthetic)))
         y_synthetic_samples = np.squeeze(y_synthetic_samples, axis=1)
+
+        if i == k - 1:
+            synthetic_dataset = np.concatenate((x_synthetic_samples, y_synthetic_samples.reshape(-1, 1)), axis=1)
+            synthetic_df = pd.DataFrame(synthetic_dataset, columns=[f'feature_{i}' for i in range(synthetic_dataset.shape[1] - 1)] + ['label'])
+            synthetic_output_path = os.path.join(output_dir, f'synthetic_dataset_last_fold.csv')
+            synthetic_df.to_csv(synthetic_output_path, index=False)
 
         list_classifiers = instance_classifier.get_trained_classifiers(classifier_list, x_training, y_training,
                                                                        dataset_type, verbose_level, input_data_shape)
