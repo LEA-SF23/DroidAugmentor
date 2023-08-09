@@ -78,30 +78,39 @@
 
 
 
-# Métricas de aplicabilidade
+<div style="text-align: center;">
+    <h1>Métricas de aplicabilidad</h1>
+    <h2>RandomForest_Synthetic 256</h2>
+    <table> 
+        <tbody> 
+            <tr>
+                <th width="20%">RandomForest_Synthetic 256</th>
+                <th width="20%">RandomForest_Real 256 </th>
+            </tr>
+            <tr>
+                <td>
+                    <figure style="display: inline-block; text-align: center;">
+                        <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Synthetic_page_1.png"
+                             alt="RandomForest Synthetic 256"
+                             title="Métricas de aplicabilidad sintético 256"
+                             style="max-width:160%;">
+                        <figcaption>Métricas de aplicabilidad sintético 256</figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <figure style="display: inline-block; text-align: center;">
+                        <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Real_page_1.png"
+                             alt="RandomForest Real 256"
+                             title="Métricas de aplicabilidad real 256"
+                             style="max-width:160%;">
+                        <figcaption>Métricas de aplicabilidad real 256</figcaption>
+                    </figure>
+                </td>
+            </tr>
+        </tbody> 
+    </table>
+</div>
 
-<table> 
-    <tbody> 
-        <tr>
-            <th width="20%">RandomForest_Synthetic 256</th>
-            <th width="20%">RandomForest_Real 256 </th>
-        </tr>
-        <tr>
-            <td>
-                <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Synthetic_page_1.png"
-                     alt="RandomForest Synthetic 256"
-                     title="Métricas de aplicabilidade sintético 256 "
-                     style="max-width:160%;">
-            </td>
-            <td>
-                <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Real_page_1.png"
-                     alt="RandomForest Real 256"
-                     title="Métricas de aplicabilidade sintético  Real 256"
-                     style="max-width:160%;">
-            </td>
-        </tr>
-    </tbody> 
-</table>
 
    
 ## Matrizes de confusão
