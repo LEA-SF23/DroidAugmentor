@@ -159,7 +159,7 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
 
 ## Ambientes de teste
 
-A ferramenta executada e testada na prática nos seguintes ambientes:
+A ferramenta foi executada e testada na prática nos seguintes ambientes:
 
 1. Windows 10<br/>
    Kernel Version = 10.0.19043<br/>
