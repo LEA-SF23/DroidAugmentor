@@ -84,7 +84,7 @@
     <tbody> 
         <tr>
             <td colspan="2" style="text-align: center;">
-                <h2>Métricas de aplicabilidade RandomForest </h2>
+                <h2>Métricas de aplicabilidade </h2>
             </td>
         </tr>
         <tr>
