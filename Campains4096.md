@@ -65,3 +65,20 @@ python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_
       
 
 --------------------------------------------------------------
+
+  <table>
+    <tbody> 
+        <tr>
+            <th width="20%">Synthetic_AdaBoost_k5_4096</th>
+            <th width="20%">Real_AdaBoost_k5_4096</th>
+        </tr>
+        <tr>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/confusion_matrix/CM_Synthetic_AdaBoost_k5_page_1.png" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/confusion_matrix/CM_Real_AdaBoost_k5_page_1.png" alt="" style="max-width:160%;"></td>
+        </tr>
+    <tbody> 
+        <tr>
+            <th width="20%">Synthetic_AdaBoost_k5_4096</th>
+            <th width="20%">Real_AdaBoost_k5_4096</th>
+        </tr>
+        <tr>
