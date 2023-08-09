@@ -8,9 +8,7 @@ Ferramenta de treinamento e avaliação de cGANs para geração de dados sintét
 
 ## Resultados dos experimentos (campanha) do paper
 
-
-![Topologias testadas](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/topologias/drebin_topologias_knn_page_1.png)
-
+[Gráfico resumo das três topologias testadas](https://github.com/LEA-SF23/DroidAugmentor/blob/main/CAMPAINS.md)
 
 Os gráficos e links para os resultados completos de cada experimento estão disponíveis nos arquivos a seguir.
 - [Experimento 1: camadas densas de 256](https://github.com/LEA-SF23/DroidAugmentor/blob/main/CAMPAIN_256.md)
