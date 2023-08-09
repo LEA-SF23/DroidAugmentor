@@ -1,7 +1,7 @@
 Apresentamos sumariamente as configurações dos experimentos realizados para a sua replicação.
 Os gráficos estão disponíveis aqui: 
 
-[256]()
+[256](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains256.md)
 [1024]()
 [4096]()
 
