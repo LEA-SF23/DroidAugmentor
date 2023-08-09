@@ -78,35 +78,31 @@
  [Log completo da campanha](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/logging.log)
     
 
-
-
-<div style="position: relative;">
-    <h2></h2>
-    <table> 
-        <tbody> 
-            <tr>
-                <th width="20%">Métricas de aplicabilidade </th>
-            </tr>
-            <tr>
-                <td>
-                    <div style="position: absolute; top: 50px; left: 50px;">
-                        <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Synthetic_page_1.png"
-                             alt="RandomForest Synthetic 256"
-                             style="max-width: 160%;">
-                    </div>
-                </td>
-                <td>
-                    <div style="position: absolute; top: 50px; left: 200px;">
-                        <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Real_page_1.png"
-                             alt="RandomForest Real 256"
-                             style="max-width: 160%;">
-                    </div>
-                </td>
-            </tr>
-        </tbody> 
-    </table>
-</div>
-
+<table> 
+    <tbody> 
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <h2>ok</h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="position: absolute; top: 50px; left: 50px;">
+                    <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Synthetic_page_1.png"
+                         alt="RandomForest Synthetic 256"
+                         style="max-width: 160%;">
+                </div>
+            </td>
+            <td>
+                <div style="position: absolute; top: 50px; left: 200px;">
+                    <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Real_page_1.png"
+                         alt="RandomForest Real 256"
+                         style="max-width: 160%;">
+                </div>
+            </td>
+        </tr>
+    </tbody> 
+</table>
 
 
 
