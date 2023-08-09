@@ -73,7 +73,7 @@
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/Comparison_Real_Synthetic_page_1.png" alt="" style="max-width:50%;"></td>
         </tr>
 </div>
-
+Essas métricas permitem verificar se os dados gerados são diferentes dos dados originais e, ao mesmo tempo, seguem mesmo padrão estatístico
 
 
 
