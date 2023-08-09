@@ -80,8 +80,9 @@
 
 ## Métricas de aplicabilidade
 
+Métricas de aplicabilidade
 <div style="position: relative;">
-    <h2>RandomForest_Synthetic 256</h2>
+    <h2></h2>
     <table> 
         <tbody> 
             <tr>
