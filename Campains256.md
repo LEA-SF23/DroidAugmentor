@@ -63,6 +63,18 @@
     
 ## Métricas de similaridade
 
+<div style="text-align: center;">
+<table>
+    <tbody>
+        <tr>
+            <th width="20%">Métricas de similaridade</th>
+        </tr>
+        <tr>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/Comparison_Real_Synthetic_page_1.png" alt="" style="max-width:50%;"></td>
+        </tr>
+</div>
+
+
 ## Métricas de aplicabilidade
 
 <table>
