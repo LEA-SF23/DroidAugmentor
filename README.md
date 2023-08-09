@@ -171,9 +171,11 @@ A ferramenta executada e testada na prática nos seguintes ambientes:
 
 3. Linux Ubuntu 22.04.2 LTS
    Kernel Version =  5.19.0-46-generic
-   Versão Python e bibliotecas conforme [requirements](requirements.txt).
+   Python = 3.10.6
+   Módulos Python conforme [requirements](requirements.txt).
 
 4. Linux Ubuntu 20.04.6 LTS
    Kernel Version =  5.19.0-46-generic
-   Versão Python e bibliotecas conforme [requirements](requirements.txt).
+   Python = 3.8.10
+   Módulos Python conforme [requirements](requirements.txt).
 
