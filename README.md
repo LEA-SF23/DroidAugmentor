@@ -159,21 +159,25 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
 
 ## Ambientes de teste
 
-A ferramenta executada e testada na prática nos seguintes ambientes:
+A ferramenta foi executada e testada na prática nos seguintes ambientes:
 
-1. Windows 10.
-   Kernel Version = 10.0.19043
-   Versão Python e bibliotecas conforme [requirements](requirements.txt).
+1. Windows 10<br/>
+   Kernel Version = 10.0.19043<br/>
+   Python = <br/>
+   Módulos Python conforme [requirements](requirements.txt).
    
-2. Linux Ubuntu 22.04.2 LTS
-   Kernel Version = 5.15.109+
-   Versão Python e bibliotecas conforme [requirements](requirements.txt).
+2. Linux Ubuntu 22.04.2 LTS<br/>
+   Kernel Version = 5.15.109+<br/>
+   Python = <br/>
+   Módulos Python conforme [requirements](requirements.txt).
 
-3. Linux Ubuntu 22.04.2 LTS
-   Kernel Version =  5.19.0-46-generic
-   Versão Python e bibliotecas conforme [requirements](requirements.txt).
+3. Linux Ubuntu 22.04.2 LTS<br/>
+   Kernel Version =  5.19.0-46-generic<br/>
+   Python = 3.10.6<br/>
+   Módulos Python conforme [requirements](requirements.txt).
 
-4. Linux Ubuntu 20.04.6 LTS
-   Kernel Version =  5.19.0-46-generic
-   Versão Python e bibliotecas conforme [requirements](requirements.txt).
+4. Linux Ubuntu 20.04.6 LTS<br/>
+   Kernel Version =  5.19.0-46-generic<br/>
+   Python = 3.8.10<br/>
+   Módulos Python conforme [requirements](requirements.txt).
 
