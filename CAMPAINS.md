@@ -180,8 +180,8 @@ Os gráficos estão disponíveis aqui:
       batch_size                : 32
       classifier                : ['RandomForest', 'SupportVectorMachine', 'KNN', 'DecisionTree', 'AdaBoost']
       data_type                 : float32
-      dense_layer_sizes_d       : [[256]]
-      dense_layer_sizes_g       : [[256]]
+      dense_layer_sizes_d       : [[1024]]
+      dense_layer_sizes_g       : [[1024]]
       dropout_decay_rate_d      : 0.4
       dropout_decay_rate_g      : 0.2
       initializer_deviation     : 0.02
@@ -248,8 +248,8 @@ python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_
       batch_size                : 32
       classifier                : ['RandomForest', 'SupportVectorMachine', 'KNN', 'DecisionTree', 'AdaBoost']
       data_type                 : float32
-      dense_layer_sizes_d       : [[256]]
-      dense_layer_sizes_g       : [[256]]
+      dense_layer_sizes_d       : [[4096]]
+      dense_layer_sizes_g       : [[4096]]
       dropout_decay_rate_d      : 0.4
       dropout_decay_rate_g      : 0.2
       initializer_deviation     : 0.02
