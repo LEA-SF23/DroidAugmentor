@@ -77,7 +77,7 @@
 
  [Log completo da campanha](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/logging.log)
     
-
+## Métricas de Aplicabilidade
 
 <table>
     <tbody> 
@@ -121,7 +121,6 @@
             <th width="20%">Real_RandomForest_k5_256</th>
         </tr>
         <tr>
-
 
 
 
