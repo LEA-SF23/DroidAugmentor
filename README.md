@@ -174,11 +174,8 @@ A ferramenta executada e testada na prática nos seguintes ambientes:
    Python = 3.10.6
    Módulos Python conforme [requirements](requirements.txt).
 
-4. Linux Ubuntu 20.04.6 LTS
-
-   Kernel Version =  5.19.0-46-generic
-
-   Python = 3.8.10
-
+4. Linux Ubuntu 20.04.6 LTS<br/>
+   Kernel Version =  5.19.0-46-generic<br/>
+   Python = 3.8.10<br/>
    Módulos Python conforme [requirements](requirements.txt).
 
