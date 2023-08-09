@@ -134,7 +134,9 @@
 <table>
     <tbody>
         <tr>
-            <th width="20%">Curvas</th>
+           <td colspan="2" style="text-align: center;">
+                <h2> Curva de treinamento </h2>
+           </td>
         </tr>
         <tr>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/training_curve/curve_training_error_k_5_page_1.png" alt="" style="max-width:50%;"></td>
