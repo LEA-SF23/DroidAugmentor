@@ -78,7 +78,7 @@
  [Log completo da campanha](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/logging.log)
     
 
-## Métricas de aplicabilidade
+
 
 Métricas de aplicabilidade
 <div style="position: relative;">
