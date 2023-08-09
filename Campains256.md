@@ -1,6 +1,6 @@
 # Experimento 1: camadas densas de 256
 
-Nas próximas seções apresentamos:
+Nas seções a seguir apresentamos:
 - a execução (comando) e configuração do experimento;
 - os gráficos das métricas de similaridade;
 - os gráficos das métricas de aplicabilidade utilizando o Random Forest;
