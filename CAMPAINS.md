@@ -6,7 +6,7 @@ Os gráficos estão disponíveis aqui:
 [4096]()
 
 
-###  Topologias
+
 
 <div style="text-align: center;">
 <table>
