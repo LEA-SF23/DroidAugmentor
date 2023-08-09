@@ -163,12 +163,12 @@ A ferramenta foi executada e testada na prática nos seguintes ambientes:
 
 1. Windows 10<br/>
    Kernel Version = 10.0.19043<br/>
-   Python = <br/>
+   Python = 3.8.10 <br/>
    Módulos Python conforme [requirements](requirements.txt).
    
 2. Linux Ubuntu 22.04.2 LTS<br/>
    Kernel Version = 5.15.109+<br/>
-   Python = <br/>
+   Python = 3.8.10 <br/>
    Módulos Python conforme [requirements](requirements.txt).
 
 3. Linux Ubuntu 22.04.2 LTS<br/>
