@@ -77,6 +77,8 @@
 
 ## Métricas de aplicabilidade
 
+
+
 <table>
     <tbody> 
         <tr>
