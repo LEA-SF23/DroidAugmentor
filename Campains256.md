@@ -1,4 +1,6 @@
 
+
+
 ## Configuração do Experimento para camadas densas de 256. 
 
 1. Comando utilizado para a execução do experimento:
@@ -7,22 +9,6 @@
 
    ```
 
-   <table>
-    <tbody> 
-        <tr>
-            <th width="20%">RandomForest_Synthetic 256</th>
-            <th width="20%">RandomForest_Real 256 </th>
-        </tr>
-        <tr>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Synthetic_page_1.png" alt="" style="max-width:160%;"></td>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Real_page_1.png" alt="" style="max-width:160%;"></td>
-        </tr>
-    <tbody> 
-        <tr>
-            <th width="20%">RandomForest_Synthetic 256</th>
-            <th width="20%">RandomForest_Real 256</th>
-        </tr>
-        <tr>
 
  
 ### Configurações utilizadas:
@@ -72,7 +58,30 @@
                       
 
     --------------------------------------------------------------
+## Métricas de similaridade
 
+## Métricas de aplicabilidade
+
+
+   <table>
+    <tbody> 
+        <tr>
+            <th width="20%">RandomForest_Synthetic 256</th>
+            <th width="20%">RandomForest_Real 256 </th>
+        </tr>
+        <tr>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Synthetic_page_1.png" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Real_page_1.png" alt="" style="max-width:160%;"></td>
+        </tr>
+    <tbody> 
+        <tr>
+            <th width="20%">RandomForest_Synthetic 256</th>
+            <th width="20%">RandomForest_Real 256</th>
+        </tr>
+        <tr>
+
+   
+## Matrizes de confusão
   <table>
     <tbody> 
         <tr>
@@ -89,3 +98,5 @@
             <th width="20%">Real_RandomForest_k5_256</th>
         </tr>
         <tr>
+
+ ## Curvas       
