@@ -6,6 +6,10 @@ Ferramenta de treinamento e avaliação de cGANs para geração de dados sintét
 
 [Overview da Topologia](https://github.com/LEA-SF23/DroidAugmentor/blob/main/TOPOLOGIA.md)
 
+## Resultados dos experimentos (campanha) do paper
+
+[Overview dos saídas e resultados gerados pelos experimentos](https://github.com/LEA-SF23/DroidAugmentor/blob/main/CAMPAINS.md)
+
 ## Preparação e Execução
 
 1. Clonar o repositório 
