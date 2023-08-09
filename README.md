@@ -49,7 +49,7 @@ Os gráficos e links para os resultados completos de cada um dos três experimen
     ./run_sf23_experiments.sh
     ```
 
-## Executando experimentos
+## Executando outros experimentos
 
 A ferramenta conta com o **run_campaign.py** para automatizar o treinamento e a avaliação da cGAN. O **run_campaign.py** permite executar várias campanhas de avaliação com diferentes parâmetros, registrando os resultados em arquivos de saída para análise posterior. O usuário poderá visualmente realizar uma análise comparativa das diferentes configurações em relação aos conjuntos de dados utilizados.
 
