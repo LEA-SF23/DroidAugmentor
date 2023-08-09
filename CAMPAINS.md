@@ -127,7 +127,7 @@ Os gráficos estão disponíveis aqui:
             <th width="20%">Real_AdaBoost_k5_4096</th>
         </tr>
         <tr>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/confusion_matrix/CM_Synthetic_AdaBoost_k5_page_1.png alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/confusion_matrix/CM_Synthetic_AdaBoost_k5_page_1.png" alt="" style="max-width:160%;"></td>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/confusion_matrix/CM_Real_AdaBoost_k5_page_1.png" alt="" style="max-width:160%;"></td>
         </tr>
     <tbody> 
