@@ -1,66 +1,72 @@
 # DroidAugmentor
 
-Ferramenta de treinamento e avaliação de cGANs para geração de dados sintéticos
-
-
+Ferramenta de treinamento e avaliação de cGANs para geração de dados sintéticos para o contexto de detecção de malwares Android.
 
 ## Topologia da rede neural
 
-[Link](https://github.com/LEA-SF23/DroidAugmentor/blob/main/TOPOLOGIA.md)
+[Overview da Topologia](https://github.com/LEA-SF23/DroidAugmentor/blob/main/TOPOLOGIA.md)
 
+## Preparação e Execução
 
-## Instalação e utilização 
-
-1. Usar imagem disponivel no hub.docker.com
+1. Clonar o repositório 
+   ```bash
+    git clone https://github.com/LEA-SF23/DroidAugmentor.git
+    cd DroidAugmentor
    ```
-   docker_run.sh
+
+2. Executar a demonstração de funcionamento da ferramenta: 
+
+   **Opção 1**: irá instalar as dependências e executar a aplicação em um ambiente Linux.
+   ```bash
+   ./run_demo_app.sh
+   ```
+
+   **Opção 2**: irá baixar a imagem do [hub.docker.com](hub.docker.com) e instanciar um Container Docker.
+   ```bash
+   ./run_demo_docker.sh
    ```
      
-2. Construir uma imagem do docker. O dockerfile já está disponível no repositório e pode ser modificado com a necessidade do usuário.
+   **Opção 3**: construir e instanciar uma imagem Docker localmente a partir do Dockerfile.
    
-    ```
-   docker build -t IMAGE_NAME .
+   ```bash
+   ./scripts/docker_build.sh
+   ./scripts/docker_run_solo.sh
     ```
     
-3. Instalar dependências e executar em um linux qualquer
-    - Instalação dos [requirements](requirements.txt)
-```
-pip install pipenv
-```
-```
-pipenv install -r requirements.txt
-```
-- Execução da ferramenta
-```
-pipenv run python main.py -i "dataset/seu.csv" -c knn -o --output_dir
-```
+3. Executar os mesmos experimentos (campanha) do paper
 
-## Automatizar os experimentos
+   ```bash
+    ./run_sf23_experiments.sh
+    ```
 
-A ferramenta conta com o run_campaign.py para automatizar a avaliação, executando várias campanhas de avaliação com diferentes parâmetros e registra os resultados em arquivos de log para análise posterior. O resultado final é uma análise comparativa das diferentes configurações em relação aos conjuntos de dados utilizados.
+## Automatizando experimentos
 
-Com todas as dependências instaladas execute: 
+A ferramenta conta com o **run_campaign.py** para automatizar a avaliação, executando várias campanhas de avaliação com diferentes parâmetros e registra os resultados em arquivos de log para análise posterior. O resultado final é uma análise comparativa das diferentes configurações em relação aos conjuntos de dados utilizados.
+
+Execução básica:
 ```
-python run_campaign.py
+pipenv python3 run_campaign.py
 ```
 
 
-Mesma campanha realizada no artigo:
+Execução da mesma campanha utilizada no artigo:
 
 ```
-pipenv run python run_campaign.py -c sf23_1l_256,sf23_1l_1024,sf23_1l_4096
+pipenv run python3 run_campaign.py -c sf23_1l_256,sf23_1l_1024,sf23_1l_4096
 ```
 
-Exemplo de execução de campanha:
+Exemplo de execução de uma campanha pré-configurada:
 
 ```
-run_campaign.py -c sf23_1l_256
+pipenv run python3 run_campaign.py -c sf23_1l_256
 
 ```
-Mesma campanha sendo executada por main.py:
+
+Mesma campanha (sf23_1l_256) sendo executada diretamente na aplicação (**main.py**):
 ```
 pipenv run python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_1l_256/combination_2 --input_dataset datasets/drebin215_original_5560Malwares_6566Benign.csv --dense_layer_sizes_g 256 --dense_layer_sizes_d 256 --number_epochs 1000 --training_algorithm Adam
 ```
+
 ###  Parâmetros dos testes automatizados:
 
       --------------------------------------------------------------
@@ -94,7 +100,7 @@ pipenv run python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-
     --------------------------------------------------------------
 
 
-### Executar no Google Colab
+## Executando a ferramenta no Google Colab
 
 ```
 from google.colab import drive
@@ -105,7 +111,7 @@ drive.mount('/content/drive')
 !pip install -r requirements.txt
 ```
 ```
-input_file_path = "/content/seu.csv"
+input_file_path = "/content/dataset.csv"
 ```
 
 ```
@@ -116,7 +122,7 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
  <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/layout/arquivos.JPG" style="max-width:100%;"></td>
 
 
- ## Parâmetros da ferramenta:
+## Parâmetros da ferramenta:
     --------------------------------------------------------------
    
           (main.py):
@@ -149,7 +155,7 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
 
 ## Ambientes de teste
 
-A ferramenta foi testada e utilizada na prática nos seguintes ambientes:
+A ferramenta executada e testada na prática nos seguintes ambientes:
 
 1. Windows 10.
    Kernel Version = 10.0.19043
@@ -159,4 +165,11 @@ A ferramenta foi testada e utilizada na prática nos seguintes ambientes:
    Kernel Version = 5.15.109+
    Versão Python e bibliotecas conforme [requirements](requirements.txt).
 
-   
+3. Linux Ubuntu 22.04.2 LTS
+   Kernel Version =  5.19.0-46-generic
+   Versão Python e bibliotecas conforme [requirements](requirements.txt).
+
+4. Linux Ubuntu 20.04.6 LTS
+   Kernel Version =  5.19.0-46-generic
+   Versão Python e bibliotecas conforme [requirements](requirements.txt).
+
