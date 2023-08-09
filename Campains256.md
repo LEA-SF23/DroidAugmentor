@@ -84,8 +84,8 @@
 
 
 <div style="text-align: center;">
-    <h1>Métricas de aplicabilidade</h1>
-    <h2>RandomForest_Synthetic 256</h2>
+    <h1></h1>
+    <h2>/h2>
     <table> 
         <tbody> 
             <tr>
