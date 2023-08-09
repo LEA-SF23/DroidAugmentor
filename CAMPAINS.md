@@ -8,7 +8,7 @@ Os gráficos estão disponíveis aqui:
 
 ###  Topologias
 
-
+<div style="text-align: center;">
 <table>
     <tbody>
         <tr>
@@ -17,7 +17,7 @@ Os gráficos estão disponíveis aqui:
         <tr>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/topologias/drebin_topologias_knn_page_1.png" alt="" style="max-width:50%;"></td>
         </tr>
-
+</div>
 
 
 
