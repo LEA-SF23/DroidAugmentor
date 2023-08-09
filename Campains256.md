@@ -65,7 +65,9 @@
 <table>
     <tbody>
         <tr>
-            <th width="20%">Métricas de similaridade </th>
+           <td colspan="2" style="text-align: center;">
+                <h2>Métricas de similaridade  </h2>
+           </td>
         </tr>
         <tr>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/Comparison_Real_Synthetic_page_1.png" alt="" style="max-width:50%;"></td>
