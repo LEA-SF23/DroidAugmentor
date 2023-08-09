@@ -82,10 +82,26 @@
 
 
 
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    .image-container {
+        position: relative;
+    }
+    .absolute-image {
+        position: absolute;
+        top: 50px; /* Ajusta estas coordenadas según sea necesario */
+        left: 50px;
+        max-width: 160%;
+    }
+</style>
+</head>
+<body>
 
-<div style="text-align: center;">
-    <h1></h1>
-    <h2>/h2>
+<div class="image-container">
+    <h1>Métricas de aplicabilidade</h1>
+    <h2>RandomForest_Synthetic 256</h2>
     <table> 
         <tbody> 
             <tr>
@@ -94,27 +110,27 @@
             </tr>
             <tr>
                 <td>
-                    <figure style="display: inline-block; text-align: center;">
+                    <div class="absolute-image">
                         <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Synthetic_page_1.png"
                              alt="RandomForest Synthetic 256"
-                             title="Métricas de aplicabilidade: sintético 256"
-                             style="max-width:160%;">
-                        <figcaption>Métricas de aplicabilidade: sintético 256</figcaption>
-                    </figure>
+                             title="Métricas de aplicabilidade sintético 256">
+                    </div>
                 </td>
                 <td>
-                    <figure style="display: inline-block; text-align: center;">
+                    <div class="absolute-image">
                         <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Real_page_1.png"
                              alt="RandomForest Real 256"
-                             title="Métricas de aplicabilidade: real 256"
-                             style="max-width:160%;">
-                        <figcaption>Métricas de aplicabilidade: real 256</figcaption>
-                    </figure>
+                             title="Métricas de aplicabilidade real 256">
+                    </div>
                 </td>
             </tr>
         </tbody> 
     </table>
 </div>
+
+</body>
+</html>
+
 
 
    
