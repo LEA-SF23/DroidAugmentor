@@ -20,17 +20,17 @@ Ferramenta de treinamento e avaliação de cGANs para geração de dados sintét
 
 2. Executar a demonstração de funcionamento da ferramenta: 
 
-   **Opção 1**: irá instalar as dependências e executar a aplicação em um ambiente Linux.
+   **Opção 1**: instalar as dependências e executar a aplicação em um ambiente Linux.
    ```bash
    ./run_demo_app.sh
    ```
 
-   **Opção 2**: irá baixar a imagem do [hub.docker.com](hub.docker.com) e instanciar um Container Docker.
+   **Opção 2**: baixar a imagem do [hub.docker.com](hub.docker.com) e instanciar um container Docker.
    ```bash
    ./run_demo_docker.sh
    ```
      
-   **Opção 3**: construir e instanciar uma imagem Docker localmente a partir do Dockerfile.
+   **Opção 3**: construir uma imagem Docker localmente a partir do Dockerfile e instanciar um container.
    
    ```bash
    ./scripts/docker_build.sh
@@ -43,9 +43,9 @@ Ferramenta de treinamento e avaliação de cGANs para geração de dados sintét
     ./run_sf23_experiments.sh
     ```
 
-## Automatizando experimentos
+## Executando experimentos
 
-A ferramenta conta com o **run_campaign.py** para automatizar a avaliação, executando várias campanhas de avaliação com diferentes parâmetros e registra os resultados em arquivos de log para análise posterior. O resultado final é uma análise comparativa das diferentes configurações em relação aos conjuntos de dados utilizados.
+A ferramenta conta com o **run_campaign.py** para automatizar o treinamento e a avaliação da cGAN. O **run_campaign.py** permite executar várias campanhas de avaliação com diferentes parâmetros, registrando os resultados em arquivos de saída para análise posterior. O usuário poderá visualmente realizar uma análise comparativa das diferentes configurações em relação aos conjuntos de dados utilizados.
 
 Execução básica:
 ```
