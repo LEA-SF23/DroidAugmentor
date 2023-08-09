@@ -64,30 +64,14 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
       verbosity                 : 20
       
 
-     
-
-   
-                      
-
     --------------------------------------------------------------
 
 
-<div style="text-align: center;">
-    <table>
-        <tbody>
-            <tr>
-                <td colspan="2" style="text-align: center;">
-                    <h2>Métricas de similaridade</h2>
-                    <p>Essas métricas permitem verificar se os dados gerados são diferentes dos dados originais e, ao mesmo tempo, seguem o mesmo padrão estatístico.</p>
-                </td>
-            </tr>
-            <tr>
-                <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/Comparison_Real_Synthetic_page_1.png" alt="" style="max-width:50%;"></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+## Métricas de similaridade
 
+Essas métricas permitem verificar se os dados gerados são diferentes dos dados originais e, ao mesmo tempo, seguem o mesmo padrão estatístico.
+
+![enter image description here](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/Comparison_Real_Synthetic_page_1.png)
 
 
     
