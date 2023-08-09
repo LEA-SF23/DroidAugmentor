@@ -11,9 +11,9 @@ Ferramenta de treinamento e avaliação de cGANs para geração de dados sintét
 [Gráfico resumo das métricas de aplicabilidade (KNN) das três topologias testadas](https://github.com/LEA-SF23/DroidAugmentor/blob/main/CAMPAINS.md)
 
 Os gráficos e links para os resultados completos de cada um dos três experimentos (campanhas) estão disponíveis nos arquivos a seguir.
-- [Experimento 1: camadas densas de 256](https://github.com/LEA-SF23/DroidAugmentor/blob/main/CAMPAIN_256.md)
-- [Experimento 2: camadas densas de 1024](https://github.com/LEA-SF23/DroidAugmentor/blob/main/CAMPAIN_1024.md)
-- [Experimento 3: camadas densas de 4096](https://github.com/LEA-SF23/DroidAugmentor/blob/main/CAMPAIN_4096.md)
+- [Experimento (campanha) 1: camadas densas de 256](https://github.com/LEA-SF23/DroidAugmentor/blob/main/CAMPAIN_256.md)
+- [Experimento (campanha) 2: camadas densas de 1024](https://github.com/LEA-SF23/DroidAugmentor/blob/main/CAMPAIN_1024.md)
+- [Experimento (campanha) 3: camadas densas de 4096](https://github.com/LEA-SF23/DroidAugmentor/blob/main/CAMPAIN_4096.md)
 
 
 ## Preparação e Execução
