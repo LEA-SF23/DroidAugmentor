@@ -18,13 +18,12 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
 
 1. Comando utilizado para a execução do experimento:
    ```
-     python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_1l_256/combination_2 --input_dataset datasets/drebin215_original_5560Malwares_6566Benign.csv --dense_layer_sizes_g 256 --dense_layer_sizes_d 256 --number_epochs 1000 --training_algorithm Adam
+     python3 main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_1l_256/combination_2 --input_dataset datasets/drebin215_original_5560Malwares_6566Benign.csv --dense_layer_sizes_g 256 --dense_layer_sizes_d 256 --number_epochs 1000 --training_algorithm Adam
 
    ```
 
 
- 
-### Configurações utilizadas:
+2. Configuração do experimento: 
 
 
   --------------------------------------------------------------
