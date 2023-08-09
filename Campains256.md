@@ -78,8 +78,8 @@
 
 
 
-
-<table> ## Métricas de aplicabilidade
+## Métricas de aplicabilidade
+<table> 
     <tbody> 
         <tr>
             <th width="20%">RandomForest_Synthetic 256</th>
