@@ -138,7 +138,6 @@ Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive
           (main.py):
 
            -i ,  --input_dataset        Caminho para o arquivo do dataset real de entrada         
-           -c ,  --classifier           Classificador a ser utilizado     
            -o ,  --output_dir           Diretório para gravação dos arquivos de saída.
            --data_type                  Tipo de dado para representar as características das amostras.
            --num_samples_class_malware  Número de amostras da Classe 1 (maligno).
