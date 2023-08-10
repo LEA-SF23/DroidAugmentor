@@ -117,13 +117,13 @@ As métricas de aplicabilidade são as convencionais, como Acurácia, Precisão,
   <table>
     <tbody> 
         <tr>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/confusion_matrix/CM_Synthetic_KNN_k5_page_1.png" alt="" style="max-width:160%;"></td>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/confusion_matrix/CM_Real_KNN_k5_page_1.png" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/confusion_matrix/CM_Synthetic_RandomForest_k5_page_1.png" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/confusion_matrix/CM_Real_RandomForest_k5_page_1.png" alt="" style="max-width:160%;"></td>
         </tr>
     <tbody> 
         <tr>
-            <th width="20%">Synthetic_KNN_k5_256</th>
-            <th width="20%">Real_KNN_k5_256</th>
+            <th width="20%">Synthetic_RandomForest_k5_256</th>
+            <th width="20%">Real_RandomForest_k5_256</th>
         </tr>
         <tr>
     </tbody> 
