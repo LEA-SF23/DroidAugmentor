@@ -78,6 +78,34 @@ As métricas de similaridade permitem verificar se os dados gerados são diferen
 
 As métricas de aplicabilidade são as convencionais, como Acurácia, Precisão, Recall e F1-Score. O objetivo é verificar se os classificadores são capazes de classificar os dados sintéticos de maneira similar aos dados reais. Em caso positivo, pode-se inferir que os dados sintéticos são realistas e adequados.
 
+
+
+<table> 
+    <tbody> 
+            <td>
+                <div style="position: absolute; top: 50px; left: 50px;">
+                    <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Synthetic_page_1.png"
+                         alt="RandomForest_Synthetic 256"
+                         style="max-width: 160%;">
+                </div>
+            </td>
+            <td>
+                <div style="position: absolute; top: 50px; left: 200px;">
+                    <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/RandomForest_Real_page_1.png"
+                         alt="RandomForest_Real_256"
+                         style="max-width: 160%;">
+                </div>
+            </td>
+        </tr>
+       <tbody> 
+        <tr>
+            <th width="20%">Synthetic_KNN_k5_256</th>
+            <th width="20%">Real_KNN_k5_256</th>
+        </tr>
+    </tbody> 
+</table>
+
+
 <table> 
     <tbody> 
             <td>
