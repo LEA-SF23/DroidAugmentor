@@ -129,6 +129,7 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
         <tr>
            <td colspan="2" style="text-align: center;">
                 <h2>Matrizes de confusão </h2> 
+              <p>Ajuda a entender como o modelo está se saindo em relação a classificação das categorias de interesse, quanto mais parecidas com o real, maior é a qualidade dos dados.</p>
                </td>
         </tr>
         <tr>
