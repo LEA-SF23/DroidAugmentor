@@ -99,8 +99,8 @@ As métricas de aplicabilidade são as convencionais, como Acurácia, Precisão,
         </tr>
        <tbody> 
         <tr>
-            <th width="20%">Synthetic_KNN_k5_256</th>
-            <th width="20%">Real_KNN_k5_256</th>
+            <th width="20%">RandomForest_Synthetic 256</th>
+            <th width="20%">RandomForest_Real 256</th>
         </tr>
     </tbody> 
 </table>
