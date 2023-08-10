@@ -149,6 +149,7 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
         <tr>
            <td colspan="2" style="text-align: center;">
                 <h2> Curva de treinamento </h2>
+              <p> Curva da cGAN do gerador e discriminador</p>
            </td>
         </tr>
         <tr>
