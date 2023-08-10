@@ -120,6 +120,7 @@ As métricas de aplicabilidade são as convencionais, como Acurácia, Precisão,
    
 ## Matrizes de Confusão 
 
+Ajuda a entender como o modelo está se saindo em relação a classificação das categorias de interesse, quanto mais parecidas com o real, maior é a qualidade. dos dados.
   <table>
     <tbody> 
         <tr>
