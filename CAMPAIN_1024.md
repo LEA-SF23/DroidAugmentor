@@ -21,7 +21,7 @@
     <tbody> 
         <tr>
             <th width="20%">KNN_Synthetic 1024</th>
-            <th width="20%">KNN_Real 1024/th>
+            <th width="20%">KNN_Real 1024 </th>
         </tr>
         <tr>
 
