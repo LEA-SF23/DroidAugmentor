@@ -128,7 +128,7 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
     <tbody> 
         <tr>
            <td colspan="2" style="text-align: center;">
-                <h2>Matriz de confusão </h2> 
+                <h2>Matrizes de confusão </h2> 
                </td>
         </tr>
         <tr>
