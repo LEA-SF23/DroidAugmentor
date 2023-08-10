@@ -36,22 +36,22 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
             <td>
                 <div style="position: absolute; top: 50px; left: 50px;">
                     <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/KNN_Synthetic_page_1.png"
-                         alt="KNN_Synthetic 256"
+                         alt="KNN_Synthetic 1024"
                          style="max-width: 160%;">
                 </div>
             </td>
             <td>
                 <div style="position: absolute; top: 50px; left: 200px;">
                     <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/KNN_Real_page_1.png"
-                         alt="KNN_Real 256"
+                         alt="KNN_Real 1024"
                          style="max-width: 160%;">
                 </div>
             </td>
         </tr>
        <tbody> 
         <tr>
-            <th width="20%">KNN_Synthetic 256</th>
-            <th width="20%">KNN_Real  256</th>
+            <th width="20%">KNN_Synthetic 1024</th>
+            <th width="20%">KNN_Real  1024</th>
         </tr>
     </tbody> 
 </table>
