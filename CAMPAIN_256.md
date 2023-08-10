@@ -140,5 +140,6 @@ Ajuda a entender como o modelo está se saindo em relação a classificação da
 
 ## Curva de Treinamento
 Curva da cGAN do gerador e discriminador:A figura ilustra a dinâmica entre o gerador e o discriminador durante o processo de aprendizado. Ao longo das iterações, ocorre uma luta entre as duas redes. O gerador busca produzir amostras cada vez mais autênticas para enganar o discriminador, enquanto o discriminador se esforça para melhorar sua capacidade de distinguir entre real e falso. Essa competição leva a uma convergência, onde as amostras geradas se tornam quase indistinguíveis dos dados reais.
+Alguns casos de não convergência em redes GAN podem ser eventualmente confirmados também através da observação do monitoramento das curvas de perda. As curvas de perda devem diminuir e estabilizar com o tempo. 
 
 ![enter image description here](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/training_curve/curve_training_error_k_5_page_1.png)
