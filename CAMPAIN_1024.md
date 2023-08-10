@@ -82,7 +82,7 @@
     <tbody> 
         <tr>
             <th width="20%">Synthetic_DecisionTree_k5_1024</th>
-            <th width="20%">Real_DecisionTree_k5_1024</th>
+            <th width="20%">Real_DecisionTree_k5_1024 </th>
         </tr>
         <tr>
 
