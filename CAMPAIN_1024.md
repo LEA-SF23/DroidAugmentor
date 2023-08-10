@@ -1,3 +1,19 @@
+# Experimento 1: camadas densas de 1024
+
+Nas seções a seguir apresentamos:
+- a execução (comando) e configuração do experimento;
+- os gráficos das métricas de similaridade;
+- os gráficos das métricas de aplicabilidade utilizando o Random Forest;
+- as matrizes de confusão do Random Forest para as 5 dobras;
+- o gráfico da curva de treinamento.
+
+Os logs completos e todos os gráficos gerados pela execução do experimento podem ser vistos nos dois links a seguir. Os logs completos incluem os gráficos dos 5 classificadores utilizados (Random Forest, Support Vector Machine, KNN, Decision Tree, AdaBoost) e todos os detalhes de saídas da execução em formato textual.
+
+[Log completo da campanha](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/logging.log)
+
+[Relação completa de gráficos e dados do experimento](https://github.com/LEA-SF23/DroidAugmentor/tree/main/Campains_Results/256)
+
+
 
 ## Configuração do Experimento para camadas densas de 1024. 
 
