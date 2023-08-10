@@ -77,7 +77,7 @@
         </tr>
         <tr>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/confusion_matrix/CM_Synthetic_KNN_k5_page_1.png" alt="" style="max-width:160%;"></td>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/confusion_matrix/CM_Real_KNN_k5.pdf" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/confusion_matrix/CM_Real_KNN_k5_page_1.png" alt="" style="max-width:160%;"></td>
         </tr>
     <tbody> 
         <tr>
