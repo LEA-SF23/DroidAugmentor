@@ -105,3 +105,19 @@ python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_
             <th width="20%">Real_AdaBoost_k5_4096</th>
         </tr>
         <tr>
+
+
+    
+ <div style="text-align: center;">
+<table>
+    <tbody>
+        <tr>
+           <td colspan="2" style="text-align: center;">
+                <h2> Curva de treinamento </h2>
+           </td>
+        </tr>
+        <tr>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/training_curve/curve_training_error_k_5_page_1.png" alt="" style="max-width:50%;"></td>
+        </tr>
+</div>
+    
