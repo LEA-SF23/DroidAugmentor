@@ -149,7 +149,7 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
         <tr>
            <td colspan="2" style="text-align: center;">
                 <h2> Curva de treinamento </h2>
-              <p> Curva da cGAN do gerador e discriminador: A figura ilustra a dinâmica entre o gerador e o discriminador durante o processo de aprendizado. Ao longo das iterações, ocorre uma luta entre as duas redes. O gerador busca produzir amostras cada vez mais autênticas para enganar o discriminador, enquanto o discriminador se esforça para melhorar sua capacidade de distinguir entre real e falso. Essa competição leva a uma convergência, onde as amostras geradas se tornam quase indistinguíveis dos dados reais.</p>
+              <p> Curva da cGAN do gerador e discriminador: A figura ilustra a dinâmica entre o gerador e o discriminador durante o processo de aprendizado. Ao longo das iterações, ocorre uma luta entre as duas redes. O gerador busca produzir amostras cada vez mais autênticas para enganar o discriminador, enquanto o discriminador se esforça para melhorar sua capacidade de distinguir entre real e falso. Essa competição leva a uma convergência, onde as amostras geradas se tornam quase indistinguíveis dos dados reais.Alguns casos de não convergência em redes GAN podem ser eventualmente confirmados também através da observação do monitoramento das curvas de perda. As curvas de perda devem diminuir e estabilizar com o tempo. </p>
            </td>
         </tr>
         <tr>
