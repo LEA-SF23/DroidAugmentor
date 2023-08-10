@@ -3,7 +3,7 @@
 Nas seções a seguir apresentamos:
 - a execução (comando) e configuração do experimento;
 - os gráficos das métricas de similaridade;
-- os gráficos das métricas de aplicabilidade utilizando o Random Forest;
+- os gráficos das métricas de aplicabilidade utilizando o KNN;
 - as matrizes de confusão do Random Forest para as 5 dobras;
 - o gráfico da curva de treinamento.
 
