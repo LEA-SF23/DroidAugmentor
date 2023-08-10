@@ -9,7 +9,7 @@ Nas seções a seguir apresentamos:
   
 
 
-Como pode ser visto, para que os dados tenham uma melhor qualidade, é necessário um treinamento com mais camadas densas.
+Como pode ser visto, para que os dados tenham uma melhor qualidade, é necessário um treinamento com mais camadas densas. Como pode ser observado nos gráficos de similaridade e aplicabilidade são baixos com relação ao desempenho do experimento 2 e 3
 --------------------
 
 
