@@ -139,5 +139,6 @@ Ajuda a entender como o modelo está se saindo em relação a classificação da
 
 
 ## Curva de Treinamento
+Curva da cGAN do gerador e discriminador
 
 ![enter image description here](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/training_curve/curve_training_error_k_5_page_1.png)
