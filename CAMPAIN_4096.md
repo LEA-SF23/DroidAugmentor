@@ -112,6 +112,7 @@ python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_
         <tr>
            <td colspan="2" style="text-align: center;">
                 <h2>Matrizes de confusão </h2>
+              <p>Ajuda a entender como o modelo está se saindo em relação a classificação das categorias de interesse, quanto mais parecidas com o real, maior é a qualidade dos dados.</p>
             </td>
         </tr>
         <tr>
