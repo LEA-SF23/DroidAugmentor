@@ -9,9 +9,11 @@ Nas seções a seguir apresentamos:
   
 
 
-Como pode ser visto, para que os dados ```diff
-tenham uma melhor qualidade, é necessário um treinamento com mais camadas densas
+Como pode ser visto, para que os dados
 
+```diff
+tenham uma melhor qualidade, é necessário um treinamento com mais camadas densas
+```
 
 Os logs completos e todos os gráficos gerados pela execução do experimento podem ser vistos nos dois links a seguir. Os logs completos incluem os gráficos dos 5 classificadores utilizados (Random Forest, Support Vector Machine, KNN, Decision Tree, AdaBoost) e todos os detalhes de saídas da execução em formato textual.
 
