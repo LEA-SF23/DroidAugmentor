@@ -9,7 +9,7 @@ Nas seções a seguir apresentamos:
   
 
 
-Como pode ser visto, para que os dados tenham uma melhor qualidade, é necessário um treinamento com mais camadas densas
+Como pode ser visto, para que os dados tenham uma melhor qualidade, é necessário um treinamento com mais camadas densas.
 --------------------
 
 
