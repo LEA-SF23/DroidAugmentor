@@ -11,17 +11,17 @@
   <table>
     <tbody> 
         <tr>
-            <th width="20%">DecisionTree_Synthetic 1024</th>
-            <th width="20%">DecisionTree_Real 1024 </th>
+            <th width="20%">KNN_Synthetic 1024</th>
+            <th width="20%">KNN_Real 1024 </th>
         </tr>
         <tr>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/DecisionTree_Synthetic_page_1.png" alt="" style="max-width:160%;"></td>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/DecisionTree_Real_page_1.png" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/KNN_Synthetic_page_1.png" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/KNN_Real_page_1.png" alt="" style="max-width:160%;"></td>
         </tr>
     <tbody> 
         <tr>
-            <th width="20%">DecisionTree_Synthetic 1024</th>
-            <th width="20%">DecisionTree_Real 1024</th>
+            <th width="20%">KNN_Synthetic 1024</th>
+            <th width="20%">KNN_Real 1024/th>
         </tr>
         <tr>
 
