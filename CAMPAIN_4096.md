@@ -29,7 +29,7 @@ python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_
  <table>
     <tbody> 
         <tr>
-          <h2>Métricas de aplicabilidade RF </h2>
+          <h2>Métricas de aplicabilidade </h2>
                 <p>Ao verificar se os classificadores são capazes de classificar os dados sintéticos de maneira similar aos dados reais, pode-se inferir que os dados sintéticos são realistas e adequados.</p>
             </td>
         </tr>
