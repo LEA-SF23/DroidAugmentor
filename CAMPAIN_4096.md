@@ -134,6 +134,7 @@ python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_
         <tr>
            <td colspan="2" style="text-align: center;">
                 <h2> Curva de treinamento </h2>
+             <p> Curva da cGAN do gerador e discriminador</p>
            </td>
         </tr>
         <tr>
