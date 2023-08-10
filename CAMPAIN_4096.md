@@ -26,6 +26,25 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
  
 python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_1l_4096/combination_2 --input_dataset datasets/drebin215_original_5560Malwares_6566Benign.csv --dense_layer_sizes_g 4096 --dense_layer_sizes_d 4096 --number_epochs 1000 --training_algorithm Adam
    ```
+
+  
+<div style="text-align: center;">
+    <table>
+        <tbody>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <h2>Métricas de similaridade</h2>
+                    <p>Essas métricas permitem verificar se os dados gerados são diferentes dos dados originais e, ao mesmo tempo, seguem o mesmo padrão estatístico.</p>
+                </td>
+            </tr>
+            <tr>
+                <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/Comparison_Real_Synthetic_page_1.png" alt="" style="max-width:50%;"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
  <table>
     <tbody> 
         <tr>
