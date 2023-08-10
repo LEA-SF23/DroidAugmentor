@@ -4,7 +4,7 @@
 Nas seções a seguir apresentamos:
 - a execução (comando) e configuração do experimento;
 - os gráficos das métricas de similaridade;
-- os gráficos das métricas de aplicabilidade utilizando AdaBoost;
+- os gráficos das métricas de aplicabilidade utilizando KNN;
 - as matrizes de confusão do Random Forest para as 5 dobras;
 - o gráfico da curva de treinamento.
 
@@ -38,7 +38,7 @@ python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_
                 </td>
             </tr>
             <tr>
-                <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/Comparison_Real_Synthetic_page_1.png" alt="" style="max-width:50%;"></td>
+                <td><img src="" alt="" style="max-width:50%;"></td>
             </tr>
         </tbody>
     </table>
@@ -54,13 +54,13 @@ python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_
             </td>
         </tr>
         <tr>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/AdaBoost_Synthetic_page_1.png" alt="" style="max-width:160%;"></td>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/AdaBoost_Real_page_1.png" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/KNN_Synthetic_page_1.png" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/KNN_Real_page_1.png" alt="" style="max-width:160%;"></td>
         </tr>
     <tbody> 
         <tr>
-            <th width="20%">AdaBoost_Synthetic 4096</th>
-            <th width="20%">AdaBoost_Real 4096</th>
+            <th width="20%">KNN_Synthetic 4096</th>
+            <th width="20%">KNN_Real 4096</th>
         </tr>
         <tr>
 
@@ -115,13 +115,13 @@ python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_
             </td>
         </tr>
         <tr>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/confusion_matrix/CM_Synthetic_AdaBoost_k5_page_1.png" alt="" style="max-width:160%;"></td>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/confusion_matrix/CM_Real_AdaBoost_k5_page_1.png" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/confusion_matrix/CM_Synthetic_KNN_k5_page_1.png" alt="" style="max-width:160%;"></td>
+            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/confusion_matrix/CM_Real_KNN_k5_page_1.png" alt="" style="max-width:160%;"></td>
         </tr>
     <tbody> 
         <tr>
-            <th width="20%">Synthetic_AdaBoost_k5_4096</th>
-            <th width="20%">Real_AdaBoost_k5_4096</th>
+            <th width="20%">Synthetic_KNN_k5_4096</th>
+            <th width="20%">Real_KNN_k5_4096</th>
         </tr>
         <tr>
 
