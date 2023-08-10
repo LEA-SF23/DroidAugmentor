@@ -6,6 +6,10 @@ Nas seções a seguir apresentamos:
 - os gráficos das métricas de aplicabilidade utilizando o KNN;
 - as matrizes de confusão do Random Forest para as 5 dobras;
 - o gráfico da curva de treinamento.
+  
+
+
+Como pode ser visto, para que os dados <span style="color: red;">tenham uma melhor qualidade, é necessário um treinamento com mais camadas densas</span>.
 
 Os logs completos e todos os gráficos gerados pela execução do experimento podem ser vistos nos dois links a seguir. Os logs completos incluem os gráficos dos 5 classificadores utilizados (Random Forest, Support Vector Machine, KNN, Decision Tree, AdaBoost) e todos os detalhes de saídas da execução em formato textual.
 
