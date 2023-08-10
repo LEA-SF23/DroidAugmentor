@@ -1,3 +1,23 @@
+
+# Experimento 1: camadas densas de 4096
+
+Nas seções a seguir apresentamos:
+- a execução (comando) e configuração do experimento;
+- os gráficos das métricas de similaridade;
+- os gráficos das métricas de aplicabilidade utilizando AdaBoost;
+- as matrizes de confusão do Random Forest para as 5 dobras;
+- o gráfico da curva de treinamento.
+
+Os logs completos e todos os gráficos gerados pela execução do experimento podem ser vistos nos dois links a seguir. Os logs completos incluem os gráficos dos 5 classificadores utilizados (Random Forest, Support Vector Machine, KNN, Decision Tree, AdaBoost) e todos os detalhes de saídas da execução em formato textual.
+
+[Log completo da campanha](https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/256/logging.log)
+
+[Relação completa de gráficos e dados do experimento](https://github.com/LEA-SF23/DroidAugmentor/tree/main/Campains_Results/256)
+
+
+
+
+
 ## Configuração do Experimento para camadas densas de 4096. 
 
 1. Comando utilizado para a execução do experimento:
@@ -9,8 +29,9 @@ python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_
  <table>
     <tbody> 
         <tr>
-            <th width="20%">AdaBoost_Synthetic 4096</th>
-            <th width="20%">AdaBoost_Real 4096</th>
+          <h2>Métricas de aplicabilidade RF </h2>
+                <p>Ao verificar se os classificadores são capazes de classificar os dados sintéticos de maneira similar aos dados reais, pode-se inferir que os dados sintéticos são realistas e adequados.</p>
+            </td>
         </tr>
         <tr>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/AdaBoost_Synthetic_page_1.png" alt="" style="max-width:160%;"></td>
@@ -69,8 +90,9 @@ python main.py --verbosity 20 --output_dir outputs/out_2023-08-05_12-04-18/sf23_
   <table>
     <tbody> 
         <tr>
-            <th width="20%">Synthetic_AdaBoost_k5_4096</th>
-            <th width="20%">Real_AdaBoost_k5_4096</th>
+           <td colspan="2" style="text-align: center;">
+                <h2>Matrizes de confusão RF </h2>
+            </td>
         </tr>
         <tr>
             <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/confusion_matrix/CM_Synthetic_AdaBoost_k5_page_1.png" alt="" style="max-width:160%;"></td>
