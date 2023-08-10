@@ -23,23 +23,42 @@ Os logs completos e todos os gráficos gerados pela execução do experimento po
 
 
    ```
+
+<table> 
+    <tbody> 
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <h2>Métricas de aplicabilidade RF </h2>
+                <p>Ao verificar se os classificadores são capazes de classificar os dados sintéticos de maneira similar aos dados reais, pode-se inferir que os dados sintéticos são realistas e adequados.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="position: absolute; top: 50px; left: 50px;">
+                    <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/KNN_Synthetic_page_1.png"
+                         alt="KNN_Synthetic 256"
+                         style="max-width: 160%;">
+                </div>
+            </td>
+            <td>
+                <div style="position: absolute; top: 50px; left: 200px;">
+                    <img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/KNN_Real_page_1.png"
+                         alt="KNN_Real 256"
+                         style="max-width: 160%;">
+                </div>
+            </td>
+        </tr>
+       <tbody> 
+        <tr>
+            <th width="20%">KNN_Synthetic 256</th>
+            <th width="20%">KNN_Real  256</th>
+        </tr>
+    </tbody> 
+</table>
+
+
        
-  <table>
-    <tbody> 
-        <tr>
-            <th width="20%">KNN_Synthetic 1024</th>
-            <th width="20%">KNN_Real 1024 </th>
-        </tr>
-        <tr>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/KNN_Synthetic_page_1.png" alt="" style="max-width:160%;"></td>
-            <td><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/1024/KNN_Real_page_1.png" alt="" style="max-width:160%;"></td>
-        </tr>
-    <tbody> 
-        <tr>
-            <th width="20%">KNN_Synthetic 1024</th>
-            <th width="20%">KNN_Real 1024 </th>
-        </tr>
-        <tr>
+  
 
  ### Configurações utilizadas:
 
