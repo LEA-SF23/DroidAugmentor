@@ -125,7 +125,7 @@ input_file_path = "/content/dataset.csv"
 ```
 
 ```
-!python main.py -i "$input_file_path" -c knn 
+!python main.py -i "$input_file_path" -c RandomForest
 ```
 
 Obs.: Lembre-se de ter Models, Tools e a main devidamente importada no seu drive.
