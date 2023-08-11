@@ -9,7 +9,7 @@ Nas seções a seguir apresentamos:
   
 
 
-Como pode ser visto, para que os dados tenham uma melhor qualidade, é necessário um treinamento com mais camadas densas. Como pode ser observado nos gráficos de similaridade, aplicabilidade e matrizes de confusão são baixos com relação ao desempenho do experimento 2 e 3.
+Conforme evidenciado, aprimorar a qualidade dos dados demanda um treinamento que empregue um maior número de camadas densas. Isso se reflete claramente nos gráficos que representam as métricas de similaridade, aplicabilidade e matrizes de confusão, os quais indicam um desempenho menos satisfatório do que os experimentos 2 e 3.
 --------------------
 
 
