@@ -117,12 +117,9 @@ def generate_samples(instance_model, number_instances, latent_dimension, label_c
                      latent_mean_distribution, latent_stander_deviation):
 
     if np.ceil(label_class) == 1:
-
         label_samples_generated = np.ones(number_instances, dtype=np.float32)
         label_samples_generated = label_samples_generated.reshape((number_instances, 1))
-
     else:
-
         label_samples_generated = np.zeros(number_instances, dtype=np.float32)
         label_samples_generated = label_samples_generated.reshape((number_instances, 1))
 
@@ -375,7 +372,7 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
                    initializer_mean=None, initializer_deviation=None,
                    last_layer_activation=DEFAULT_CONDITIONAL_LAST_ACTIVATION_LAYER, save_models=False,
                    path_confusion_matrix=None, path_curve_loss=None, verbose_level=None,
-                   latent_mean_distribution=None, latent_stander_deviation=None):
+                   latent_mean_distribution=None, latent_stander_deviation=None, num_samples_class_malware=DEFAULT_NUMBER_GENERATE_MALWARE_SAMPLES, num_samples_class_benign=DEFAULT_NUMBER_GENERATE_BENIGN_SAMPLES):
 
     show_model(latent_dim, input_data_shape, activation_function, initializer_mean,
                initializer_deviation, dropout_decay_rate_g, dropout_decay_rate_d,
@@ -395,6 +392,43 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
                                                   last_layer_activation, dense_layer_sizes_g, dense_layer_sizes_d,
                                                   dataset_type, training_algorithm, latent_mean_distribution,
                                                   latent_stander_deviation)
+
+        # Calcular o número desejado de amostras sintéticas para cada classe
+        num_samples_true_desired = num_samples_class_malware
+        num_samples_false_desired = num_samples_class_benign
+
+        # Gerar dados sintéticos para a classe verdadeira (label 1)
+        x_true_synthetic, y_true_synthetic = generate_samples(adversarial_model, num_samples_true_desired, latent_dim,
+                                                              1, verbose_level, latent_mean_distribution,
+                                                              latent_stander_deviation)
+
+        # Gerar dados sintéticos para a classe falsa (label 0)
+        x_false_synthetic, y_false_synthetic = generate_samples(adversarial_model, num_samples_false_desired,
+                                                                latent_dim,
+                                                                0, verbose_level, latent_mean_distribution,
+                                                                latent_stander_deviation)
+
+        # Juntar os dados sintéticos gerados para ambas as classes
+        x_synthetic_samples = np.concatenate((x_true_synthetic, x_false_synthetic), axis=0)
+        y_synthetic_samples = np.rint(np.concatenate((y_true_synthetic, y_false_synthetic), axis=0))
+        y_synthetic_samples = np.squeeze(y_synthetic_samples, axis=1)
+
+        # Converter para DataFrame e adicionar os nomes das colunas
+        synthetic_columns = dataset.columns[:-1]
+        df_synthetic = pd.DataFrame(data=x_synthetic_samples, columns=synthetic_columns)
+        df_synthetic['class'] = y_synthetic_samples
+
+        if i + 1 == k:
+            # Salvar dados sintéticos em um arquivo CSV
+            synthetic_filename = f'synthetic_data_fold_{i + 1}.csv'
+            synthetic_filepath = os.path.join(output_dir, synthetic_filename)
+            df_synthetic.to_csv(synthetic_filepath, index=False, sep=',', header=True)
+
+        # Salvar dados sintéticos em um arquivo CSV
+        #synthetic_filename = f'synthetic_data_fold_{i + 1}.csv'
+        #synthetic_filepath = os.path.join(output_dir, synthetic_filename)
+        #df_synthetic.to_csv(synthetic_filepath, index=False, sep=',', header=True)
+
         instance_classifier = Classifiers()
 
         x_training = np.array(dataset.iloc[train_index, :-1].values, dtype=dataset_type)
@@ -421,18 +455,16 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
         number_samples_true = len([positional_label for positional_label in y_test.tolist() if positional_label == 1])
         number_samples_false = len([positional_label for positional_label in y_test.tolist() if positional_label == 0])
 
-        # Calculate the desired number of synthetic samples for each class
-        num_samples_true_desired = int(number_samples_true * (1 + 1.0 / k))
-        num_samples_false_desired = int(number_samples_false * (1 + 1.0 / k))
+
 
         # Generate synthetic samples with the desired number for each class
         x_true_synthetic, y_true_synthetic = generate_samples(adversarial_model, num_samples_true_desired, latent_dim,
-                                                              1, verbose_level, latent_mean_distribution,
+                                                            1, verbose_level, latent_mean_distribution,
                                                               latent_stander_deviation)
 
         x_false_synthetic, y_false_synthetic = generate_samples(adversarial_model, num_samples_false_desired, latent_dim,
-                                                                0, verbose_level, latent_mean_distribution,
-                                                                latent_stander_deviation)
+                                                             0, verbose_level, latent_mean_distribution,
+                                                              latent_stander_deviation)
 
         # Ensure the desired number of samples for each class
         x_true_synthetic = x_true_synthetic[:number_samples_true]
@@ -445,11 +477,7 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
         y_synthetic_samples = np.rint(np.concatenate((y_true_synthetic, y_false_synthetic)))
         y_synthetic_samples = np.squeeze(y_synthetic_samples, axis=1)
 
-        if i == k - 1:
-            synthetic_dataset = np.concatenate((x_synthetic_samples, y_synthetic_samples.reshape(-1, 1)), axis=1)
-            synthetic_df = pd.DataFrame(synthetic_dataset, columns=[f'feature_{i}' for i in range(synthetic_dataset.shape[1] - 1)] + ['label'])
-            synthetic_output_path = os.path.join(output_dir, f'synthetic_dataset_last_fold.csv')
-            synthetic_df.to_csv(synthetic_output_path, index=False)
+
 
         list_classifiers = instance_classifier.get_trained_classifiers(classifier_list, x_training, y_training,
                                                                        dataset_type, verbose_level, input_data_shape)
