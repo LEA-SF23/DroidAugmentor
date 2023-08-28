@@ -1,0 +1,949 @@
+2023-08-28 23:00:39,891	***	Command:
+	main.py --verbosity 20 --output_dir /droidaugmentor/shared/outputs --input_dataset /droidaugmentor/shared/datasets/drebin215_small_64Malwares_64Benign.csv --dense_layer_sizes_g 256 --dense_layer_sizes_d 256 --number_epochs 1000 --training_algorithm Adam
+
+2023-08-28 23:00:39,891	***	Settings:
+2023-08-28 23:00:39,891	***		activation_function       : LeakyReLU
+2023-08-28 23:00:39,891	***		batch_size                : 32
+2023-08-28 23:00:39,891	***		classifier                : ['RandomForest', 'SupportVectorMachine', 'KNN', 'DecisionTree', 'AdaBoost']
+2023-08-28 23:00:39,891	***		data_type                 : float32
+2023-08-28 23:00:39,891	***		dense_layer_sizes_d       : [[256]]
+2023-08-28 23:00:39,891	***		dense_layer_sizes_g       : [[256]]
+2023-08-28 23:00:39,891	***		dropout_decay_rate_d      : 0.4
+2023-08-28 23:00:39,891	***		dropout_decay_rate_g      : 0.2
+2023-08-28 23:00:39,891	***		initializer_deviation     : 0.02
+2023-08-28 23:00:39,891	***		initializer_mean          : 0.0
+2023-08-28 23:00:39,891	***		input_dataset             : /droidaugmentor/shared/datasets/drebin215_small_64Malwares_64Benign.csv
+2023-08-28 23:00:39,891	***		k_fold                    : 5
+2023-08-28 23:00:39,891	***		latent_dimension          : 128
+2023-08-28 23:00:39,891	***		latent_mean_distribution  : 0.0
+2023-08-28 23:00:39,891	***		latent_stander_deviation  : 1.0
+2023-08-28 23:00:39,891	***		num_samples_class_benign  : 2000
+2023-08-28 23:00:39,891	***		num_samples_class_malware : 2000
+2023-08-28 23:00:39,892	***		number_epochs             : 1000
+2023-08-28 23:00:39,892	***		output_dir                : /droidaugmentor/shared/outputs
+2023-08-28 23:00:39,892	***		path_confusion_matrix     : confusion_matrix
+2023-08-28 23:00:39,892	***		path_curve_loss           : training_curve
+2023-08-28 23:00:39,892	***		save_models               : True
+2023-08-28 23:00:39,892	***		training_algorithm        : Adam
+2023-08-28 23:00:39,892	***		verbosity                 : 20
+2023-08-28 23:00:39,892	***	
+2023-08-28 23:00:39,898	***	Model Architecture
+2023-08-28 23:00:39,898	***	  Model Generator
+2023-08-28 23:00:39,946	***	  Model Discriminator
+2023-08-28 23:00:40,025	***	 Starting training ADVERSARIAL MODEL:
+
+2023-08-28 23:00:46,359	***	     Finished training
+
+2023-08-28 23:00:46,359	***	Saving Adversarial Model:
+2023-08-28 23:00:46,370	***	  Discriminator output: /droidaugmentor/shared/outputs/models_saved/fold_1/discriminator_model_0
+2023-08-28 23:00:46,370	***	  Generator output: /droidaugmentor/shared/outputs/models_saved/fold_1/generator_model_0
+2023-08-28 23:00:47,069	***	
+Starting training classifier
+
+2023-08-28 23:00:47,069	***	    Starting training classifier: RANDOM FOREST
+2023-08-28 23:00:47,121	***	    Finished training
+
+2023-08-28 23:00:47,121	***	    Starting training classifier: SUPPORT VECTOR MACHINE
+2023-08-28 23:00:47,123	***	    Finished training
+
+2023-08-28 23:00:47,123	***	    Starting training classifier: K-NEIGHBORS NEAREST
+2023-08-28 23:00:47,123	***	    Finished training
+
+2023-08-28 23:00:47,123	***	    Starting training classifier: DECISION TREE
+2023-08-28 23:00:47,124	***	    Finished training
+
+2023-08-28 23:00:47,124	***	    Starting training classifier: ADA BOOST
+2023-08-28 23:00:47,158	***	    Finished training
+
+2023-08-28 23:00:47,158	***	Synthetic Fold 1/5 results
+
+2023-08-28 23:00:47,162	***	 Classifier Model: RandomForest
+2023-08-28 23:00:47,163	***	   Synthetic Fold 1 - Confusion Matrix:
+2023-08-28 23:00:47,163	***	[[ 2 11]
+ [ 2 11]]
+2023-08-28 23:00:47,163	***	
+   Classifier Metrics:
+2023-08-28 23:00:47,163	***	     Synthetic Fold 1 - Accuracy: 0.5
+2023-08-28 23:00:47,163	***	     Synthetic Fold 1 - Precision: 0.5
+2023-08-28 23:00:47,163	***	     Synthetic Fold 1 - Recall: 0.8461538461538461
+2023-08-28 23:00:47,163	***	     Synthetic Fold 1 - F1 Score: 0.6285714285714286
+
+2023-08-28 23:00:47,458	***	 Classifier Model: SupportVectorMachine
+2023-08-28 23:00:47,458	***	   Synthetic Fold 1 - Confusion Matrix:
+2023-08-28 23:00:47,458	***	[[ 2 11]
+ [ 3 10]]
+2023-08-28 23:00:47,458	***	
+   Classifier Metrics:
+2023-08-28 23:00:47,458	***	     Synthetic Fold 1 - Accuracy: 0.46153846153846156
+2023-08-28 23:00:47,458	***	     Synthetic Fold 1 - Precision: 0.47619047619047616
+2023-08-28 23:00:47,458	***	     Synthetic Fold 1 - Recall: 0.7692307692307693
+2023-08-28 23:00:47,458	***	     Synthetic Fold 1 - F1 Score: 0.588235294117647
+
+2023-08-28 23:00:47,597	***	 Classifier Model: KNN
+2023-08-28 23:00:47,597	***	   Synthetic Fold 1 - Confusion Matrix:
+2023-08-28 23:00:47,597	***	[[ 1 12]
+ [ 2 11]]
+2023-08-28 23:00:47,597	***	
+   Classifier Metrics:
+2023-08-28 23:00:47,597	***	     Synthetic Fold 1 - Accuracy: 0.46153846153846156
+2023-08-28 23:00:47,597	***	     Synthetic Fold 1 - Precision: 0.4782608695652174
+2023-08-28 23:00:47,597	***	     Synthetic Fold 1 - Recall: 0.8461538461538461
+2023-08-28 23:00:47,597	***	     Synthetic Fold 1 - F1 Score: 0.6111111111111112
+
+2023-08-28 23:00:47,773	***	 Classifier Model: DecisionTree
+2023-08-28 23:00:47,774	***	   Synthetic Fold 1 - Confusion Matrix:
+2023-08-28 23:00:47,774	***	[[ 2 11]
+ [ 3 10]]
+2023-08-28 23:00:47,774	***	
+   Classifier Metrics:
+2023-08-28 23:00:47,774	***	     Synthetic Fold 1 - Accuracy: 0.46153846153846156
+2023-08-28 23:00:47,774	***	     Synthetic Fold 1 - Precision: 0.47619047619047616
+2023-08-28 23:00:47,774	***	     Synthetic Fold 1 - Recall: 0.7692307692307693
+2023-08-28 23:00:47,774	***	     Synthetic Fold 1 - F1 Score: 0.588235294117647
+
+2023-08-28 23:00:47,912	***	 Classifier Model: AdaBoost
+2023-08-28 23:00:47,912	***	   Synthetic Fold 1 - Confusion Matrix:
+2023-08-28 23:00:47,912	***	[[ 4  9]
+ [ 2 11]]
+2023-08-28 23:00:47,913	***	
+   Classifier Metrics:
+2023-08-28 23:00:47,913	***	     Synthetic Fold 1 - Accuracy: 0.5769230769230769
+2023-08-28 23:00:47,913	***	     Synthetic Fold 1 - Precision: 0.55
+2023-08-28 23:00:47,913	***	     Synthetic Fold 1 - Recall: 0.8461538461538461
+2023-08-28 23:00:47,913	***	     Synthetic Fold 1 - F1 Score: 0.6666666666666667
+
+2023-08-28 23:00:48,045	***	Real Fold 1/5 results
+2023-08-28 23:00:48,049	***	 Classifier Model: RandomForest
+2023-08-28 23:00:48,049	***	   Real Fold 1 - Confusion Matrix:
+2023-08-28 23:00:48,049	***	[[13  0]
+ [ 1 12]]
+2023-08-28 23:00:48,049	***	
+   Classifier Metrics:
+2023-08-28 23:00:48,049	***	     Real Fold 1 - Accuracy: 0.9615384615384616
+2023-08-28 23:00:48,049	***	     Real Fold 1 - Precision: 1.0
+2023-08-28 23:00:48,049	***	     Real Fold 1 - Recall: 0.9230769230769231
+2023-08-28 23:00:48,049	***	     Real Fold 1 - F1 Score: 0.9600000000000001
+
+2023-08-28 23:00:48,050	***	
+2023-08-28 23:00:48,176	***	 Classifier Model: SupportVectorMachine
+2023-08-28 23:00:48,176	***	   Real Fold 1 - Confusion Matrix:
+2023-08-28 23:00:48,176	***	[[13  0]
+ [ 0 13]]
+2023-08-28 23:00:48,176	***	
+   Classifier Metrics:
+2023-08-28 23:00:48,176	***	     Real Fold 1 - Accuracy: 1.0
+2023-08-28 23:00:48,176	***	     Real Fold 1 - Precision: 1.0
+2023-08-28 23:00:48,176	***	     Real Fold 1 - Recall: 1.0
+2023-08-28 23:00:48,176	***	     Real Fold 1 - F1 Score: 1.0
+
+2023-08-28 23:00:48,176	***	
+2023-08-28 23:00:48,388	***	 Classifier Model: KNN
+2023-08-28 23:00:48,388	***	   Real Fold 1 - Confusion Matrix:
+2023-08-28 23:00:48,388	***	[[13  0]
+ [ 0 13]]
+2023-08-28 23:00:48,388	***	
+   Classifier Metrics:
+2023-08-28 23:00:48,388	***	     Real Fold 1 - Accuracy: 1.0
+2023-08-28 23:00:48,388	***	     Real Fold 1 - Precision: 1.0
+2023-08-28 23:00:48,388	***	     Real Fold 1 - Recall: 1.0
+2023-08-28 23:00:48,388	***	     Real Fold 1 - F1 Score: 1.0
+
+2023-08-28 23:00:48,388	***	
+2023-08-28 23:00:48,560	***	 Classifier Model: DecisionTree
+2023-08-28 23:00:48,561	***	   Real Fold 1 - Confusion Matrix:
+2023-08-28 23:00:48,561	***	[[13  0]
+ [ 0 13]]
+2023-08-28 23:00:48,561	***	
+   Classifier Metrics:
+2023-08-28 23:00:48,561	***	     Real Fold 1 - Accuracy: 1.0
+2023-08-28 23:00:48,561	***	     Real Fold 1 - Precision: 1.0
+2023-08-28 23:00:48,561	***	     Real Fold 1 - Recall: 1.0
+2023-08-28 23:00:48,561	***	     Real Fold 1 - F1 Score: 1.0
+
+2023-08-28 23:00:48,561	***	
+2023-08-28 23:00:48,690	***	 Classifier Model: AdaBoost
+2023-08-28 23:00:48,690	***	   Real Fold 1 - Confusion Matrix:
+2023-08-28 23:00:48,690	***	[[13  0]
+ [ 0 13]]
+2023-08-28 23:00:48,690	***	
+   Classifier Metrics:
+2023-08-28 23:00:48,690	***	     Real Fold 1 - Accuracy: 1.0
+2023-08-28 23:00:48,690	***	     Real Fold 1 - Precision: 1.0
+2023-08-28 23:00:48,691	***	     Real Fold 1 - Recall: 1.0
+2023-08-28 23:00:48,691	***	     Real Fold 1 - F1 Score: 1.0
+
+2023-08-28 23:00:48,691	***	
+2023-08-28 23:00:48,825	***	Similarity Metrics
+2023-08-28 23:00:48,825	***	  Synthetic Fold 1 - Mean Squared Error: 0.17173524
+2023-08-28 23:00:48,825	***	  Synthetic Fold 1 - Cosine Similarity: 0.7541233112032597
+2023-08-28 23:00:48,825	***	  Synthetic Fold 1 - KL Divergence: 0.17173524
+2023-08-28 23:00:48,825	***	  Synthetic Fold 1 - Maximum Mean Discrepancy: 0.17173524
+2023-08-28 23:00:48,825	***	
+2023-08-28 23:00:48,879	***	 Starting training ADVERSARIAL MODEL:
+
+2023-08-28 23:00:54,877	***	     Finished training
+
+2023-08-28 23:00:54,877	***	Saving Adversarial Model:
+2023-08-28 23:00:54,887	***	  Discriminator output: /droidaugmentor/shared/outputs/models_saved/fold_2/discriminator_model_1
+2023-08-28 23:00:54,887	***	  Generator output: /droidaugmentor/shared/outputs/models_saved/fold_2/generator_model_1
+2023-08-28 23:00:55,018	***	
+Starting training classifier
+
+2023-08-28 23:00:55,018	***	    Starting training classifier: RANDOM FOREST
+2023-08-28 23:00:55,074	***	    Finished training
+
+2023-08-28 23:00:55,074	***	    Starting training classifier: SUPPORT VECTOR MACHINE
+2023-08-28 23:00:55,075	***	    Finished training
+
+2023-08-28 23:00:55,075	***	    Starting training classifier: K-NEIGHBORS NEAREST
+2023-08-28 23:00:55,075	***	    Finished training
+
+2023-08-28 23:00:55,075	***	    Starting training classifier: DECISION TREE
+2023-08-28 23:00:55,076	***	    Finished training
+
+2023-08-28 23:00:55,076	***	    Starting training classifier: ADA BOOST
+2023-08-28 23:00:55,111	***	    Finished training
+
+2023-08-28 23:00:55,111	***	Synthetic Fold 2/5 results
+
+2023-08-28 23:00:55,116	***	 Classifier Model: RandomForest
+2023-08-28 23:00:55,116	***	   Synthetic Fold 2 - Confusion Matrix:
+2023-08-28 23:00:55,116	***	[[ 3 10]
+ [ 6  7]]
+2023-08-28 23:00:55,116	***	
+   Classifier Metrics:
+2023-08-28 23:00:55,116	***	     Synthetic Fold 2 - Accuracy: 0.38461538461538464
+2023-08-28 23:00:55,116	***	     Synthetic Fold 2 - Precision: 0.4117647058823529
+2023-08-28 23:00:55,116	***	     Synthetic Fold 2 - Recall: 0.5384615384615384
+2023-08-28 23:00:55,116	***	     Synthetic Fold 2 - F1 Score: 0.4666666666666667
+
+2023-08-28 23:00:55,249	***	 Classifier Model: SupportVectorMachine
+2023-08-28 23:00:55,249	***	   Synthetic Fold 2 - Confusion Matrix:
+2023-08-28 23:00:55,249	***	[[ 3 10]
+ [ 6  7]]
+2023-08-28 23:00:55,250	***	
+   Classifier Metrics:
+2023-08-28 23:00:55,250	***	     Synthetic Fold 2 - Accuracy: 0.38461538461538464
+2023-08-28 23:00:55,250	***	     Synthetic Fold 2 - Precision: 0.4117647058823529
+2023-08-28 23:00:55,250	***	     Synthetic Fold 2 - Recall: 0.5384615384615384
+2023-08-28 23:00:55,250	***	     Synthetic Fold 2 - F1 Score: 0.4666666666666667
+
+2023-08-28 23:00:55,381	***	 Classifier Model: KNN
+2023-08-28 23:00:55,381	***	   Synthetic Fold 2 - Confusion Matrix:
+2023-08-28 23:00:55,381	***	[[ 2 11]
+ [ 2 11]]
+2023-08-28 23:00:55,382	***	
+   Classifier Metrics:
+2023-08-28 23:00:55,382	***	     Synthetic Fold 2 - Accuracy: 0.5
+2023-08-28 23:00:55,382	***	     Synthetic Fold 2 - Precision: 0.5
+2023-08-28 23:00:55,382	***	     Synthetic Fold 2 - Recall: 0.8461538461538461
+2023-08-28 23:00:55,382	***	     Synthetic Fold 2 - F1 Score: 0.6285714285714286
+
+2023-08-28 23:00:55,573	***	 Classifier Model: DecisionTree
+2023-08-28 23:00:55,573	***	   Synthetic Fold 2 - Confusion Matrix:
+2023-08-28 23:00:55,573	***	[[6 7]
+ [5 8]]
+2023-08-28 23:00:55,574	***	
+   Classifier Metrics:
+2023-08-28 23:00:55,574	***	     Synthetic Fold 2 - Accuracy: 0.5384615384615384
+2023-08-28 23:00:55,574	***	     Synthetic Fold 2 - Precision: 0.5333333333333333
+2023-08-28 23:00:55,574	***	     Synthetic Fold 2 - Recall: 0.6153846153846154
+2023-08-28 23:00:55,574	***	     Synthetic Fold 2 - F1 Score: 0.5714285714285715
+
+2023-08-28 23:00:55,714	***	 Classifier Model: AdaBoost
+2023-08-28 23:00:55,714	***	   Synthetic Fold 2 - Confusion Matrix:
+2023-08-28 23:00:55,714	***	[[6 7]
+ [5 8]]
+2023-08-28 23:00:55,714	***	
+   Classifier Metrics:
+2023-08-28 23:00:55,714	***	     Synthetic Fold 2 - Accuracy: 0.5384615384615384
+2023-08-28 23:00:55,714	***	     Synthetic Fold 2 - Precision: 0.5333333333333333
+2023-08-28 23:00:55,714	***	     Synthetic Fold 2 - Recall: 0.6153846153846154
+2023-08-28 23:00:55,714	***	     Synthetic Fold 2 - F1 Score: 0.5714285714285715
+
+2023-08-28 23:00:55,843	***	Real Fold 2/5 results
+2023-08-28 23:00:55,847	***	 Classifier Model: RandomForest
+2023-08-28 23:00:55,847	***	   Real Fold 2 - Confusion Matrix:
+2023-08-28 23:00:55,847	***	[[13  0]
+ [ 0 13]]
+2023-08-28 23:00:55,848	***	
+   Classifier Metrics:
+2023-08-28 23:00:55,848	***	     Real Fold 2 - Accuracy: 1.0
+2023-08-28 23:00:55,848	***	     Real Fold 2 - Precision: 1.0
+2023-08-28 23:00:55,848	***	     Real Fold 2 - Recall: 1.0
+2023-08-28 23:00:55,848	***	     Real Fold 2 - F1 Score: 1.0
+
+2023-08-28 23:00:55,848	***	
+2023-08-28 23:00:55,978	***	 Classifier Model: SupportVectorMachine
+2023-08-28 23:00:55,979	***	   Real Fold 2 - Confusion Matrix:
+2023-08-28 23:00:55,979	***	[[13  0]
+ [ 0 13]]
+2023-08-28 23:00:55,979	***	
+   Classifier Metrics:
+2023-08-28 23:00:55,979	***	     Real Fold 2 - Accuracy: 1.0
+2023-08-28 23:00:55,979	***	     Real Fold 2 - Precision: 1.0
+2023-08-28 23:00:55,979	***	     Real Fold 2 - Recall: 1.0
+2023-08-28 23:00:55,979	***	     Real Fold 2 - F1 Score: 1.0
+
+2023-08-28 23:00:55,979	***	
+2023-08-28 23:00:56,121	***	 Classifier Model: KNN
+2023-08-28 23:00:56,121	***	   Real Fold 2 - Confusion Matrix:
+2023-08-28 23:00:56,121	***	[[13  0]
+ [ 0 13]]
+2023-08-28 23:00:56,121	***	
+   Classifier Metrics:
+2023-08-28 23:00:56,121	***	     Real Fold 2 - Accuracy: 1.0
+2023-08-28 23:00:56,121	***	     Real Fold 2 - Precision: 1.0
+2023-08-28 23:00:56,121	***	     Real Fold 2 - Recall: 1.0
+2023-08-28 23:00:56,121	***	     Real Fold 2 - F1 Score: 1.0
+
+2023-08-28 23:00:56,121	***	
+2023-08-28 23:00:56,305	***	 Classifier Model: DecisionTree
+2023-08-28 23:00:56,305	***	   Real Fold 2 - Confusion Matrix:
+2023-08-28 23:00:56,305	***	[[13  0]
+ [ 0 13]]
+2023-08-28 23:00:56,305	***	
+   Classifier Metrics:
+2023-08-28 23:00:56,305	***	     Real Fold 2 - Accuracy: 1.0
+2023-08-28 23:00:56,305	***	     Real Fold 2 - Precision: 1.0
+2023-08-28 23:00:56,305	***	     Real Fold 2 - Recall: 1.0
+2023-08-28 23:00:56,305	***	     Real Fold 2 - F1 Score: 1.0
+
+2023-08-28 23:00:56,306	***	
+2023-08-28 23:00:56,443	***	 Classifier Model: AdaBoost
+2023-08-28 23:00:56,443	***	   Real Fold 2 - Confusion Matrix:
+2023-08-28 23:00:56,443	***	[[13  0]
+ [ 0 13]]
+2023-08-28 23:00:56,443	***	
+   Classifier Metrics:
+2023-08-28 23:00:56,443	***	     Real Fold 2 - Accuracy: 1.0
+2023-08-28 23:00:56,443	***	     Real Fold 2 - Precision: 1.0
+2023-08-28 23:00:56,443	***	     Real Fold 2 - Recall: 1.0
+2023-08-28 23:00:56,443	***	     Real Fold 2 - F1 Score: 1.0
+
+2023-08-28 23:00:56,443	***	
+2023-08-28 23:00:56,570	***	Similarity Metrics
+2023-08-28 23:00:56,570	***	  Synthetic Fold 2 - Mean Squared Error: 0.13792486
+2023-08-28 23:00:56,570	***	  Synthetic Fold 2 - Cosine Similarity: 0.8345541954040527
+2023-08-28 23:00:56,570	***	  Synthetic Fold 2 - KL Divergence: 0.13792486
+2023-08-28 23:00:56,570	***	  Synthetic Fold 2 - Maximum Mean Discrepancy: 0.13792486
+2023-08-28 23:00:56,571	***	
+2023-08-28 23:00:56,625	***	 Starting training ADVERSARIAL MODEL:
+
+2023-08-28 23:01:02,808	***	     Finished training
+
+2023-08-28 23:01:02,808	***	Saving Adversarial Model:
+2023-08-28 23:01:02,817	***	  Discriminator output: /droidaugmentor/shared/outputs/models_saved/fold_3/discriminator_model_2
+2023-08-28 23:01:02,817	***	  Generator output: /droidaugmentor/shared/outputs/models_saved/fold_3/generator_model_2
+2023-08-28 23:01:02,944	***	
+Starting training classifier
+
+2023-08-28 23:01:02,944	***	    Starting training classifier: RANDOM FOREST
+2023-08-28 23:01:03,001	***	    Finished training
+
+2023-08-28 23:01:03,001	***	    Starting training classifier: SUPPORT VECTOR MACHINE
+2023-08-28 23:01:03,002	***	    Finished training
+
+2023-08-28 23:01:03,002	***	    Starting training classifier: K-NEIGHBORS NEAREST
+2023-08-28 23:01:03,002	***	    Finished training
+
+2023-08-28 23:01:03,002	***	    Starting training classifier: DECISION TREE
+2023-08-28 23:01:03,003	***	    Finished training
+
+2023-08-28 23:01:03,003	***	    Starting training classifier: ADA BOOST
+2023-08-28 23:01:03,039	***	    Finished training
+
+2023-08-28 23:01:03,039	***	Synthetic Fold 3/5 results
+
+2023-08-28 23:01:03,044	***	 Classifier Model: RandomForest
+2023-08-28 23:01:03,044	***	   Synthetic Fold 3 - Confusion Matrix:
+2023-08-28 23:01:03,044	***	[[5 8]
+ [7 6]]
+2023-08-28 23:01:03,045	***	
+   Classifier Metrics:
+2023-08-28 23:01:03,045	***	     Synthetic Fold 3 - Accuracy: 0.4230769230769231
+2023-08-28 23:01:03,045	***	     Synthetic Fold 3 - Precision: 0.42857142857142855
+2023-08-28 23:01:03,045	***	     Synthetic Fold 3 - Recall: 0.46153846153846156
+2023-08-28 23:01:03,045	***	     Synthetic Fold 3 - F1 Score: 0.4444444444444445
+
+2023-08-28 23:01:03,180	***	 Classifier Model: SupportVectorMachine
+2023-08-28 23:01:03,180	***	   Synthetic Fold 3 - Confusion Matrix:
+2023-08-28 23:01:03,180	***	[[5 8]
+ [7 6]]
+2023-08-28 23:01:03,180	***	
+   Classifier Metrics:
+2023-08-28 23:01:03,180	***	     Synthetic Fold 3 - Accuracy: 0.4230769230769231
+2023-08-28 23:01:03,180	***	     Synthetic Fold 3 - Precision: 0.42857142857142855
+2023-08-28 23:01:03,180	***	     Synthetic Fold 3 - Recall: 0.46153846153846156
+2023-08-28 23:01:03,180	***	     Synthetic Fold 3 - F1 Score: 0.4444444444444445
+
+2023-08-28 23:01:03,316	***	 Classifier Model: KNN
+2023-08-28 23:01:03,316	***	   Synthetic Fold 3 - Confusion Matrix:
+2023-08-28 23:01:03,316	***	[[ 4  9]
+ [ 3 10]]
+2023-08-28 23:01:03,316	***	
+   Classifier Metrics:
+2023-08-28 23:01:03,316	***	     Synthetic Fold 3 - Accuracy: 0.5384615384615384
+2023-08-28 23:01:03,316	***	     Synthetic Fold 3 - Precision: 0.5263157894736842
+2023-08-28 23:01:03,316	***	     Synthetic Fold 3 - Recall: 0.7692307692307693
+2023-08-28 23:01:03,317	***	     Synthetic Fold 3 - F1 Score: 0.625
+
+2023-08-28 23:01:03,516	***	 Classifier Model: DecisionTree
+2023-08-28 23:01:03,516	***	   Synthetic Fold 3 - Confusion Matrix:
+2023-08-28 23:01:03,517	***	[[ 4  9]
+ [ 3 10]]
+2023-08-28 23:01:03,517	***	
+   Classifier Metrics:
+2023-08-28 23:01:03,517	***	     Synthetic Fold 3 - Accuracy: 0.5384615384615384
+2023-08-28 23:01:03,517	***	     Synthetic Fold 3 - Precision: 0.5263157894736842
+2023-08-28 23:01:03,517	***	     Synthetic Fold 3 - Recall: 0.7692307692307693
+2023-08-28 23:01:03,517	***	     Synthetic Fold 3 - F1 Score: 0.625
+
+2023-08-28 23:01:03,657	***	 Classifier Model: AdaBoost
+2023-08-28 23:01:03,657	***	   Synthetic Fold 3 - Confusion Matrix:
+2023-08-28 23:01:03,657	***	[[5 8]
+ [7 6]]
+2023-08-28 23:01:03,657	***	
+   Classifier Metrics:
+2023-08-28 23:01:03,657	***	     Synthetic Fold 3 - Accuracy: 0.4230769230769231
+2023-08-28 23:01:03,657	***	     Synthetic Fold 3 - Precision: 0.42857142857142855
+2023-08-28 23:01:03,657	***	     Synthetic Fold 3 - Recall: 0.46153846153846156
+2023-08-28 23:01:03,657	***	     Synthetic Fold 3 - F1 Score: 0.4444444444444445
+
+2023-08-28 23:01:03,796	***	Real Fold 3/5 results
+2023-08-28 23:01:03,800	***	 Classifier Model: RandomForest
+2023-08-28 23:01:03,800	***	   Real Fold 3 - Confusion Matrix:
+2023-08-28 23:01:03,800	***	[[13  0]
+ [ 0 13]]
+2023-08-28 23:01:03,800	***	
+   Classifier Metrics:
+2023-08-28 23:01:03,800	***	     Real Fold 3 - Accuracy: 1.0
+2023-08-28 23:01:03,800	***	     Real Fold 3 - Precision: 1.0
+2023-08-28 23:01:03,801	***	     Real Fold 3 - Recall: 1.0
+2023-08-28 23:01:03,801	***	     Real Fold 3 - F1 Score: 1.0
+
+2023-08-28 23:01:03,801	***	
+2023-08-28 23:01:03,934	***	 Classifier Model: SupportVectorMachine
+2023-08-28 23:01:03,934	***	   Real Fold 3 - Confusion Matrix:
+2023-08-28 23:01:03,934	***	[[13  0]
+ [ 0 13]]
+2023-08-28 23:01:03,935	***	
+   Classifier Metrics:
+2023-08-28 23:01:03,935	***	     Real Fold 3 - Accuracy: 1.0
+2023-08-28 23:01:03,935	***	     Real Fold 3 - Precision: 1.0
+2023-08-28 23:01:03,935	***	     Real Fold 3 - Recall: 1.0
+2023-08-28 23:01:03,935	***	     Real Fold 3 - F1 Score: 1.0
+
+2023-08-28 23:01:03,935	***	
+2023-08-28 23:01:04,073	***	 Classifier Model: KNN
+2023-08-28 23:01:04,073	***	   Real Fold 3 - Confusion Matrix:
+2023-08-28 23:01:04,073	***	[[12  1]
+ [ 1 12]]
+2023-08-28 23:01:04,073	***	
+   Classifier Metrics:
+2023-08-28 23:01:04,073	***	     Real Fold 3 - Accuracy: 0.9230769230769231
+2023-08-28 23:01:04,073	***	     Real Fold 3 - Precision: 0.9230769230769231
+2023-08-28 23:01:04,073	***	     Real Fold 3 - Recall: 0.9230769230769231
+2023-08-28 23:01:04,073	***	     Real Fold 3 - F1 Score: 0.9230769230769231
+
+2023-08-28 23:01:04,073	***	
+2023-08-28 23:01:04,260	***	 Classifier Model: DecisionTree
+2023-08-28 23:01:04,260	***	   Real Fold 3 - Confusion Matrix:
+2023-08-28 23:01:04,260	***	[[13  0]
+ [ 1 12]]
+2023-08-28 23:01:04,260	***	
+   Classifier Metrics:
+2023-08-28 23:01:04,260	***	     Real Fold 3 - Accuracy: 0.9615384615384616
+2023-08-28 23:01:04,260	***	     Real Fold 3 - Precision: 1.0
+2023-08-28 23:01:04,260	***	     Real Fold 3 - Recall: 0.9230769230769231
+2023-08-28 23:01:04,260	***	     Real Fold 3 - F1 Score: 0.9600000000000001
+
+2023-08-28 23:01:04,260	***	
+2023-08-28 23:01:04,397	***	 Classifier Model: AdaBoost
+2023-08-28 23:01:04,397	***	   Real Fold 3 - Confusion Matrix:
+2023-08-28 23:01:04,397	***	[[13  0]
+ [ 0 13]]
+2023-08-28 23:01:04,397	***	
+   Classifier Metrics:
+2023-08-28 23:01:04,397	***	     Real Fold 3 - Accuracy: 1.0
+2023-08-28 23:01:04,397	***	     Real Fold 3 - Precision: 1.0
+2023-08-28 23:01:04,398	***	     Real Fold 3 - Recall: 1.0
+2023-08-28 23:01:04,398	***	     Real Fold 3 - F1 Score: 1.0
+
+2023-08-28 23:01:04,398	***	
+2023-08-28 23:01:04,529	***	Similarity Metrics
+2023-08-28 23:01:04,529	***	  Synthetic Fold 3 - Mean Squared Error: 0.16547409
+2023-08-28 23:01:04,529	***	  Synthetic Fold 3 - Cosine Similarity: 0.5286617771937296
+2023-08-28 23:01:04,529	***	  Synthetic Fold 3 - KL Divergence: 0.16547409
+2023-08-28 23:01:04,529	***	  Synthetic Fold 3 - Maximum Mean Discrepancy: 0.16547409
+2023-08-28 23:01:04,529	***	
+2023-08-28 23:01:04,585	***	 Starting training ADVERSARIAL MODEL:
+
+2023-08-28 23:01:10,627	***	     Finished training
+
+2023-08-28 23:01:10,628	***	Saving Adversarial Model:
+2023-08-28 23:01:10,636	***	  Discriminator output: /droidaugmentor/shared/outputs/models_saved/fold_4/discriminator_model_3
+2023-08-28 23:01:10,636	***	  Generator output: /droidaugmentor/shared/outputs/models_saved/fold_4/generator_model_3
+2023-08-28 23:01:10,778	***	
+Starting training classifier
+
+2023-08-28 23:01:10,779	***	    Starting training classifier: RANDOM FOREST
+2023-08-28 23:01:10,838	***	    Finished training
+
+2023-08-28 23:01:10,838	***	    Starting training classifier: SUPPORT VECTOR MACHINE
+2023-08-28 23:01:10,839	***	    Finished training
+
+2023-08-28 23:01:10,839	***	    Starting training classifier: K-NEIGHBORS NEAREST
+2023-08-28 23:01:10,839	***	    Finished training
+
+2023-08-28 23:01:10,839	***	    Starting training classifier: DECISION TREE
+2023-08-28 23:01:10,840	***	    Finished training
+
+2023-08-28 23:01:10,840	***	    Starting training classifier: ADA BOOST
+2023-08-28 23:01:10,875	***	    Finished training
+
+2023-08-28 23:01:10,876	***	Synthetic Fold 4/5 results
+
+2023-08-28 23:01:10,880	***	 Classifier Model: RandomForest
+2023-08-28 23:01:10,880	***	   Synthetic Fold 4 - Confusion Matrix:
+2023-08-28 23:01:10,880	***	[[5 7]
+ [5 8]]
+2023-08-28 23:01:10,881	***	
+   Classifier Metrics:
+2023-08-28 23:01:10,881	***	     Synthetic Fold 4 - Accuracy: 0.52
+2023-08-28 23:01:10,881	***	     Synthetic Fold 4 - Precision: 0.5333333333333333
+2023-08-28 23:01:10,881	***	     Synthetic Fold 4 - Recall: 0.6153846153846154
+2023-08-28 23:01:10,881	***	     Synthetic Fold 4 - F1 Score: 0.5714285714285715
+
+2023-08-28 23:01:11,016	***	 Classifier Model: SupportVectorMachine
+2023-08-28 23:01:11,016	***	   Synthetic Fold 4 - Confusion Matrix:
+2023-08-28 23:01:11,016	***	[[5 7]
+ [5 8]]
+2023-08-28 23:01:11,016	***	
+   Classifier Metrics:
+2023-08-28 23:01:11,016	***	     Synthetic Fold 4 - Accuracy: 0.52
+2023-08-28 23:01:11,016	***	     Synthetic Fold 4 - Precision: 0.5333333333333333
+2023-08-28 23:01:11,016	***	     Synthetic Fold 4 - Recall: 0.6153846153846154
+2023-08-28 23:01:11,016	***	     Synthetic Fold 4 - F1 Score: 0.5714285714285715
+
+2023-08-28 23:01:11,152	***	 Classifier Model: KNN
+2023-08-28 23:01:11,152	***	   Synthetic Fold 4 - Confusion Matrix:
+2023-08-28 23:01:11,152	***	[[5 7]
+ [4 9]]
+2023-08-28 23:01:11,152	***	
+   Classifier Metrics:
+2023-08-28 23:01:11,152	***	     Synthetic Fold 4 - Accuracy: 0.56
+2023-08-28 23:01:11,152	***	     Synthetic Fold 4 - Precision: 0.5625
+2023-08-28 23:01:11,152	***	     Synthetic Fold 4 - Recall: 0.6923076923076923
+2023-08-28 23:01:11,152	***	     Synthetic Fold 4 - F1 Score: 0.6206896551724138
+
+2023-08-28 23:01:11,337	***	 Classifier Model: DecisionTree
+2023-08-28 23:01:11,337	***	   Synthetic Fold 4 - Confusion Matrix:
+2023-08-28 23:01:11,337	***	[[9 3]
+ [4 9]]
+2023-08-28 23:01:11,338	***	
+   Classifier Metrics:
+2023-08-28 23:01:11,338	***	     Synthetic Fold 4 - Accuracy: 0.72
+2023-08-28 23:01:11,338	***	     Synthetic Fold 4 - Precision: 0.75
+2023-08-28 23:01:11,338	***	     Synthetic Fold 4 - Recall: 0.6923076923076923
+2023-08-28 23:01:11,338	***	     Synthetic Fold 4 - F1 Score: 0.7199999999999999
+
+2023-08-28 23:01:11,481	***	 Classifier Model: AdaBoost
+2023-08-28 23:01:11,481	***	   Synthetic Fold 4 - Confusion Matrix:
+2023-08-28 23:01:11,481	***	[[6 6]
+ [5 8]]
+2023-08-28 23:01:11,482	***	
+   Classifier Metrics:
+2023-08-28 23:01:11,482	***	     Synthetic Fold 4 - Accuracy: 0.56
+2023-08-28 23:01:11,482	***	     Synthetic Fold 4 - Precision: 0.5714285714285714
+2023-08-28 23:01:11,482	***	     Synthetic Fold 4 - Recall: 0.6153846153846154
+2023-08-28 23:01:11,482	***	     Synthetic Fold 4 - F1 Score: 0.5925925925925927
+
+2023-08-28 23:01:11,614	***	Real Fold 4/5 results
+2023-08-28 23:01:11,618	***	 Classifier Model: RandomForest
+2023-08-28 23:01:11,618	***	   Real Fold 4 - Confusion Matrix:
+2023-08-28 23:01:11,618	***	[[12  0]
+ [ 2 11]]
+2023-08-28 23:01:11,619	***	
+   Classifier Metrics:
+2023-08-28 23:01:11,619	***	     Real Fold 4 - Accuracy: 0.92
+2023-08-28 23:01:11,619	***	     Real Fold 4 - Precision: 1.0
+2023-08-28 23:01:11,619	***	     Real Fold 4 - Recall: 0.8461538461538461
+2023-08-28 23:01:11,619	***	     Real Fold 4 - F1 Score: 0.9166666666666666
+
+2023-08-28 23:01:11,619	***	
+2023-08-28 23:01:11,785	***	 Classifier Model: SupportVectorMachine
+2023-08-28 23:01:11,785	***	   Real Fold 4 - Confusion Matrix:
+2023-08-28 23:01:11,785	***	[[12  0]
+ [ 2 11]]
+2023-08-28 23:01:11,786	***	
+   Classifier Metrics:
+2023-08-28 23:01:11,786	***	     Real Fold 4 - Accuracy: 0.92
+2023-08-28 23:01:11,786	***	     Real Fold 4 - Precision: 1.0
+2023-08-28 23:01:11,786	***	     Real Fold 4 - Recall: 0.8461538461538461
+2023-08-28 23:01:11,786	***	     Real Fold 4 - F1 Score: 0.9166666666666666
+
+2023-08-28 23:01:11,786	***	
+2023-08-28 23:01:11,990	***	 Classifier Model: KNN
+2023-08-28 23:01:11,990	***	   Real Fold 4 - Confusion Matrix:
+2023-08-28 23:01:11,990	***	[[11  1]
+ [ 1 12]]
+2023-08-28 23:01:11,990	***	
+   Classifier Metrics:
+2023-08-28 23:01:11,990	***	     Real Fold 4 - Accuracy: 0.92
+2023-08-28 23:01:11,991	***	     Real Fold 4 - Precision: 0.9230769230769231
+2023-08-28 23:01:11,991	***	     Real Fold 4 - Recall: 0.9230769230769231
+2023-08-28 23:01:11,991	***	     Real Fold 4 - F1 Score: 0.9230769230769231
+
+2023-08-28 23:01:11,991	***	
+2023-08-28 23:01:12,350	***	 Classifier Model: DecisionTree
+2023-08-28 23:01:12,350	***	   Real Fold 4 - Confusion Matrix:
+2023-08-28 23:01:12,350	***	[[11  1]
+ [ 1 12]]
+2023-08-28 23:01:12,350	***	
+   Classifier Metrics:
+2023-08-28 23:01:12,350	***	     Real Fold 4 - Accuracy: 0.92
+2023-08-28 23:01:12,351	***	     Real Fold 4 - Precision: 0.9230769230769231
+2023-08-28 23:01:12,351	***	     Real Fold 4 - Recall: 0.9230769230769231
+2023-08-28 23:01:12,351	***	     Real Fold 4 - F1 Score: 0.9230769230769231
+
+2023-08-28 23:01:12,351	***	
+2023-08-28 23:01:12,486	***	 Classifier Model: AdaBoost
+2023-08-28 23:01:12,486	***	   Real Fold 4 - Confusion Matrix:
+2023-08-28 23:01:12,486	***	[[12  0]
+ [ 1 12]]
+2023-08-28 23:01:12,486	***	
+   Classifier Metrics:
+2023-08-28 23:01:12,486	***	     Real Fold 4 - Accuracy: 0.96
+2023-08-28 23:01:12,486	***	     Real Fold 4 - Precision: 1.0
+2023-08-28 23:01:12,486	***	     Real Fold 4 - Recall: 0.9230769230769231
+2023-08-28 23:01:12,486	***	     Real Fold 4 - F1 Score: 0.9600000000000001
+
+2023-08-28 23:01:12,486	***	
+2023-08-28 23:01:12,619	***	Similarity Metrics
+2023-08-28 23:01:12,619	***	  Synthetic Fold 4 - Mean Squared Error: 0.16893022
+2023-08-28 23:01:12,619	***	  Synthetic Fold 4 - Cosine Similarity: 0.18343060359358787
+2023-08-28 23:01:12,619	***	  Synthetic Fold 4 - KL Divergence: 0.16893022
+2023-08-28 23:01:12,619	***	  Synthetic Fold 4 - Maximum Mean Discrepancy: 0.16893022
+2023-08-28 23:01:12,619	***	
+2023-08-28 23:01:12,685	***	 Starting training ADVERSARIAL MODEL:
+
+2023-08-28 23:01:18,759	***	     Finished training
+
+2023-08-28 23:01:18,760	***	Saving Adversarial Model:
+2023-08-28 23:01:18,769	***	  Discriminator output: /droidaugmentor/shared/outputs/models_saved/fold_5/discriminator_model_4
+2023-08-28 23:01:18,769	***	  Generator output: /droidaugmentor/shared/outputs/models_saved/fold_5/generator_model_4
+2023-08-28 23:01:18,896	***	
+Starting training classifier
+
+2023-08-28 23:01:18,896	***	    Starting training classifier: RANDOM FOREST
+2023-08-28 23:01:18,952	***	    Finished training
+
+2023-08-28 23:01:18,952	***	    Starting training classifier: SUPPORT VECTOR MACHINE
+2023-08-28 23:01:18,953	***	    Finished training
+
+2023-08-28 23:01:18,953	***	    Starting training classifier: K-NEIGHBORS NEAREST
+2023-08-28 23:01:18,953	***	    Finished training
+
+2023-08-28 23:01:18,953	***	    Starting training classifier: DECISION TREE
+2023-08-28 23:01:18,954	***	    Finished training
+
+2023-08-28 23:01:18,954	***	    Starting training classifier: ADA BOOST
+2023-08-28 23:01:18,991	***	    Finished training
+
+2023-08-28 23:01:18,991	***	Synthetic Fold 5/5 results
+
+2023-08-28 23:01:18,996	***	 Classifier Model: RandomForest
+2023-08-28 23:01:18,996	***	   Synthetic Fold 5 - Confusion Matrix:
+2023-08-28 23:01:18,996	***	[[ 7  6]
+ [ 2 10]]
+2023-08-28 23:01:18,997	***	
+   Classifier Metrics:
+2023-08-28 23:01:18,997	***	     Synthetic Fold 5 - Accuracy: 0.68
+2023-08-28 23:01:18,997	***	     Synthetic Fold 5 - Precision: 0.625
+2023-08-28 23:01:18,997	***	     Synthetic Fold 5 - Recall: 0.8333333333333334
+2023-08-28 23:01:18,997	***	     Synthetic Fold 5 - F1 Score: 0.7142857142857143
+
+2023-08-28 23:01:19,138	***	 Classifier Model: SupportVectorMachine
+2023-08-28 23:01:19,139	***	   Synthetic Fold 5 - Confusion Matrix:
+2023-08-28 23:01:19,139	***	[[ 7  6]
+ [ 1 11]]
+2023-08-28 23:01:19,139	***	
+   Classifier Metrics:
+2023-08-28 23:01:19,139	***	     Synthetic Fold 5 - Accuracy: 0.72
+2023-08-28 23:01:19,139	***	     Synthetic Fold 5 - Precision: 0.6470588235294118
+2023-08-28 23:01:19,139	***	     Synthetic Fold 5 - Recall: 0.9166666666666666
+2023-08-28 23:01:19,139	***	     Synthetic Fold 5 - F1 Score: 0.7586206896551724
+
+2023-08-28 23:01:19,271	***	 Classifier Model: KNN
+2023-08-28 23:01:19,272	***	   Synthetic Fold 5 - Confusion Matrix:
+2023-08-28 23:01:19,272	***	[[ 5  8]
+ [ 0 12]]
+2023-08-28 23:01:19,272	***	
+   Classifier Metrics:
+2023-08-28 23:01:19,272	***	     Synthetic Fold 5 - Accuracy: 0.68
+2023-08-28 23:01:19,272	***	     Synthetic Fold 5 - Precision: 0.6
+2023-08-28 23:01:19,272	***	     Synthetic Fold 5 - Recall: 1.0
+2023-08-28 23:01:19,272	***	     Synthetic Fold 5 - F1 Score: 0.7499999999999999
+
+2023-08-28 23:01:19,469	***	 Classifier Model: DecisionTree
+2023-08-28 23:01:19,469	***	   Synthetic Fold 5 - Confusion Matrix:
+2023-08-28 23:01:19,469	***	[[ 7  6]
+ [ 1 11]]
+2023-08-28 23:01:19,469	***	
+   Classifier Metrics:
+2023-08-28 23:01:19,469	***	     Synthetic Fold 5 - Accuracy: 0.72
+2023-08-28 23:01:19,470	***	     Synthetic Fold 5 - Precision: 0.6470588235294118
+2023-08-28 23:01:19,470	***	     Synthetic Fold 5 - Recall: 0.9166666666666666
+2023-08-28 23:01:19,470	***	     Synthetic Fold 5 - F1 Score: 0.7586206896551724
+
+2023-08-28 23:01:19,608	***	 Classifier Model: AdaBoost
+2023-08-28 23:01:19,608	***	   Synthetic Fold 5 - Confusion Matrix:
+2023-08-28 23:01:19,608	***	[[ 7  6]
+ [ 0 12]]
+2023-08-28 23:01:19,608	***	
+   Classifier Metrics:
+2023-08-28 23:01:19,608	***	     Synthetic Fold 5 - Accuracy: 0.76
+2023-08-28 23:01:19,608	***	     Synthetic Fold 5 - Precision: 0.6666666666666666
+2023-08-28 23:01:19,608	***	     Synthetic Fold 5 - Recall: 1.0
+2023-08-28 23:01:19,608	***	     Synthetic Fold 5 - F1 Score: 0.8
+
+2023-08-28 23:01:19,742	***	Real Fold 5/5 results
+2023-08-28 23:01:19,747	***	 Classifier Model: RandomForest
+2023-08-28 23:01:19,747	***	   Real Fold 5 - Confusion Matrix:
+2023-08-28 23:01:19,747	***	[[13  0]
+ [ 0 12]]
+2023-08-28 23:01:19,748	***	
+   Classifier Metrics:
+2023-08-28 23:01:19,748	***	     Real Fold 5 - Accuracy: 1.0
+2023-08-28 23:01:19,748	***	     Real Fold 5 - Precision: 1.0
+2023-08-28 23:01:19,748	***	     Real Fold 5 - Recall: 1.0
+2023-08-28 23:01:19,748	***	     Real Fold 5 - F1 Score: 1.0
+
+2023-08-28 23:01:19,748	***	
+2023-08-28 23:01:19,887	***	 Classifier Model: SupportVectorMachine
+2023-08-28 23:01:19,887	***	   Real Fold 5 - Confusion Matrix:
+2023-08-28 23:01:19,887	***	[[13  0]
+ [ 0 12]]
+2023-08-28 23:01:19,888	***	
+   Classifier Metrics:
+2023-08-28 23:01:19,888	***	     Real Fold 5 - Accuracy: 1.0
+2023-08-28 23:01:19,888	***	     Real Fold 5 - Precision: 1.0
+2023-08-28 23:01:19,888	***	     Real Fold 5 - Recall: 1.0
+2023-08-28 23:01:19,888	***	     Real Fold 5 - F1 Score: 1.0
+
+2023-08-28 23:01:19,888	***	
+2023-08-28 23:01:20,027	***	 Classifier Model: KNN
+2023-08-28 23:01:20,027	***	   Real Fold 5 - Confusion Matrix:
+2023-08-28 23:01:20,027	***	[[12  1]
+ [ 0 12]]
+2023-08-28 23:01:20,028	***	
+   Classifier Metrics:
+2023-08-28 23:01:20,028	***	     Real Fold 5 - Accuracy: 0.96
+2023-08-28 23:01:20,028	***	     Real Fold 5 - Precision: 0.9230769230769231
+2023-08-28 23:01:20,028	***	     Real Fold 5 - Recall: 1.0
+2023-08-28 23:01:20,028	***	     Real Fold 5 - F1 Score: 0.9600000000000001
+
+2023-08-28 23:01:20,028	***	
+2023-08-28 23:01:20,220	***	 Classifier Model: DecisionTree
+2023-08-28 23:01:20,221	***	   Real Fold 5 - Confusion Matrix:
+2023-08-28 23:01:20,221	***	[[13  0]
+ [ 0 12]]
+2023-08-28 23:01:20,221	***	
+   Classifier Metrics:
+2023-08-28 23:01:20,221	***	     Real Fold 5 - Accuracy: 1.0
+2023-08-28 23:01:20,221	***	     Real Fold 5 - Precision: 1.0
+2023-08-28 23:01:20,221	***	     Real Fold 5 - Recall: 1.0
+2023-08-28 23:01:20,221	***	     Real Fold 5 - F1 Score: 1.0
+
+2023-08-28 23:01:20,221	***	
+2023-08-28 23:01:20,360	***	 Classifier Model: AdaBoost
+2023-08-28 23:01:20,361	***	   Real Fold 5 - Confusion Matrix:
+2023-08-28 23:01:20,361	***	[[13  0]
+ [ 0 12]]
+2023-08-28 23:01:20,361	***	
+   Classifier Metrics:
+2023-08-28 23:01:20,361	***	     Real Fold 5 - Accuracy: 1.0
+2023-08-28 23:01:20,361	***	     Real Fold 5 - Precision: 1.0
+2023-08-28 23:01:20,361	***	     Real Fold 5 - Recall: 1.0
+2023-08-28 23:01:20,361	***	     Real Fold 5 - F1 Score: 1.0
+
+2023-08-28 23:01:20,361	***	
+2023-08-28 23:01:20,496	***	Similarity Metrics
+2023-08-28 23:01:20,496	***	  Synthetic Fold 5 - Mean Squared Error: 0.14567442
+2023-08-28 23:01:20,496	***	  Synthetic Fold 5 - Cosine Similarity: 0.8753131127357483
+2023-08-28 23:01:20,496	***	  Synthetic Fold 5 - KL Divergence: 0.14567442
+2023-08-28 23:01:20,496	***	  Synthetic Fold 5 - Maximum Mean Discrepancy: 0.14567442
+2023-08-28 23:01:20,497	***	
+2023-08-28 23:01:20,500	***	Overall Synthetic Results: Classifier RandomForest
+
+2023-08-28 23:01:20,500	***	  Synthetic List of Accuracies: [0.5, 0.46153846153846156, 0.46153846153846156, 0.46153846153846156, 0.5769230769230769]
+2023-08-28 23:01:20,500	***	  Synthetic List of Precisions: [0.5, 0.47619047619047616, 0.4782608695652174, 0.47619047619047616, 0.55]
+2023-08-28 23:01:20,500	***	  Synthetic List of Recalls: [0.8461538461538461, 0.7692307692307693, 0.8461538461538461, 0.7692307692307693, 0.8461538461538461]
+2023-08-28 23:01:20,500	***	  Synthetic List of F1-scores: [0.6285714285714286, 0.588235294117647, 0.6111111111111112, 0.588235294117647, 0.6666666666666667]
+2023-08-28 23:01:20,500	***	  Synthetic Mean Accuracy: 0.49230769230769234
+2023-08-28 23:01:20,500	***	  Synthetic Mean Precision: 0.496128364389234
+2023-08-28 23:01:20,500	***	  Synthetic Mean Recall: 0.8153846153846154
+2023-08-28 23:01:20,500	***	  Synthetic Mean F1 Score: 0.6165639589169001
+2023-08-28 23:01:20,500	***	  Synthetic Standard Deviation of Accuracy: 0.04485347611419459
+2023-08-28 23:01:20,500	***	  Synthetic Standard Deviation of Precision: 0.02839517152130024
+2023-08-28 23:01:20,500	***	  Synthetic Standard Deviation of Recall: 0.03768445758127963
+2023-08-28 23:01:20,500	***	  Synthetic Standard Deviation of F1 Score: 0.029288976421762956
+
+2023-08-28 23:01:20,593	***	Overall Real Results: RandomForest
+
+2023-08-28 23:01:20,593	***	  Real List of Accuracies: [0.9615384615384616, 1.0, 1.0, 1.0, 1.0]
+2023-08-28 23:01:20,593	***	  Real List of Precisions: [1.0, 1.0, 1.0, 1.0, 1.0]
+2023-08-28 23:01:20,593	***	  Real List of Recalls: [0.9230769230769231, 1.0, 1.0, 1.0, 1.0]
+2023-08-28 23:01:20,593	***	  Real List of F1-scores: [0.9600000000000001, 1.0, 1.0, 1.0, 1.0]
+2023-08-28 23:01:20,593	***	  Real Mean Accuracy: 0.9923076923076923
+2023-08-28 23:01:20,593	***	  Real Mean Precision: 1.0
+2023-08-28 23:01:20,593	***	  Real Mean Recall: 0.9846153846153847
+2023-08-28 23:01:20,593	***	  Real Mean F1 Score: 0.992
+2023-08-28 23:01:20,594	***	  Real Standard Deviation of Accuracy: 0.015384615384615375
+2023-08-28 23:01:20,594	***	  Real Standard Deviation of Precision: 0.0
+2023-08-28 23:01:20,594	***	  Real Standard Deviation of Recall: 0.03076923076923075
+2023-08-28 23:01:20,594	***	  Real Standard Deviation of F1 Score: 0.01599999999999997
+
+2023-08-28 23:01:20,653	***	Overall Synthetic Results: Classifier SupportVectorMachine
+
+2023-08-28 23:01:20,653	***	  Synthetic List of Accuracies: [0.38461538461538464, 0.38461538461538464, 0.5, 0.5384615384615384, 0.5384615384615384]
+2023-08-28 23:01:20,653	***	  Synthetic List of Precisions: [0.4117647058823529, 0.4117647058823529, 0.5, 0.5333333333333333, 0.5333333333333333]
+2023-08-28 23:01:20,653	***	  Synthetic List of Recalls: [0.5384615384615384, 0.5384615384615384, 0.8461538461538461, 0.6153846153846154, 0.6153846153846154]
+2023-08-28 23:01:20,653	***	  Synthetic List of F1-scores: [0.4666666666666667, 0.4666666666666667, 0.6285714285714286, 0.5714285714285715, 0.5714285714285715]
+2023-08-28 23:01:20,653	***	  Synthetic Mean Accuracy: 0.4692307692307692
+2023-08-28 23:01:20,653	***	  Synthetic Mean Precision: 0.4780392156862745
+2023-08-28 23:01:20,653	***	  Synthetic Mean Recall: 0.6307692307692307
+2023-08-28 23:01:20,653	***	  Synthetic Mean F1 Score: 0.540952380952381
+2023-08-28 23:01:20,653	***	  Synthetic Standard Deviation of Accuracy: 0.07050116453778213
+2023-08-28 23:01:20,654	***	  Synthetic Standard Deviation of Precision: 0.05546490104544988
+2023-08-28 23:01:20,654	***	  Synthetic Standard Deviation of Recall: 0.11305337274383898
+2023-08-28 23:01:20,654	***	  Synthetic Standard Deviation of F1 Score: 0.06414269805898187
+
+2023-08-28 23:01:20,699	***	Overall Real Results: SupportVectorMachine
+
+2023-08-28 23:01:20,699	***	  Real List of Accuracies: [1.0, 1.0, 1.0, 1.0, 1.0]
+2023-08-28 23:01:20,699	***	  Real List of Precisions: [1.0, 1.0, 1.0, 1.0, 1.0]
+2023-08-28 23:01:20,699	***	  Real List of Recalls: [1.0, 1.0, 1.0, 1.0, 1.0]
+2023-08-28 23:01:20,699	***	  Real List of F1-scores: [1.0, 1.0, 1.0, 1.0, 1.0]
+2023-08-28 23:01:20,699	***	  Real Mean Accuracy: 1.0
+2023-08-28 23:01:20,699	***	  Real Mean Precision: 1.0
+2023-08-28 23:01:20,699	***	  Real Mean Recall: 1.0
+2023-08-28 23:01:20,699	***	  Real Mean F1 Score: 1.0
+2023-08-28 23:01:20,699	***	  Real Standard Deviation of Accuracy: 0.0
+2023-08-28 23:01:20,699	***	  Real Standard Deviation of Precision: 0.0
+2023-08-28 23:01:20,699	***	  Real Standard Deviation of Recall: 0.0
+2023-08-28 23:01:20,699	***	  Real Standard Deviation of F1 Score: 0.0
+
+2023-08-28 23:01:20,740	***	Overall Synthetic Results: Classifier KNN
+
+2023-08-28 23:01:20,740	***	  Synthetic List of Accuracies: [0.4230769230769231, 0.4230769230769231, 0.5384615384615384, 0.5384615384615384, 0.4230769230769231]
+2023-08-28 23:01:20,740	***	  Synthetic List of Precisions: [0.42857142857142855, 0.42857142857142855, 0.5263157894736842, 0.5263157894736842, 0.42857142857142855]
+2023-08-28 23:01:20,740	***	  Synthetic List of Recalls: [0.46153846153846156, 0.46153846153846156, 0.7692307692307693, 0.7692307692307693, 0.46153846153846156]
+2023-08-28 23:01:20,740	***	  Synthetic List of F1-scores: [0.4444444444444445, 0.4444444444444445, 0.625, 0.625, 0.4444444444444445]
+2023-08-28 23:01:20,740	***	  Synthetic Mean Accuracy: 0.4692307692307692
+2023-08-28 23:01:20,740	***	  Synthetic Mean Precision: 0.46766917293233073
+2023-08-28 23:01:20,740	***	  Synthetic Mean Recall: 0.5846153846153846
+2023-08-28 23:01:20,740	***	  Synthetic Mean F1 Score: 0.5166666666666667
+2023-08-28 23:01:20,740	***	  Synthetic Standard Deviation of Accuracy: 0.05652668637191949
+2023-08-28 23:01:20,740	***	  Synthetic Standard Deviation of Precision: 0.04788476188899445
+2023-08-28 23:01:20,740	***	  Synthetic Standard Deviation of Recall: 0.15073783032511867
+2023-08-28 23:01:20,740	***	  Synthetic Standard Deviation of F1 Score: 0.0884537962671703
+
+2023-08-28 23:01:20,779	***	Overall Real Results: KNN
+
+2023-08-28 23:01:20,779	***	  Real List of Accuracies: [1.0, 1.0, 0.9230769230769231, 0.9615384615384616, 1.0]
+2023-08-28 23:01:20,779	***	  Real List of Precisions: [1.0, 1.0, 0.9230769230769231, 1.0, 1.0]
+2023-08-28 23:01:20,779	***	  Real List of Recalls: [1.0, 1.0, 0.9230769230769231, 0.9230769230769231, 1.0]
+2023-08-28 23:01:20,779	***	  Real List of F1-scores: [1.0, 1.0, 0.9230769230769231, 0.9600000000000001, 1.0]
+2023-08-28 23:01:20,780	***	  Real Mean Accuracy: 0.976923076923077
+2023-08-28 23:01:20,780	***	  Real Mean Precision: 0.9846153846153847
+2023-08-28 23:01:20,780	***	  Real Mean Recall: 0.9692307692307693
+2023-08-28 23:01:20,780	***	  Real Mean F1 Score: 0.9766153846153847
+2023-08-28 23:01:20,780	***	  Real Standard Deviation of Accuracy: 0.03076923076923075
+2023-08-28 23:01:20,780	***	  Real Standard Deviation of Precision: 0.03076923076923075
+2023-08-28 23:01:20,780	***	  Real Standard Deviation of Recall: 0.03768445758127964
+2023-08-28 23:01:20,780	***	  Real Standard Deviation of F1 Score: 0.030928816918471515
+
+2023-08-28 23:01:20,818	***	Overall Synthetic Results: Classifier DecisionTree
+
+2023-08-28 23:01:20,818	***	  Synthetic List of Accuracies: [0.52, 0.52, 0.56, 0.72, 0.56]
+2023-08-28 23:01:20,818	***	  Synthetic List of Precisions: [0.5333333333333333, 0.5333333333333333, 0.5625, 0.75, 0.5714285714285714]
+2023-08-28 23:01:20,818	***	  Synthetic List of Recalls: [0.6153846153846154, 0.6153846153846154, 0.6923076923076923, 0.6923076923076923, 0.6153846153846154]
+2023-08-28 23:01:20,818	***	  Synthetic List of F1-scores: [0.5714285714285715, 0.5714285714285715, 0.6206896551724138, 0.7199999999999999, 0.5925925925925927]
+2023-08-28 23:01:20,818	***	  Synthetic Mean Accuracy: 0.5760000000000001
+2023-08-28 23:01:20,818	***	  Synthetic Mean Precision: 0.5901190476190475
+2023-08-28 23:01:20,818	***	  Synthetic Mean Recall: 0.6461538461538462
+2023-08-28 23:01:20,818	***	  Synthetic Mean F1 Score: 0.6152278781244298
+2023-08-28 23:01:20,818	***	  Synthetic Standard Deviation of Accuracy: 0.0741889479639656
+2023-08-28 23:01:20,818	***	  Synthetic Standard Deviation of Precision: 0.08139201351450631
+2023-08-28 23:01:20,818	***	  Synthetic Standard Deviation of Recall: 0.03768445758127963
+2023-08-28 23:01:20,818	***	  Synthetic Standard Deviation of F1 Score: 0.05541866692011763
+
+2023-08-28 23:01:20,856	***	Overall Real Results: DecisionTree
+
+2023-08-28 23:01:20,857	***	  Real List of Accuracies: [0.92, 0.92, 0.92, 0.92, 0.96]
+2023-08-28 23:01:20,857	***	  Real List of Precisions: [1.0, 1.0, 0.9230769230769231, 0.9230769230769231, 1.0]
+2023-08-28 23:01:20,857	***	  Real List of Recalls: [0.8461538461538461, 0.8461538461538461, 0.9230769230769231, 0.9230769230769231, 0.9230769230769231]
+2023-08-28 23:01:20,857	***	  Real List of F1-scores: [0.9166666666666666, 0.9166666666666666, 0.9230769230769231, 0.9230769230769231, 0.9600000000000001]
+2023-08-28 23:01:20,857	***	  Real Mean Accuracy: 0.9280000000000002
+2023-08-28 23:01:20,857	***	  Real Mean Precision: 0.9692307692307693
+2023-08-28 23:01:20,857	***	  Real Mean Recall: 0.8923076923076924
+2023-08-28 23:01:20,857	***	  Real Mean F1 Score: 0.9278974358974359
+2023-08-28 23:01:20,857	***	  Real Standard Deviation of Accuracy: 0.01599999999999997
+2023-08-28 23:01:20,857	***	  Real Standard Deviation of Precision: 0.03768445758127964
+2023-08-28 23:01:20,857	***	  Real Standard Deviation of Recall: 0.037684457581279696
+2023-08-28 23:01:20,857	***	  Real Standard Deviation of F1 Score: 0.016305273163576783
+
+2023-08-28 23:01:20,896	***	Overall Synthetic Results: Classifier AdaBoost
+
+2023-08-28 23:01:20,896	***	  Synthetic List of Accuracies: [0.68, 0.72, 0.68, 0.72, 0.76]
+2023-08-28 23:01:20,896	***	  Synthetic List of Precisions: [0.625, 0.6470588235294118, 0.6, 0.6470588235294118, 0.6666666666666666]
+2023-08-28 23:01:20,897	***	  Synthetic List of Recalls: [0.8333333333333334, 0.9166666666666666, 1.0, 0.9166666666666666, 1.0]
+2023-08-28 23:01:20,897	***	  Synthetic List of F1-scores: [0.7142857142857143, 0.7586206896551724, 0.7499999999999999, 0.7586206896551724, 0.8]
+2023-08-28 23:01:20,897	***	  Synthetic Mean Accuracy: 0.712
+2023-08-28 23:01:20,897	***	  Synthetic Mean Precision: 0.637156862745098
+2023-08-28 23:01:20,897	***	  Synthetic Mean Recall: 0.9333333333333332
+2023-08-28 23:01:20,897	***	  Synthetic Mean F1 Score: 0.7563054187192118
+2023-08-28 23:01:20,897	***	  Synthetic Standard Deviation of Accuracy: 0.029933259094191512
+2023-08-28 23:01:20,897	***	  Synthetic Standard Deviation of Precision: 0.022783098749286974
+2023-08-28 23:01:20,897	***	  Synthetic Standard Deviation of Recall: 0.06236095644623235
+2023-08-28 23:01:20,897	***	  Synthetic Standard Deviation of F1 Score: 0.0272959750081227
+
+2023-08-28 23:01:20,937	***	Overall Real Results: AdaBoost
+
+2023-08-28 23:01:20,937	***	  Real List of Accuracies: [1.0, 1.0, 0.96, 1.0, 1.0]
+2023-08-28 23:01:20,937	***	  Real List of Precisions: [1.0, 1.0, 0.9230769230769231, 1.0, 1.0]
+2023-08-28 23:01:20,937	***	  Real List of Recalls: [1.0, 1.0, 1.0, 1.0, 1.0]
+2023-08-28 23:01:20,937	***	  Real List of F1-scores: [1.0, 1.0, 0.9600000000000001, 1.0, 1.0]
+2023-08-28 23:01:20,937	***	  Real Mean Accuracy: 0.992
+2023-08-28 23:01:20,937	***	  Real Mean Precision: 0.9846153846153847
+2023-08-28 23:01:20,937	***	  Real Mean Recall: 1.0
+2023-08-28 23:01:20,938	***	  Real Mean F1 Score: 0.992
+2023-08-28 23:01:20,938	***	  Real Standard Deviation of Accuracy: 0.016000000000000014
+2023-08-28 23:01:20,938	***	  Real Standard Deviation of Precision: 0.03076923076923075
+2023-08-28 23:01:20,938	***	  Real Standard Deviation of Recall: 0.0
+2023-08-28 23:01:20,938	***	  Real Standard Deviation of F1 Score: 0.01599999999999997
+
+2023-08-28 23:01:20,975	***	Comparative Metrics:
+2023-08-28 23:01:20,975	***		Mean Squared Error
+2023-08-28 23:01:20,975	***			Mean Squared Error - List     : [0.17173524, 0.13792486, 0.16547409, 0.16893022, 0.14567442]
+2023-08-28 23:01:20,975	***			Mean Squared Error - Mean     : 0.15794776380062103
+2023-08-28 23:01:20,975	***			Mean Squared Error - Std. Dev.: 0.013556591235101223
+
+2023-08-28 23:01:20,975	***		Cosine Similarity
+2023-08-28 23:01:20,975	***			Cosine Similarity - List     : [0.7541233112032597, 0.8345541954040527, 0.5286617771937296, 0.18343060359358787, 0.8753131127357483]
+2023-08-28 23:01:20,975	***			Cosine Similarity - Mean     : 0.6352166000260757
+2023-08-28 23:01:20,975	***			Cosine Similarity - Std. Dev.: 0.25572842436879123
+
+2023-08-28 23:01:20,976	***		KL divergence 
+2023-08-28 23:01:20,976	***			KL divergence  - List     : [0.17173524, 0.13792486, 0.16547409, 0.16893022, 0.14567442]
+2023-08-28 23:01:20,976	***			KL divergence  - Mean     : 0.15794776380062103
+2023-08-28 23:01:20,976	***			KL divergence  - Std. Dev.: 0.013556591235101223
+
+2023-08-28 23:01:20,976	***		Max Mean Discrepancy
+2023-08-28 23:01:20,976	***			Max Mean Discrepancy - List     : [0.17173524, 0.13792486, 0.16547409, 0.16893022, 0.14567442]
+2023-08-28 23:01:20,976	***			Max Mean Discrepancy - Mean     : 0.15794776380062103
+2023-08-28 23:01:20,976	***			Max Mean Discrepancy - Std. Dev.: 0.013556591235101223
+
+2023-08-28 23:01:21,032	***		 Evaluation duration: 0:00:41.139807
