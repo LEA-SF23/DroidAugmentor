@@ -372,7 +372,7 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
                    initializer_mean=None, initializer_deviation=None,
                    last_layer_activation=DEFAULT_CONDITIONAL_LAST_ACTIVATION_LAYER, save_models=False,
                    path_confusion_matrix=None, path_curve_loss=None, verbose_level=None,
-                   latent_mean_distribution=None, latent_stander_deviation=None, num_samples_class_malware=DEFAULT_NUMBER_GENERATE_MALWARE_SAMPLES, num_samples_class_benign=DEFAULT_NUMBER_GENERATE_BENIGN_SAMPLES):
+                   latent_mean_distribution=None, latent_stander_deviation=None, num_samples_class_malware=None, num_samples_class_benign=None):
 
     show_model(latent_dim, input_data_shape, activation_function, initializer_mean,
                initializer_deviation, dropout_decay_rate_g, dropout_decay_rate_d,
@@ -547,6 +547,7 @@ def show_all_settings(arg_parsers):
 
 
 def create_argparse():
+
     parser = argparse.ArgumentParser(description='Run the experiment with cGAN and classifiers')
 
     parser.add_argument('-i', '--input_dataset', type=str, required=True,
@@ -654,6 +655,8 @@ def create_argparse():
 
 if __name__ == "__main__":
 
+
+
     arguments = create_argparse()
 
     logging_format = '%(asctime)s\t***\t%(message)s'
@@ -715,7 +718,7 @@ if __name__ == "__main__":
                    initializer_deviation=arguments.initializer_deviation, save_models=arguments.save_models,
                    path_confusion_matrix=arguments.path_confusion_matrix, path_curve_loss=arguments.path_curve_loss,
                    verbose_level=arguments.verbosity, latent_mean_distribution=arguments.latent_mean_distribution,
-                   latent_stander_deviation=arguments.latent_stander_deviation)
+                   latent_stander_deviation=arguments.latent_stander_deviation, num_samples_class_malware=arguments.num_samples_class_malware, num_samples_class_benign=arguments.num_samples_class_benign )
 
     time_end_campaign = datetime.datetime.now()
     logging.info("\t Evaluation duration: {}".format(time_end_campaign - time_start_campaign))
