@@ -393,6 +393,24 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
                                                   dataset_type, training_algorithm, latent_mean_distribution,
                                                   latent_stander_deviation)
 
+
+
+
+
+        instance_classifier = Classifiers()
+
+        x_training = np.array(dataset.iloc[train_index, :-1].values, dtype=dataset_type)
+        x_test = np.array(dataset.iloc[test_index, :-1].values, dtype=dataset_type)
+        y_training = np.array(dataset.iloc[train_index, -1].values, dtype=dataset_type)
+        y_test = np.array(dataset.iloc[test_index, -1].values, dtype=dataset_type)
+        x_training = x_training[0:int(len(x_training) - (len(x_training) % batch_size)), :]
+        y_training = y_training[0:int(len(y_training) - (len(y_training) % batch_size))]
+
+        logging.info(f" Starting training ADVERSARIAL MODEL:\n")
+        training_history = adversarial_model.fit(x_training, y_training, epochs=number_epochs, batch_size=batch_size,
+                                                 verbose=DEFAULT_VERBOSE_LIST[verbose_level])
+        logging.info(f"     Finished training\n")
+
         # Calcular o número desejado de amostras sintéticas para cada classe
         num_samples_true_desired = num_samples_class_malware
         num_samples_false_desired = num_samples_class_benign
@@ -423,25 +441,10 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
             synthetic_filename = f'synthetic_data_fold_{i + 1}.csv'
             synthetic_filepath = os.path.join(output_dir, synthetic_filename)
             df_synthetic.to_csv(synthetic_filepath, index=False, sep=',', header=True)
-
-        # Salvar dados sintéticos em um arquivo CSV
-        #synthetic_filename = f'synthetic_data_fold_{i + 1}.csv'
-        #synthetic_filepath = os.path.join(output_dir, synthetic_filename)
-        #df_synthetic.to_csv(synthetic_filepath, index=False, sep=',', header=True)
-
-        instance_classifier = Classifiers()
-
-        x_training = np.array(dataset.iloc[train_index, :-1].values, dtype=dataset_type)
-        x_test = np.array(dataset.iloc[test_index, :-1].values, dtype=dataset_type)
-        y_training = np.array(dataset.iloc[train_index, -1].values, dtype=dataset_type)
-        y_test = np.array(dataset.iloc[test_index, -1].values, dtype=dataset_type)
-        x_training = x_training[0:int(len(x_training) - (len(x_training) % batch_size)), :]
-        y_training = y_training[0:int(len(y_training) - (len(y_training) % batch_size))]
-
-        logging.info(f" Starting training ADVERSARIAL MODEL:\n")
-        training_history = adversarial_model.fit(x_training, y_training, epochs=number_epochs, batch_size=batch_size,
-                                                 verbose=DEFAULT_VERBOSE_LIST[verbose_level])
-        logging.info(f"     Finished training\n")
+            # Salvar dados sintéticos em um arquivo CSV
+            # synthetic_filename = f'synthetic_data_fold_{i + 1}.csv'
+            # synthetic_filepath = os.path.join(output_dir, synthetic_filename)
+            # df_synthetic.to_csv(synthetic_filepath, index=False, sep=',', header=True)
 
         if save_models:
             adversarial_model.save_models(output_dir, i)
