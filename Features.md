@@ -30,6 +30,7 @@ padrões similares aos dados reais, tanto para amostras classificadas como malig
         <tr>
             <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/KNN_Synthetic_page_1.png" alt="" style="max-width: 100%; height: auto;"></td>
             <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/KNN_Real_page_1.png" alt="" style="max-width: 100%; height: auto;"></td>
+              <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/KNN_Real_page_1.png" alt="" style="max-width: 100%; height: auto;"></td>
         </tr>
     </tbody>
     <tbody>
