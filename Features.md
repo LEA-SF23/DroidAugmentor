@@ -22,21 +22,21 @@ padrões similares aos dados reais, tanto para amostras classificadas como malig
     <tbody>
         <tr>
             <td colspan="3" style="text-align: center;">
-                <h2>Métricas de aplicabilidade</h2>
-                <p>Ao verificar se os classificadores são capazes de classificar os dados sintéticos de maneira similar aos dados reais, pode-se inferir que os dados sintéticos são realistas e adequados.</p>
+                <h2>Importância das Features</h2>
+                <p> O gráfico que mostra as importâncias das diferentes características (features) do RandomForest treinado nos dados sintéticos e reais. Esse gráfico pode ajudar a identificar quais características têm mais impacto nas decisões do classificador. Como pode se observar, as features nos dados sintéticos mantiveram um padrão considerável a dos dados originais. </p>
             </td>
         </tr>
         <tr>
-            <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/KNN_Synthetic_page_1.png" alt="" style="max-width: 100%; height: auto;"></td>
-            <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/KNN_Real_page_1.png" alt="" style="max-width: 100%; height: auto;"></td>
-            <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/KNN_Real_page_1.png" alt="" style="max-width: 100%; height: auto;"></td>
+            <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Features/Sintetico_5560Malwares_6566Benign.png" alt="" style="max-width: 100%; height: auto;"></td>
+            <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Features/Drebin215_original_5560Malwares_6566Benign.png" alt="" style="max-width: 100%; height: auto;"></td>
+            <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Features/Sintetico_6063Malwares_6063Benign.png" alt="" style="max-width: 100%; height: auto;"></td>
         </tr>
     </tbody>
     <tbody>
         <tr>
-            <th width="33.33%">KNN_Synthetic 4096</th>
-            <th width="33.33%">KNN_Real 4096</th>
-            <th width="33.33%">KNN_Real 4096</th>
+            <th width="33.33%">Sintético 12.126 amostras desbalanceado</th>
+            <th width="33.33%"> Debrin-215 dados reais  </th>
+            <th width="33.33%">intético 12.126 amostras balanceado</th>
         </tr>
     </tbody>
 </table>
