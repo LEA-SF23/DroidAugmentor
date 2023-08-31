@@ -1,4 +1,4 @@
-# Análise das Features dos dados sintéticos.
+# Análise das features dos dados sintéticos.
 
 
 [Imagens completas](https://github.com/LEA-SF23/DroidAugmentor/tree/main/Features)
