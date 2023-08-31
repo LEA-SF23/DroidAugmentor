@@ -411,6 +411,21 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
                                                  verbose=DEFAULT_VERBOSE_LIST[verbose_level])
         logging.info(f"     Finished training\n")
 
+
+        if save_models:
+            adversarial_model.save_models(output_dir, i)
+
+        generator_loss_list = training_history.history['loss_g']
+        discriminator_loss_list = training_history.history['loss_d']
+        plot_loss_curve_instance = PlotCurveLoss()
+        plot_loss_curve_instance.plot_training_loss_curve(generator_loss_list, discriminator_loss_list, output_dir, i,
+                                                          path_curve_loss)
+
+        number_samples_true = len([positional_label for positional_label in y_test.tolist() if positional_label == 1])
+        number_samples_false = len([positional_label for positional_label in y_test.tolist() if positional_label == 0])
+
+
+
         # Calcular o número desejado de amostras sintéticas para cada classe
         num_samples_true_desired = num_samples_class_malware
         num_samples_false_desired = num_samples_class_benign
@@ -445,18 +460,6 @@ def run_experiment(dataset, input_data_shape, k, classifier_list, output_dir, ba
             # synthetic_filename = f'synthetic_data_fold_{i + 1}.csv'
             # synthetic_filepath = os.path.join(output_dir, synthetic_filename)
             # df_synthetic.to_csv(synthetic_filepath, index=False, sep=',', header=True)
-
-        if save_models:
-            adversarial_model.save_models(output_dir, i)
-
-        generator_loss_list = training_history.history['loss_g']
-        discriminator_loss_list = training_history.history['loss_d']
-        plot_loss_curve_instance = PlotCurveLoss()
-        plot_loss_curve_instance.plot_training_loss_curve(generator_loss_list, discriminator_loss_list, output_dir, i,
-                                                          path_curve_loss)
-
-        number_samples_true = len([positional_label for positional_label in y_test.tolist() if positional_label == 1])
-        number_samples_false = len([positional_label for positional_label in y_test.tolist() if positional_label == 0])
 
 
 
