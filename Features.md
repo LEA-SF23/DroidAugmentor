@@ -18,11 +18,10 @@ padrões similares aos dados reais, tanto para amostras classificadas como malig
         </tr>
 </div>
 
-
 <table>
     <tbody>
         <tr>
-            <td colspan="2" style="text-align: center;">
+            <td colspan="3" style="text-align: center;">
                 <h2>Métricas de aplicabilidade</h2>
                 <p>Ao verificar se os classificadores são capazes de classificar os dados sintéticos de maneira similar aos dados reais, pode-se inferir que os dados sintéticos são realistas e adequados.</p>
             </td>
@@ -30,13 +29,14 @@ padrões similares aos dados reais, tanto para amostras classificadas como malig
         <tr>
             <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/KNN_Synthetic_page_1.png" alt="" style="max-width: 100%; height: auto;"></td>
             <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/KNN_Real_page_1.png" alt="" style="max-width: 100%; height: auto;"></td>
-              <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/KNN_Real_page_1.png" alt="" style="max-width: 100%; height: auto;"></td>
+            <td style="text-align: center;"><img src="https://github.com/LEA-SF23/DroidAugmentor/blob/main/Campains_Results/4096/KNN_Real_page_1.png" alt="" style="max-width: 100%; height: auto;"></td>
         </tr>
     </tbody>
     <tbody>
         <tr>
-            <th width="50%">KNN_Synthetic 4096</th>
-            <th width="50%">KNN_Real 4096</th>
+            <th width="33.33%">KNN_Synthetic 4096</th>
+            <th width="33.33%">KNN_Real 4096</th>
+            <th width="33.33%">KNN_Real 4096</th>
         </tr>
     </tbody>
 </table>
