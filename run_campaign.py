@@ -70,8 +70,7 @@ campaigns_available['sf23_1l_128'] = {
 }
 
 campaigns_available['sf23_1l_256'] = {
-    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
-                     'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
+    'input_dataset': ['datasets/drebin215_original_5560Malwares_6566Benign.csv'],
     "dense_layer_sizes_g" : ['256'],
     "dense_layer_sizes_d" : ['256'],
     'number_epochs' : ['1000'],
@@ -88,8 +87,7 @@ campaigns_available['sf23_1l_512'] = {
 }
 
 campaigns_available['sf23_1l_1024'] = {
-    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
-                     'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
+    'input_dataset': ['datasets/drebin215_original_5560Malwares_6566Benign.csv'],
     "dense_layer_sizes_g" : ['1024'],
     "dense_layer_sizes_d" : ['1024'],
     'number_epochs' : ['1000'],
@@ -97,8 +95,7 @@ campaigns_available['sf23_1l_1024'] = {
 }
 
 campaigns_available['sf23_1l_4096'] = {
-    'input_dataset': ['datasets/defenseDroid2939_original_6000Malwares_5975Benign.csv',
-                     'datasets/drebin215_original_5560Malwares_6566Benign.csv'],
+    'input_dataset': ['datasets/drebin215_original_5560Malwares_6566Benign.csv'],
     "dense_layer_sizes_g" : ['4096'],
     "dense_layer_sizes_d" : ['4096'],
     'number_epochs' : ['1000'],
