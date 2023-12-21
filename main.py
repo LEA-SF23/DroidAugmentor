@@ -95,8 +95,9 @@ DEFAULT_PERCEPTRON_METRIC = ["accuracy"]
 DEFAULT_SAVE_MODELS = True
 DEFAULT_OUTPUT_PATH_CONFUSION_MATRIX = "confusion_matrix"
 DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "training_curve"
-DEFAULT_CLASSIFIER_LIST = ["RandomForest", "SupportVectorMachine", "KNN",
-                           "DecisionTree", "AdaBoost"]  # "QuadraticDiscriminant", "NaiveBayes","Perceptron"
+DEFAULT_CLASSIFIER_LIST = ["RandomForest",  
+                           "KNN",
+                           "DecisionTree"]  #"AdaBoost", "SupportVectorMachine", "QuadraticDiscriminant", "NaiveBayes","Perceptron"
 
 DEFAULT_VERBOSE_LIST = {logging.INFO: 2, logging.DEBUG: 1, logging.WARNING: 2,
                         logging.FATAL: 0, logging.ERROR: 0}
