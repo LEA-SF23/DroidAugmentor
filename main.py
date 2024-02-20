@@ -528,11 +528,22 @@ def initial_step(initial_arguments, dataset_type):
     with open(file_args, 'w') as f:
         json.dump(initial_arguments.__dict__, f, indent=2)
 
-    dataset_file_loaded = pd.read_csv(initial_arguments.input_dataset, dtype=dataset_type)
-    dataset_file_loaded = dataset_file_loaded.dropna()
-    dataset_input_shape = dataset_file_loaded.shape[1] - 1
+   # dataset_file_loaded = pd.read_csv(initial_arguments.input_dataset, dtype=dataset_type)
+   # dataset_file_loaded = dataset_file_loaded.dropna()
+   # dataset_input_shape = dataset_file_loaded.shape[1] - 1
+    features_names=pd.read_csv('processed/mh100-features-all.csv',index_col=0)
+    dataset=np.load('processed/mh100.npy')
+    features=pd.read_csv(initial_arguments.input_dataset)
+    #features=features.dropna()
+    labels=pd.read_csv("processed/mh100_labels.csv")
+    features=features.set_index('names')
+    dataset_file=pd.DataFrame(dataset,columns=features_names.features.values) 
+    dataset_file_loaded=dataset_file[dataset_file.columns.intersection(features.index.values)]
+    dataset_file_loaded['class']=labels.loc[:,'CLASS']
 
-    input_dataset = os.path.basename(initial_arguments.input_dataset)
+    dataset_input_shape=dataset_file_loaded.shape[1] - 1
+   # dataset_file_loaded['class']=labels['CLASS']
+    input_dataset = os.path.basename('processed/mh100_vt-labels.csv')
     dataset_labels = f'Dataset: {input_dataset}'
 
     return dataset_file_loaded, dataset_input_shape, dataset_labels
