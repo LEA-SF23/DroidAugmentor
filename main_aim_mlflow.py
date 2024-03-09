@@ -379,7 +379,7 @@ def show_and_export_results(synthetic_accuracies, synthetic_precisions, syntheti
        aim_image = Image(plot_filename)
        aim_run.track(value=aim_image, name=f'Comparison_Real_Synthetic',context={'classifier_type': classifier_type[index]})
     if USE_MLFLOW:
-       mlflow.log_artifact(plot_filename, artifact_subdir)
+       mlflow.log_artifact(plot_filename,'images')
 def get_adversarial_model(latent_dim, input_data_shape, activation_function, initializer_mean, initializer_deviation,
                           dropout_decay_rate_g, dropout_decay_rate_d, last_layer_activation, dense_layer_sizes_g,
                           dense_layer_sizes_d, dataset_type, training_algorithm, latent_mean_distribution,
