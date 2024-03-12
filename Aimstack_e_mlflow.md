@@ -71,10 +71,12 @@ Como monitorar uma métrica
 ```bash
 $ mlflow.log_metric('nome',métrica)
 ```
-# Como executar 
+# Gerar certificados
 
-Primeiro é necessaria a geração de certificados e chaves para serem utilizados
+Primeiro é necessaria a geração de certificados e chaves para serem utilizados nas execuções
 -opcional criar um arquivo de configuração
+
+
 1.Gerar a chave
 ```bash
 $  openssl genrsa -out nome_da_chave.key 2048
