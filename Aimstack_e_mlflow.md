@@ -34,7 +34,7 @@ Firewall precisa permitir transferência na porta ex: ``` sudo ufw allow 53800``
 
 
 # Como instrumentalizar
-### Aimstack
+### AIMSTACK
  Importar a biblioteca
 ```bash
 $ import aim
@@ -50,7 +50,7 @@ Monitorar uma métrica
 ```bash
 $  aim_run.track(métrica_a_ser_monitorada, name='nome_para_salvar_a_métrica')
 ```
-### Mlflow
+### MLFLOW
  Importar a biblioteca
 ```bash
 $  import mlflow
@@ -100,7 +100,7 @@ $ openssl pkcs12 -export -out arquivo.pfx -inkey nome_da_chave.key -in nome_cert
 $ openssl req -x509 -nodes -days 365 -out nome_pen.csr.pem -subj "/CN=example.com" -addext "subjectAltName = IP:número de ip"
 ```
 
-## AIM Stack
+## AIMStack
 
 4.Exportar o crt para o cliente e exportar a variável de ambiente no cliente
 ```bash
@@ -190,4 +190,12 @@ Especifica o número de gunicorn workers. Por padrão é  1 worker.
 Uri para salvar os modelos dos experimentos, compativel com bancos de dados SQLAlchemy (e.g. ‘sqlite:///path/to/file.db’).
 ```	
 --registry-store-uri <URI>
+```
+Se habilitado é permitada apenas o monitoramente e salvamento de artefatos (imagens,modelos e arquivos de dados)
+```	
+--artifacts-only
+```
+Nome da aplicação a ser utilizado para o servidor de monitoramento. Se não especificado ‘mlflow.server:app’sera utilizado: Opções basic-auth | basic-auth
+```	
+--app-name <app_name
 ```
