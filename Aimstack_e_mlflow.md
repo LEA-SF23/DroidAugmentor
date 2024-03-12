@@ -71,50 +71,68 @@ Como monitorar uma métrica
 ```bash
 $ mlflow.log_metric('nome',métrica)
 ```
-# Gerar certificados
+# Como executar
+## Gerar certificados
 
 Primeiro é necessaria a geração de certificados e chaves para serem utilizados nas execuções
 -opcional criar um arquivo de configuração
 
 
-1.Gerar a chave
+1.  Gerar a chave
 ```bash
 $  openssl genrsa -out nome_da_chave.key 2048
 ```
-2.Gerar arquivo .pem
+2.  Gerar arquivo .pem
 ```bash
 $ openssl req -config test.conf -new -out nome_pem.csr.pem
 ```
-3.Gerar o certificado 
+3.  Gerar o certificado 
 ```bash
 $ openssl x509 -req -days 365 -extfile dev.config -extensions v3_req -in nome_pem.csr.pem -signkey nome_da_chavae.key -out nome_do_certficado.crt
 ```
-3.4 Opcional gerar um .pfx
+3.4. Opcional gerar um .pfx
 ```bash
 $ openssl pkcs12 -export -out arquivo.pfx -inkey nome_da_chave.key -in nome_cert.crt -password pass:$'senha'
 ```
 
-3.5 Alternativamente quando não utilizado arquivo de configuração
+3.5. Alternativamente quando não utilizado arquivo de configuração
 ```bash
 $ openssl req -x509 -nodes -days 365 -out nome_pen.csr.pem -subj "/CN=example.com" -addext "subjectAltName = IP:número de ip"
 ```
+
+## AIM Stack
 4.Exportar o crt para o cliente e exportar a variável de ambiente no cliente
 
 
 ``` export __AIM_CLIENT_SSL_CERTIFICATES_FILE__= nome_do_certificado.crt  ```
 
 
-5.Inicializar o servidor
+5.  Inicializar o servidor
 ```bash
 $ aim server --repo diretorio para ser salvo  -h ip --ssl-keyfile nome_da_chave.key --ssl-certfile nome_do_certificado.crt 
 ```
-6.Executar o código no cliente 
+6.  Executar o código no cliente 
 
-7.Visualização no servidor
+7.  Visualização no servidor
 ```bash
 $ aim up
 ```
+## MLFLOW
+4. Estabalecer um arquivo .ini com a senha e usuario de admistrador
 
+5. Fazer com as variavel de ambiente aponte ao arquivo
+```bash
+$ export MLFLOW_AUTH_CONFIG_PATH=caminho_para_arquivo/basic_auth.ini
+```
+6. Criar o servidor
+```bash
+$ mlflow server --host IP --port Porta --app-name basic-auth
+```
+7. Exportar as variaveis de ambiente no cliente contendo o o usuário e a senha
+```bash
+$ export MLFLOW_TRACKING_USERNAME=usuario
+$ export MLFLOW_TRACKING_PASSWORD=senha 
+```
 ###  Parâmetros disponíveis:
 Caminho para diretorio pai do repo .aim. Por padrão é utilizado o diretorio atual
 ```
