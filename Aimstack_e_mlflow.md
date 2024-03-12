@@ -1,6 +1,6 @@
 # AIMSTACK
  Aimstack é uma ferramenta open-source para o monitoramento de métricas e metadados
-## Como instalar
+### Como instalar
 ``` pip3 install aim ```
 
 ``` pip install aim ```
@@ -11,7 +11,7 @@ Para instalar no pipenv
 
 # MLFLOW
   Mflow é uma ferramenta que tem o proposito de auxiliar o processo auxiliar de aprendizado de maquina através do monitoramento
-## Como instalar
+### Como instalar
 ``` pip3 install mlflow ```
 
 ``` pip install mlflow ```
