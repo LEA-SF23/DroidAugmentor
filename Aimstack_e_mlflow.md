@@ -171,7 +171,7 @@ Especifica o nivel log para o pacote python logging package. Por padrão ``WARNI
 ```
 ### MLFLOW
 
-Uri para salvar os dados do experimento, compativel com bancos de dados SQLAlchemy
+Uri para salvar os dados do experimento, compativel com bancos de dados SQLAlchemy (e.g. ‘sqlite:///path/to/file.db’).
 ```
 --backend-store-uri <PATH>
 ```
@@ -186,4 +186,8 @@ Porta a ser utilizada para estabelecer o servidor, por padrão utilzada  5000
 Especifica o número de gunicorn workers. Por padrão é  1 worker.
 ```	
 -w, --workers <workers>
+```
+Uri para salvar os modelos dos experimentos, compativel com bancos de dados SQLAlchemy (e.g. ‘sqlite:///path/to/file.db’).
 ```	
+--registry-store-uri <URI>
+```
