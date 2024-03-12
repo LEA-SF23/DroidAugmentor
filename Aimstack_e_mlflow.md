@@ -125,6 +125,7 @@ $ export MLFLOW_AUTH_CONFIG_PATH=caminho_para_arquivo/basic_auth.ini
 ```
 6. Criar o servidor
 ```bash
+$ MLFLOW_TRACKING_SERVER_CERT_PATH=nome_do_certificado.crt
 $ mlflow server --host IP --port Porta --app-name basic-auth
 ```
 7. Exportar as variaveis de ambiente no cliente contendo o o usuário e a senha
