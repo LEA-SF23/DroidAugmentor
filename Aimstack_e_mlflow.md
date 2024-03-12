@@ -134,6 +134,7 @@ $ export MLFLOW_TRACKING_USERNAME=usuario
 $ export MLFLOW_TRACKING_PASSWORD=senha 
 ```
 ###  Parâmetros disponíveis:
+### AimStack
 Caminho para diretorio pai do repo .aim. Por padrão é utilizado o diretorio atual
 ```
 --repo <repo_path>
@@ -167,4 +168,22 @@ Especifica o caminho para o certificado
 Especifica o nivel log para o pacote python logging package. Por padrão ``WARNING``
 ```		
 --log-level
-```		
+```
+### MLFLOW
+
+Uri para salvar os dados do experimento, compativel com bancos de dados SQLAlchemy
+```
+--backend-store-uri <PATH>
+```
+Ip a ser utilizado para estabelecer o servidor
+```
+--h, --host <HOST>
+```
+Porta a ser utilizada para estabelecer o servidor, por padrão utilzada  5000
+```
+-p, --port <port>
+```
+Especifica o número de gunicorn workers. Por padrão é  1 worker.
+```	
+-w, --workers <workers>
+```	
