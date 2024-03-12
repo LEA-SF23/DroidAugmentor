@@ -34,7 +34,7 @@ Firewall precisa permitir transferência na porta ex: ``` sudo ufw allow 53800``
 
 
 # Como instrumentalizar
-## Aimstack
+### Aimstack
  Importar a biblioteca
 ```bash
 $ import aim
@@ -50,7 +50,7 @@ Monitorar uma métrica
 ```bash
 $  aim_run.track(métrica_a_ser_monitorada, name='nome_para_salvar_a_métrica')
 ```
-## Mlflow
+### Mlflow
  Importar a biblioteca
 ```bash
 $  import mlflow
@@ -101,12 +101,11 @@ $ openssl req -x509 -nodes -days 365 -out nome_pen.csr.pem -subj "/CN=example.co
 ```
 
 ## AIM Stack
+
 4.Exportar o crt para o cliente e exportar a variável de ambiente no cliente
-
-
-``` export __AIM_CLIENT_SSL_CERTIFICATES_FILE__= nome_do_certificado.crt  ```
-
-
+```bash
+$ export __AIM_CLIENT_SSL_CERTIFICATES_FILE__= nome_do_certificado.crt
+```
 5.  Inicializar o servidor
 ```bash
 $ aim server --repo diretorio para ser salvo  -h ip --ssl-keyfile nome_da_chave.key --ssl-certfile nome_do_certificado.crt 
