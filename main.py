@@ -11,6 +11,7 @@ __credits__ = ['unknown']
 
 try:
 
+    # Standard Library Imports
     import json
     import os
     import sys
@@ -20,19 +21,21 @@ try:
     import warnings
     from logging.handlers import RotatingFileHandler
 
+    # Third-party Imports
     import numpy as np
     import pandas as pd
     import matplotlib.pyplot as plt
-
     from pathlib import Path
     from tensorflow.keras.losses import BinaryCrossentropy
     from sklearn.model_selection import StratifiedKFold
     from sklearn.metrics import confusion_matrix
 
+    # Custom Model Imports
     from Models.ConditionalGANModel import ConditionalGAN
     from Models.AdversarialModel import AdversarialModel
     from Models.Classifiers import Classifiers
 
+    # Custom Tools Imports
     from Tools.tools import PlotConfusionMatrix
     from Tools.tools import PlotRegressiveMetrics
     from Tools.tools import PlotCurveLoss
@@ -55,11 +58,13 @@ except ImportError as error:
     print()
     sys.exit(-1)
 
+# Suppress TensorFlow Warnings
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 tf_logger = logging.getLogger('tensorflow')
 tf_logger.setLevel(logging.ERROR)
 warnings.filterwarnings("ignore", category=FutureWarning)
 
+# Suppress Specific Warnings
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore", message=".*the default value of `keepdims` will become False.*")
     warnings.filterwarnings("ignore", message="Variables are collinear")
@@ -68,36 +73,44 @@ DEFAULT_VERBOSITY = logging.INFO
 TIME_FORMAT = '%Y-%m-%d,%H:%M:%S'
 DEFAULT_DATA_TYPE = "float32"
 
-DEFAULT_NUMBER_GENERATE_MALWARE_SAMPLES = 2000
-DEFAULT_NUMBER_GENERATE_BENIGN_SAMPLES = 2000
-DEFAULT_NUMBER_EPOCHS_CONDITIONAL_GAN = 100
-DEFAULT_NUMBER_STRATIFICATION_FOLD = 5
+# Default parameters for data generation and training
+DEFAULT_NUMBER_GENERATE_MALWARE_SAMPLES = 2000  # Default number of generated malware samples
+DEFAULT_NUMBER_GENERATE_BENIGN_SAMPLES = 2000   # Default number of generated benign samples
+DEFAULT_NUMBER_EPOCHS_CONDITIONAL_GAN = 100     # Default number of epochs for Conditional GAN training
+DEFAULT_NUMBER_STRATIFICATION_FOLD = 5          # Default number of folds for data stratification
 
-DEFAULT_ADVERSARIAL_LATENT_DIMENSION = 128
-DEFAULT_ADVERSARIAL_TRAINING_ALGORITHM = "Adam"
-DEFAULT_ADVERSARIAL_ACTIVATION = "LeakyReLU"  # ['LeakyReLU', 'ReLU', 'PReLU']
-DEFAULT_ADVERSARIAL_DROPOUT_DECAY_RATE_G = 0.2
-DEFAULT_ADVERSARIAL_DROPOUT_DECAY_RATE_D = 0.4
-DEFAULT_ADVERSARIAL_INITIALIZER_MEAN = 0.0
-DEFAULT_ADVERSARIAL_INITIALIZER_DEVIATION = 0.02
-DEFAULT_ADVERSARIAL_BATCH_SIZE = 32
-DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_G = [128]
-DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_D = [128]
-DEFAULT_ADVERSARIAL_RANDOM_LATENT_MEAN_DISTRIBUTION = 0.0
-DEFAULT_ADVERSARIAL_RANDOM_LATENT_STANDER_DEVIATION = 1.0
+# Default parameters for the adversarial model
+DEFAULT_ADVERSARIAL_LATENT_DIMENSION = 128                        # Default latent dimension for the adversarial model
+DEFAULT_ADVERSARIAL_BATCH_SIZE = 32                               # Default batch size for adversarial training
+DEFAULT_ADVERSARIAL_TRAINING_ALGORITHM = "Adam"                   # Default training algorithm for adversarial model
+DEFAULT_ADVERSARIAL_ACTIVATION = "LeakyReLU"                      # Default activation function for adversarial model
+# Options: ['LeakyReLU', 'ReLU', 'PReLU']
+DEFAULT_ADVERSARIAL_DROPOUT_DECAY_RATE_G = 0.2                    # Default dropout decay rate for generator
+DEFAULT_ADVERSARIAL_DROPOUT_DECAY_RATE_D = 0.4                    # Default dropout decay rate for discriminator
+DEFAULT_ADVERSARIAL_INITIALIZER_MEAN = 0.0                        # Default mean for weight initialization
+DEFAULT_ADVERSARIAL_INITIALIZER_DEVIATION = 0.02                  # Default standard deviation for weight initialization
+DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_G = [128]               # Default settings for generator dense layers
+DEFAULT_ADVERSARIAL_DENSE_LAYERS_SETTINGS_D = [128]               # Default settings for discriminator dense layers
+DEFAULT_ADVERSARIAL_RANDOM_LATENT_MEAN_DISTRIBUTION = 0.0         # Default mean for random latent distribution
+DEFAULT_ADVERSARIAL_RANDOM_LATENT_STANDER_DEVIATION = 1.0         # Default standard deviation for random latent distribution
 
-DEFAULT_CONDITIONAL_LAST_ACTIVATION_LAYER = "sigmoid"
-DEFAULT_PERCEPTRON_TRAINING_ALGORITHM = "Adam"
-DEFAULT_PERCEPTRON_LOSS = "binary_crossentropy"
-DEFAULT_PERCEPTRON_DENSE_LAYERS_SETTINGS = [512, 256, 256]
-DEFAULT_PERCEPTRON_DROPOUT_DECAY_RATE = 0.2
-DEFAULT_PERCEPTRON_METRIC = ["accuracy"]
-DEFAULT_SAVE_MODELS = True
-DEFAULT_OUTPUT_PATH_CONFUSION_MATRIX = "confusion_matrix"
-DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "training_curve"
-DEFAULT_CLASSIFIER_LIST = ["RandomForest",  
-                           "KNN",
-                           "DecisionTree"]  #"AdaBoost", "SupportVectorMachine", "QuadraticDiscriminant", "NaiveBayes","Perceptron"
+# Default parameters for the conditional model
+DEFAULT_CONDITIONAL_LAST_ACTIVATION_LAYER = "sigmoid"             # Default last activation layer for conditional model
+
+# Default parameters for the perceptron model
+DEFAULT_PERCEPTRON_TRAINING_ALGORITHM = "Adam"                    # Default training algorithm for perceptron model
+DEFAULT_PERCEPTRON_LOSS = "binary_crossentropy"                   # Default loss function for perceptron model
+DEFAULT_PERCEPTRON_DENSE_LAYERS_SETTINGS = [512, 256, 256]        # Default settings for perceptron dense layers
+DEFAULT_PERCEPTRON_DROPOUT_DECAY_RATE = 0.2                       # Default dropout decay rate for perceptron
+DEFAULT_PERCEPTRON_METRIC = ["accuracy"]                          # Default evaluation metric for perceptron
+
+# Default settings for saving models and outputs
+DEFAULT_SAVE_MODELS = True                                       # Default option to save trained models
+DEFAULT_OUTPUT_PATH_CONFUSION_MATRIX = "confusion_matrix"         # Default output path for confusion matrix
+DEFAULT_OUTPUT_PATH_TRAINING_CURVE = "training_curve"             # Default output path for training curve
+
+# List of classifiers used for evaluation
+DEFAULT_CLASSIFIER_LIST = ["RandomForest", "KNN", "DecisionTree"]  # Default list of classifiers for evaluation
 
 DEFAULT_VERBOSE_LIST = {logging.INFO: 2, logging.DEBUG: 1, logging.WARNING: 2,
                         logging.FATAL: 0, logging.ERROR: 0}
