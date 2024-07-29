@@ -400,7 +400,7 @@ def main():
                         cmd += " --{} {}".format(param, combination[param])
                         if(param=="input_dataset"):
 
-                            cmd+=" --output_dir {}".format((c+"/"+(combination[param].split("/")[-1])+'_'+str(count_combination)))
+                            cmd+=" --output_dir {}".format((c+"/"+((combination[param].split("/")[-1]).split('.csv')[0])+'_'+str(count_combination)))
                             cmd+=' --num_samples_class_malware {}'.format(samples[combination[param].split("/")[-1]])
                             cmd+=' --num_samples_class_benign {}'.format(samples[combination[param].split("/")[-1]])
                     count_combination += 1
@@ -470,7 +470,7 @@ def main():
                     cmd += " --{} {}".format(param, combination[param])
                     if(param=="input_dataset"):
 
-                            cmd+=" --output_dir {}".format((c+"/"+(combination[param].split("/")[-1])+"_"+str(count_combination)))
+                            cmd+=" --output_dir {}".format((c+"/"+((combination[param].split("/")[-1]))+"_"+str(count_combination)))
                             cmd+=' --num_samples_class_malware {}'.format(samples[combination[param].split("/")[-1]])
                             cmd+=' --num_samples_class_benign {}'.format(samples[combination[param].split("/")[-1]])
                 count_combination += 1
