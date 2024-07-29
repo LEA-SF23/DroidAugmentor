@@ -394,15 +394,16 @@ def main():
                     cmd = COMMAND
                     cmd += " --verbosity {}".format(Parâmetros.verbosity)
                     cmd+=" --batch_size {}".format(Parâmetros.batch_size)
-                    count_combination += 1
-
+                    #count_combination += 1
+                    count_combination=1
                     for param in combination.keys():
                         cmd += " --{} {}".format(param, combination[param])
                         if(param=="input_dataset"):
 
-                            cmd+=" --output_dir {}".format((c+"/"+(combination[param].split("/")[-1])+str(count_combination)))
+                            cmd+=" --output_dir {}".format((c+"/"+(combination[param].split("/")[-1])+'_'+str(count_combination)))
                             cmd+=' --num_samples_class_malware {}'.format(samples[combination[param].split("/")[-1]])
                             cmd+=' --num_samples_class_benign {}'.format(samples[combination[param].split("/")[-1]])
+                    count_combination += 1
                         
                     # cronometra o início do experimento da campanha
                     time_start_experiment = datetime.datetime.now()
@@ -463,15 +464,17 @@ def main():
                 cmd += " --verbosity {}".format(Parâmetros.verbosity)
                 cmd += " --run_id {}".format(id)
 
-                count_combination += 1
-
+                #count_combination += 1
+                count_combination=1
                 for param in combination.keys():
                     cmd += " --{} {}".format(param, combination[param])
                     if(param=="input_dataset"):
 
-                            cmd+=" --output_dir {}".format((c+"/"+(combination[param].split("/")[-1])+str(count_combination)))
+                            cmd+=" --output_dir {}".format((c+"/"+(combination[param].split("/")[-1])+"_"+str(count_combination)))
                             cmd+=' --num_samples_class_malware {}'.format(samples[combination[param].split("/")[-1]])
                             cmd+=' --num_samples_class_benign {}'.format(samples[combination[param].split("/")[-1]])
+                count_combination += 1
+
                 # cronometra o início do experimento da campanha
                 time_start_experiment = datetime.datetime.now()
                 logging.info(
